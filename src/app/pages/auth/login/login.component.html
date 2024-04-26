@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center justify-center h-screen">
   <div class="py-3 px-5 w-full max-w-md">
-    <h1 class="text-center mb-5">Cadastre sua conta</h1>
+    <h1 class="text-center mb-5">Entre com a sua conta</h1>
     <form [formGroup]="formRegister">
       <div class="px-5 flex flex-col gap-y-5">
         <div class="flex flex-col">
@@ -23,26 +23,6 @@
           />
         </div>
 
-        <div class="flex flex-col">
-          <label>Confirme sua Senha</label>
-          <input
-            formControlName="confirmPassword"
-            type="confirm-password"
-            placeholder="Confirme a senha"
-            class="border-b outline-none pt-2"
-          />
-        </div>
-        <div>
-          <mat-checkbox color="primary">
-            Ao registrar se está aceitando os nosso
-            <a href="" class="underline text-blue-500">Termos e Condições</a> do
-            aplicativo
-            <a href="" class="underline text-blue-500"
-              >Politica de Privacidade</a
-            >.
-          </mat-checkbox>
-        </div>
-
         <div>
           <button
             [disabled]="formRegister.invalid"
@@ -52,8 +32,10 @@
           </button>
         </div>
         <div class="flex gap-2">
-          Já tem uma conta?<a href="auth/login" class="underline text-blue-500"
-            >Realizar login</a
+          Não tem uma conta?<a
+            href="auth/register"
+            class="underline text-blue-500"
+            >Cadastrar-se</a
           >
         </div>
       </div>
