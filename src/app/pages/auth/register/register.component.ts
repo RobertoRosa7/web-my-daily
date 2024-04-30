@@ -1,31 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
-import {
-  validateEmailRegex,
-  validatePasswordRegex,
-} from '../../../utils/regex/utils.regex.validators';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatInputModule } from '@angular/material/input';
+import { validateEmailRegex } from '../../../utils/regex/utils.regex.validators';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCheckboxModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
@@ -38,23 +17,9 @@ export class RegisterComponent extends AuthComponent {
     super();
     this.formRegister = this.formBuilder.group(
       {
-        email: [
-          '',
-          [
-            Validators.required,
-            Validators.email,
-            Validators.pattern(validateEmailRegex),
-          ],
-        ],
+        email: ['', [Validators.required, Validators.email, Validators.pattern(validateEmailRegex)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirm_password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            this.matchPasswords.bind(this),
-          ],
-        ],
+        confirm_password: ['', [Validators.required, Validators.minLength(6), this.matchPasswords.bind(this)]],
         checkTerms: [false, Validators.requiredTrue],
       },
       { validator: this.checkPassword('password', 'confirm_password') }
@@ -79,18 +44,14 @@ export class RegisterComponent extends AuthComponent {
    * @param matchingControlName string  field confirm password (required)
    * @returns (formGroup: FormGroup) => void
    */
-  public checkPassword(
-    controlName: string,
-    matchingControlName: string
-  ): (formGroup: FormGroup) => void {
+  public checkPassword(controlName: string, matchingControlName: string): (formGroup: FormGroup) => void {
     // return function
     return (formGroup: FormGroup) => {
       // get field abstract controll of password
       const control: AbstractControl = formGroup.controls[controlName];
 
       // get field abstract controll of confirm password
-      const matchingControl: AbstractControl =
-        formGroup.controls[matchingControlName];
+      const matchingControl: AbstractControl = formGroup.controls[matchingControlName];
 
       // check if password and confirm is equal
       if (control.value === matchingControl.value) {

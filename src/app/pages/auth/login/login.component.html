@@ -9,8 +9,7 @@
             formControlName="email"
             type="text"
             placeholder="Insira seu email"
-            class="border-b outline-none pt-2"
-          />
+            class="border-b outline-none pt-2" />
         </div>
 
         <div class="flex flex-col">
@@ -19,24 +18,18 @@
             formControlName="password"
             type="password"
             placeholder="Insira uma senha"
-            class="border-b outline-none pt-2"
-          />
+            class="border-b outline-none pt-2" />
         </div>
 
         <div>
           <button
             [disabled]="formLogin.invalid"
-            class="w-full bg-blue-500 text-white py-3 rounded-full hover:bg-blue-600 cursor-pointer"
-          >
+            class="w-full bg-blue-500 text-white py-3 rounded-full hover:bg-blue-600 cursor-pointer">
             Realizar login
           </button>
         </div>
         <div class="flex gap-2">
-          Não tem uma conta?<a
-            href="auth/register"
-            class="underline text-blue-500"
-            >Cadastrar-se</a
-          >
+          Não tem uma conta?<a href="auth/register" class="underline text-blue-500">Cadastrar-se</a>
         </div>
       </div>
     </form>
