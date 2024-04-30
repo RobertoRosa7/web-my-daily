@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center justify-center h-screen">
   <div class="py-3 px-5 w-full max-w-md">
     <h1 class="text-center mb-5">Cadastre sua conta</h1>
-    <form [formGroup]="formRegister">
+    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
       <div class="px-5 flex flex-col gap-y-5">
         <div class="flex flex-col">
           <label>Email</label>
@@ -26,19 +26,22 @@
         <div class="flex flex-col">
           <label>Confirme sua Senha</label>
           <input
-            formControlName="confirmPassword"
-            type="confirm-password"
+            formControlName="confirm_password"
+            type="password"
             placeholder="Confirme a senha"
             class="border-b outline-none pt-2"
           />
+
+          <mat-error *ngIf="!isPasswordSame" class="text-error">
+            Senhas não são iguais
+          </mat-error>
         </div>
         <div>
-          <mat-checkbox color="primary">
+          <mat-checkbox color="primary" formControlName="checkTerms">
             Ao registrar se está aceitando os nosso
-            <a href="" class="underline text-blue-500">Termos e Condições</a> do
+            <a href="" class="underline text-primary">Termos e Condições</a> do
             aplicativo
-            <a href="" class="underline text-blue-500"
-              >Politica de Privacidade</a
+            <a href="" class="underline text-primary">Politica de Privacidade</a
             >.
           </mat-checkbox>
         </div>
@@ -46,7 +49,7 @@
         <div>
           <button
             [disabled]="formRegister.invalid"
-            class="w-full bg-blue-500 text-white py-3 rounded-full hover:bg-blue-600 cursor-pointer"
+            class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-slate-500"
           >
             Registrar-se
           </button>

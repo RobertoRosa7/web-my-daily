@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center justify-center h-screen">
   <div class="py-3 px-5 w-full max-w-md">
     <h1 class="text-center mb-5">Entre com a sua conta</h1>
-    <form [formGroup]="formRegister">
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
       <div class="px-5 flex flex-col gap-y-5">
         <div class="flex flex-col">
           <label>Email</label>
@@ -25,10 +25,10 @@
 
         <div>
           <button
-            [disabled]="formRegister.invalid"
+            [disabled]="formLogin.invalid"
             class="w-full bg-blue-500 text-white py-3 rounded-full hover:bg-blue-600 cursor-pointer"
           >
-            Registrar-se
+            Realizar login
           </button>
         </div>
         <div class="flex gap-2">
