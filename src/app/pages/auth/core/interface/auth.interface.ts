@@ -3,10 +3,12 @@ export interface ILogin {
   password: string;
 }
 
-export interface IRegister {
-  email: string;
-  password: string;
+export interface IRegister extends ILogin {
   checkTerms: boolean;
   nickname?: string;
   nameId: string;
+}
+
+export interface IAuthState {
+  auth: IRegister | undefined | null;
 }

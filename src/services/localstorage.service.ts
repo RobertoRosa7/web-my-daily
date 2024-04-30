@@ -7,24 +7,23 @@ import { IData } from '../interfaces/localstorage.interface';
 export class LocalStorageService {
   constructor() {}
 
-  getKey(key: string) {
+  public getKey(key: string) {
     return this.deserealizeKey(key);
-
   }
 
-  setKey<T>(key: string, data: IData<T>) {
+  public setKey<T>(key: string, data: IData<T>) {
     localStorage.setItem(key, this.serealizeKey(data));
   }
 
-  clearKey(key: string) {
+  public clearKey(key: string) {
     localStorage.removeItem(key);
   }
 
-  serealizeKey<T>({ data }: IData<T>) {
+  private serealizeKey<T>({ data }: IData<T>) {
     return JSON.stringify(data);
   }
 
-  deserealizeKey<T>(key: string) {
+  private deserealizeKey<T>(key: string) {
     return JSON.parse(localStorage.getItem(key) as string);
   }
 }

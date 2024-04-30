@@ -1,39 +1,36 @@
-import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
-import { validateEmailRegex } from '../../../utils/regex/utils.regex.validators';
+import { FielRegister } from '../auth.field.validators';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent extends AuthComponent {
-  isPasswordSame = false;
-
-  public formRegister: FormGroup;
+export class RegisterComponent extends AuthComponent implements OnInit {
+  public isPasswordSame = true;
 
   constructor(private readonly formBuilder: FormBuilder) {
     super();
-    this.formRegister = this.formBuilder.group(
-      {
-        email: ['', [Validators.required, Validators.email, Validators.pattern(validateEmailRegex)]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirm_password: ['', [Validators.required, Validators.minLength(6), this.matchPasswords.bind(this)]],
-        checkTerms: [false, Validators.requiredTrue],
-      },
-      { validator: this.checkPassword('password', 'confirm_password') }
-    );
   }
 
-  matchPasswords(control: AbstractControl) {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
+  /**
+   * INFO:
+   * ngOnInit - start life cycle hooks
+   */
+  public ngOnInit(): void {
+    this.form = this.formBuilder.group(new FielRegister(), {
+      validator: this.checkPassword('password', 'confirm_password'),
+    });
+  }
 
-    if (password !== confirmPassword) {
-      return { mismatch: null };
-    }
-    return true;
+  /**
+   * INFO:
+   * getNameId = get name field from form
+   */
+  public get getNameId() {
+    return this.form.get('nameId')?.value;
   }
 
   /**
@@ -67,18 +64,13 @@ export class RegisterComponent extends AuthComponent {
     };
   }
 
-  onSubmit() {
-    if (this.formRegister.valid) {
-      const email = this.formRegister.value.email;
-      const password = this.formRegister.value.password;
-      const confirm_password = this.formRegister.value.confirm_password;
-
-      console.log('Email:', email);
-      console.log('Senha:', password);
-      console.log('Confirmar Senha:', confirm_password);
-      console.log('Aceita os Termos:', this.formRegister.value.checkTerms);
-    } else {
-      console.log('Formulário inválido. Verifique os campos.');
-    }
+  /**
+   * INFO:
+   * onSubmit - make regiter listening event on submit from form
+   */
+  public onSubmit(): void {
+    const email = this.form.value.email;
+    const password = this.form.value.password;
+    const confirm_password = this.form.value.confirm_password;
   }
 }
