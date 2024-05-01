@@ -11,4 +11,7 @@ export const actionLoginSuccess = createAction(
   authType.LOGIN_SUCCESS,
   (payload: HttpResponseDefault<IAuthState>) => payload
 );
+
 export const actionClear = createAction(authType.CLEAR);
+export const actionGoto = createAction(authType.LOGIN_GOTO, (payload: { paths: Array<string> }) => payload);
+export const actionLoading = createAction(authType.LOGIN_LOADING, (payload: { isLoading: boolean }) => payload);

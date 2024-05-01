@@ -28,3 +28,7 @@ export interface IAuthState {
   token: string | null;
   user: User | null;
 }
+
+export enum AuthVars {
+  TOKEN = 'token',
+}

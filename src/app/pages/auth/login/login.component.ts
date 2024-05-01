@@ -32,9 +32,16 @@ export class LoginComponent extends AuthComponent implements OnInit {
   /**
    * INFO:
    * onSubmit - make login listening event on submit from form
+   * Aqui você pode acessar os valores do formulário
    */
   onSubmit() {
-    // Aqui você pode acessar os valores do formulário
+    // starting loading
+    this.store.dispatch(this.loading({ isLoading: true }));
+
+    // starting payload to make login
     this.store.dispatch(this.loginAction({ email: this.getEmail, password: this.getPassword }));
+
+    // dispatch action to home after login
+    this.store.dispatch(this.goToAction({ paths: ['/home'] }));
   }
 }

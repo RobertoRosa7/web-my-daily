@@ -13,7 +13,7 @@ export const authReducer = createReducer(
   STATES,
   on(actionLoginSuccess, (_, { data, message, error }) => ({ data, message, error })),
 
-  on(actionLoginError, (_, { error }) => ({ ..._, message: error.message })),
+  on(actionLoginError, (_, { error }) => ({ ..._, message: error.error.message })),
 
   on(actionClear, () => STATES)
 );

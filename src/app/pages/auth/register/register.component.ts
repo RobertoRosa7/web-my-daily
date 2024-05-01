@@ -4,6 +4,7 @@ import { AuthComponent } from '../auth.component';
 import { FielRegister } from '../auth.field.validators';
 import { IAuthState } from '../core/interface/auth.interface';
 import { Store } from '@ngrx/store';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -64,14 +65,21 @@ export class RegisterComponent extends AuthComponent implements OnInit {
    * onSubmit - make regiter listening event on submit from form
    */
   public onSubmit(): void {
+    // starting loading
+    this.store.dispatch(this.loading({ isLoading: true }));
+
+    // starting payload to make register
     this.store.dispatch(
       this.registerActioln({
         email: this.getEmail,
         password: this.getPassword,
         checkTerms: this.getCheckTerms,
-        nameId: this.getNameId,
+        nameId: this.getNameId + this.domainSuffix,
         nickname: this.getNickName,
       })
     );
+
+    // dispatch action to login
+    this.store.dispatch(this.goToAction({ paths: ['/login'] }));
   }
 }

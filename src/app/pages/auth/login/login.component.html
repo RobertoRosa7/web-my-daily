@@ -37,7 +37,11 @@
             type="submit"
             [disabled]="form.invalid"
             class="w-full bg-blue-500 text-white py-3 rounded-full hover:bg-blue-600 cursor-pointer disabled:bg-slate-500">
-            Realizar login
+            <span *ngIf="!(isLoading$ | async)">Realizar login</span>
+            <mat-spinner
+              style="display: inline-block; min-height: 23px"
+              diameter="16"
+              *ngIf="isLoading$ | async"></mat-spinner>
           </button>
         </div>
         <div class="flex gap-2">

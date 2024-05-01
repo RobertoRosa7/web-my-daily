@@ -4,4 +4,6 @@ export enum authType {
   LOGIN_ERROR = 'loginError@types',
   LOGIN_SUCCESS = 'loginSuccess@types',
   CLEAR = 'loginClear@types',
+  LOGIN_GOTO = 'loginToHome@types',
+  LOGIN_LOADING = 'loginLoading@types',
 }
