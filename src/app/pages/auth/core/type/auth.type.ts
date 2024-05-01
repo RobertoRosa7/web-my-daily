@@ -3,4 +3,5 @@ export enum authType {
   LOGIN_REGISTER = 'loginRegister@types',
   LOGIN_ERROR = 'loginError@types',
   LOGIN_SUCCESS = 'loginSuccess@types',
+  CLEAR = 'loginClear@types',
 }

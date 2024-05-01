@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
 import { FielRegister } from '../auth.field.validators';
+import { IAuthState } from '../core/interface/auth.interface';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-register',
@@ -11,8 +13,8 @@ import { FielRegister } from '../auth.field.validators';
 export class RegisterComponent extends AuthComponent implements OnInit {
   public isPasswordSame = true;
 
-  constructor(private readonly formBuilder: FormBuilder) {
-    super();
+  constructor(private readonly formBuilder: FormBuilder, protected override readonly store: Store<IAuthState>) {
+    super(store);
   }
 
   /**
@@ -23,14 +25,7 @@ export class RegisterComponent extends AuthComponent implements OnInit {
     this.form = this.formBuilder.group(new FielRegister(), {
       validator: this.checkPassword('password', 'confirm_password'),
     });
-  }
-
-  /**
-   * INFO:
-   * getNameId = get name field from form
-   */
-  public get getNameId() {
-    return this.form.get('nameId')?.value;
+    this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
   }
 
   /**
@@ -69,8 +64,14 @@ export class RegisterComponent extends AuthComponent implements OnInit {
    * onSubmit - make regiter listening event on submit from form
    */
   public onSubmit(): void {
-    const email = this.form.value.email;
-    const password = this.form.value.password;
-    const confirm_password = this.form.value.confirm_password;
+    this.store.dispatch(
+      this.registerActioln({
+        email: this.getEmail,
+        password: this.getPassword,
+        checkTerms: this.getCheckTerms,
+        nameId: this.getNameId,
+        nickname: this.getNickName,
+      })
+    );
   }
 }

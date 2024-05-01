@@ -3,10 +3,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.services';
-import * as actionAuth from '../action/auth.action';
+import * as authAction from '../action/auth.action';
+import { authType } from '../type/auth.type';
 import { LocalStorageService } from '../../../../../services/localstorage.service';
 import { Store } from '@ngrx/store';
 
+/**
+ * @see: https://ngrx.io/guide/effects
+ */
 @Injectable()
 export class AuthEffect {
   /**
@@ -16,7 +20,7 @@ export class AuthEffect {
   public register: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(actionAuth.actionRegiser),
+      ofType(authType.LOGIN_REGISTER),
       // layer to fetch payload from action
       mergeMap((payload) =>
         // layer to service send payload to backend
@@ -24,14 +28,14 @@ export class AuthEffect {
           // layer resolve http error to handler
           catchError((e) => {
             // dispatch error to component handler on display
-            this.store.dispatch(actionAuth.actionLoginError({ error: e }));
+            this.store.dispatch(authAction.actionLoginError({ error: e }));
             // stopping and interupt runtime
             return throwError(() => new Error(e));
           }),
           // layer to save on localstorage information from login after validate on backend
           tap(({ data }) => this.localStorage.setKey('token', { data })),
           // layer map when login made success
-          map((response) => actionAuth.actionLoginSuccess(response))
+          map((response) => authAction.actionLoginSuccess(response))
         )
       ),
       // layer to catch error from effect
@@ -46,7 +50,7 @@ export class AuthEffect {
   public login: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(actionAuth.actionLogin),
+      ofType(authType.LOGIN),
       // layer to fetch payload from action
       mergeMap((payload) =>
         // layer to service send payload to backend
@@ -54,14 +58,14 @@ export class AuthEffect {
           // layer resolve http error to handler
           catchError((e) => {
             // dispatch error to component handler on display
-            this.store.dispatch(actionAuth.actionLoginError({ error: e }));
+            this.store.dispatch(authAction.actionLoginError({ error: e }));
             // stopping and interupt runtime
             return throwError(() => new Error(e));
           }),
           // layer to save on localstorage information from login after validate on backend
           tap(({ data }) => this.localStorage.setKey('token', { data })),
           // layer map when login made success
-          map((response) => actionAuth.actionLoginSuccess(response))
+          map((response) => authAction.actionLoginSuccess(response))
         )
       ),
       // layer to catch error from effect

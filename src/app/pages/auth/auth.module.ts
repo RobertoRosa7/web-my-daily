@@ -7,16 +7,16 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.services';
 import { AuthComponent } from './auth.component';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
-import { AuthStore } from './core/store/auth.store';
 import { AuthRepository } from './core/repository/auth.repository';
 import { ConstantsRepository } from './core/repository/constants.repository';
 import { HttpClientModule } from '@angular/common/http';
+import { provideEffects } from '@ngrx/effects';
+import { AuthEffect } from './core/effect/auth.effect';
 
 export const routes: Routes = [
   {
     path: '',
+    providers: [provideEffects(AuthEffect)],
     component: AuthComponent,
     children: [
       { path: 'login', component: LoginComponent },
@@ -26,6 +26,9 @@ export const routes: Routes = [
   },
 ];
 
+/**
+ * @see: https://ngrx.io/guide/store
+ */
 @NgModule({
   declarations: [RegisterComponent, LoginComponent, AuthComponent],
   imports: [
@@ -35,9 +38,6 @@ export const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forChild(routes),
-    StoreModule.forRoot({}),
-    StoreModule.forFeature('auth', AuthStore),
-    StoreDevtoolsModule.instrument({ maxAge: 45 }),
   ],
   providers: [AuthService, AuthRepository, ConstantsRepository],
 })

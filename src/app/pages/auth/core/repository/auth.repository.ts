@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ConstantsRepository, Paths } from './constants.repository';
 import { HttpClient } from '@angular/common/http';
-import { ILogin, IRegister } from '../interface/auth.interface';
-import { Observable, of } from 'rxjs';
+import { IAuthState, ILogin, IRegister } from '../interface/auth.interface';
+import { Observable } from 'rxjs';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthRepository {
-  private readonly responseTemp: HttpResponseDefault<string> = {
-    data: 'token',
-    error: false,
-    message: 'ok',
-  };
-
   constructor(private readonly constansts: ConstantsRepository, private readonly http: HttpClient) {}
 
   /**
@@ -24,11 +18,8 @@ export class AuthRepository {
    * @param payload ILogin
    * @returns Observable<HttpResponseDefault<string>>
    */
-  public login(payload: ILogin): Observable<HttpResponseDefault<string>> {
-    // uncomment to integrate backen
-    // return this.http.post<HttpResponseDefault<string>>(this.constansts.get(Paths.signin), payload);
-
-    return of(this.responseTemp);
+  public login(payload: ILogin): Observable<HttpResponseDefault<IAuthState>> {
+    return this.http.post<HttpResponseDefault<IAuthState>>(this.constansts.get(Paths.signin), payload);
   }
 
   /**
@@ -38,10 +29,7 @@ export class AuthRepository {
    * @param payload ILogin
    * @returns Observable<HttpResponseDefault<string>>
    */
-  public register(payload: IRegister): Observable<HttpResponseDefault<string>> {
-    // uncomment to integrate backen
-    // return this.http.post<HttpResponseDefault<string>>(this.constansts.get(Paths.signup), payload);
-
-    return of(this.responseTemp);
+  public register(payload: IRegister): Observable<HttpResponseDefault<IAuthState>> {
+    return this.http.post<HttpResponseDefault<IAuthState>>(this.constansts.get(Paths.signup), payload);
   }
 }

@@ -1,4 +1,4 @@
-import { text } from "stream/consumers";
+import { text } from 'stream/consumers';
 
 /**
  * @see https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
@@ -23,14 +23,12 @@ export const validateEmailRegex =
  * @returns
  */
 
-export const validatePasswordRegex =
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
+export const validatePasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/;
 
 export const validatePassword = (senha: string) => {
   return String(senha).toLowerCase().match(validatePasswordRegex);
 };
 
-
 export const clearText = (text: string) => {
   return text.trim();
-}
+};

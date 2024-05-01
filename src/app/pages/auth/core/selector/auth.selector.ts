@@ -1,9 +1,17 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
-import { IAuthState, IRegister } from '../interface/auth.interface';
+import { IAuthState } from '../interface/auth.interface';
+import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
-const auth: MemoizedSelector<object, IAuthState> = createFeatureSelector<IAuthState>('auth');
+const error: MemoizedSelector<object, HttpResponseDefault<void>> = createFeatureSelector('auth');
+const success: MemoizedSelector<object, HttpResponseDefault<IAuthState>> = createFeatureSelector<
+  HttpResponseDefault<IAuthState>
+>('auth');
 
-export const selectError: MemoizedSelector<object, IRegister | undefined | null> = createSelector(
-  auth,
-  (states: IAuthState): IRegister | undefined | null => states.auth
+export const selectorError: MemoizedSelector<object, HttpResponseDefault<void>> = createSelector(
+  error,
+  (states: HttpResponseDefault<void>) => states
+);
+export const selectorSuccess: MemoizedSelector<object, HttpResponseDefault<IAuthState>> = createSelector(
+  success,
+  (states: HttpResponseDefault<IAuthState>) => states
 );

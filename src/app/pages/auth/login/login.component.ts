@@ -1,9 +1,6 @@
-import { AuthService } from '../core/services/auth.services';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
-import { validateEmailRegex } from '../../../utils/regex/utils.regex.validators';
-import * as authAction from '../core/action/auth.action';
 import { Store } from '@ngrx/store';
 import { IAuthState } from '../core/interface/auth.interface';
 import { FieldLogin } from '../auth.field.validators';
@@ -13,17 +10,31 @@ import { FieldLogin } from '../auth.field.validators';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent extends AuthComponent {
-
-  constructor(private readonly formBuilder: FormBuilder, private readonly store: Store<IAuthState>) {
-    super();
-    this.form = this.formBuilder.group(new FieldLogin());
+export class LoginComponent extends AuthComponent implements OnInit {
+  /**
+   *
+   * @param formBuilder FormBuilder form react
+   * @param store Store - layer redux store where are all data storagered
+   */
+  constructor(private readonly formBuilder: FormBuilder, protected override readonly store: Store<IAuthState>) {
+    super(store);
   }
 
+  /**
+   * INFO:
+   * ngOnInit - start life cycle hooks
+   */
+  public ngOnInit(): void {
+    this.form = this.formBuilder.group(new FieldLogin());
+    this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
+  }
+
+  /**
+   * INFO:
+   * onSubmit - make login listening event on submit from form
+   */
   onSubmit() {
     // Aqui você pode acessar os valores do formulário
-    const email = this.form.value.email;
-    const password = this.form.value.password;
-    this.store.dispatch(authAction.actionLogin({ email, password }));
+    this.store.dispatch(this.loginAction({ email: this.getEmail, password: this.getPassword }));
   }
 }
