@@ -1,63 +1,97 @@
 <div class="flex flex-col items-center justify-center h-screen">
   <div class="py-3 px-5 w-full max-w-md">
+    <mat-error *ngIf="error$ | async as error">
+      {{ error.message }}
+    </mat-error>
+    <mat-hint *ngIf="loginResponse$ | async as response">
+      {{ response.message }}
+    </mat-hint>
     <h1 class="text-center mb-5">Cadastre sua conta</h1>
-    <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="px-5 flex flex-col gap-y-5">
-        <div class="flex flex-col">
+        <mat-form-field class="flex flex-col" floatLabel="always">
+          <label>Name id</label>
+          <input
+            matInput
+            required
+            formControlName="nameId"
+            type="text"
+            placeholder="Insira seu name id"
+            class="border-b outline-none pt-2" />
+          <mat-hint matSuffix>{{ domainSuffix }}</mat-hint>
+          <mat-hint align="end">{{ getNameId }}{{ domainSuffix }}</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="flex flex-col" floatLabel="always">
+          <label>Apelido</label>
+          <input
+            matInput
+            formControlName="nickname"
+            type="text"
+            placeholder="Insira seu apelido"
+            class="border-b outline-none pt-2" />
+        </mat-form-field>
+
+        <mat-form-field class="flex flex-col" floatLabel="always">
           <label>Email</label>
           <input
+            matInput
+            required
             formControlName="email"
             type="text"
             placeholder="Insira seu email"
-            class="border-b outline-none pt-2"
-          />
-        </div>
+            class="border-b outline-none pt-2" />
+        </mat-form-field>
 
-        <div class="flex flex-col">
+        <mat-form-field class="flex flex-col" floatLabel="always">
           <label>Senha</label>
           <input
+            matInput
+            required
             formControlName="password"
-            type="password"
+            [type]="changeTexts ? 'password' : 'text'"
             placeholder="Insira uma senha"
-            class="border-b outline-none pt-2"
-          />
-        </div>
+            class="border-b outline-none pt-2" />
+          <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>{{
+            changeTexts ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+        </mat-form-field>
 
-        <div class="flex flex-col">
+        <mat-form-field class="flex flex-col" floatLabel="always">
           <label>Confirme sua Senha</label>
           <input
+            matInput
+            required
             formControlName="confirm_password"
-            type="password"
+            [type]="changeTexts ? 'password' : 'text'"
             placeholder="Confirme a senha"
-            class="border-b outline-none pt-2"
-          />
-
-          <mat-error *ngIf="!isPasswordSame" class="text-error">
-            Senhas não são iguais
-          </mat-error>
-        </div>
-        <div>
-          <mat-checkbox color="primary" formControlName="checkTerms">
-            Ao registrar se está aceitando os nosso
-            <a href="" class="underline text-primary">Termos e Condições</a> do
-            aplicativo
-            <a href="" class="underline text-primary">Politica de Privacidade</a
-            >.
-          </mat-checkbox>
-        </div>
+            class="border-b outline-none pt-2" />
+          <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>{{
+            changeTexts ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+          <mat-error *ngIf="!isPasswordSame" class="text-error"> Senhas não são iguais </mat-error>
+        </mat-form-field>
+        <mat-checkbox color="primary" formControlName="checkTerms">
+          Ao registrar se está aceitando os nosso
+          <a href="" class="underline text-primary">Termos e Condições</a> do aplicativo
+          <a href="" class="underline text-primary">Politica de Privacidade</a>.
+        </mat-checkbox>
 
         <div>
           <button
-            [disabled]="formRegister.invalid"
-            class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-slate-500"
-          >
-            Registrar-se
+            type="submit"
+            [disabled]="form.invalid"
+            class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-slate-500">
+            <span *ngIf="!(isLoading$ | async)">Registrar-se</span>
+            <mat-spinner
+              style="display: inline-block; min-height: 23px"
+              diameter="16"
+              *ngIf="isLoading$ | async"></mat-spinner>
           </button>
+         
         </div>
         <div class="flex gap-2">
-          Já tem uma conta?<a href="auth/login" class="underline text-blue-500"
-            >Realizar login</a
-          >
+          Já tem uma conta?<a href="auth/login" class="underline text-blue-500">Realizar login</a>
         </div>
       </div>
     </form>

@@ -1,58 +1,47 @@
-import { AuthService } from './../services/auth.services';
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
-import { validateEmailRegex } from '../../../utils/regex/utils.regex.validators';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Store } from '@ngrx/store';
+import { IAuthState } from '../core/interface/auth.interface';
+import { FieldLogin } from '../auth.field.validators';
 
 @Component({
   selector: 'app-login',
-  providers: [AuthService],
-  standalone: true,
-  imports: [MatCheckboxModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent extends AuthComponent {
-  public formLogin: FormGroup;
-
-  constructor(
-    private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService
-  ) {
-    super();
-    this.formLogin = this.formBuilder.group({
-      email: [
-        '',
-        [
-          Validators.required,
-          Validators.email,
-          Validators.pattern(validateEmailRegex),
-        ],
-      ],
-      password: ['', Validators.required],
-    });
+export class LoginComponent extends AuthComponent implements OnInit {
+  /**
+   *
+   * @param formBuilder FormBuilder form react
+   * @param store Store - layer redux store where are all data storagered
+   */
+  constructor(private readonly formBuilder: FormBuilder, protected override readonly store: Store<IAuthState>) {
+    super(store);
   }
 
+  /**
+   * INFO:
+   * ngOnInit - start life cycle hooks
+   */
+  public ngOnInit(): void {
+    this.form = this.formBuilder.group(new FieldLogin());
+    this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
+  }
+
+  /**
+   * INFO:
+   * onSubmit - make login listening event on submit from form
+   * Aqui você pode acessar os valores do formulário
+   */
   onSubmit() {
-    if (this.formLogin.valid) {
-      // Aqui você pode acessar os valores do formulário
-      const email = this.formLogin.value.email;
-      const password = this.formLogin.value.password;
+    // starting loading
+    this.store.dispatch(this.loading({ isLoading: true }));
 
-      this.authService.login({ email, password });
+    // starting payload to make login
+    this.store.dispatch(this.loginAction({ email: this.getEmail, password: this.getPassword }));
 
-      console.log('Email:', email);
-      console.log('Senha:', password);
-    } else {
-      // Se o formulário não for válido, você pode realizar ações apropriadas, como mostrar mensagens de erro
-      console.log('Formulário inválido. Verifique os campos.');
-    }
+    // dispatch action to home after login
+    this.store.dispatch(this.goToAction({ paths: ['/home'] }));
   }
 }

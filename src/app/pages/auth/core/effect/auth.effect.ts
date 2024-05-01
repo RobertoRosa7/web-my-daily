@@ -1,0 +1,88 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
+import { AuthService } from '../services/auth.services';
+import * as authAction from '../action/auth.action';
+import { authType } from '../type/auth.type';
+import { LocalStorageService } from '../../../../../services/localstorage.service';
+import { Store } from '@ngrx/store';
+import { AuthVars } from '../interface/auth.interface';
+import { HttpErrorResponse } from '@angular/common/http';
+
+/**
+ * @see: https://ngrx.io/guide/effects
+ */
+@Injectable()
+export class AuthEffect {
+  /**
+   * INFO:
+   * register - effect login effect responsible to handler layer between services, store states, reducers and components
+   */
+  public register: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      // layer types to dispatch action
+      ofType(authType.LOGIN_REGISTER),
+      // layer to fetch payload from action
+      mergeMap((payload) =>
+        // layer to service send payload to backend
+        this.authService.register(payload).pipe(
+          // layer resolve http error to handler
+          catchError((e) => of(e)),
+          // layer map when login made success
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return authAction.actionLoginError({ error: response });
+            }
+
+            return authAction.actionLoginSuccess(response);
+          }),
+          // layer finalize stopping loading
+          finalize(() => this.store.dispatch(authAction.actionLoading({ isLoading: false })))
+        )
+      ),
+      // layer to catch error from effect
+      catchError((err) => of(err))
+    )
+  );
+
+  /**
+   * INFO:
+   * login - effect login effect responsible to handler layer between services, store states, reducers and components
+   */
+  public login: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      // layer types to dispatch action
+      ofType(authType.LOGIN),
+      // layer to fetch payload from action
+      mergeMap((payload) =>
+        // layer to service send payload to backend
+        this.authService.login(payload).pipe(
+          // layer resolve http error to handler
+          catchError((e) => of(e)),
+          // layer map when login made success
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return authAction.actionLoginError({ error: response });
+            }
+
+            // layer to save on localstorage information from login after validate on backend
+            this.localStorage.setKey(AuthVars.TOKEN, { data: response.data?.token });
+            return authAction.actionLoginSuccess(response);
+          }),
+          // layer finalize stopping loading
+          finalize(() => this.store.dispatch(authAction.actionLoading({ isLoading: false })))
+        )
+      ),
+      // layer to catch error from effect
+      catchError((err) => of(err))
+    )
+  );
+
+  constructor(
+    private readonly action: Actions,
+    private readonly authService: AuthService,
+    private readonly localStorage: LocalStorageService,
+    private readonly store: Store
+  ) {}
+}

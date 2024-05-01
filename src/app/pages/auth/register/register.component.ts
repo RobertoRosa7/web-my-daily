@@ -1,74 +1,32 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
-import {
-  validateEmailRegex,
-  validatePasswordRegex,
-} from '../../../utils/regex/utils.regex.validators';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatInputModule } from '@angular/material/input';
+import { FielRegister } from '../auth.field.validators';
+import { IAuthState } from '../core/interface/auth.interface';
+import { Store } from '@ngrx/store';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatCheckboxModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent extends AuthComponent {
-  isPasswordSame = false;
+export class RegisterComponent extends AuthComponent implements OnInit {
+  public isPasswordSame = true;
 
-  public formRegister: FormGroup;
-
-  constructor(private readonly formBuilder: FormBuilder) {
-    super();
-    this.formRegister = this.formBuilder.group(
-      {
-        email: [
-          '',
-          [
-            Validators.required,
-            Validators.email,
-            Validators.pattern(validateEmailRegex),
-          ],
-        ],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirm_password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            this.matchPasswords.bind(this),
-          ],
-        ],
-        checkTerms: [false, Validators.requiredTrue],
-      },
-      { validator: this.checkPassword('password', 'confirm_password') }
-    );
+  constructor(private readonly formBuilder: FormBuilder, protected override readonly store: Store<IAuthState>) {
+    super(store);
   }
 
-  matchPasswords(control: AbstractControl) {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password !== confirmPassword) {
-      return { mismatch: null };
-    }
-    return true;
+  /**
+   * INFO:
+   * ngOnInit - start life cycle hooks
+   */
+  public ngOnInit(): void {
+    this.form = this.formBuilder.group(new FielRegister(), {
+      validator: this.checkPassword('password', 'confirm_password'),
+    });
+    this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
   }
 
   /**
@@ -79,18 +37,14 @@ export class RegisterComponent extends AuthComponent {
    * @param matchingControlName string  field confirm password (required)
    * @returns (formGroup: FormGroup) => void
    */
-  public checkPassword(
-    controlName: string,
-    matchingControlName: string
-  ): (formGroup: FormGroup) => void {
+  public checkPassword(controlName: string, matchingControlName: string): (formGroup: FormGroup) => void {
     // return function
     return (formGroup: FormGroup) => {
       // get field abstract controll of password
       const control: AbstractControl = formGroup.controls[controlName];
 
       // get field abstract controll of confirm password
-      const matchingControl: AbstractControl =
-        formGroup.controls[matchingControlName];
+      const matchingControl: AbstractControl = formGroup.controls[matchingControlName];
 
       // check if password and confirm is equal
       if (control.value === matchingControl.value) {
@@ -106,18 +60,26 @@ export class RegisterComponent extends AuthComponent {
     };
   }
 
-  onSubmit() {
-    if (this.formRegister.valid) {
-      const email = this.formRegister.value.email;
-      const password = this.formRegister.value.password;
-      const confirm_password = this.formRegister.value.confirm_password;
+  /**
+   * INFO:
+   * onSubmit - make regiter listening event on submit from form
+   */
+  public onSubmit(): void {
+    // starting loading
+    this.store.dispatch(this.loading({ isLoading: true }));
 
-      console.log('Email:', email);
-      console.log('Senha:', password);
-      console.log('Confirmar Senha:', confirm_password);
-      console.log('Aceita os Termos:', this.formRegister.value.checkTerms);
-    } else {
-      console.log('Formulário inválido. Verifique os campos.');
-    }
+    // starting payload to make register
+    this.store.dispatch(
+      this.registerActioln({
+        email: this.getEmail,
+        password: this.getPassword,
+        checkTerms: this.getCheckTerms,
+        nameId: this.getNameId + this.domainSuffix,
+        nickname: this.getNickName,
+      })
+    );
+
+    // dispatch action to login
+    this.store.dispatch(this.goToAction({ paths: ['/login'] }));
   }
 }
