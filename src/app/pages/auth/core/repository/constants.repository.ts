@@ -1,9 +1,5 @@
 import { environment } from '../../../../../environments/environment';
-
-export enum Paths {
-  signup = '/ms-users/auth',
-  signin = '/ms-users/auth/login',
-}
+import { Paths } from '../interface/auth.interface';
 
 export class ConstantsRepository {
   private readonly host: string = environment.host;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ConstantsRepository, Paths } from './constants.repository';
+import { ConstantsRepository } from './constants.repository';
 import { HttpClient } from '@angular/common/http';
-import { IAuthState, ILogin, IRegister } from '../interface/auth.interface';
+import { IAuthState, ILogin, IRegister, Paths } from '../interface/auth.interface';
 import { Observable } from 'rxjs';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
