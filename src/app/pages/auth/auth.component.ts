@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import * as selectAuth from './core/selector/auth.selector';
-import { Observable, exhaustMap, filter, map } from 'rxjs';
+import { Observable, Subscription, delay, filter, from, map, mergeMap, of, tap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { IAuthState } from './core/interface/auth.interface';
 import { HttpResponseDefault } from '../../interface/http-response.interface';
@@ -13,21 +13,36 @@ import { Router } from '@angular/router';
   selector: 'app-auth',
   template: '<router-outlet></router-outlet>',
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
   public form!: FormGroup;
   public domainSuffix = '@daily';
   public changeTexts = true;
   public isLoading$!: Observable<boolean>;
+  public subscriptions: Array<Subscription> = [];
 
   // responsible to listening actions to login success
-  public loginResponse$: Observable<HttpResponseDefault<IAuthState>> = this.store
+  public message$: Observable<HttpResponseDefault<IAuthState>> = this.store
     // layer selector to filter
-    .select(selectAuth.selectorSuccess)
-    .pipe(
-      // layer filter if exists data
-      filter(({ data }) => !!data),
-      // layer exhuastMap only go through if data exists
-      exhaustMap((data) =>
+    .select(selectAuth.selectorMessage);
+
+  // inject action subject dependency only super class?
+  private actionSubject = inject(ActionsSubject);
+  private router = inject(Router);
+
+  constructor(protected readonly store: Store<IAuthState>) {
+    // listening action loading happens
+    this.isLoading$ = this.actionSubject.pipe(
+      // layer filer only action loading
+      filter(({ type }) => type === authType.LOGIN_LOADING),
+      // layer map catch payload action loading
+      map((action) => {
+        // abastract loading from action types
+        const { isLoading } = action as { type: string; isLoading: boolean };
+
+        // return loading
+        return isLoading;
+      }),
+      mergeMap(() =>
         // layer subject to listening action login to go
         this.actionSubject.pipe(
           filter(({ type }) => type === authType.LOGIN_GOTO),
@@ -36,33 +51,26 @@ export class AuthComponent {
             // abstract paths to navigate
             const { paths } = action as { type: string; paths: Array<string> };
 
-            // navigate after login
-            this.navigate(paths);
-
             // return data to display message
-            return data;
-          })
+            return paths;
+          }),
+          // layer wait 1500 ms and then got
+          delay(1500),
+          // layer navigate
+          mergeMap(this.navigate.bind(this))
         )
       )
     );
+  }
 
-  // responsible to listening some error
-  public error$: Observable<HttpResponseDefault<void>> = this.store
-    .select(selectAuth.selectorError)
-    .pipe(filter(({ data }) => !data));
-
-  // inject action subject dependency only super class?
-  private actionSubject = inject(ActionsSubject);
-  private router = inject(Router);
-
-  constructor(protected readonly store: Store<IAuthState>) {
-    this.isLoading$ = this.actionSubject.pipe(
-      filter(({ type }) => type === authType.LOGIN_LOADING),
-      map((action) => {
-        const { isLoading } = action as { type: string; isLoading: boolean };
-        return isLoading;
-      })
-    );
+  /**
+   * INFO:
+   * ngOnDestroy - destory component
+   */
+  ngOnDestroy(): void {
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   }
 
   /**
@@ -71,8 +79,12 @@ export class AuthComponent {
    *
    * @param paths Array<string> paths to navigate
    */
-  private navigate(paths: Array<string>) {
-    setTimeout(() => this.router.navigate(paths), 300);
+  private navigate(paths: Array<string>): Observable<boolean> {
+    // clear fields message on display
+    this.store.dispatch(this.clearAction());
+
+    // navigate
+    return from(this.router.navigate(paths));
   }
 
   /**

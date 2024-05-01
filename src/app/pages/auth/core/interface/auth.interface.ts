@@ -30,5 +30,16 @@ export interface IAuthState {
 }
 
 export enum AuthVars {
-  TOKEN = 'token',
+  token = 'token',
+  user = 'user',
+}
+
+export enum RoutePaths {
+  register = '/auth/register',
+  login = '/aut/login',
+}
+
+export enum Paths {
+  signup = '/ms-users/auth',
+  signin = '/ms-users/auth/login',
 }

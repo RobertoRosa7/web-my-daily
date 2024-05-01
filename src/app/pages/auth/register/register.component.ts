@@ -4,7 +4,6 @@ import { AuthComponent } from '../auth.component';
 import { FielRegister } from '../auth.field.validators';
 import { IAuthState } from '../core/interface/auth.interface';
 import { Store } from '@ngrx/store';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -23,9 +22,12 @@ export class RegisterComponent extends AuthComponent implements OnInit {
    * ngOnInit - start life cycle hooks
    */
   public ngOnInit(): void {
+    // create new instance form group
     this.form = this.formBuilder.group(new FielRegister(), {
       validator: this.checkPassword('password', 'confirm_password'),
     });
+
+    // clear form when some error happens
     this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
   }
 
@@ -78,8 +80,5 @@ export class RegisterComponent extends AuthComponent implements OnInit {
         nickname: this.getNickName,
       })
     );
-
-    // dispatch action to login
-    this.store.dispatch(this.goToAction({ paths: ['/login'] }));
   }
 }

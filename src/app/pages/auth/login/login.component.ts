@@ -25,7 +25,10 @@ export class LoginComponent extends AuthComponent implements OnInit {
    * ngOnInit - start life cycle hooks
    */
   public ngOnInit(): void {
+    // create new instance form group
     this.form = this.formBuilder.group(new FieldLogin());
+
+    // clear fields when some error happens
     this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
   }
 
@@ -40,8 +43,5 @@ export class LoginComponent extends AuthComponent implements OnInit {
 
     // starting payload to make login
     this.store.dispatch(this.loginAction({ email: this.getEmail, password: this.getPassword }));
-
-    // dispatch action to home after login
-    this.store.dispatch(this.goToAction({ paths: ['/home'] }));
   }
 }

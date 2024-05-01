@@ -7,7 +7,7 @@ import * as authAction from '../action/auth.action';
 import { authType } from '../type/auth.type';
 import { LocalStorageService } from '../../../../../services/localstorage.service';
 import { Store } from '@ngrx/store';
-import { AuthVars } from '../interface/auth.interface';
+import { AuthVars, RoutePaths } from '../interface/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 
 /**
@@ -31,10 +31,12 @@ export class AuthEffect {
           catchError((e) => of(e)),
           // layer map when login made success
           map((response) => {
+            // check if response if http error and then dispatch action of error
             if (response instanceof HttpErrorResponse) {
               return authAction.actionLoginError({ error: response });
             }
-
+            // dispatch action to home after login
+            this.store.dispatch(authAction.actionGoto({ paths: [RoutePaths.login] }));
             return authAction.actionLoginSuccess(response);
           }),
           // layer finalize stopping loading
@@ -62,12 +64,19 @@ export class AuthEffect {
           catchError((e) => of(e)),
           // layer map when login made success
           map((response) => {
+            // check if response if http error and then dispatch action of error
             if (response instanceof HttpErrorResponse) {
               return authAction.actionLoginError({ error: response });
             }
 
             // layer to save on localstorage information from login after validate on backend
-            this.localStorage.setKey(AuthVars.TOKEN, { data: response.data?.token });
+            this.localStorage.setKey(AuthVars.token, { data: response.data?.token });
+
+            // layer to save on localstorage information from login after validate on backend
+            this.localStorage.setKey(AuthVars.user, { data: response.data?.user });
+
+            // dispatch action to home after register
+            this.store.dispatch(authAction.actionGoto({ paths: [RoutePaths.register] }));
             return authAction.actionLoginSuccess(response);
           }),
           // layer finalize stopping loading
