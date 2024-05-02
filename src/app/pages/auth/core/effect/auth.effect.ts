@@ -33,7 +33,7 @@ export class AuthEffect {
           map((response) => {
             // check if response if http error and then dispatch action of error
             if (response instanceof HttpErrorResponse) {
-              return authAction.actionLoginError({ error: response });
+              return authAction.actionLoginError({ fail: response });
             }
             // dispatch action to home after login
             this.store.dispatch(authAction.actionGoto({ paths: [RoutePaths.login] }));
@@ -66,7 +66,7 @@ export class AuthEffect {
           map((response) => {
             // check if response if http error and then dispatch action of error
             if (response instanceof HttpErrorResponse) {
-              return authAction.actionLoginError({ error: response });
+              return authAction.actionLoginError({ fail: response });
             }
 
             // layer to save on localstorage information from login after validate on backend
