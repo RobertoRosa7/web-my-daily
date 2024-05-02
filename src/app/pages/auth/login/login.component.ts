@@ -27,7 +27,6 @@ export class LoginComponent extends AuthComponent implements OnInit {
   public ngOnInit(): void {
     // create new instance form group
     this.form = this.formBuilder.group(new FieldLogin());
-
     // clear fields when some error happens
     this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
   }

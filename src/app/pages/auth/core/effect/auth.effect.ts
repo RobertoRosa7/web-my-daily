@@ -44,7 +44,7 @@ export class AuthEffect {
         )
       ),
       // layer to catch error from effect
-      catchError((err) => of(err))
+      catchError((e) => of(e))
     )
   );
 
@@ -84,7 +84,7 @@ export class AuthEffect {
         )
       ),
       // layer to catch error from effect
-      catchError((err) => of(err))
+      catchError((e) => of(e))
     )
   );
 

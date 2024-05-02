@@ -1,7 +1,7 @@
 import { Component, OnDestroy, inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import * as selectAuth from './core/selector/auth.selector';
-import { Observable, Subscription, delay, filter, from, map, mergeMap, of, tap } from 'rxjs';
+import { Observable, Subscription, delay, filter, from, map, mergeMap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { IAuthState } from './core/interface/auth.interface';
 import { HttpResponseDefault } from '../../interface/http-response.interface';
@@ -15,8 +15,6 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnDestroy {
   public form!: FormGroup;
-  public domainSuffix = '@daily';
-  public changeTexts = true;
   public isLoading$!: Observable<boolean>;
   public subscriptions: Array<Subscription> = [];
 
@@ -41,10 +39,13 @@ export class AuthComponent implements OnDestroy {
 
         // return loading
         return isLoading;
-      }),
-      mergeMap(() =>
-        // layer subject to listening action login to go
-        this.actionSubject.pipe(
+      })
+    );
+
+    // after login send to home
+    this.subscriptions.push(
+      this.actionSubject
+        .pipe(
           filter(({ type }) => type === authType.LOGIN_GOTO),
           // layer map to return message on display
           map((action) => {
@@ -59,7 +60,7 @@ export class AuthComponent implements OnDestroy {
           // layer navigate
           mergeMap(this.navigate.bind(this))
         )
-      )
+        .subscribe()
     );
   }
 
@@ -71,6 +72,11 @@ export class AuthComponent implements OnDestroy {
     for (const sub of this.subscriptions) {
       sub.unsubscribe();
     }
+  }
+
+  public onFireEvent(field: string, form: FormControl) {
+    // this.disabledButton = Object.values(this.valid).some((value) => value);
+    this.form.addControl(field, form);
   }
 
   /**

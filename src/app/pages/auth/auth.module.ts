@@ -12,6 +12,11 @@ import { ConstantsRepository } from './core/repository/constants.repository';
 import { HttpClientModule } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
 import { AuthEffect } from './core/effect/auth.effect';
+import { EmailComponent } from './core/components/input-email/email.component';
+import { PasswordComponent } from './core/components/input-password/password.component';
+import { NameIdComponent } from './core/components/input-name-id/name-id.component';
+import { NickNameComponent } from './core/components/input-nickname/nickname.component';
+import { ConfirmPasswordComponent } from './core/components/input-confirm-password/confirm-password.component';
 
 export const routes: Routes = [
   {
@@ -38,6 +43,11 @@ export const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forChild(routes),
+    EmailComponent,
+    PasswordComponent,
+    NameIdComponent,
+    NickNameComponent,
+    ConfirmPasswordComponent,
   ],
   providers: [AuthService, AuthRepository, ConstantsRepository],
 })
