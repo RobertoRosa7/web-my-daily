@@ -1,6 +1,6 @@
 {
   "name": "web-my-daily",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

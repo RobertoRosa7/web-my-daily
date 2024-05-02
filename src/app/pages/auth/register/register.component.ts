@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
 import { FielRegister } from '../auth.field.validators';
 import { IAuthState } from '../core/interface/auth.interface';
@@ -23,43 +23,10 @@ export class RegisterComponent extends AuthComponent implements OnInit {
    */
   public ngOnInit(): void {
     // create new instance form group
-    this.form = this.formBuilder.group(new FielRegister(), {
-      validator: this.checkPassword('password', 'confirm_password'),
-    });
+    this.form = this.formBuilder.group(new FielRegister());
 
     // clear form when some error happens
     this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
-  }
-
-  /**
-   * INFO:
-   * checkPassword - responsible to match password
-   *
-   * @param controlName string field password (required)
-   * @param matchingControlName string  field confirm password (required)
-   * @returns (formGroup: FormGroup) => void
-   */
-  public checkPassword(controlName: string, matchingControlName: string): (formGroup: FormGroup) => void {
-    // return function
-    return (formGroup: FormGroup) => {
-      // get field abstract controll of password
-      const control: AbstractControl = formGroup.controls[controlName];
-
-      // get field abstract controll of confirm password
-      const matchingControl: AbstractControl = formGroup.controls[matchingControlName];
-
-      // check if password and confirm is equal
-      if (control.value === matchingControl.value) {
-        matchingControl.setErrors(null);
-        return;
-      }
-
-      // display error
-      matchingControl.setErrors({ mustMatch: true });
-
-      // invalidate field
-      this.isPasswordSame = matchingControl.status === 'VALID' ? true : false;
-    };
   }
 
   /**
@@ -76,7 +43,7 @@ export class RegisterComponent extends AuthComponent implements OnInit {
         email: this.getEmail,
         password: this.getPassword,
         checkTerms: this.getCheckTerms,
-        nameId: this.getNameId + this.domainSuffix,
+        nameId: this.getNameId,
         nickname: this.getNickName,
       })
     );
