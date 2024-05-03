@@ -6,7 +6,7 @@ import { HttpResponseDefault } from '../../../../interface/http-response.interfa
 
 export const actionLogin = createAction(authType.LOGIN, (payload: ILogin) => payload);
 export const actionRegiser = createAction(authType.LOGIN_REGISTER, (payload: IRegister) => payload);
-export const actionLoginError = createAction(authType.LOGIN_ERROR, (payload: { error: HttpErrorResponse }) => payload);
+export const actionLoginError = createAction(authType.LOGIN_ERROR, (payload: { fail: HttpErrorResponse }) => payload);
 export const actionLoginSuccess = createAction(
   authType.LOGIN_SUCCESS,
   (payload: HttpResponseDefault<IAuthState>) => payload

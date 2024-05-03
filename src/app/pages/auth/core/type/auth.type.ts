@@ -7,3 +7,5 @@ export enum authType {
   LOGIN_GOTO = 'loginToHome@types',
   LOGIN_LOADING = 'loginLoading@types',
 }
+
+
