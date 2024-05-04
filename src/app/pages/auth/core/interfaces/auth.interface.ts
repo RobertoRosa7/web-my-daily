@@ -1,3 +1,5 @@
+import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+
 export interface ILogin {
   email: string;
   password: string;
@@ -29,17 +31,18 @@ export interface IAuthState {
   user: User | null;
 }
 
+export type loginResponse = HttpResponseDefault<IAuthState>;
+export type registerResponse = HttpResponseDefault<IAuthState>;
+
 export enum AuthVars {
   token = 'token',
   user = 'user',
 }
 //paths do frotend
 export enum RoutePaths {
-
   register = '/auth/register',
   login = '/auth/login',
 }
-
 
 //paths do backend
 export enum Paths {

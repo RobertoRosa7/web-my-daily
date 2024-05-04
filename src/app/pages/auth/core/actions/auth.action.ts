@@ -1,6 +1,6 @@
 import { createAction } from '@ngrx/store';
-import { authType } from '../type/auth.type';
-import { IAuthState, ILogin, IRegister } from '../interface/auth.interface';
+import { authType } from '../types/auth.type';
+import { IAuthState, ILogin, IRegister } from '../interfaces/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 

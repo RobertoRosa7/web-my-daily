@@ -7,8 +7,8 @@ import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.services';
 import { AuthComponent } from './auth.component';
-import { AuthRepository } from './core/repository/auth.repository';
-import { ConstantsRepository } from './core/repository/constants.repository';
+import { AuthRepository } from './core/repositories/auth.repository';
+import { ConstantsRepository } from './core/repositories/constants.repository';
 import { HttpClientModule } from '@angular/common/http';
 import { EmailComponent } from './core/components/input-email/email.component';
 import { PasswordComponent } from './core/components/input-password/password.component';
@@ -17,6 +17,10 @@ import { NickNameComponent } from './core/components/input-nickname/nickname.com
 import { ConfirmPasswordComponent } from './core/components/input-confirm-password/confirm-password.component';
 import { routes } from './auth.routes';
 import { ButtonSubmitComponent } from './core/components/button-submit/button-submit.component';
+import { provideState } from '@ngrx/store';
+import { authReducer } from './core/reducers/auth.reducer';
+import { AuthEffect } from './core/effects/auth.effect';
+import { provideEffects } from '@ngrx/effects';
 
 /**
  * @see: https://ngrx.io/guide/store
@@ -36,8 +40,13 @@ import { ButtonSubmitComponent } from './core/components/button-submit/button-su
     NickNameComponent,
     ConfirmPasswordComponent,
     ButtonSubmitComponent,
-    
   ],
-  providers: [AuthService, AuthRepository, ConstantsRepository],
+  providers: [
+    AuthService,
+    AuthRepository,
+    ConstantsRepository,
+    provideState({ name: 'auth', reducer: authReducer }),
+    provideEffects(AuthEffect),
+  ],
 })
 export class AuthModule {}

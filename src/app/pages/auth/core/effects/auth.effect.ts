@@ -3,11 +3,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.services';
-import * as authAction from '../action/auth.action';
-import { authType } from '../type/auth.type';
+import * as authAction from '../actions/auth.action';
+import { authType } from '../types/auth.type';
 import { LocalStorageService } from '../../../../../services/localstorage.service';
 import { Store } from '@ngrx/store';
-import { AuthVars, RoutePaths } from '../interface/auth.interface';
+import { AuthVars, RoutePaths } from '../interfaces/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 
 /**

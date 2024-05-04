@@ -7,7 +7,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { AuthStore } from './pages/auth/core/store/auth.store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
-    provideStore(AuthStore),
+    provideStore(),
     provideStoreDevtools({
       maxAge: 45,
       logOnly: false, // Restrict extension to log-only mode

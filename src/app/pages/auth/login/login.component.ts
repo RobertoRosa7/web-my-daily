@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
 import { Store } from '@ngrx/store';
-import { IAuthState } from '../core/interface/auth.interface';
+import { IAuthState } from '../core/interfaces/auth.interface';
 import { FieldLogin } from '../auth.field.validators';
 
 @Component({

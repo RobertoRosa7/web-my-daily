@@ -1,5 +1,5 @@
 import { environment } from '../../../../../environments/environment';
-import { Paths } from '../interface/auth.interface';
+import { Paths } from '../interfaces/auth.interface';
 
 export class ConstantsRepository {
   private readonly host: string = environment.host;

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IAuthState, ILogin, IRegister } from '../interface/auth.interface';
+import { ILogin, IRegister, loginResponse, registerResponse } from '../interfaces/auth.interface';
 import { clearText } from '../../../../utils/regex/utils.regex.validators';
 import { Observable } from 'rxjs';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
-import { AuthRepository } from '../repository/auth.repository';
+import { AuthRepository } from '../repositories/auth.repository';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +10,28 @@ import { AuthRepository } from '../repository/auth.repository';
 export class AuthService {
   constructor(private readonly authRepository: AuthRepository) {}
 
-  login({ password, email }: ILogin): Observable<HttpResponseDefault<IAuthState>> {
+  /**
+   * INFO:
+   * login - responsible to call repository to make login
+   *
+   * @param param ILogin
+   * @returns Observable<loginResponse>
+   */
+  public login({ password, email }: ILogin): Observable<loginResponse> {
     email = clearText(email);
     password = clearText(password);
 
     return this.authRepository.login({ password, email });
   }
 
-  register(payload: IRegister): Observable<HttpResponseDefault<IAuthState>> {
+  /**
+   * INFO:
+   * register - responsible to create new user
+   *
+   * @param payload IRegister
+   * @returns Observable<registerResponse>
+   */
+  public register(payload: IRegister): Observable<registerResponse> {
     clearText(payload.nameId);
     clearText(payload.email);
 

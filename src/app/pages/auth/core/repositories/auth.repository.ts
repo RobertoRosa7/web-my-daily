@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ConstantsRepository } from './constants.repository';
 import { HttpClient } from '@angular/common/http';
-import { IAuthState, ILogin, IRegister, Paths } from '../interface/auth.interface';
+import { ILogin, IRegister, Paths, loginResponse, registerResponse } from '../interfaces/auth.interface';
 import { Observable } from 'rxjs';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +17,8 @@ export class AuthRepository {
    * @param payload ILogin
    * @returns Observable<HttpResponseDefault<string>>
    */
-  public login(payload: ILogin): Observable<HttpResponseDefault<IAuthState>> {
-    return this.http.post<HttpResponseDefault<IAuthState>>(this.constansts.get(Paths.signin), payload);
+  public login(payload: ILogin): Observable<loginResponse> {
+    return this.http.post<loginResponse>(this.constansts.get(Paths.signin), payload);
   }
 
   /**
@@ -29,7 +28,7 @@ export class AuthRepository {
    * @param payload ILogin
    * @returns Observable<HttpResponseDefault<string>>
    */
-  public register(payload: IRegister): Observable<HttpResponseDefault<IAuthState>> {
-    return this.http.post<HttpResponseDefault<IAuthState>>(this.constansts.get(Paths.signup), payload);
+  public register(payload: IRegister): Observable<registerResponse> {
+    return this.http.post<registerResponse>(this.constansts.get(Paths.signup), payload);
   }
 }

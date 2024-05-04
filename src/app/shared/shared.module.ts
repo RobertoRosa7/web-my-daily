@@ -3,8 +3,21 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
 
-const commons = [MatCheckboxModule, MatInputModule, MatIconModule, MatProgressSpinnerModule];
+const commons = [
+  MatCheckboxModule,
+  MatInputModule,
+  MatIconModule,
+  MatProgressSpinnerModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatBadgeModule,
+  MatDividerModule,
+];
 @NgModule({
   declarations: [],
   imports: [...commons],
