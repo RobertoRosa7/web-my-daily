@@ -1,0 +1,48 @@
+<main class="card-feeling">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <span role="none" aria-describedby="name">Roberto Rosa</span>
+        <button mat-icon-button role="button" aria-describedby="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span
+          style="cursor: pointer"
+          [queryParams]="{ name: 'rosa@daily' }"
+          [routerLink]="['/profile/user']"
+          matTooltip="name id"
+          role="link"
+          aria-describedby="name id"
+          >rosa&#64;daily</span
+        >
+        <span>|</span>
+        <span matTooltip="data" role="timer" aria-describedby="date">{{ '2024-05-06' | date }}</span>
+
+        <mat-icon matTooltip="private" role="none" aria-describedby="post private">lock</mat-icon>
+        <!-- <mat-icon matTooltip="public" role="none" aria-describedby="post public">public</mat-icon> -->
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content role="doc-epigraph" aria-describedby="post" aria-details="post content">
+      <p>{{ longText }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div>
+        <small>123.1k</small>
+        <button mat-icon-button role="button" aria-describedby="favorite">
+          <mat-icon>favorite_outline</mat-icon>
+          <!-- <mat-icon>favorite</mat-icon> -->
+        </button>
+      </div>
+      <div>
+        <small>123.1k</small>
+        <button mat-icon-button role="button" aria-describedby="favorite">
+          <mat-icon>thumb_down</mat-icon>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</main>

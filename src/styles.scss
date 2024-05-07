@@ -1,6 +1,92 @@
+@import './themes/mixins';
+@import './themes/dark/dark';
+@import './themes/light/light';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  // light
+  --text-accent: #ff4081;
+  --text-light: #08090c50;
+  --text-middle-orange: #e67e22;
+  --text-middle-light: #585858;
+  --text-green: #009688;
+  --text-green-light: #00968850;
+
+  --color-white: white;
+  --color-whitesmoke: whitesmoke;
+  --color-medium-white: #fafafa;
+
+  --color-light-soft: #8b8b8b;
+
+  //dark
+  --text-dark: #d65a31;
+  --text-dark-green: #0ff5e6;
+  --color-dark-default: #202124;
+  --color-dark-primary: #58525200;
+  --color-dark-secondary: #131722;
+  --color-dark: #212121;
+  --bg-dark-color: #505050;
+
+  // dark red
+  --color-dark-red: #400000;
+  --color-dark-red-intensive: #000000;
+  --color-dark-red-medium: #800000;
+  --color-dark-red-soft: #bf0000;
+  --color-dark-red-light: #ff0000;
+
+  // dark blue
+  --color-dark-blue: #090088;
+  --color-dark-blue-light: #02006c;
+  --color-dark-blue-soft: #010057;
+  --color-dark-blue-medium: #010048;
+  --color-dark-blue-intensive: #03002e;
+  --color-dark-blue-darkness: rgb(2, 0, 36);
+
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #df3636;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --green-microsoft: #488a84ad;
+
+  --profile-cover: linear-gradient(-45deg, var(--dark) 20%, var(--color-dark-blue-darkness) 80%, var(--primary) 5%);
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// buton back
+.btn-back {
+  @include btn-icon-radio;
+}
+
+// button menu
+.btn-menu {
+  @include btn-icon-radio;
+}

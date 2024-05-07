@@ -1,0 +1,78 @@
+@import '../mixins';
+
+// theme of page profile light
+.profile {
+  width: 100%;
+  position: relative;
+  color: var(--color-dark-default);
+
+  mat-toolbar {
+    background-color: transparent;
+  }
+  // mat card
+  .mdc-card {
+    background-color: var(--white);
+    border-left: 1px solid var(--primary);
+  }
+
+  .mat-mdc-card-subtitle {
+    color: var(--gray);
+  }
+
+  // followers
+  .container-followers p {
+    color: var(--white);
+  }
+
+  .container-followers button {
+    background-color: var(--white);
+    color: var(--primary) !important;
+  }
+
+  // phto profile image
+  .page .container-photo .img {
+    background-color: var(--white);
+  }
+
+  // button back
+  .btn-back {
+    // change color icon from btn back
+    mat-icon {
+      color: var(--white);
+    }
+  }
+
+  // button menu
+  .btn-menu {
+    // change color icon from button
+    mat-icon {
+      color: var(--primary);
+    }
+  }
+}
+
+// media queries max width 768px - mobile first
+@media screen and (max-width: 768px) {
+  .user {
+    .page {
+      .container-photo {
+        .container-followers p {
+          color: var(--color-medium-white);
+        }
+        .container-followers button {
+          color: var(--primary);
+          background-color: var(--white);
+        }
+        .img {
+          background-color: var(--color-medium-white);
+        }
+        .border-top-radious {
+          background-color: var(--white);
+        }
+      }
+      .follow {
+        background-color: transparent;
+      }
+    }
+  }
+}

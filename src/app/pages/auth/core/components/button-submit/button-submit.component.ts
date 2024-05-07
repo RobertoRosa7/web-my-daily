@@ -2,10 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Form } from '../../../auth.form';
 import { Observable, filter, map } from 'rxjs';
 import { ActionsSubject } from '@ngrx/store';
-import { authType } from '../../type/auth.type';
+import { authType } from '../../types/auth.type';
 
 /**
  * @see: https://angular.io/guide/form-validation

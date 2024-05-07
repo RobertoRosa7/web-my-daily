@@ -1,12 +1,12 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import * as selectAuth from './core/selector/auth.selector';
+import * as selectAuth from './core/selectors/auth.selector';
 import { Observable, Subscription, delay, filter, from, map, mergeMap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { IAuthState } from './core/interface/auth.interface';
+import { IAuthState } from './core/interfaces/auth.interface';
 import { HttpResponseDefault } from '../../interface/http-response.interface';
-import { actionClear, actionRegiser, actionLogin, actionGoto, actionLoading } from './core/action/auth.action';
-import { authType } from './core/type/auth.type';
+import { actionClear, actionRegiser, actionLogin, actionGoto, actionLoading } from './core/actions/auth.action';
+import { authType } from './core/types/auth.type';
 import { Router } from '@angular/router';
 
 @Component({
