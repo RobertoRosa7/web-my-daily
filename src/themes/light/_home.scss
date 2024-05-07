@@ -1,0 +1,10 @@
+@import '../mixins';
+
+.home {
+  .text {
+    color: red;
+  }
+  mat-toolbar {
+    background-color: transparent;
+  }
+}
