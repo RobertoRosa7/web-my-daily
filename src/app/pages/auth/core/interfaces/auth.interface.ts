@@ -42,6 +42,7 @@ export enum AuthVars {
 export enum RoutePaths {
   register = '/auth/register',
   login = '/auth/login',
+  home = '/home',
 }
 
 //paths do backend

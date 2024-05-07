@@ -76,7 +76,7 @@ export class AuthEffect {
             this.localStorage.setKey(AuthVars.user, { data: response.data?.user });
 
             // dispatch action to home after register
-            this.store.dispatch(authAction.actionGoto({ paths: [RoutePaths.register] }));
+            this.store.dispatch(authAction.actionGoto({ paths: [RoutePaths.home] }));
             return authAction.actionLoginSuccess(response);
           }),
           // layer finalize stopping loading

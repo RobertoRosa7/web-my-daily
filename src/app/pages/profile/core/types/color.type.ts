@@ -4,4 +4,6 @@ export enum colorType {
 
 export enum stringType {
   profileCover = 'var(--profile-cover)',
+  homeCover = 'var(--home-cover)',
 }
+
