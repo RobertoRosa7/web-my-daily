@@ -1,0 +1,26 @@
+@import '../mixins';
+
+// theme of page profile
+.profile {
+  width: 100%;
+  position: relative;
+
+  mat-toolbar {
+    background-color: transparent;
+  }
+  // button back
+  .btn-back {
+    // change color icon from btn back
+    mat-icon {
+      color: var(--primary);
+    }
+  }
+
+  // button menu
+  .btn-menu {
+    // change color icon from button
+    mat-icon {
+      color: var(--primary);
+    }
+  }
+}

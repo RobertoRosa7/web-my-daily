@@ -1,0 +1,29 @@
+<main class="card-feeling">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <span>Roberto Rosa</span>
+        <button mat-icon-button>
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span>rosa&#64;daily | {{ '2024-05-06' | date }}</span>
+        <mat-icon>lock</mat-icon>
+        <!-- <mat-icon>public</mat-icon> -->
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{ longText }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <small>123.1k</small>
+
+      <button mat-icon-button>
+        <mat-icon>favorite_outline</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</main>

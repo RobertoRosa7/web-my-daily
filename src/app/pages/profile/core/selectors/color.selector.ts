@@ -1,13 +1,15 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
-
-// declare type to simply
-type color = { background: string };
+import { colors } from '../interfaces/colors.interface';
 
 // recovery state from store
-const state: MemoizedSelector<object, color> = createFeatureSelector<color>('colors');
+const state: MemoizedSelector<object, colors> = createFeatureSelector<colors>('colors');
 
 // create selector
-export const selectorColor: MemoizedSelector<object, string> = createSelector(
+export const selectorBg: MemoizedSelector<object, string> = createSelector(
   state,
-  ({ background }: color) => background
+  ({ background }: colors) => background || ''
+);
+export const selectorTheme: MemoizedSelector<object, string> = createSelector(
+  state,
+  ({ theme }: colors) => theme || ''
 );

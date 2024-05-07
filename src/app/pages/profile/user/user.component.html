@@ -1,3 +1,29 @@
-<main class="main">
-  <h1>profile</h1>
+<main class="user" [ngClass]="theme$ | async">
+  <div class="page">
+    <app-cover></app-cover>
+
+    <div class="container-photo">
+      <div class="image">
+        <div class="img">
+          <button mat-icon-button>
+            <mat-icon>camera</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="container-followers">
+        <app-follwers></app-follwers>
+        <button mat-raised-button>follow</button>
+      </div>
+      <div class="border-top-radious"></div>
+    </div>
+
+    <div class="container-user-details">
+      <app-user-details></app-user-details>
+    </div>
+
+    <div class="container-feelings">
+      <app-feelings *ngFor="let i of [1, 2, 3, 5, 6]"></app-feelings>
+    </div>
+  </div>
 </main>

@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 
 const commons = [
   MatCheckboxModule,
@@ -17,6 +18,7 @@ const commons = [
   MatMenuModule,
   MatBadgeModule,
   MatDividerModule,
+  MatButtonModule,
 ];
 @NgModule({
   declarations: [],

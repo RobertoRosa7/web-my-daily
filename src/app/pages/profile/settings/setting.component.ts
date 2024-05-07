@@ -14,6 +14,6 @@ export class SettingComponent extends Profile implements OnInit {
   }
 
   override ngOnInit(): void {
-    this.store.dispatch(actionColor({ background: 'red' }));
+    this.store.dispatch(actionColor({ theme: 'settings' }));
   }
 }

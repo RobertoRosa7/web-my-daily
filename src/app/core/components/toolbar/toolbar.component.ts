@@ -9,7 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
-import { selectorColor } from '../../../pages/profile/core/selectors/color.selector';
+import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,7 +19,7 @@ import { selectorColor } from '../../../pages/profile/core/selectors/color.selec
   imports: [SharedModule, CommonModule, ButtonMenuComponent, ButtonBackComponent],
 })
 export class ToolbarComponent implements OnInit {
-  public colors$ = this.store.select(selectorColor);
+  public theme$ = this.store.select(selectorTheme);
 
   @Output() send = new EventEmitter();
   @Output() updateRegisters = new EventEmitter();

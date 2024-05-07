@@ -1,9 +1,10 @@
+@import './themes/mixins';
+@import './themes/dark/dark';
+@import './themes/light/light';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './themes/dark';
-@import './themes/light';
 
 :root {
   // light
@@ -13,10 +14,15 @@
   --text-middle-light: #585858;
   --text-green: #009688;
   --text-green-light: #00968850;
+
   --color-white: white;
   --color-whitesmoke: whitesmoke;
   --color-medium-white: #fafafa;
+
   --bg-light-color: #fafafa;
+  --bg-dark-blue: rgb(2, 0, 36);
+  // --bg-dark-blue: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 48%, rgba(61, 61, 159, 1) 79%);
+
   --white-one: #fff;
   --white-two: #eee;
   --white-three: #ddd;
@@ -58,11 +64,19 @@
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
-.profile {
-  width: 100%;
+
+// buton back
+.btn-back {
+  @include btn-icon-radio;
+}
+
+// button menu
+.btn-menu {
+  @include btn-icon-radio;
 }
