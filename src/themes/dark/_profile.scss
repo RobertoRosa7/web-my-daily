@@ -1,37 +1,39 @@
 @import '../mixins';
 
-// theme of page profile light
+// theme of page profile dark
 .profile {
   width: 100%;
   position: relative;
-  color: var(--color-dark-default);
+  color: var(--white);
 
+  // mat toolbar
   mat-toolbar {
     background-color: transparent;
   }
+
   // mat card
   .mdc-card {
-    background-color: var(--white);
-    border-left: 1px solid var(--primary);
+    background-color: var(--color-dark-default);
+    border-left: 1px solid var(--teal);
   }
 
   .mat-mdc-card-subtitle {
-    color: var(--gray);
+    color: var(--color-light-soft);
   }
 
   // followers
   .container-followers p {
-    color: var(--white);
+    color: var(--color-medium-white);
   }
 
   .container-followers button {
-    background-color: var(--white);
-    color: var(--primary) !important;
+    background-color: var(--primary);
+    color: var(--white) !important;
   }
 
   // phto profile image
   .page .container-photo .img {
-    background-color: var(--white);
+    background-color: var(--color-dark-blue-darkness);
   }
 
   // button back
@@ -49,8 +51,19 @@
       color: var(--primary);
     }
   }
-}
 
+  .infos p:first-child {
+    color: var(--color-medium-white);
+  }
+
+  .score-positive {
+    color: var(--teal) !important;
+  }
+
+  .score-negative {
+    color: var(--primary) !important;
+  }
+}
 // media queries max width 768px - mobile first
 @media screen and (max-width: 768px) {
   .user {
@@ -60,14 +73,14 @@
           color: var(--color-medium-white);
         }
         .container-followers button {
-          color: var(--primary);
-          background-color: var(--white);
+          color: var(--white);
+          background-color: var(--primary);
         }
         .img {
-          background-color: var(--color-medium-white);
+          background-color: var(--color-dark-blue-darkness);
         }
         .border-top-radious {
-          background-color: var(--white);
+          background-color: var(--color-dark-default);
         }
       }
       .follow {

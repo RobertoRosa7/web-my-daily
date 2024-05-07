@@ -1,6 +1,8 @@
 @import '../mixins';
 
 .dark-mode {
-  background: var(--color-default-dark);
+  background: var(--color-dark-default);
   color: var(--white);
+
+  @import './profile';
 }

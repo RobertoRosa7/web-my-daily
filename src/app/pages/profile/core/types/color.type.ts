@@ -3,5 +3,5 @@ export enum colorType {
 }
 
 export enum stringType {
-  profileCover = 'linear-gradient(-45deg, var(--dark) 20%, var(--bg-dark-blue) 80%, var(--primary) 5%)'
+  profileCover = 'var(--profile-cover)',
 }

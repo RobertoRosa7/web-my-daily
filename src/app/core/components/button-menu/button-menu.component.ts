@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
 import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
 import { Store } from '@ngrx/store';
