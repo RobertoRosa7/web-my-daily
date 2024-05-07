@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-button-back',
@@ -12,6 +12,11 @@ import { CommonModule } from '@angular/common';
   imports: [MatIconModule, MatDividerModule, RouterModule, CommonModule],
   template: `
     <button
+      (click)="location.back()"
+      aria-details="go back"
+      aria-describedby="button"
+      role="button"
+      type="button"
       class="btn-back"
       [ngClass]="theme$ | async"
       disableRipple="true"
@@ -24,5 +29,5 @@ import { CommonModule } from '@angular/common';
 })
 export class ButtonBackComponent {
   public theme$ = this.store.select(selectorTheme);
-  constructor(private readonly store: Store) {}
+  constructor(public readonly location: Location, private readonly store: Store) {}
 }

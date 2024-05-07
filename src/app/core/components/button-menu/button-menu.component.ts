@@ -7,11 +7,12 @@ import { RouterModule } from '@angular/router';
 import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '../../../shared/shared.module';
 
 @Component({
   selector: 'app-button-menu',
   standalone: true,
-  imports: [MatIconModule, MatMenuModule, MatBadgeModule, MatDividerModule, RouterModule, CommonModule],
+  imports: [SharedModule, RouterModule, CommonModule],
   template: `
     <button
       class="btn-menu"
@@ -24,7 +25,7 @@ import { CommonModule } from '@angular/common';
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
-      <button mat-menu-item matTooltip="Perfil" routerLink="/profile/user">
+      <button mat-menu-item matTooltip="Perfil" [queryParams]="{ name: 'rosa@daily' }" [routerLink]="['/profile/user']">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>
