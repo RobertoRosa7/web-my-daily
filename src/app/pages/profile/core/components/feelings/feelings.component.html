@@ -10,15 +10,14 @@
       <mat-card-subtitle>
         <span
           style="cursor: pointer"
-          [queryParams]="{ name: 'rosa@daily' }"
-          [routerLink]="['/profile/user']"
-          matTooltip="name id"
+          routerLink="/profile/user"
+          matTooltip="Nome de domínio"
           role="link"
-          aria-describedby="name id"
+          aria-describedby="nameId"
           >rosa&#64;daily</span
         >
         <span>|</span>
-        <span matTooltip="data" role="timer" aria-describedby="date">{{ '2024-05-06' | date }}</span>
+        <span matTooltip="Data" role="timer" aria-describedby="date">{{ '2024-05-06' | date }}</span>
 
         <mat-icon matTooltip="private" role="none" aria-describedby="post private">lock</mat-icon>
         <!-- <mat-icon matTooltip="public" role="none" aria-describedby="post public">public</mat-icon> -->
@@ -40,7 +39,7 @@
       <div>
         <small>123.1k</small>
         <button mat-icon-button role="button" aria-describedby="favorite">
-          <mat-icon>thumb_down</mat-icon>
+          <span class="material-symbols-outlined"> thumb_down </span>
         </button>
       </div>
     </mat-card-actions>

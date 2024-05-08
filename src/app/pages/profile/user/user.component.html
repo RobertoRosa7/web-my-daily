@@ -13,7 +13,11 @@
 
       <div class="container-followers">
         <app-follwers></app-follwers>
-        <button mat-raised-button>follow</button>
+        <button *ngIf="profilePublic$ | async" mat-raised-button>follow</button>
+        <button *ngIf="!(profilePublic$ | async)" mat-raised-button>
+          <mat-icon>lock</mat-icon>
+          <span>privado</span>
+        </button>
       </div>
       <div class="border-top-radious"></div>
     </div>

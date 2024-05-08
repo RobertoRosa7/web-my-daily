@@ -1,0 +1,33 @@
+<ng-container *ngIf="userProfile$ | async as data; else loading">
+  <div class="follow">
+    <div class="followers">
+      <p>{{ data.total_follows.totalFollowers | follows }}</p>
+      <p>seguidores</p>
+    </div>
+    <div class="follwing">
+      <p>{{ data.total_follows.totalFollowing | follows }}</p>
+      <p>seguindo</p>
+    </div>
+    <div class="likes">
+      <p>{{ data.profile.totalRegisters | follows }}</p>
+      <p>posts</p>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="follow">
+    <div class="followers loading-waves">
+      <p>0</p>
+      <p>seguidores</p>
+    </div>
+    <div class="follwing loading-waves">
+      <p>0</p>
+      <p>seguindo</p>
+    </div>
+    <div class="likes loading-waves">
+      <p>0</p>
+      <p>posts</p>
+    </div>
+  </div>
+</ng-template>

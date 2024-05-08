@@ -21,7 +21,7 @@ import { SharedModule } from '../../../shared/shared.module';
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
-      <button mat-menu-item matTooltip="Perfil" [queryParams]="{ name: 'rosa@daily' }" [routerLink]="['/profile/user']">
+      <button mat-menu-item matTooltip="Perfil" routerLink="/profile/user">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>

@@ -80,6 +80,30 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+.loading-waves {
+  width: inherit;
+  height: inherit;
+  min-height: 25px;
+  overflow: hidden;
+  position: relative;
+  opacity: 0.5;
+}
+.loading-waves::after {
+  content: '';
+  position: absolute;
+  animation: waves 1.5s linear infinite;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 2);
+  filter: blur(5rem);
+  z-index: 3;
+  transform: rotate(45deg);
+}
+@keyframes waves {
+  to {
+    transform: translateX(100%);
+  }
+}
 
 // buton back
 .btn-back {

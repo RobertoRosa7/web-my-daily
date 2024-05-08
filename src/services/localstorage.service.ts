@@ -1,11 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, afterNextRender } from '@angular/core';
 import { IData } from '../interfaces/localstorage.interface';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
-  constructor() {}
+  private token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+
+  constructor() {
+    afterNextRender(() => {
+      try {
+        this.token$.next(this.deserealizeKey('token'));
+      } catch (err) {}
+    });
+  }
+
+  public getTokenStream(): Observable<string | null> {
+    return this.token$.asObservable();
+  }
 
   public getKey(key: string) {
     return this.deserealizeKey(key);

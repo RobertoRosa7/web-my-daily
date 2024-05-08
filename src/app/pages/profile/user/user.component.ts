@@ -4,8 +4,10 @@ import { Store } from '@ngrx/store';
 import { actionColor } from '../core/actions/color.action';
 import { selectorTheme } from '../core/selectors/color.selector';
 import { stringType } from '../core/types/color.type';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
+import { actionProfileRequest } from '../core/actions/profile.action';
+import { profileObservable, profilePublicObservable } from '../core/interfaces/profile.interface';
+import { selectorProfile, selectorProfilePublic } from '../core/selectors/profile.selector';
 
 @Component({
   selector: 'app-user',
@@ -14,12 +16,17 @@ import { map } from 'rxjs';
 })
 export class UserComponent extends Profile implements OnInit {
   public theme$ = this.store.select(selectorTheme);
-  constructor(private readonly activeRouter: ActivatedRoute, protected override readonly store: Store) {
+  public userProfile$: profileObservable = this.store.select(selectorProfile);
+  public profilePublic$: profilePublicObservable = this.store.select(selectorProfilePublic);
+
+  constructor(protected override readonly store: Store) {
     super(store);
   }
 
   override ngOnInit(): void {
-    this.activeRouter.queryParamMap.pipe(map((params) => params.get('name'))).subscribe(console.log);
+    if (isPlatformBrowser(this.platform)) {
+      this.store.dispatch(actionProfileRequest());
+    }
 
     this.store.dispatch(
       actionColor({

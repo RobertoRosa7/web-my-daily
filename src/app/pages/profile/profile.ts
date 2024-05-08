@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -10,6 +10,8 @@ import { Store } from '@ngrx/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Profile implements OnInit {
+  protected platform = inject(PLATFORM_ID);
+
   constructor(protected readonly store: Store) {}
 
   ngOnInit(): void {}

@@ -1,25 +1,54 @@
-<div class="user-details">
-  <div class="infos">
-    <p>Roberto Rosa</p>
-    <p>roberto.rosa7&#64;.com</p>
-  </div>
+<ng-container *ngIf="userProfile$ | async as data; else loading">
+  <div class="user-details">
+    <div class="infos">
+      <p>{{ data.name }}</p>
+      <p>{{ data.email }}</p>
+    </div>
 
-  <div class="scores">
-    <div class="score-positive">
-      <p>{{ 0.4012 | percent : '1.2-2' }}</p>
-      <p>score pos.</p>
-    </div>
-    <div class="score-negative">
-      <p>{{ 0.5988 | percent : '1.2-2' }}</p>
-      <p>socre neg.</p>
-    </div>
-    <div class="mean">
-      <p>0</p>
-      <p>média</p>
-    </div>
-    <div class="std">
-      <p>0</p>
-      <p>des. padrão</p>
+    <div class="scores">
+      <div class="score-positive">
+        <p>{{ data.profile.totalScorePositive / 100 | percent : '1.2-2' }}</p>
+        <p>score pos.</p>
+      </div>
+      <div class="score-negative">
+        <p>{{ data.profile.totalScoreNegative / 100 | percent : '1.2-2' }}</p>
+        <p>socre neg.</p>
+      </div>
+      <div class="mean">
+        <p>{{ data.profile.meanFeeling / 100 | percent : '1.2-2' }}</p>
+        <p>média</p>
+      </div>
+      <div class="std">
+        <p>{{ data.profile.stdFeeling / 100 | percent : '1.2-2' }}</p>
+        <p>des. padrão</p>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="user-details">
+    <div class="infos loading-waves">
+      <p>Fulano Silva</p>
+      <p>seu.fulano&#64;.com</p>
+    </div>
+    <div class="scores">
+      <div class="score-positive loading-waves">
+        <p>0</p>
+        <p>score pos.</p>
+      </div>
+      <div class="score-negative loading-waves">
+        <p>0</p>
+        <p>socre neg.</p>
+      </div>
+      <div class="mean loading-waves">
+        <p>0</p>
+        <p>média</p>
+      </div>
+      <div class="std loading-waves">
+        <p>0</p>
+        <p>des. padrão</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

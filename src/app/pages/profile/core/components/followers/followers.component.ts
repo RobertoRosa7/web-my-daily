@@ -1,26 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { profileObservable } from '../../interfaces/profile.interface';
+import { selectorProfile } from '../../selectors/profile.selector';
+import { Store } from '@ngrx/store';
+import { FollowerPipe } from '../../../../../core/pipes/follwers.pipe';
 
 @Component({
   selector: 'app-follwers',
   styleUrl: './followers.component.scss',
-  template: `
-    <div class="follow">
-      <div class="followers">
-        <p>2M</p>
-        <p>seguidores</p>
-      </div>
-      <div class="follwing">
-        <p>343.1M</p>
-        <p>seguindo</p>
-      </div>
-      <div class="likes">
-        <p>13.1K</p>
-        <p>posts</p>
-      </div>
-    </div>
-  `,
+  templateUrl: './followers.component.html',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FollowerPipe],
 })
-export class FollowersComponent {}
+export class FollowersComponent {
+  public userProfile$: profileObservable = this.store.select(selectorProfile);
+
+  constructor(private readonly store: Store) {}
+}

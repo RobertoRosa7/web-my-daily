@@ -1,6 +1,9 @@
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { Component, LOCALE_ID } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
+import { profileObservable } from '../../interfaces/profile.interface';
+import { selectorProfile } from '../../selectors/profile.selector';
+import { Store } from '@ngrx/store';
 
 registerLocaleData(localePt, 'pt');
 
@@ -17,4 +20,8 @@ registerLocaleData(localePt, 'pt');
   imports: [CommonModule],
   providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
 })
-export class UserDetailsComponent {}
+export class UserDetailsComponent {
+  public userProfile$: profileObservable = this.store.select(selectorProfile);
+
+  constructor(private readonly store: Store) {}
+}
