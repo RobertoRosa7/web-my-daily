@@ -10,6 +10,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const commons = [
   MatCheckboxModule,
@@ -23,6 +24,7 @@ const commons = [
   MatButtonModule,
   MatCardModule,
   MatTooltipModule,
+  MatTabsModule,
 ];
 @NgModule({
   declarations: [],
