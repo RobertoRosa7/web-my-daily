@@ -21,10 +21,16 @@ import { SharedModule } from '../../../shared/shared.module';
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
+      <button mat-menu-item matTooltip="Inicial" routerLink="/home/initial">
+        <mat-icon>home</mat-icon>
+        <span>Inicial</span>
+      </button>
+
       <button mat-menu-item matTooltip="Perfil" routerLink="/profile/user">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>
+
       <button mat-menu-item matTooltip="Configurações" routerLink="/profile/setting">
         <mat-icon>settings</mat-icon>
         <span>Configurações</span>
