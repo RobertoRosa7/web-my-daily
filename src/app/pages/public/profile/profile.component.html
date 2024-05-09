@@ -1,0 +1,25 @@
+<main *ngIf="userPublicProfile$ | async; else empty" class="public-profile" [ngClass]="theme$ | async">
+  <div class="page">
+    <app-cover></app-cover>
+
+    <div class="container-photo">
+      <div class="image">
+        <div class="img">
+          <button mat-icon-button>
+            <mat-icon>camera</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="container-followers">
+        <!-- <app-follwers></app-follwers> -->
+        <button mat-raised-button>follow</button>
+      </div>
+      <div class="border-top-radious"></div>
+    </div>
+  </div>
+</main>
+
+<ng-template #empty>
+  <app-404></app-404>
+</ng-template>

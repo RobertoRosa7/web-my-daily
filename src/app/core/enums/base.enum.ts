@@ -10,4 +10,12 @@ export enum Paths {
   signup = '/ms-users/auth',
   signin = '/ms-users/auth/login',
   getProfile = '/ms-users/user/profile',
+
+  getHappen = '/ms-daily/happen/user',
+}
+
+export enum HappenPublicStatus {
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE',
+  FOLLWERS = 'FOLLOWERS',
 }

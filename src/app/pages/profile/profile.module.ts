@@ -19,6 +19,8 @@ import { LocalStorageService } from '../../../services/localstorage.service';
 import { profileReducer } from './core/reducers/profile.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { ProfileEffect } from './core/effects/profile.effect';
+import { profileHappenReducer } from './core/reducers/profile.happens.reducer';
+import { ProfileHappensEffect } from './core/effects/profile.happens.effect';
 
 @NgModule({
   declarations: [Profile, UserComponent, SettingComponent],
@@ -33,9 +35,9 @@ import { ProfileEffect } from './core/effects/profile.effect';
     UserDetailsComponent,
   ],
   providers: [
-    provideState({ name: 'colors', reducer: colorReducer }),
     provideState({ name: 'profile', reducer: profileReducer }),
-    provideEffects([ProfileEffect]),
+    provideState({ name: 'profileHappens', reducer: profileHappenReducer }),
+    provideEffects([ProfileEffect, ProfileHappensEffect]),
     ProfileRepository,
     ProfileService,
     LocalStorageService,

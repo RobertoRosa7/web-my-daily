@@ -13,5 +13,9 @@ export const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then((m) => m.ProfileModule),
   },
+  {
+    path: 'public',
+    loadChildren: () => import('./pages/public/public.module').then((m) => m.PublicModule),
+  },
   { path: '**', redirectTo: 'auth', pathMatch: 'prefix' },
 ];

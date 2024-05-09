@@ -5,13 +5,14 @@ import { routes } from './app.routes';
 import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { provideStore } from '@ngrx/store';
+import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { authInterceptor } from './core/interceptors/core.interceptor';
+import { colorReducer } from './pages/profile/core/reducers/color.reducer';
 
 registerLocaleData(localePt, 'pt');
 
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideState({ name: 'colors', reducer: colorReducer }),
     provideStore(),
     provideClientHydration(
       withHttpTransferCacheOptions({

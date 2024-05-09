@@ -27,7 +27,7 @@
     </div>
 
     <div class="container-feelings">
-      <app-feelings *ngFor="let i of [1, 2, 3, 5, 6]"></app-feelings>
+      <app-feelings [happen]="happen" *ngFor="let happen of profileHappens$ | async"></app-feelings>
     </div>
   </div>
 </main>

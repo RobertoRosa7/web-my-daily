@@ -2,7 +2,9 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <span matTooltipPosition="left" matTooltip="Apelido" role="none" aria-describedby="name">Roberto Rosa</span>
+        <span matTooltipPosition="left" matTooltip="Apelido" role="none" aria-describedby="name">{{
+          (userName$ | async)?.name
+        }}</span>
         <button matTooltipPosition="above" matTooltip="Menu" mat-icon-button role="button" aria-describedby="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -15,34 +17,57 @@
           matTooltip="Nome de domínio"
           role="link"
           aria-describedby="nameId"
-          >rosa&#64;daily</span
+          >{{ happen.nameId }}</span
         >
         <span>|</span>
         <span matTooltipPosition="above" matTooltip="Data" role="timer" aria-describedby="date">{{
-          '2024-05-06' | date
+          happen.createdAt | date
         }}</span>
-
-        <mat-icon matTooltipPosition="right" matTooltip="private" role="none" aria-describedby="post private"
-          >lock</mat-icon
-        >
-        <!-- <mat-icon matTooltip="public" role="none" aria-describedby="post public">public</mat-icon> -->
+        <ng-container [ngSwitch]="happen.visibility">
+          <mat-icon
+            *ngSwitchCase="status.PRIVATE"
+            matTooltipPosition="right"
+            matTooltip="Somente você pode visualizar"
+            role="icon"
+            aria-describedby="post-private"
+            >lock</mat-icon
+          >
+          <mat-icon
+            *ngSwitchCase="status.FOLLWERS"
+            matTooltipPosition="right"
+            matTooltip="Seguidores podem visualizar"
+            role="icon"
+            aria-describedby="post-followers"
+            >person</mat-icon
+          >
+          <mat-icon
+            *ngSwitchDefault
+            matTooltipPosition="right"
+            matTooltip="Público - todos podem visualizar"
+            role="icon"
+            aria-describedby="post-public"
+            >public</mat-icon
+          >
+        </ng-container>
       </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content role="doc-epigraph" aria-describedby="post" aria-details="post content">
-      <p>{{ longText }}</p>
+      <p>{{ happen.whatHappen }}</p>
     </mat-card-content>
 
     <mat-card-actions>
       <div>
-        <small>123.1k</small>
+        <small>{{ happen.likes.likedCount | follows }}</small>
         <button matTooltipPosition="above" matTooltip="Cutir" mat-icon-button role="button" aria-describedby="favorite">
-          <mat-icon aria-label="favorite">favorite_outline</mat-icon>
-          <!-- <mat-icon>favorite</mat-icon> -->
+          <ng-container *ngIf="userName$ | async as data">
+            <mat-icon *ngIf="data.id !== happen.userId" aria-label="favorite">favorite_outline</mat-icon>
+            <mat-icon *ngIf="data.id === happen.userId" aria-label="favorite">favorite</mat-icon>
+          </ng-container>
         </button>
       </div>
       <div>
-        <small>123.1k</small>
+        <small>{{ happen.likes.dislikedCount | follows }}</small>
         <button
           matTooltipPosition="above"
           matTooltip="Não curtir"

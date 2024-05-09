@@ -38,7 +38,8 @@ export class TotalFollowsDto {
 }
 
 export class UserProfile {
-  public _id: string | undefined = undefined;
+  @JsonProperty('_id')
+  public id: string | undefined = undefined;
   public email: string | undefined = undefined;
   public name: string | undefined = undefined;
   public phone: string | undefined = undefined;
