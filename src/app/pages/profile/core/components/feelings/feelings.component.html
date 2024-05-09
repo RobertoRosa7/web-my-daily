@@ -2,13 +2,14 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <span role="none" aria-describedby="name">Roberto Rosa</span>
-        <button mat-icon-button role="button" aria-describedby="menu">
+        <span matTooltipPosition="left" matTooltip="Apelido" role="none" aria-describedby="name">Roberto Rosa</span>
+        <button matTooltipPosition="above" matTooltip="Menu" mat-icon-button role="button" aria-describedby="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
       </mat-card-title>
       <mat-card-subtitle>
         <span
+          matTooltipPosition="left"
           style="cursor: pointer"
           routerLink="/profile/user"
           matTooltip="Nome de domínio"
@@ -17,9 +18,13 @@
           >rosa&#64;daily</span
         >
         <span>|</span>
-        <span matTooltip="Data" role="timer" aria-describedby="date">{{ '2024-05-06' | date }}</span>
+        <span matTooltipPosition="above" matTooltip="Data" role="timer" aria-describedby="date">{{
+          '2024-05-06' | date
+        }}</span>
 
-        <mat-icon matTooltip="private" role="none" aria-describedby="post private">lock</mat-icon>
+        <mat-icon matTooltipPosition="right" matTooltip="private" role="none" aria-describedby="post private"
+          >lock</mat-icon
+        >
         <!-- <mat-icon matTooltip="public" role="none" aria-describedby="post public">public</mat-icon> -->
       </mat-card-subtitle>
     </mat-card-header>
@@ -31,15 +36,20 @@
     <mat-card-actions>
       <div>
         <small>123.1k</small>
-        <button mat-icon-button role="button" aria-describedby="favorite">
-          <mat-icon>favorite_outline</mat-icon>
+        <button matTooltipPosition="above" matTooltip="Cutir" mat-icon-button role="button" aria-describedby="favorite">
+          <mat-icon aria-label="favorite">favorite_outline</mat-icon>
           <!-- <mat-icon>favorite</mat-icon> -->
         </button>
       </div>
       <div>
         <small>123.1k</small>
-        <button mat-icon-button role="button" aria-describedby="favorite">
-          <span class="material-symbols-outlined"> thumb_down </span>
+        <button
+          matTooltipPosition="above"
+          matTooltip="Não curtir"
+          mat-icon-button
+          role="button"
+          aria-describedby="not-favorite">
+          <span aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </span>
         </button>
       </div>
     </mat-card-actions>
