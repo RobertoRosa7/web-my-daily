@@ -1,25 +1,42 @@
 <ng-container *ngIf="userProfile$ | async as data; else loading">
   <div class="user-details">
-    <div class="infos">
-      <p>{{ data.name }}</p>
-      <p>{{ data.email }}</p>
+    <div role="div" aria-describedby="infos" class="infos">
+      <p aria-label="name">
+        <span matTooltipPosition="left" matTooltip="Nome">{{ data.name }}</span>
+      </p>
+      <p aria-label="email">
+        <span matTooltip="Email" matTooltipPosition="left">{{ data.email }}</span>
+      </p>
     </div>
 
     <div class="scores">
-      <div class="score-positive">
-        <p>{{ data.profile.totalScorePositive / 100 | percent : '1.2-2' }}</p>
+      <div
+        matTooltip="Score Positivo"
+        matTooltipPosition="above"
+        aria-label="score-positive"
+        role="div"
+        aria-describedby="score-positive"
+        class="score-positive">
+        <p aria-label="score-positive">
+          {{ data.profile.totalScorePositive / 100 | percent : '1.2-2' }}
+        </p>
         <p>score pos.</p>
       </div>
-      <div class="score-negative">
-        <p>{{ data.profile.totalScoreNegative / 100 | percent : '1.2-2' }}</p>
+      <div
+        matTooltip="Score Negativo"
+        matTooltipPosition="above"
+        role="div"
+        aria-describedby="score-negative"
+        class="score-negative">
+        <p aria-label="score-negative">{{ data.profile.totalScoreNegative / 100 | percent : '1.2-2' }}</p>
         <p>socre neg.</p>
       </div>
-      <div class="mean">
-        <p>{{ data.profile.meanFeeling / 100 | percent : '1.2-2' }}</p>
+      <div matTooltip="Média" matTooltipPosition="above" role="div" aria-describedby="mean" class="mean">
+        <p aria-label="mean">{{ data.profile.meanFeeling / 100 | percent : '1.2-2' }}</p>
         <p>média</p>
       </div>
-      <div class="std">
-        <p>{{ data.profile.stdFeeling / 100 | percent : '1.2-2' }}</p>
+      <div matTooltip="Desvio Padrão" matTooltipPosition="above" role="div" aria-describedby="std" class="std">
+        <p aria-label="std">{{ data.profile.stdFeeling / 100 | percent : '1.2-2' }}</p>
         <p>des. padrão</p>
       </div>
     </div>

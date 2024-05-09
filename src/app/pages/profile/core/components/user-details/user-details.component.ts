@@ -1,11 +1,9 @@
-import { CommonModule, registerLocaleData } from '@angular/common';
-import { Component, LOCALE_ID } from '@angular/core';
-import localePt from '@angular/common/locales/pt';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { profileObservable } from '../../interfaces/profile.interface';
 import { selectorProfile } from '../../selectors/profile.selector';
 import { Store } from '@ngrx/store';
-
-registerLocaleData(localePt, 'pt');
+import { SharedModule } from '../../../../../shared/shared.module';
 
 /**
  * @see: https://angular.io/api/common/PercentPipe
@@ -17,8 +15,7 @@ registerLocaleData(localePt, 'pt');
   styleUrl: './user-details.component.scss',
   templateUrl: `./user-details.component.html`,
   standalone: true,
-  imports: [CommonModule],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt' }],
+  imports: [CommonModule, SharedModule],
 })
 export class UserDetailsComponent {
   public userProfile$: profileObservable = this.store.select(selectorProfile);

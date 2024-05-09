@@ -1,16 +1,16 @@
 <ng-container *ngIf="userProfile$ | async as data; else loading">
   <div class="follow">
-    <div class="followers">
-      <p>{{ data.total_follows.totalFollowers | follows }}</p>
-      <p>seguidores</p>
+    <div role="div" aria-describedby="followers" matTooltipPosition="above" matTooltip="Seguidores" class="followers">
+      <p aria-label="followers">{{ data.total_follows.totalFollowers | follows }}</p>
+      <p aria-label="followers">Seguidores</p>
     </div>
-    <div class="follwing">
-      <p>{{ data.total_follows.totalFollowing | follows }}</p>
-      <p>seguindo</p>
+    <div role="div" aria-describedby="following" matTooltipPosition="above" matTooltip="Seguindo" class="follwing">
+      <p aria-label="following">{{ data.total_follows.totalFollowing | follows }}</p>
+      <p aria-label="following">Seguindo</p>
     </div>
-    <div class="likes">
-      <p>{{ data.profile.totalRegisters | follows }}</p>
-      <p>posts</p>
+    <div role="div" aria-describedby="posts" matTooltipPosition="above" matTooltip="Posts" class="likes">
+      <p aria-label="posts">{{ data.profile.totalRegisters | follows }}</p>
+      <p aria-label="posts">Posts</p>
     </div>
   </div>
 </ng-container>

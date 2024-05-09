@@ -4,13 +4,14 @@ import { profileObservable } from '../../interfaces/profile.interface';
 import { selectorProfile } from '../../selectors/profile.selector';
 import { Store } from '@ngrx/store';
 import { FollowerPipe } from '../../../../../core/pipes/follwers.pipe';
+import { SharedModule } from '../../../../../shared/shared.module';
 
 @Component({
   selector: 'app-follwers',
   styleUrl: './followers.component.scss',
   templateUrl: './followers.component.html',
   standalone: true,
-  imports: [CommonModule, FollowerPipe],
+  imports: [CommonModule, FollowerPipe, SharedModule],
 })
 export class FollowersComponent {
   public userProfile$: profileObservable = this.store.select(selectorProfile);
