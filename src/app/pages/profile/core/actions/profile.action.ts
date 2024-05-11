@@ -1,13 +1,25 @@
 import { createAction } from '@ngrx/store';
 import { profileType } from '../types/profile.type';
-import { UserProfileResponse } from '../interfaces/profile.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ProfileResponse } from '../interfaces/profile.interface';
+import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
 export const actionProfileRequest = createAction(profileType.USER_PROFILE);
 export const actionProfileSuccess = createAction(
   profileType.USER_PROFILE_SUCESS,
-  (payload: UserProfileResponse) => payload
+  (payload: ProfileResponse) => payload
 );
+
+export const actionProfilePublicSuccess = createAction(
+  profileType.USER_PROFILE_SUCESS,
+  (payload: ProfileResponse | HttpResponseDefault<null>) => payload
+);
+
+export const actionProfilePublic = createAction(
+  profileType.USER_PROFILE_PUBLIC,
+  (payload: { name: string | null }) => payload
+);
+
 export const actionProfileError = createAction(
   profileType.USER_PROFILE_ERROR,
   (payload: { error: HttpErrorResponse }) => payload

@@ -1,25 +1,37 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
-import { UserProfile, UserProfileResponse } from '../interfaces/profile.interface';
+import { ProfileResponse, ProfileSingletonOrPageable, UserProfile } from '../interfaces/profile.interface';
 
 // recovery state from store
-const profile: MemoizedSelector<object, UserProfileResponse> = createFeatureSelector<UserProfileResponse>('profile');
+const profile: MemoizedSelector<object, ProfileResponse> = createFeatureSelector<ProfileResponse>('profile');
 
 export const selectorProfile: MemoizedSelector<object, UserProfile | null> = createSelector(
   profile,
-  ({ data }: UserProfileResponse) => data
+  ({ data }: ProfileResponse) => (data instanceof UserProfile ? data : null)
 );
 
-export const selectorMessage: MemoizedSelector<object, Pick<UserProfileResponse, 'error' | 'message'>> = createSelector(
+export const selectorMessage: MemoizedSelector<object, Pick<ProfileResponse, 'error' | 'message'>> = createSelector(
   profile,
-  ({ message, error }: UserProfileResponse) => ({ error, message })
+  ({ message, error }: ProfileResponse) => ({ error, message })
 );
 
-export const selectorProfilePublic: MemoizedSelector<object, boolean> = createSelector(
+export const isSelectorProfilePublic: MemoizedSelector<object, boolean> = createSelector(
   profile,
-  ({ data }: UserProfileResponse) => !!data?.profilePublic
+  ({ data }: ProfileResponse) => (data instanceof UserProfile ? !!data?.profilePublic : false)
+);
+
+export const selectorProfilePublic: MemoizedSelector<object, any | null> = createSelector(
+  profile,
+  ({ data }: ProfileResponse) => {
+    if (!data) return null;
+
+    return data instanceof UserProfile ? { pageable: null, data } : { pageable: data, data: null };
+  }
 );
 
 export const selectorProfileName: MemoizedSelector<object, Pick<UserProfile, 'name' | 'id'>> = createSelector(
   profile,
-  ({ data }: UserProfileResponse) => ({ name: data?.name, id: data?.id })
+  ({ data }: ProfileResponse) => ({
+    name: data instanceof UserProfile ? data?.name : '',
+    id: data instanceof UserProfile ? data?.id : '',
+  })
 );

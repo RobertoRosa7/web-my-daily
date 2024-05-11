@@ -1,16 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
-import { UserProfile, UserProfileResponse } from '../interfaces/profile.interface';
 import { actionProfileSuccess } from '../actions/profile.action';
-import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
+import { ProfileResponse } from '../interfaces/profile.interface';
 
-const states: Partial<UserProfileResponse> = {};
+const states: Partial<ProfileResponse> = {};
 
 export const profileReducer = createReducer(
   states,
   on(actionProfileSuccess, (_, { data, message, error }) => {
     return {
       ..._,
-      data: JsonMapProperties.deserialize(UserProfile, data),
+      data,
       message,
       error,
     };

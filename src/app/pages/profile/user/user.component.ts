@@ -6,11 +6,11 @@ import { selectorTheme } from '../core/selectors/color.selector';
 import { stringType } from '../core/types/color.type';
 import { isPlatformBrowser } from '@angular/common';
 import { actionProfileRequest } from '../core/actions/profile.action';
-import { profileObservable, profilePublicObservable } from '../core/interfaces/profile.interface';
-import { selectorProfile, selectorProfilePublic } from '../core/selectors/profile.selector';
+import { selectorProfile, isSelectorProfilePublic } from '../core/selectors/profile.selector';
 import { actionProfileHappensRequest } from '../core/actions/profile.happens.action';
 import { ProfileHappenObservable } from '../core/interfaces/profile.happen.interface';
 import { selectorHappens } from '../core/selectors/profile.happens.selector';
+import { ProfileObservable, ProfilePublicObservable } from '../core/interfaces/profile.interface';
 
 @Component({
   selector: 'app-user',
@@ -19,8 +19,8 @@ import { selectorHappens } from '../core/selectors/profile.happens.selector';
 })
 export class UserComponent extends Profile implements OnInit {
   public theme$ = this.store.select(selectorTheme);
-  public userProfile$: profileObservable = this.store.select(selectorProfile);
-  public profilePublic$: profilePublicObservable = this.store.select(selectorProfilePublic);
+  public userProfile$: ProfileObservable = this.store.select(selectorProfile);
+  public profilePublic$: ProfilePublicObservable = this.store.select(isSelectorProfilePublic);
   public profileHappens$: ProfileHappenObservable = this.store.select(selectorHappens);
 
   constructor(protected override readonly store: Store) {

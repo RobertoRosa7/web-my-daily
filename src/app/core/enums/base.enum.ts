@@ -10,6 +10,7 @@ export enum Paths {
   signup = '/ms-users/auth',
   signin = '/ms-users/auth/login',
   getProfile = '/ms-users/user/profile',
+  profilePublic = '/ms-users/public/user',
 
   getHappen = '/ms-daily/happen/user',
 }

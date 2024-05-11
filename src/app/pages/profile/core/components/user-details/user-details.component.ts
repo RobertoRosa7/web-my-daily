@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { profileObservable } from '../../interfaces/profile.interface';
 import { selectorProfile } from '../../selectors/profile.selector';
 import { Store } from '@ngrx/store';
 import { SharedModule } from '../../../../../shared/shared.module';
+import { ProfileObservable } from '../../interfaces/profile.interface';
 
 /**
  * @see: https://angular.io/api/common/PercentPipe
@@ -18,7 +18,7 @@ import { SharedModule } from '../../../../../shared/shared.module';
   imports: [CommonModule, SharedModule],
 })
 export class UserDetailsComponent {
-  public userProfile$: profileObservable = this.store.select(selectorProfile);
+  public userProfile$: ProfileObservable = this.store.select(selectorProfile);
 
   constructor(private readonly store: Store) {}
 }

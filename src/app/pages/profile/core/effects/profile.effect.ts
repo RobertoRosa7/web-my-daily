@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../types/profile.type';
 import { ProfileService } from '../services/profile.service';
-import { actionProfileError, actionProfileSuccess } from '../actions/profile.action';
+import { actionProfileError, actionProfilePublicSuccess, actionProfileSuccess } from '../actions/profile.action';
 import { actionLoading } from '../../../auth/core/actions/auth.action';
 
 /**
@@ -20,9 +20,32 @@ export class ProfileEffect {
 
   /**
    * INFO:
+   * profilePublic - responsilbe to fetch Pageable or Single public profile of user
+   */
+  public profilePublic$: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      ofType(profileType.USER_PROFILE_PUBLIC),
+      mergeMap(({ name }) =>
+        this.profileService.getProfilePublic(name).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return actionProfileError({ error: response });
+            }
+            return actionProfileSuccess(response);
+          })
+        )
+      ),
+      // layer to catch error from effect
+      catchError((e) => of(e))
+    )
+  );
+
+  /**
+   * INFO:
    * register - effect login effect responsible to handler layer between services, store states, reducers and components
    */
-  public profile: Observable<Actions> = createEffect(() =>
+  public profile$: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
       ofType(profileType.USER_PROFILE),

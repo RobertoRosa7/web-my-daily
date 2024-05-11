@@ -1,22 +1,29 @@
-<main *ngIf="userPublicProfile$ | async; else empty" class="public-profile" [ngClass]="theme$ | async">
+<main *ngIf="userPublicProfile$ | async as pup; else empty" class="public-profile" [ngClass]="theme$ | async">
   <div class="page">
     <app-cover></app-cover>
 
-    <div class="container-photo">
-      <div class="image">
-        <div class="img">
-          <button mat-icon-button>
-            <mat-icon>camera</mat-icon>
-          </button>
+    <div *ngIf="!pup.pageable && pup.data; else showlist">
+      <div class="container-photo">
+        <div class="image">
+          <div class="img">
+            <button mat-icon-button>
+              <mat-icon>camera</mat-icon>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div class="container-followers">
-        <!-- <app-follwers></app-follwers> -->
-        <button mat-raised-button>follow</button>
+        <div class="container-followers">
+          <!-- <app-follwers></app-follwers> -->
+          <button mat-raised-button>follow</button>
+        </div>
+        <div class="border-top-radious"></div>
       </div>
-      <div class="border-top-radious"></div>
+      {{ pup | json }}
     </div>
+
+    <ng-template #showlist>
+      {{ pup | json }}
+    </ng-template>
   </div>
 </main>
 

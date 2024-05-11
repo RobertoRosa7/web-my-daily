@@ -1,10 +1,14 @@
 import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/json.decorator';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { PageableGeneral, SingletonOrPageable } from '../../../../interface/pageable.interface';
 
-export type UserProfileResponse = HttpResponseDefault<UserProfile>;
-export type profileObservable = Observable<UserProfile | null>;
-export type profilePublicObservable = Observable<boolean>;
+export type PageableOrUserProfile = PageableGeneral<Array<User>> | UserProfile;
+export type ProfileResponse = HttpResponseDefault<PageableOrUserProfile>;
+export type ProfileObservable = Observable<UserProfile | null>;
+export type ProfilePublicObservable = Observable<boolean>;
+export type ProfileSingletonOrPageable = SingletonOrPageable<PageableOrUserProfile>;
+export type ProfilePublicReponseObservable = Observable<ProfileSingletonOrPageable>;
 
 export class MsUserProfileChartResponse {
   public negative: number = 0;
@@ -37,7 +41,7 @@ export class TotalFollowsDto {
   public totalFollowers: number = 0;
 }
 
-export class UserProfile {
+export class User {
   @JsonProperty('_id')
   public id: string | undefined = undefined;
   public email: string | undefined = undefined;
@@ -55,10 +59,12 @@ export class UserProfile {
   public createdAt: string | undefined = undefined;
   @JsonProperty('updated_at')
   public updatedAt: string | undefined = undefined;
+}
 
+export class UserProfile extends User {
   @JsonProperty({ clazz: MsUserProfileResponse })
   public profile: MsUserProfileResponse = new MsUserProfileResponse();
 
   @JsonProperty({ clazz: TotalFollowsDto })
-  public total_follows: TotalFollowsDto = new TotalFollowsDto();
+  public follows: TotalFollowsDto = new TotalFollowsDto();
 }
