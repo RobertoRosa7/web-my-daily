@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../types/profile.type';
 import { ProfileService } from '../services/profile.service';
-import { actionProfileError, actionProfilePublicSuccess, actionProfileSuccess } from '../actions/profile.action';
+import { actionProfileError, actionProfileSuccess } from '../actions/profile.action';
 import { actionLoading } from '../../../auth/core/actions/auth.action';
 
 /**
