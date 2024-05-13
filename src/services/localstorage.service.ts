@@ -1,6 +1,10 @@
 import { Injectable, afterNextRender } from '@angular/core';
 import { IData } from '../app/interface/localstorage.interface';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { actionUser } from '../app/pages/profile/core/actions/user.action';
+import { JsonMapProperties } from '../app/core/decorators/json.decorator';
+import { User } from '../app/pages/profile/core/interfaces/profile.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +12,11 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 export class LocalStorageService {
   private token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
-  constructor() {
+  constructor(private readonly store: Store) {
     afterNextRender(() => {
       try {
         this.token$.next(this.deserealizeKey('token'));
+        this.store.dispatch(actionUser(JsonMapProperties.deserialize(User, this.deserealizeKey('user'))));
       } catch (err) {}
     });
   }

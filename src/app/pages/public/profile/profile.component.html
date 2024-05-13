@@ -18,14 +18,27 @@
         </div>
         <div class="border-top-radious"></div>
       </div>
+      <app-user-details></app-user-details>
     </div>
 
     <ng-template #showlist>
-      {{ pup | json }}
+      <div class="container-pup">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput type="text" placeholder="Pesquisar" />
+        </mat-form-field>
+
+        <app-initial-explore [profile]="profile" *ngFor="let profile of pup.pageable.content"></app-initial-explore>
+      </div>
     </ng-template>
   </div>
 </main>
 
 <ng-template #empty>
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput type="text" placeholder="Pesquisar" />
+  </mat-form-field>
+
   <app-404></app-404>
 </ng-template>

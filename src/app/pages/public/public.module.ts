@@ -15,6 +15,8 @@ import { profileReducer } from '../profile/core/reducers/profile.reducer';
 import { provideState } from '@ngrx/store';
 import { ProfileEffect } from '../profile/core/effects/profile.effect';
 import { provideEffects } from '@ngrx/effects';
+import { InitialExploreComponent } from '../home/core/components/initial-explore/initial-explore.component';
+import { userReducer } from '../profile/core/reducers/user.reducer';
 
 @NgModule({
   declarations: [Public, ProfileComponent],
@@ -27,10 +29,12 @@ import { provideEffects } from '@ngrx/effects';
     FollowersComponent,
     UserDetailsComponent,
     Page404Component,
+    InitialExploreComponent,
   ],
 
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),
+    provideState({ name: 'user', reducer: userReducer }),
     provideEffects([ProfileEffect]),
     ProfileService,
   ],

@@ -1,13 +1,5 @@
 <div [ngClass]="theme$ | async" class="">
-  <mat-tab-group
-    class="w-full"
-    selectedIndex="0"
-    disablePagination=""
-
-    
-    
-
-    >
+  <mat-tab-group class="w-full" selectedIndex="0" disablePagination="">
     <mat-tab>
       <ng-template mat-tab-label>
         <div class="flex items-center">
@@ -16,7 +8,12 @@
         </div>
       </ng-template>
       <div class="bg-slate-200 h-[86.6vh] text-gray-800">
-        <app-initial-explore></app-initial-explore>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-icon matPrefix>search</mat-icon>
+          <input matInput type="text" placeholder="Pesquisar" />
+        </mat-form-field>
+
+        <!-- <app-initial-explore></app-initial-explore> -->
       </div>
     </mat-tab>
 

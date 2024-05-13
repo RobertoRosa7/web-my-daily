@@ -64,13 +64,18 @@
     .body {
       border-top-left-radius: 4rem;
     }
+    .container-pup {
+      max-width: 70%;
+      margin: auto;
+      padding-top: calc(10% + 5rem);
+    }
   }
 }
 
 // media queries max width 768px - mobile first
 @media screen and (max-width: 768px) {
   // user page
-  .user {
+  .public-profile {
     // page
     .page {
       .container-user-details,
@@ -92,7 +97,6 @@
       .img {
         display: flex;
       }
-
       .container-photo {
         min-height: 15rem;
         gap: 1rem;
@@ -117,7 +121,6 @@
         .container-followers button {
           width: 100%;
         }
-
         // phto profile image
         .img {
           height: 7rem;
@@ -126,7 +129,6 @@
           align-items: center;
           justify-content: center;
         }
-
         .border-top-radious {
           display: block;
           position: absolute;
@@ -145,6 +147,9 @@
       }
       .body {
         border-top-left-radius: 4rem;
+      }
+      .container-pup {
+        padding-top: 12rem;
       }
     }
   }

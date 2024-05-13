@@ -1,9 +1,8 @@
 .card-explore {
   width: 100%;
 
-
   .div-main {
-    width: 70%;
+    width: inherit;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -73,8 +72,6 @@
       margin: 0;
     }
     .scores {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
       display: flex;
       flex-wrap: wrap;
       min-height: 5rem;
