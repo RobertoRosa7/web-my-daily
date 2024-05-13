@@ -4,7 +4,7 @@ import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happ
 const profileHappens: MemoizedSelector<object, ProfileHappenResponse> =
   createFeatureSelector<ProfileHappenResponse>('profileHappens');
 
-export const selectorHappens: MemoizedSelector<object, Array<ProfileHappen> | null> = createSelector(
+export const selectorHappens: MemoizedSelector<object, Array<ProfileHappen> | undefined> = createSelector(
   profileHappens,
   ({ data }: ProfileHappenResponse) => data
 );

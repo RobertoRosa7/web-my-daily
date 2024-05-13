@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
-import { User, UserProfile, ProfileResponse } from '../interfaces/profile.interface';
+import { Observable, map } from 'rxjs';
+import { ProfileResponse, ProfileSingleResponse } from '../interfaces/profile.interface';
 import { ProfileRepository } from '../repositories/profile.repository';
-import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happen.interface';
+import { ProfileHappenResponse } from '../interfaces/profile.happen.interface';
 import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
-import { PageableGeneral } from '../../../../interface/pageable.interface';
+import { PageableUser } from '../../../../interface/pageable.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +15,10 @@ export class ProfileService {
   /**
    * @see: https://cloudmark.github.io/Json-Mapping/
    */
-  public getUseProfile(): Observable<ProfileResponse> {
+  public getUseProfile(): Observable<ProfileSingleResponse> {
     return this.profileRespository
       .getUseProfile()
-      .pipe(map((response) => ({ ...response, data: JsonMapProperties.deserialize(UserProfile, response.data) })));
+      .pipe(map((data) => JsonMapProperties.deserialize(ProfileSingleResponse, data)));
   }
 
   /**
@@ -27,14 +27,9 @@ export class ProfileService {
    * @returns Observable<ProfileHappenResponse>
    */
   public getHappens(): Observable<ProfileHappenResponse> {
-    return this.profileRespository.getHappens().pipe(
-      map((response) => ({
-        ...response,
-        data: response.data
-          ? response.data.map((happens) => JsonMapProperties.deserialize(ProfileHappen, happens))
-          : [],
-      }))
-    );
+    return this.profileRespository
+      .getHappens()
+      .pipe(map((data) => JsonMapProperties.deserialize(ProfileHappenResponse, data)));
   }
 
   /**
@@ -43,14 +38,20 @@ export class ProfileService {
    * @returns Observable<ProfileHappenResponse>
    */
   public getProfilePublic(name: string | null): Observable<ProfileResponse> {
-    return this.profileRespository.getProfilePublic(name).pipe(
-      map((response) => ({
-        ...response,
-        data: name
-          ? JsonMapProperties.deserialize(UserProfile, response.data)
-          : JsonMapProperties.deserialize(PageableGeneral<Array<User>>, response.data),
-      })),
-      tap(console.log)
-    );
+    return this.profileRespository.getProfilePublic(name).pipe(map((data) => this.singleTonOrPageable(name, data)));
+  }
+
+  /**
+   * INFO:
+   * singleTonOrPageable - responsible to serialize User or Pageable Use
+   *
+   * @param name string
+   * @param response ProfileResponse
+   * @returns
+   */
+  private singleTonOrPageable(name: string | null, response: ProfileResponse): ProfileResponse {
+    return name
+      ? JsonMapProperties.deserialize(ProfileSingleResponse, response)
+      : { ...response, data: JsonMapProperties.deserialize(PageableUser, response.data) };
   }
 }

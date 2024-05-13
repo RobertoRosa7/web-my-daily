@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/json.decorator';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
-import { PageableGeneral, SingletonOrPageable } from '../../../../interface/pageable.interface';
+import { PageableUser, SingletonOrPageable } from '../../../../interface/pageable.interface';
 
-export type PageableOrUserProfile = PageableGeneral<Array<User>> | UserProfile;
+export type PageableOrUserProfile = PageableUser | UserProfile;
 export type ProfileResponse = HttpResponseDefault<PageableOrUserProfile>;
 export type ProfileObservable = Observable<UserProfile | null>;
 export type ProfilePublicObservable = Observable<boolean>;
@@ -67,4 +67,9 @@ export class UserProfile extends User {
 
   @JsonProperty({ clazz: TotalFollowsDto })
   public follows: TotalFollowsDto = new TotalFollowsDto();
+}
+
+export class ProfileSingleResponse extends HttpResponseDefault<UserProfile> {
+  @JsonProperty({ clazz: UserProfile })
+  public override data: UserProfile = new UserProfile();
 }

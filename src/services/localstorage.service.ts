@@ -1,5 +1,5 @@
 import { Injectable, afterNextRender } from '@angular/core';
-import { IData } from '../interfaces/localstorage.interface';
+import { IData } from '../app/interface/localstorage.interface';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({

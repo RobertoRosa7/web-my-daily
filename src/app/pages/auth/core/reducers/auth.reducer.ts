@@ -4,7 +4,7 @@ import { HttpResponseDefault } from '../../../../interface/http-response.interfa
 import { actionClear, actionLoginError, actionLoginSuccess } from '../actions/auth.action';
 
 const STATES: HttpResponseDefault<IAuthState> = {
-  data: null,
+  data: undefined,
   error: false,
   message: '',
 };

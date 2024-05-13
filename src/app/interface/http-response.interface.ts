@@ -1,5 +1,5 @@
-export interface HttpResponseDefault<T> {
-  data: T | null;
-  error: boolean;
-  message: string;
+export class HttpResponseDefault<T> {
+  public data: T | undefined = undefined;
+  public error: boolean | undefined = undefined;
+  public message: string | undefined = undefined;
 }

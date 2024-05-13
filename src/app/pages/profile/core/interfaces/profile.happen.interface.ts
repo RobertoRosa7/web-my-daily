@@ -2,8 +2,7 @@ import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/json.decorator';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
-export type ProfileHappenResponse = HttpResponseDefault<Array<ProfileHappen>>;
-export type ProfileHappenObservable = Observable<Array<ProfileHappen> | null>;
+export type ProfileHappenObservable = Observable<Array<ProfileHappen> | undefined>;
 
 export class ProfileHappenLike {
   @JsonProperty('disliked_count')
@@ -29,4 +28,9 @@ export class ProfileHappen {
   public whatHappen: string = '';
   @JsonProperty({ clazz: ProfileHappenLike })
   public likes: ProfileHappenLike = new ProfileHappenLike();
+}
+
+export class ProfileHappenResponse extends HttpResponseDefault<Array<ProfileHappen>> {
+  @JsonProperty({ clazz: ProfileHappen })
+  public override data: ProfileHappen[] | undefined = undefined;
 }

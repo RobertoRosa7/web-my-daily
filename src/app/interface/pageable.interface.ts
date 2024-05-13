@@ -1,3 +1,6 @@
+import { JsonProperty } from '../core/decorators/json.decorator';
+import { User } from '../pages/profile/core/interfaces/profile.interface';
+
 export class Page {
   public pageNumbe!: number;
   public pageSiz!: number;
@@ -12,22 +15,8 @@ export interface SingletonOrPageable<T> {
   data: T | null | undefined;
 }
 
-export interface Pageable<T> {
-  content?: T;
-  pageable?: Page;
-  last?: boolean;
-  size?: number;
-  number?: number;
-  sort?: Array<string>;
-  numberOfElements?: number;
-  first?: boolean;
-  empty?: boolean;
-  totalPages?: number;
-  totalElements?: number;
-}
-
-export class PageableGeneral<T> implements Pageable<T> {
-  public content: undefined | T = undefined;
+export class Pageable<T> {
+  public content?: T;
   public pageable: undefined | Page = undefined;
   public last: undefined | boolean = undefined;
   public size: undefined | number = undefined;
@@ -38,4 +27,9 @@ export class PageableGeneral<T> implements Pageable<T> {
   public empty: undefined | boolean = undefined;
   public totalPages: undefined | number = undefined;
   public totalElements: undefined | number = undefined;
+}
+
+export class PageableUser extends Pageable<Array<User>> {
+  @JsonProperty({ clazz: User })
+  public override content: Array<User> = [];
 }
