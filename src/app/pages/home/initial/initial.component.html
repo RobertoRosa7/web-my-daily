@@ -1,7 +1,47 @@
 <div [ngClass]="theme$ | async" class="">
-  <mat-tab-group>
-    <mat-tab label="First"> Content 1 </mat-tab>
-    <mat-tab label="Second"> Content 2 </mat-tab>
-    <mat-tab label="Third"> Content 3 </mat-tab>
+  <mat-tab-group
+    class="w-full"
+    selectedIndex="0"
+    disablePagination=""
+
+    
+    
+
+    >
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="flex items-center">
+          <span class="page text-sm">Explorar</span>
+          <mat-icon class="text-xl ml-1 mb-1">explore</mat-icon>
+        </div>
+      </ng-template>
+      <div class="bg-slate-200 h-[86.6vh] text-gray-800">
+        <app-initial-explore></app-initial-explore>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="flex items-center">
+          <span class="text-sm">Principal</span>
+          <mat-icon class="text-xl ml-1 mb-1">home</mat-icon>
+        </div>
+      </ng-template>
+      <div class="bg-slate-300 h-[86.6vh] text-gray-800">
+        <app-initial-main></app-initial-main>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div class="flex items-center">
+          <span class="text-sm">Sentimentos</span>
+          <mat-icon class="text-xl ml-1 mb-1">sentiment_satisfied</mat-icon>
+        </div>
+      </ng-template>
+      <div class="bg-slate-400 h-[86.6vh] text-gray-800">
+        <app-initial-feelings></app-initial-feelings>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>
