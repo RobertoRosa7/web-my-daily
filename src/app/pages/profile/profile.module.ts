@@ -8,19 +8,19 @@ import { ToolbarComponent } from '../../core/components/toolbar/toolbar.componen
 import { UserComponent } from './user/user.component';
 import { SettingComponent } from './settings/setting.component';
 import { provideState } from '@ngrx/store';
-import { colorReducer } from './core/reducers/color.reducer';
 import { CoverComponent } from '../../core/components/cover/cover.component';
 import { FollowersComponent } from './core/components/followers/followers.component';
 import { FeelingsComponent } from './core/components/feelings/feelings.component';
 import { UserDetailsComponent } from './core/components/user-details/user-details.component';
 import { ProfileRepository } from './core/repositories/profile.repository';
 import { ProfileService } from './core/services/profile.service';
-import { LocalStorageService } from '../../../services/localstorage.service';
+import { LocalStorageService } from '../../core/services/localstorage/localstorage.service';
 import { profileReducer } from './core/reducers/profile.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { ProfileEffect } from './core/effects/profile.effect';
 import { profileHappenReducer } from './core/reducers/profile.happens.reducer';
 import { ProfileHappensEffect } from './core/effects/profile.happens.effect';
+import { userReducer } from './core/reducers/user.reducer';
 
 @NgModule({
   declarations: [Profile, UserComponent, SettingComponent],
@@ -37,6 +37,7 @@ import { ProfileHappensEffect } from './core/effects/profile.happens.effect';
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),
     provideState({ name: 'profileHappens', reducer: profileHappenReducer }),
+    provideState({ name: 'user', reducer: userReducer }),
     provideEffects([ProfileEffect, ProfileHappensEffect]),
     ProfileRepository,
     ProfileService,

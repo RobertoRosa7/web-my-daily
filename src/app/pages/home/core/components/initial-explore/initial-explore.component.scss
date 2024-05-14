@@ -8,6 +8,10 @@
     flex-direction: column;
     justify-items: center;
     min-height: 1rem;
+
+    img {
+      cursor: pointer;
+    }
   }
 
   .mdc-card {
@@ -29,14 +33,47 @@
     display: inline-block;
     padding-right: 0.5rem;
   }
-
-  ::ng-deep .mdc-card .mat-mdc-card-header .mat-mdc-card-header-text {
-    flex: 1 !important;
+  ::ng-deep .mat-mdc-card-header-text {
+    width: 100%;
+  }
+  .mat-mdc-card-title {
+    justify-content: space-between;
+  }
+  .mat-mdc-card-title,
+  .mat-mdc-card-title p,
+  .mat-mdc-card-title p mat-icon {
+    display: flex;
+  }
+  .mat-mdc-card-title,
+  .mat-mdc-card-title p,
+  .mat-mdc-card-title p mat-icon {
+    align-items: center;
   }
 
   .mat-mdc-card-title {
-    display: flex;
     justify-content: space-between;
+    div {
+      width: 100%;
+      max-width: 230px;
+    }
+    div:last-child {
+      max-width: 20%;
+      text-align: end;
+    }
+    p {
+      font-size: 0.8rem;
+      justify-content: space-between;
+
+      span.public {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+
+      mat-icon {
+        justify-content: center;
+      }
+    }
   }
 
   .mat-mdc-card-subtitle span {
@@ -95,6 +132,27 @@
   }
 
   @media screen and (max-width: 768px) {
+    .mat-mdc-card-title {
+      div {
+        width: 100% !important;
+        max-width: 100%;
+      }
+
+      div:last-child {
+        max-width: 50px;
+      }
+
+      p {
+        flex-direction: column;
+        align-items: flex-start;
+        span.divider {
+          display: none;
+        }
+      }
+    }
+    .btn-follow {
+      display: none;
+    }
     .div-main {
       width: 100%;
     }

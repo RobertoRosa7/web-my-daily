@@ -8,9 +8,26 @@
   align-items: center;
 }
 
+@mixin btn-default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  width: inherit;
+  color: var(--color-dark-red-medium) !important;
+  :focus {
+    background: var(--color-dark-red-light);
+  }
+}
+
 // set size page default
 @mixin size-page {
   width: inherit;
   max-width: 1024px;
   margin: auto;
+  padding: 1rem;
+}
+
+@mixin mt {
+  margin-top: 5rem;
 }

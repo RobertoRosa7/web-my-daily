@@ -1,57 +1,56 @@
 <main class="card-explore">
   <div class="div-main">
-    <mat-card class="">
-      <mat-card-header class="">
-        <div mat-card-avatar class="example-header-image">
+    <mat-card>
+      <mat-card-header>
+        <div [queryParams]="{ name: profile.nameId }" routerLink="/public" mat-card-avatar class="example-header-image">
           <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" class="w-[64px] rounded-full" />
         </div>
-        <mat-card-title class="flex items-center">
-          <div class="flex flex-col">
+        <mat-card-title>
+          <div>
             <span role="none" aria-describedby="name">{{ profile.name }}</span>
+            <p class="container-details">
+              <span style="cursor: pointer" [queryParams]="{ name: profile.nameId }" routerLink="/public"
+                >{{ profile.nameId }}
+              </span>
+              <span class="public">
+                {{ profile.createdAt | date }}
 
-            <p class="text text-[0.8rem] flex gap-2 justify-between">
-              <span style="cursor: pointer" [queryParams]="{ name: profile.nameId }" [routerLink]="['/public']">{{
-                profile.nameId
-              }}</span>
-              <span>|</span>
-              <span>{{ profile.createdAt | date }}</span>
-              <mat-icon
-                class="text-sm"
-                matTooltipPosition="right"
-                matTooltip="Público - todos podem visualizar"
-                role="icon"
-                aria-describedby="post-public"
-                >public</mat-icon
-              >
+                <mat-icon
+                  *ngIf="profile.profilePublic"
+                  class="text-sm"
+                  matTooltipPosition="right"
+                  matTooltip="Público - todos podem visualizar"
+                  role="icon"
+                  aria-describedby="post-public"
+                  >public</mat-icon
+                >
+                <mat-icon
+                  *ngIf="!profile.profilePublic"
+                  class="text-sm"
+                  matTooltipPosition="right"
+                  matTooltip="Privado"
+                  role="icon"
+                  aria-describedby="post-public"
+                  >lock</mat-icon
+                >
+              </span>
             </p>
           </div>
-          <button *ngIf="(userId$ | async) !== profile.id" mat-raised-button class="ml-2">
-            <span>Seguir</span>
-            <mat-icon>add</mat-icon>
-          </button>
+          <div>
+            <ng-container *ngIf="(userId$ | async) !== profile.id">
+              <button *ngIf="profile.isFollowing" (click)="unFollow(profile)" mat-button class="ml-2">
+                <span class="btn-follow">Deixar</span>
+                <mat-icon>remove</mat-icon>
+              </button>
+
+              <button *ngIf="!profile.isFollowing" (click)="follow(profile)" mat-button class="ml-2">
+                <span class="btn-follow">Seguir</span>
+                <mat-icon>add</mat-icon>
+              </button>
+            </ng-container>
+          </div>
         </mat-card-title>
       </mat-card-header>
-
-      <!-- <div class="user-details">
-        <div class="scores">
-          <div class="score-positive">
-            <p>{{ 0.4012 | percent : '1.2-2' }}</p>
-            <p>score pos.</p>
-          </div>
-          <div class="score-negative">
-            <p>{{ 0.5988 | percent : '1.2-2' }}</p>
-            <p>socre neg.</p>
-          </div>
-          <div class="mean">
-            <p>0</p>
-            <p>média</p>
-          </div>
-          <div class="std">
-            <p>0</p>
-            <p>des. padrão</p>
-          </div>
-        </div>
-      </div> -->
     </mat-card>
   </div>
 </main>

@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
  */
 @Pipe({
   name: 'follows',
-  standalone: true
+  standalone: true,
 })
 export class FollowerPipe implements PipeTransform {
   transform(value: number, ...args: any[]): any {
@@ -13,7 +13,7 @@ export class FollowerPipe implements PipeTransform {
 
     if (value === null) return null;
 
-    if (value === 0) return null;
+    if (value === 0) return 0;
 
     let abs = Math.abs(value);
 

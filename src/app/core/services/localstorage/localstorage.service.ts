@@ -1,16 +1,16 @@
 import { Injectable, afterNextRender } from '@angular/core';
-import { IData } from '../app/interface/localstorage.interface';
+import { IData } from '../../../interface/localstorage.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { actionUser } from '../app/pages/profile/core/actions/user.action';
-import { JsonMapProperties } from '../app/core/decorators/json.decorator';
-import { User } from '../app/pages/profile/core/interfaces/profile.interface';
+import { actionUser } from '../../../pages/profile/core/actions/user.action';
+import { JsonMapProperties } from '../../decorators/json.decorator';
+import { User } from '../../../pages/profile/core/interfaces/profile.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
-  private token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  public token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   constructor(private readonly store: Store) {
     afterNextRender(() => {

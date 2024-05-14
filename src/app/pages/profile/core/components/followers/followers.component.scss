@@ -1,12 +1,18 @@
 // media queries max width 768px - mobile first
 // container follow and likes
+.main-follows {
+  width: inherit;
+  button {
+    width: inherit;
+  }
+}
+
 .follow {
   display: flex;
   background-color: inherit;
   min-height: 5rem;
   justify-content: center;
   align-items: center;
-
   // custom style for all divs
   div {
     flex: 1;
@@ -54,11 +60,17 @@
 }
 @media screen and (max-width: 768px) {
   // container follow and likes
+  .main-follows {
+    width: inherit;
+    text-align: center;
+  }
+
   .follow {
     display: flex;
     min-height: 6rem;
     justify-content: center;
     align-items: center;
+    margin-left: -1.5rem;
 
     div {
       display: flex;

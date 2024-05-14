@@ -9,34 +9,39 @@
       </p>
     </div>
     <div class="scores">
-      <div
-        matTooltip="Score Positivo"
-        matTooltipPosition="above"
-        aria-label="score-positive"
-        role="div"
-        aria-describedby="score-positive"
-        class="score-positive">
-        <p aria-label="score-positive">
-          {{ data.profile.totalScorePositive / 100 | percent : '1.2-2' }}
-        </p>
-        <p>score pos.</p>
+      <div class="right">
+        <div
+          matTooltip="Score Positivo"
+          matTooltipPosition="above"
+          aria-label="score-positive"
+          role="div"
+          aria-describedby="score-positive"
+          class="score-positive">
+          <p aria-label="score-positive">
+            {{ data.profile.totalScorePositive / 100 | percent : '1.2-2' }}
+          </p>
+          <p>score pos.</p>
+        </div>
+        <div
+          matTooltip="Score Negativo"
+          matTooltipPosition="above"
+          role="div"
+          aria-describedby="score-negative"
+          class="score-negative">
+          <p aria-label="score-negative">{{ data.profile.totalScoreNegative / 100 | percent : '1.2-2' }}</p>
+          <p>socre neg.</p>
+        </div>
       </div>
-      <div
-        matTooltip="Score Negativo"
-        matTooltipPosition="above"
-        role="div"
-        aria-describedby="score-negative"
-        class="score-negative">
-        <p aria-label="score-negative">{{ data.profile.totalScoreNegative / 100 | percent : '1.2-2' }}</p>
-        <p>socre neg.</p>
-      </div>
-      <div matTooltip="Média" matTooltipPosition="above" role="div" aria-describedby="mean" class="mean">
-        <p aria-label="mean">{{ data.profile.meanFeeling / 100 | percent : '1.2-2' }}</p>
-        <p>média</p>
-      </div>
-      <div matTooltip="Desvio Padrão" matTooltipPosition="above" role="div" aria-describedby="std" class="std">
-        <p aria-label="std">{{ data.profile.stdFeeling / 100 | percent : '1.2-2' }}</p>
-        <p>des. padrão</p>
+
+      <div class="left">
+        <div matTooltip="Média" matTooltipPosition="above" role="div" aria-describedby="mean" class="mean">
+          <p aria-label="mean">{{ data.profile.meanFeeling / 100 | percent : '1.2-2' }}</p>
+          <p>média</p>
+        </div>
+        <div matTooltip="Desvio Padrão" matTooltipPosition="above" role="div" aria-describedby="std" class="std">
+          <p aria-label="std">{{ data.profile.stdFeeling / 100 | percent : '1.2-2' }}</p>
+          <p>des. padrão</p>
+        </div>
       </div>
     </div>
   </div>
@@ -45,25 +50,29 @@
 <ng-template #loading>
   <div class="user-details">
     <div class="infos loading-waves">
-      <p>Fulano Silva</p>
-      <p>seu.fulano&#64;.com</p>
+      <p>xxx</p>
+      <p>xxxx&#64;.com</p>
     </div>
     <div class="scores">
-      <div class="score-positive loading-waves">
-        <p>0</p>
-        <p>score pos.</p>
+      <div class="right">
+        <div class="score-positive loading-waves">
+          <p>0</p>
+          <p>score pos.</p>
+        </div>
+        <div class="score-negative loading-waves">
+          <p>0</p>
+          <p>socre neg.</p>
+        </div>
       </div>
-      <div class="score-negative loading-waves">
-        <p>0</p>
-        <p>socre neg.</p>
-      </div>
-      <div class="mean loading-waves">
-        <p>0</p>
-        <p>média</p>
-      </div>
-      <div class="std loading-waves">
-        <p>0</p>
-        <p>des. padrão</p>
+      <div class="left">
+        <div class="mean loading-waves">
+          <p>0</p>
+          <p>média</p>
+        </div>
+        <div class="std loading-waves">
+          <p>0</p>
+          <p>des. padrão</p>
+        </div>
       </div>
     </div>
   </div>

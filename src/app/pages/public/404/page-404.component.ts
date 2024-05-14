@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CoverComponent } from '../../../core/components/cover/cover.component';
 import { Store } from '@ngrx/store';
 import { selectorTheme } from '../../profile/core/selectors/color.selector';
@@ -15,20 +15,21 @@ import { selectorTheme } from '../../profile/core/selectors/color.selector';
       <div class="search"></div>
       <div class="container-404">
         <div class="text">
-          <h1>404</h1>
+          <h1>{{ title }}</h1>
         </div>
         <div class="text">
           <h1>OOps</h1>
-          <span>{{ someText }}</span>
+          <span>{{ message }}</span>
         </div>
       </div>
     </div>
   </main>`,
 })
 export class Page404Component {
-  public someText = 'The page your are looking for no longer exits. Perhaps you can return back to site hompage';
-
   public theme$ = this.store.select(selectorTheme);
+
+  @Input() public title!: string;
+  @Input() public message!: string;
 
   constructor(private readonly store: Store) {}
 }

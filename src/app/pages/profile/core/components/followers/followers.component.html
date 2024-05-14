@@ -1,18 +1,40 @@
-<ng-container *ngIf="userProfile$ | async as data; else loading">
-  <div class="follow">
-    <div role="div" aria-describedby="followers" matTooltipPosition="above" matTooltip="Seguidores" class="followers">
-      <p aria-label="followers">{{ data.follows.totalFollowers | follows }}</p>
-      <p aria-label="followers">Seguidores</p>
+<ng-container *ngIf="userProfile$ | async as userProfile; else loading">
+  <main class="main-follows">
+    <div class="follow">
+      <div role="div" aria-describedby="followers" matTooltipPosition="above" matTooltip="Seguidores" class="followers">
+        <p aria-label="followers">{{ userProfile.follows.totalFollowers | follows }}</p>
+        <p aria-label="followers">Seguidores</p>
+      </div>
+      <div role="div" aria-describedby="following" matTooltipPosition="above" matTooltip="Seguindo" class="follwing">
+        <p aria-label="following">{{ userProfile.follows.totalFollowing | follows }}</p>
+        <p aria-label="following">Seguindo</p>
+      </div>
+      <div role="div" aria-describedby="posts" matTooltipPosition="above" matTooltip="Posts" class="likes">
+        <p aria-label="posts">{{ userProfile.profile.totalRegisters | follows }}</p>
+        <p aria-label="posts">Posts</p>
+      </div>
     </div>
-    <div role="div" aria-describedby="following" matTooltipPosition="above" matTooltip="Seguindo" class="follwing">
-      <p aria-label="following">{{ data.follows.totalFollowing | follows }}</p>
-      <p aria-label="following">Seguindo</p>
-    </div>
-    <div role="div" aria-describedby="posts" matTooltipPosition="above" matTooltip="Posts" class="likes">
-      <p aria-label="posts">{{ data.profile.totalRegisters | follows }}</p>
-      <p aria-label="posts">Posts</p>
-    </div>
-  </div>
+
+    <ng-container *ngIf="(userId$ | async) !== userProfile.id">
+      <button
+        *ngIf="!userProfile.isFollowing && userProfile.profilePublic"
+        (click)="follow(userProfile)"
+        mat-raised-button>
+        follow
+      </button>
+      <button *ngIf="userProfile.isFollowing" (click)="unfollow(userProfile)" mat-raised-button>
+        <span>Deixar</span>
+      </button>
+
+      <button
+        *ngIf="!userProfile.isFollowing && !userProfile.profilePublic"
+        (click)="requestFollow(userProfile)"
+        mat-raised-button>
+        <mat-icon>lock</mat-icon>
+        <span>privado</span>
+      </button>
+    </ng-container>
+  </main>
 </ng-container>
 
 <ng-template #loading>

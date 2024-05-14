@@ -35,7 +35,7 @@
   --color-dark-red-intensive: #000000;
   --color-dark-red-medium: #800000;
   --color-dark-red-soft: #bf0000;
-  --color-dark-red-light: #ff0000;
+  --color-dark-red-light: #ff000025;
 
   // dark blue
   --color-dark-blue: #090088;
@@ -70,13 +70,14 @@
 
   --profile-cover: linear-gradient(-45deg, var(--dark) 20%, var(--color-dark-blue-darkness) 80%, var(--primary) 5%);
   --home-cover: linear-gradient(-45deg, var(--primary) 20%, var(--dark) 80%, var(--color-dark-blue-darkness) 5%);
-  --public-profile-cover: linear-gradient(-45deg, var(--color-dark-blue-darkness) 0%, var(--red) 80%, var(--red) 5%);
+  --public-profile-cover: linear-gradient(-45deg, var(--color-dark-blue-darkness) -10%, var(--red) 160%, var(--red) 0%);
 }
 
 html,
 body {
   height: 100%;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
@@ -115,6 +116,21 @@ body {
 // button menu
 .btn-menu {
   @include btn-icon-radio;
+}
+
+.dialog-custom {
+  button {
+    border-radius: 1rem;
+  }
+  button.submit {
+    color: var(--color-dark-red-medium) !important;
+  }
+  button.close {
+    color: var(--color-dark) !important;
+  }
+  button:focus {
+    background: var(--color-dark-red-light);
+  }
 }
 
 ::-webkit-scrollbar {

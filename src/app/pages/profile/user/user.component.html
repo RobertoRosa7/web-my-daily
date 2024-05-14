@@ -13,11 +13,6 @@
 
       <div class="container-followers">
         <app-follwers></app-follwers>
-        <button *ngIf="profilePublic$ | async" mat-raised-button>follow</button>
-        <button *ngIf="!(profilePublic$ | async)" mat-raised-button>
-          <mat-icon>lock</mat-icon>
-          <span>privado</span>
-        </button>
       </div>
       <div class="border-top-radious"></div>
     </div>
@@ -27,7 +22,9 @@
     </div>
 
     <div class="container-feelings">
-      <app-feelings [happen]="happen" *ngFor="let happen of profileHappens$ | async"></app-feelings>
+      @for (happen of profileHappens$ | async; track $index) {
+      <app-feelings [happen]="happen"></app-feelings>
+      }
     </div>
   </div>
 </main>

@@ -3,6 +3,7 @@
 // user page
 .public-profile {
   // page
+  @include mt;
   .page {
     @include size-page;
     .container-feelings {
@@ -67,7 +68,7 @@
     .container-pup {
       max-width: 70%;
       margin: auto;
-      padding-top: calc(10% + 5rem);
+      padding-top: calc(10% + 12rem);
     }
   }
 }
@@ -85,12 +86,10 @@
       .follow {
         padding: 0 2rem;
       }
-
       .container-feelings {
         max-height: 30rem;
         overflow-y: auto;
       }
-
       .container-photo,
       .container-followers,
       .image,
@@ -106,12 +105,10 @@
           font-size: 1.5rem;
           font-weight: normal;
         }
-
         .container-followers {
           margin-top: 1.5rem;
           flex-direction: column;
         }
-
         .image {
           justify-content: flex-start;
           align-items: center;
@@ -149,6 +146,7 @@
         border-top-left-radius: 4rem;
       }
       .container-pup {
+        max-width: 100%;
         padding-top: 12rem;
       }
     }

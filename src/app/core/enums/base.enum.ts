@@ -11,6 +11,7 @@ export enum Paths {
   signin = '/ms-users/auth/login',
   getProfile = '/ms-users/user/profile',
   profilePublic = '/ms-users/public/user',
+  userFollow = '/ms-users/follows',
 
   getHappen = '/ms-daily/happen/user',
 }

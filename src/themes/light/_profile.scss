@@ -6,6 +6,16 @@
   position: relative;
   color: var(--color-dark-default);
 
+  .user-details {
+    background-color: var(--white);
+  }
+
+  .card-explore .div-main button {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 1rem;
+    color: var(--color-dark-red-medium);
+  }
+
   mat-toolbar {
     background-color: transparent;
   }
@@ -50,6 +60,11 @@
     }
   }
 
+  .mat-mdc-card-title {
+    p {
+      color: var(--color-light-soft);
+    }
+  }
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
     border-bottom-color: var(--primary);
   }
@@ -66,11 +81,20 @@
       border-radius: 2rem;
     }
   }
+
+  ::ng-deep mat-dialog-actions {
+    button {
+      color: var(--primary);
+    }
+  }
 }
 
 // media queries max width 768px - mobile first
 @media screen and (max-width: 768px) {
-  .user {
+  .profile {
+    .card-explore .div-main button {
+      background-color: transparent;
+    }
     .page {
       .container-photo {
         .container-followers p {

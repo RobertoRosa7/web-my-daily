@@ -2,7 +2,6 @@ import { ApplicationConfig, LOCALE_ID } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withHttpTransferCacheOptions } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideState, provideStore } from '@ngrx/store';
@@ -23,11 +22,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideState({ name: 'colors', reducer: colorReducer }),
     provideStore(),
-    provideClientHydration(
-      withHttpTransferCacheOptions({
-        includePostRequests: true,
-      })
-    ),
+    // provideClientHydration(withNoHttpTransferCache()),
+    // withHttpTransferCacheOptions({
+    //   includePostRequests: true,
+    // })
     provideStoreDevtools({
       maxAge: 45,
       logOnly: false, // Restrict extension to log-only mode

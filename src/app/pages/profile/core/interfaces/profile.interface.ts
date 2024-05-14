@@ -51,6 +51,8 @@ export class User {
 
   @JsonProperty('profile_public')
   public profilePublic: boolean | undefined = undefined;
+  @JsonProperty('is_following')
+  public isFollowing: boolean | undefined = undefined;
   @JsonProperty('name_id')
   public nameId: string | undefined = undefined;
   @JsonProperty('auth_id')

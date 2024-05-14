@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Paths } from '../../../../core/enums/base.enum';
 import { Url } from '../../../../core/decorators/url.decorator';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ProfileHappenResponse } from '../interfaces/profile.happen.interface';
 import { ProfileResponse } from '../interfaces/profile.interface';
+import { FollowRequest } from '../../../../interface/follow.interface';
+import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,9 @@ export class ProfileRepository {
 
   @Url(Paths.profilePublic)
   private urlProfilePublic!: string;
+
+  @Url(Paths.userFollow)
+  private urlUserFollowing!: string;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -48,5 +53,14 @@ export class ProfileRepository {
   public getProfilePublic(name: string | null): Observable<ProfileResponse> {
     const url = name ? this.urlProfilePublic + '?name=' + name : this.urlProfilePublic;
     return this.http.get<ProfileResponse>(url);
+  }
+
+  /**
+   * INFO:
+   * Following - following user
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public Following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
+    return this.http.put<HttpResponseDefault<string>>(`${this.urlUserFollowing}/${follower.followId}`, follower);
   }
 }

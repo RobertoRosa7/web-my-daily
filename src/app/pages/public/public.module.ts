@@ -8,7 +8,6 @@ import { Public } from './public';
 import { FollowersComponent } from '../profile/core/components/followers/followers.component';
 import { UserDetailsComponent } from '../profile/core/components/user-details/user-details.component';
 import { ProfileComponent } from './profile/profile.component';
-import { Page404Component } from './404/page-404.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfileService } from '../profile/core/services/profile.service';
 import { profileReducer } from '../profile/core/reducers/profile.reducer';
@@ -17,6 +16,7 @@ import { ProfileEffect } from '../profile/core/effects/profile.effect';
 import { provideEffects } from '@ngrx/effects';
 import { InitialExploreComponent } from '../home/core/components/initial-explore/initial-explore.component';
 import { userReducer } from '../profile/core/reducers/user.reducer';
+import { DialogAlertComponent } from '../../core/components/dialog-alert/dialog-alert.component';
 
 @NgModule({
   declarations: [Public, ProfileComponent],
@@ -28,8 +28,8 @@ import { userReducer } from '../profile/core/reducers/user.reducer';
     CoverComponent,
     FollowersComponent,
     UserDetailsComponent,
-    Page404Component,
     InitialExploreComponent,
+    DialogAlertComponent,
   ],
 
   providers: [

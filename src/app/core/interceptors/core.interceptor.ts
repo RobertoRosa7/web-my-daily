@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { PLATFORM_ID, inject } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { LocalStorageService } from '../../../services/localstorage.service';
+import { LocalStorageService } from '../services/localstorage/localstorage.service';
 import { isPlatformBrowser } from '@angular/common';
 
 export const authInterceptor: HttpInterceptorFn = (

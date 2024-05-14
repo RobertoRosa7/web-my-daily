@@ -5,6 +5,8 @@ import { ProfileRepository } from '../repositories/profile.repository';
 import { ProfileHappenResponse } from '../interfaces/profile.happen.interface';
 import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
 import { PageableUser } from '../../../../interface/pageable.interface';
+import { FollowRequest } from '../../../../interface/follow.interface';
+import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +41,15 @@ export class ProfileService {
    */
   public getProfilePublic(name: string | null): Observable<ProfileResponse> {
     return this.profileRespository.getProfilePublic(name).pipe(map((data) => this.singleTonOrPageable(name, data)));
+  }
+
+  /**
+   * INFO:
+   * Following - following user
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public Following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
+    return this.profileRespository.Following(follower);
   }
 
   /**

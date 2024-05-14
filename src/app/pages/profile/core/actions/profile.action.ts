@@ -3,6 +3,7 @@ import { profileType } from '../types/profile.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProfileResponse } from '../interfaces/profile.interface';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { FollowRequest } from '../../../../interface/follow.interface';
 
 export const actionProfileRequest = createAction(profileType.USER_PROFILE);
 export const actionProfileSuccess = createAction(
@@ -24,3 +25,6 @@ export const actionProfileError = createAction(
   profileType.USER_PROFILE_ERROR,
   (payload: { error: HttpErrorResponse }) => payload
 );
+
+export const actionUserFollow = createAction(profileType.USER_FOLLOW, (payload: FollowRequest) => payload);
+export const actionUserFollowSuccess = createAction(profileType.USER_FOLLOW_SUCCESS, (payload: FollowRequest) => payload)

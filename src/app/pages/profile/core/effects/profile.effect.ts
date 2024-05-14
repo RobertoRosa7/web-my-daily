@@ -6,8 +6,11 @@ import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../types/profile.type';
 import { ProfileService } from '../services/profile.service';
-import { actionProfileError, actionProfileSuccess } from '../actions/profile.action';
+import { actionProfileError, actionProfileSuccess, actionUserFollowSuccess } from '../actions/profile.action';
 import { actionLoading } from '../../../auth/core/actions/auth.action';
+import { io } from 'socket.io-client';
+import { environment } from '../../../../../environments/environment';
+import { FollowRequest } from '../../../../interface/follow.interface';
 
 /**
  * @see: https://ngrx.io/guide/effects
@@ -37,6 +40,27 @@ export class ProfileEffect {
         )
       ),
       // layer to catch error from effect
+      catchError((e) => of(e))
+    )
+  );
+
+  public userProfileFollow$: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      ofType(profileType.USER_FOLLOW),
+      mergeMap((payload: FollowRequest) =>
+        this.profileService.Following(payload).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return actionProfileError({ error: response });
+            }
+
+            const socketio = io(environment.ws + '/follows');
+            socketio.emit(payload.ev, payload.followId, payload.userId);
+            return actionUserFollowSuccess(payload);
+          })
+        )
+      ),
       catchError((e) => of(e))
     )
   );

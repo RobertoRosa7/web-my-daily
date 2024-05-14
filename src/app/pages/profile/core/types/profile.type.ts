@@ -7,4 +7,6 @@ export enum profileType {
   USER_PROFILE_HAPPEN_SUCESS = 'userProfileHappensSuccess@types',
   USER_PROFILE_HAPPEN_ERROR = 'userProfileHappensError@types',
   USER_PROFILE_PUBLIC = 'userProfilePublic@types',
+  USER_FOLLOW = 'userFollow@types',
+  USER_FOLLOW_SUCCESS = 'userFollowSuccess@types',
 }

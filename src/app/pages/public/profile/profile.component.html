@@ -1,4 +1,4 @@
-<main *ngIf="userPublicProfile$ | async as pup; else empty" class="public-profile" [ngClass]="theme$ | async">
+<main *ngIf="userPublicProfile$ | async as pup" class="public-profile" [ngClass]="theme$ | async">
   <div class="page">
     <app-cover></app-cover>
 
@@ -14,7 +14,6 @@
 
         <div class="container-followers">
           <app-follwers></app-follwers>
-          <button mat-raised-button>follow</button>
         </div>
         <div class="border-top-radious"></div>
       </div>
@@ -28,17 +27,10 @@
           <input matInput type="text" placeholder="Pesquisar" />
         </mat-form-field>
 
-        <app-initial-explore [profile]="profile" *ngFor="let profile of pup.pageable.content"></app-initial-explore>
+        @for (profile of pup.pageable.content; track $index) {
+        <app-initial-explore (socketio)="onSocketio($event)" [profile]="profile"></app-initial-explore>
+        }
       </div>
     </ng-template>
   </div>
 </main>
-
-<ng-template #empty>
-  <mat-form-field appearance="fill" class="w-full">
-    <mat-icon matPrefix>search</mat-icon>
-    <input matInput type="text" placeholder="Pesquisar" />
-  </mat-form-field>
-
-  <app-404></app-404>
-</ng-template>
