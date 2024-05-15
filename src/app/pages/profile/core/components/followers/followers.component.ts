@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { ProfileObservable, UserProfile } from '../../interfaces/profile.interface';
 import { selectorProfile } from '../../selectors/profile.selector';
 import { Store } from '@ngrx/store';
@@ -7,11 +7,12 @@ import { FollowerPipe } from '../../../../../core/pipes/follwers.pipe';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { AuthService } from '../../../../auth/core/services/auth.services';
 import { DialogAlertComponent } from '../../../../../core/components/dialog-alert/dialog-alert.component';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-import { DialogAlert } from '../../../../../interface/dialogs.interface';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { selectorId } from '../../selectors/user.selector';
+import { FollowRequest } from '../../../../../interface/follow.interface';
+import { DialogService } from '../../../../../core/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-follwers',
@@ -19,11 +20,15 @@ import { selectorId } from '../../selectors/user.selector';
   templateUrl: './followers.component.html',
   standalone: true,
   imports: [CommonModule, FollowerPipe, SharedModule, DialogAlertComponent],
-  providers: [AuthService],
+  providers: [AuthService, DialogService],
 })
 export class FollowersComponent {
+  @Output()
+  public socketio: EventEmitter<FollowRequest> = new EventEmitter();
+
   public userId$: Observable<string | undefined> = this.store.select(selectorId);
   public userProfile$: ProfileObservable = this.store.select(selectorProfile);
+  private readonly dialogService = inject(DialogService);
 
   constructor(
     private readonly authService: AuthService,
@@ -32,32 +37,15 @@ export class FollowersComponent {
     private readonly router: Router
   ) {}
 
-  public get dialogConfig(): MatDialogConfig<DialogAlert> {
-    return {
-      width: '100%',
-      height: '100%',
-      maxWidth: '450px',
-      maxHeight: '250px',
-      data: {
-        title: 'Você não fez login ainda',
-        message: 'Para poder continuar precisa fazer login',
-        actions: {
-          messageAction: 'Fazer login',
-          messageClose: 'Fechar',
-        },
-      },
-    };
-  }
-
   public get dialogOpen(): MatDialogRef<DialogAlertComponent, boolean> {
-    return this.dialog.open(DialogAlertComponent, this.dialogConfig);
+    return this.dialog.open(DialogAlertComponent, this.dialogService.dialogConfig);
   }
 
-  public unfollow(user: UserProfile) {}
-
-  public follow(userProfile: UserProfile) {
+  public follow(followUser: UserProfile, currentId: string) {
     if (!this.authService.isSessionUser()) {
       this.dialogOpen.afterClosed().subscribe({ next: (res) => this.goToLogin(res) });
+    } else {
+      this.socketio.emit(this.dialogService.buildFollowRequest(followUser.id, currentId));
     }
   }
 

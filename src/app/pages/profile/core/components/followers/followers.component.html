@@ -15,24 +15,27 @@
       </div>
     </div>
 
-    <ng-container *ngIf="(userId$ | async) !== userProfile.id">
-      <button
-        *ngIf="!userProfile.isFollowing && userProfile.profilePublic"
-        (click)="follow(userProfile)"
-        mat-raised-button>
-        follow
-      </button>
-      <button *ngIf="userProfile.isFollowing" (click)="unfollow(userProfile)" mat-raised-button>
-        <span>Deixar</span>
-      </button>
+    <ng-container *ngIf="userId$ | async as uuid">
+      <ng-container *ngIf="uuid !== userProfile.id">
+        <button
+          *ngIf="!userProfile.isFollowing && userProfile.profilePublic"
+          (click)="follow(userProfile, uuid)"
+          mat-raised-button>
+          follow
+        </button>
 
-      <button
-        *ngIf="!userProfile.isFollowing && !userProfile.profilePublic"
-        (click)="requestFollow(userProfile)"
-        mat-raised-button>
-        <mat-icon>lock</mat-icon>
-        <span>privado</span>
-      </button>
+        <button *ngIf="userProfile.isFollowing" (click)="follow(userProfile, uuid)" mat-raised-button>
+          <span>Deixar</span>
+        </button>
+
+        <button
+          *ngIf="!userProfile.isFollowing && !userProfile.profilePublic"
+          (click)="requestFollow(userProfile)"
+          mat-raised-button>
+          <mat-icon>lock</mat-icon>
+          <span>privado</span>
+        </button>
+      </ng-container>
     </ng-container>
   </main>
 </ng-container>

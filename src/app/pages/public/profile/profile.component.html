@@ -1,8 +1,8 @@
-<main *ngIf="userPublicProfile$ | async as pup" class="public-profile" [ngClass]="theme$ | async">
+<main class="public-profile" [ngClass]="theme$ | async">
   <div class="page">
     <app-cover></app-cover>
 
-    <div *ngIf="!pup.pageable && pup.data; else showlist">
+    <div *ngIf="userProfile$ | async">
       <div class="container-photo">
         <div class="image">
           <div class="img">
@@ -11,26 +11,24 @@
             </button>
           </div>
         </div>
-
         <div class="container-followers">
-          <app-follwers></app-follwers>
+          <app-follwers (socketio)="onSocketio($event)"></app-follwers>
         </div>
         <div class="border-top-radious"></div>
       </div>
       <app-user-details></app-user-details>
     </div>
 
-    <ng-template #showlist>
-      <div class="container-pup">
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-icon matPrefix>search</mat-icon>
-          <input matInput type="text" placeholder="Pesquisar" />
-        </mat-form-field>
+    <div *ngIf="userPageble$ | async as pageable" class="container-pup">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput type="text" placeholder="Pesquisar" />
+      </mat-form-field>
 
-        @for (profile of pup.pageable.content; track $index) {
-        <app-initial-explore (socketio)="onSocketio($event)" [profile]="profile"></app-initial-explore>
-        }
-      </div>
-    </ng-template>
+      <app-initial-explore
+        *ngFor="let profile of pageable"
+        (socketio)="onSocketio($event)"
+        [profile]="profile"></app-initial-explore>
+    </div>
   </div>
 </main>

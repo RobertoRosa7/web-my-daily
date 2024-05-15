@@ -73,11 +73,10 @@
   }
   .page .container-pup {
     .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
-      color: var(--white);
-      caret-color: var(--white);
+      color: var(--dark);
+      caret-color: var(--dark);
     }
     .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-      background: rgba(0, 0, 0, 0.05);
       border-radius: 2rem;
     }
   }

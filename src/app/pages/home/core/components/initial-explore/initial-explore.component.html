@@ -37,16 +37,30 @@
             </p>
           </div>
           <div>
-            <ng-container *ngIf="(userId$ | async) !== profile.id">
-              <button *ngIf="profile.isFollowing" (click)="unFollow(profile)" mat-button class="ml-2">
-                <span class="btn-follow">Deixar</span>
-                <mat-icon>remove</mat-icon>
-              </button>
+            <ng-container *ngIf="userId$ | async as uuid">
+              <ng-container *ngIf="uuid !== profile.id">
+                <button *ngIf="profile.isFollowing" (click)="follow(profile, uuid)" mat-button class="ml-2">
+                  <span class="btn-follow">Deixar</span>
+                  <mat-icon>remove</mat-icon>
+                </button>
 
-              <button *ngIf="!profile.isFollowing" (click)="follow(profile)" mat-button class="ml-2">
-                <span class="btn-follow">Seguir</span>
-                <mat-icon>add</mat-icon>
-              </button>
+                <button
+                  *ngIf="!profile.isFollowing && profile.profilePublic"
+                  (click)="follow(profile, uuid)"
+                  mat-button
+                  class="ml-2">
+                  <span class="btn-follow">Seguir</span>
+                  <mat-icon>add</mat-icon>
+                </button>
+                <button
+                  [disableRipple]="true"
+                  style="background: transparent"
+                  *ngIf="!profile.isFollowing && !profile.profilePublic"
+                  (click)="requestFollow(profile)"
+                  mat-icon-button>
+                  <mat-icon style="font-size: 1.1rem">lock</mat-icon>
+                </button>
+              </ng-container>
             </ng-container>
           </div>
         </mat-card-title>

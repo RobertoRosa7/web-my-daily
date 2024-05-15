@@ -6,15 +6,14 @@ import { actionColor } from '../../profile/core/actions/color.action';
 import { stringType } from '../../profile/core/types/color.type';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
-import { ProfileService } from '../../profile/core/services/profile.service';
-import { Socket, io } from 'socket.io-client';
 import { isPlatformBrowser } from '@angular/common';
 import { actionProfilePublic, actionUserFollow } from '../../profile/core/actions/profile.action';
-import { selectorProfilePublic } from '../../profile/core/selectors/profile.selector';
-import { environment } from '../../../../environments/environment';
+import { selectorPageablePub, selectorUserPub } from '../../profile/core/selectors/profile.selector';
 import { selectorId } from '../../profile/core/selectors/user.selector';
-import { JsonMapProperties } from '../../../core/decorators/json.decorator';
 import { FollowRequest, ListeningFollowResponse } from '../../../interface/follow.interface';
+import { Socket, io } from 'socket.io-client';
+import { environment } from '../../../../environments/environment';
+import { JsonMapProperties } from '../../../core/decorators/json.decorator';
 import { actionUserFollowers } from '../../profile/core/actions/user.action';
 
 @Component({
@@ -25,8 +24,8 @@ import { actionUserFollowers } from '../../profile/core/actions/user.action';
 export class ProfileComponent extends Public implements OnInit {
   public theme$ = this.store.select(selectorTheme);
   public userId$: Observable<string | undefined> = this.store.select(selectorId);
-  public someText = 'The page your are looking for no longer exits. Perhaps you can return back to site hompage';
-  public userPublicProfile$ = this.store.select(selectorProfilePublic);
+  public userPageble$ = this.store.select(selectorPageablePub).pipe(map((res) => res?.content));
+  public userProfile$ = this.store.select(selectorUserPub);
 
   private platform = inject(PLATFORM_ID);
   private socketio!: Socket;
@@ -44,7 +43,7 @@ export class ProfileComponent extends Public implements OnInit {
           mergeMap((id) =>
             this.listeningFollows$().pipe(
               map((response) => JsonMapProperties.deserialize(ListeningFollowResponse, response)),
-              filter((response: ListeningFollowResponse) => response.followId === id)
+              filter(({ userId }: ListeningFollowResponse) => userId === id)
             )
           )
         )
@@ -78,7 +77,6 @@ export class ProfileComponent extends Public implements OnInit {
           observer.error('Unable To Reach Server');
         }
       });
-
       return () => this.socketio.disconnect();
     });
   }

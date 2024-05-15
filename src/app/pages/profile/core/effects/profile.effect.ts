@@ -48,7 +48,7 @@ export class ProfileEffect {
     this.action.pipe(
       ofType(profileType.USER_FOLLOW),
       mergeMap((payload: FollowRequest) =>
-        this.profileService.Following(payload).pipe(
+        this.profileService.following(payload).pipe(
           catchError((e) => of(e)),
           map((response) => {
             if (response instanceof HttpErrorResponse) {

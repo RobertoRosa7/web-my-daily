@@ -49,7 +49,7 @@ export class UserComponent extends Profile implements OnInit {
           mergeMap((id) =>
             this.listeningFollows$().pipe(
               map((response) => JsonMapProperties.deserialize(ListeningFollowResponse, response)),
-              filter((response: ListeningFollowResponse) => response.followId === id)
+              filter(({ followId }: ListeningFollowResponse) => followId === id)
             )
           )
         )

@@ -48,8 +48,8 @@ export class ProfileService {
    * Following - following user
    * @returns Observable<HttpResponseDefault<string>>
    */
-  public Following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
-    return this.profileRespository.Following(follower);
+  public following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
+    return this.profileRespository.following(follower);
   }
 
   /**

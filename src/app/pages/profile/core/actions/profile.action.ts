@@ -27,4 +27,7 @@ export const actionProfileError = createAction(
 );
 
 export const actionUserFollow = createAction(profileType.USER_FOLLOW, (payload: FollowRequest) => payload);
-export const actionUserFollowSuccess = createAction(profileType.USER_FOLLOW_SUCCESS, (payload: FollowRequest) => payload)
+export const actionUserFollowSuccess = createAction(
+  profileType.USER_FOLLOW_SUCCESS,
+  (payload: FollowRequest) => payload
+);

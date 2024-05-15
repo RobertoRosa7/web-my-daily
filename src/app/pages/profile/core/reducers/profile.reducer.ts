@@ -11,7 +11,6 @@ import {
 } from '../interfaces/profile.interface';
 import { PageableUser } from '../../../../interface/pageable.interface';
 import { actionUserFollowers } from '../actions/user.action';
-import { ListeningFollowResponse } from '../../../../interface/follow.interface';
 
 const states: Partial<ProfileResponse> = {};
 
@@ -26,56 +25,43 @@ export const profileReducer = createReducer(
     };
   }),
   on(actionUserFollowSuccess, (states, { followId }) => {
-    let pageable = new PageableUser();
-    let userProfile = new User();
-
     if (states.data instanceof PageableUser) {
       const index = states.data.content.findIndex(({ id }) => id === followId);
+      const pageable = Object.assign(new PageableUser(), states.data);
 
-      pageable = Object.assign(pageable, states.data);
-      userProfile = Object.assign(userProfile, pageable.content[index]);
-      userProfile.isFollowing = true;
+      const userProfile = Object.assign(new User(), pageable.content[index]);
+      userProfile.isFollowing = !userProfile.isFollowing;
 
       const users = [...pageable.content];
       users[index] = userProfile;
 
       pageable.content = users;
-    }
+      return { ...states, data: pageable };
+    } else {
+      const userProfile = Object.assign(new UserProfile(), states.data);
+      userProfile.isFollowing = !userProfile.isFollowing;
 
-    return {
-      ...states,
-      data: pageable,
-    };
+      return { ...states, data: userProfile };
+    }
   }),
 
   on(actionSocketUserMetrics, (states, metrics) => {
-    let userProfile = new UserProfile();
-
     if (states.data instanceof UserProfile) {
-      userProfile = Object.assign(userProfile, states.data);
+      const userProfile = Object.assign(new UserProfile(), states.data);
       userProfile.profile = JsonMapProperties.deserialize(MsUserProfileResponse, metrics);
+      return { ...states, data: userProfile };
     }
-
-    return {
-      ...states,
-      data: userProfile,
-    };
+    
+    return { ...states };
   }),
 
   on(actionUserFollowers, (states, folloers) => {
-    let userProfile = new UserProfile();
-
     if (states.data instanceof UserProfile) {
-      userProfile = Object.assign(userProfile, states.data);
+      const userProfile = Object.assign(new UserProfile(), states.data);
       userProfile.follows = folloers.data || new TotalFollowsDto();
-      return {
-        ...states,
-        data: userProfile,
-      };
-    } else {
-      return {
-        ...states,
-      };
+      return { ...states, data: userProfile };
     }
+
+    return { ...states };
   })
 );
