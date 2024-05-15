@@ -17,6 +17,9 @@ import { provideEffects } from '@ngrx/effects';
 import { InitialExploreComponent } from '../home/core/components/initial-explore/initial-explore.component';
 import { userReducer } from '../profile/core/reducers/user.reducer';
 import { DialogAlertComponent } from '../../core/components/dialog-alert/dialog-alert.component';
+import { InputSearchComponent } from '../../core/components/input-search/input-search.component';
+import { InputPhotoComponent } from '../../core/components/input-photo/input-photo.component';
+import { ButtonBackComponent } from '../../core/components/button-back/button-back.component';
 
 @NgModule({
   declarations: [Public, ProfileComponent],
@@ -30,6 +33,9 @@ import { DialogAlertComponent } from '../../core/components/dialog-alert/dialog-
     UserDetailsComponent,
     InitialExploreComponent,
     DialogAlertComponent,
+    InputSearchComponent,
+    InputPhotoComponent,
+    ButtonBackComponent,
   ],
 
   providers: [

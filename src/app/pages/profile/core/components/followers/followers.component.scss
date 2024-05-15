@@ -20,18 +20,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     // firt paragraph bolder
     p:first-child {
       font-weight: bold;
       font-size: 1.3rem;
     }
   }
-
   div:nth-child(1) {
     position: relative;
   }
-
   div:nth-child(1)::before {
     content: '';
     width: 1px;
@@ -42,11 +39,9 @@
     background-color: var(--primary);
     transform: translateY(50%);
   }
-
   div:nth-child(3) {
     position: relative;
   }
-
   div:nth-child(3)::before {
     content: '';
     position: absolute;
@@ -64,23 +59,19 @@
     width: inherit;
     text-align: center;
   }
-
   .follow {
     display: flex;
     min-height: 6rem;
     justify-content: center;
     align-items: center;
     margin-left: -1.5rem;
-
     div {
       display: flex;
       padding: 0.5rem;
-
       p {
         font-size: 0.7rem;
         line-height: 0.7rem;
       }
-
       p:first-child {
         font-weight: bold;
         font-size: 0.8rem;

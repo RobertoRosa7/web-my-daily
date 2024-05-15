@@ -9,7 +9,6 @@
     .container-feelings {
       overflow-y: auto;
     }
-    .photo,
     .info,
     .follow {
       padding: 0 2rem;
@@ -24,6 +23,13 @@
       min-height: 15rem;
       gap: 1rem;
       position: relative;
+      .photo {
+        width: inherit;
+        height: inherit;
+        min-width: inherit;
+        min-height: inherit;
+        flex: 0.3;
+      }
       .image,
       .container-followers {
         align-items: center;
@@ -79,7 +85,6 @@
         max-height: 30rem;
         overflow-y: auto;
       }
-
       .container-photo,
       .container-followers,
       .image,
@@ -90,36 +95,32 @@
         min-height: 15rem;
         gap: 1rem;
         position: relative;
+        padding-left: 1rem;
+        padding-right: 1rem;
 
+        .photo {
+          width: inherit;
+          height: inherit;
+          min-width: inherit;
+          min-height: inherit;
+          flex: 0.3;
+        }
         .container-followers p {
           font-size: 1.5rem;
           font-weight: normal;
         }
-
         .container-followers {
           margin-top: 1.5rem;
           flex-direction: column;
         }
-
         .image {
           justify-content: flex-start;
           align-items: center;
         }
-
         // button follow
         .container-followers button {
           width: 100%;
         }
-
-        // phto profile image
-        .img {
-          height: 7rem;
-          width: 7rem;
-          border-radius: 50%;
-          align-items: center;
-          justify-content: center;
-        }
-
         .border-top-radious {
           display: block;
           position: absolute;

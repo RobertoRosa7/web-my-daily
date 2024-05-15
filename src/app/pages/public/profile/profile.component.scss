@@ -6,10 +6,13 @@
   @include mt;
   .page {
     @include size-page;
+    .button-back {
+      display: flex;
+      justify-content: flex-start;
+    }
     .container-feelings {
       overflow-y: auto;
     }
-    .photo,
     .info,
     .follow {
       padding: 0 2rem;
@@ -24,6 +27,14 @@
       min-height: 15rem;
       gap: 1rem;
       position: relative;
+
+      .photo {
+        width: inherit;
+        height: inherit;
+        min-width: inherit;
+        min-height: inherit;
+        flex: 0.3;
+      }
       .image,
       .container-followers {
         align-items: center;
@@ -67,8 +78,14 @@
     }
     .container-pup {
       max-width: 70%;
+      max-height: 90vh;
       margin: auto;
-      padding-top: calc(10% + 12rem);
+      padding-top: 4rem;
+      background: white;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      border-radius: 2rem 2rem 0 0;
+      overflow-y: auto;
     }
   }
 }
@@ -79,13 +96,6 @@
   .public-profile {
     // page
     .page {
-      .container-user-details,
-      .container-feelings,
-      .container-photo,
-      .info,
-      .follow {
-        padding: 0 2rem;
-      }
       .container-feelings {
         max-height: 30rem;
         overflow-y: auto;
@@ -100,6 +110,8 @@
         min-height: 15rem;
         gap: 1rem;
         position: relative;
+        padding-left: 1rem;
+        padding-right: 1rem;
 
         .container-followers p {
           font-size: 1.5rem;
@@ -113,18 +125,9 @@
           justify-content: flex-start;
           align-items: center;
         }
-
         // button follow
         .container-followers button {
           width: 100%;
-        }
-        // phto profile image
-        .img {
-          height: 7rem;
-          width: 7rem;
-          border-radius: 50%;
-          align-items: center;
-          justify-content: center;
         }
         .border-top-radious {
           display: block;
@@ -147,7 +150,9 @@
       }
       .container-pup {
         max-width: 100%;
-        padding-top: 12rem;
+        padding-top: 2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
       }
     }
   }

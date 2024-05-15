@@ -2,24 +2,38 @@
   <div class="div-main">
     <mat-card>
       <mat-card-header>
-        <div [queryParams]="{ name: profile.nameId }" routerLink="/public" mat-card-avatar class="example-header-image">
+        <div
+          matTooltipPosition="left"
+          [matTooltip]="profile.name || ''"
+          [queryParams]="{ name: profile.nameId }"
+          routerLink="/public"
+          mat-card-avatar
+          class="example-header-image">
           <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" class="w-[64px] rounded-full" />
         </div>
         <mat-card-title>
           <div>
-            <span role="none" aria-describedby="name">{{ profile.name }}</span>
+            <span matTooltipPosition="above" [matTooltip]="profile.name || ''" role="none" aria-describedby="name">{{
+              profile.name
+            }}</span>
             <p class="container-details">
-              <span style="cursor: pointer" [queryParams]="{ name: profile.nameId }" routerLink="/public"
+              <span
+                matTooltipPosition="below"
+                [matTooltip]="profile.nameId || ''"
+                style="cursor: pointer"
+                [queryParams]="{ name: profile.nameId }"
+                routerLink="/public"
                 >{{ profile.nameId }}
               </span>
               <span class="public">
-                {{ profile.createdAt | date }}
-
+                <span matTooltipPosition="above" [matTooltip]="(profile.createdAt | date) || ''">{{
+                  profile.createdAt | date
+                }}</span>
                 <mat-icon
                   *ngIf="profile.profilePublic"
                   class="text-sm"
                   matTooltipPosition="right"
-                  matTooltip="Público - todos podem visualizar"
+                  matTooltip="Público"
                   role="icon"
                   aria-describedby="post-public"
                   >public</mat-icon
@@ -36,28 +50,41 @@
               </span>
             </p>
           </div>
-          <div>
+          <div class="container-buttons">
             <ng-container *ngIf="userId$ | async as uuid">
               <ng-container *ngIf="uuid !== profile.id">
-                <button *ngIf="profile.isFollowing" (click)="follow(profile, uuid)" mat-button class="ml-2">
+                <button
+                  matTooltipPosition="above"
+                  matTooltip="deixar de seguir"
+                  role="button"
+                  aria-describedby="deixar de seguir"
+                  *ngIf="profile.isFollowing"
+                  (click)="follow(profile, uuid)"
+                  mat-button>
                   <span class="btn-follow">Deixar</span>
                   <mat-icon>remove</mat-icon>
                 </button>
-
                 <button
+                  matTooltip="seguir"
+                  matTooltipPosition="above"
+                  aria-describedby="seguir"
+                  role="button"
                   *ngIf="!profile.isFollowing && profile.profilePublic"
                   (click)="follow(profile, uuid)"
-                  mat-button
-                  class="ml-2">
+                  mat-button>
                   <span class="btn-follow">Seguir</span>
                   <mat-icon>add</mat-icon>
                 </button>
                 <button
-                  [disableRipple]="true"
-                  style="background: transparent"
+                  matTooltip="privado"
+                  matTooltipPosition="above"
+                  aria-describedby="privado"
+                  role="button"
+                  class="btn-private"
                   *ngIf="!profile.isFollowing && !profile.profilePublic"
                   (click)="requestFollow(profile)"
-                  mat-icon-button>
+                  mat-button>
+                  <span class="btn-follow">Privado</span>
                   <mat-icon style="font-size: 1.1rem">lock</mat-icon>
                 </button>
               </ng-container>

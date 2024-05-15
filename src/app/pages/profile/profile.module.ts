@@ -21,6 +21,7 @@ import { ProfileEffect } from './core/effects/profile.effect';
 import { profileHappenReducer } from './core/reducers/profile.happens.reducer';
 import { ProfileHappensEffect } from './core/effects/profile.happens.effect';
 import { userReducer } from './core/reducers/user.reducer';
+import { InputPhotoComponent } from '../../core/components/input-photo/input-photo.component';
 
 @NgModule({
   declarations: [Profile, UserComponent, SettingComponent],
@@ -33,6 +34,7 @@ import { userReducer } from './core/reducers/user.reducer';
     FollowersComponent,
     FeelingsComponent,
     UserDetailsComponent,
+    InputPhotoComponent,
   ],
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),
