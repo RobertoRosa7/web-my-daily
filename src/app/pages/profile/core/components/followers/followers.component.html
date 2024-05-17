@@ -14,43 +14,8 @@
         <p aria-label="posts">Posts</p>
       </div>
     </div>
-
-    <ng-container *ngIf="userId$ | async as uuid">
-      <ng-container *ngIf="uuid !== profile.id">
-        <button
-          matTooltip="seguir"
-          matTooltipPosition="below"
-          aria-describedby="seguir"
-          role="button"
-          *ngIf="!profile.isFollowing && profile.profilePublic"
-          (click)="follow(profile, uuid)"
-          mat-raised-button>
-          follow
-        </button>
-        <button
-          matTooltipPosition="below"
-          matTooltip="deixar de seguir"
-          role="button"
-          aria-describedby="deixar de seguir"
-          *ngIf="profile.isFollowing"
-          (click)="follow(profile, uuid)"
-          mat-raised-button>
-          <span>Deixar</span>
-        </button>
-        <button
-          matTooltip="privado"
-          matTooltipPosition="below"
-          aria-describedby="privado"
-          role="button"
-          class="btn-private"
-          *ngIf="!profile.isFollowing && !profile.profilePublic"
-          (click)="requestFollow(profile)"
-          mat-raised-button>
-          <mat-icon>lock</mat-icon>
-          <span>privado</span>
-        </button>
-      </ng-container>
-    </ng-container>
+    <app-button-follower (onLogin)="requestLoginToFollow()"
+    (socketio)="onFollow($event)" [profile]="profile" [id]="userId$ | async"></app-button-follower>
   </main>
 </ng-container>
 

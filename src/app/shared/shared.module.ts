@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const commons = [
   MatCheckboxModule,
@@ -29,6 +30,7 @@ const commons = [
   MatTabsModule,
   MatChipsModule,
   MatDialogModule,
+  MatSnackBarModule,
 ];
 @NgModule({
   declarations: [],

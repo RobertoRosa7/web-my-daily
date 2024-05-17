@@ -42,7 +42,20 @@ export class AuthService {
     return this.authRepository.register(payload);
   }
 
+  /**
+   * INFO:
+   * isSessionUser - check if user have session active
+   * @returns boolean
+   */
   public isSessionUser(): boolean {
     return !!this.localStorageService.token$.getValue();
+  }
+
+  /**
+   * INFO:
+   * clearSession - clear session from user
+   */
+  public clearSession(): void {
+    this.localStorageService.clearAll();
   }
 }

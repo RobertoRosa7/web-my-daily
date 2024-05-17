@@ -6,44 +6,51 @@
   position: relative;
   color: var(--color-dark-default);
 
+  // show profile public in details
   .user-details {
     background-color: var(--white);
   }
 
+  // customize card profil public app-initial
   .card-explore .div-main button {
     background-color: rgba(0, 0, 0, 0.03);
     border-radius: 1rem;
     color: var(--color-dark-red-medium);
   }
 
+  // customize card profil public app-initial change color button private
   .card-explore .div-main .container-buttons button.btn-private {
-    color: var(--color-light-soft);
+    color: var(--black);
+    background-color: var(--color-yellow-light);
   }
 
+  // customize background toolbar theme profile
   mat-toolbar {
     background-color: transparent;
   }
+
   // mat card
   .mdc-card {
     background-color: var(--white);
-    border-left: 1px solid var(--primary);
   }
 
+  // customize color mat card subititle
   .mat-mdc-card-subtitle {
     color: var(--gray);
   }
 
-  // followers
+  // profile private and public container fo followers
   .container-followers p {
     color: var(--white);
   }
 
+  // profile private and public container fo followers button
   .container-followers button {
     background-color: var(--white);
     color: var(--primary) !important;
   }
 
-  // phto profile image
+  // customize container photo profile public and private
   .page .container-photo .img {
     background-color: var(--white);
   }
@@ -64,27 +71,40 @@
     }
   }
 
+  // customize mat card theme profile
   .mat-mdc-card-title {
     p {
       color: var(--color-light-soft);
     }
   }
-  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
-    border-bottom-color: var(--primary);
+
+  // remove filled background search input
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: rgba(255, 255, 255, 0.9);
   }
+
+  // input search remove underline coloer
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent;
+  }
+
+  // profile private and public container fo followers
   .page .container-pup .text {
     color: var(--text-middle-light);
   }
-  .page .container-pup {
-    .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
-      color: var(--dark);
-      caret-color: var(--dark);
-    }
-    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-      border-radius: 2rem;
-    }
+
+  // customize text inside input field search
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: var(--color-dark-red-medium);
+    caret-color: var(--color-dark-red-medium);
   }
 
+  // customize border radius input search
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    border-radius: 2rem;
+  }
+
+  // customize action dialog button color when ask
   ::ng-deep mat-dialog-actions {
     button {
       color: var(--primary);

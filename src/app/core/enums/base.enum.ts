@@ -14,10 +14,20 @@ export enum Paths {
   userFollow = '/ms-users/follows',
 
   getHappen = '/ms-daily/happen/user',
+  deleteHappen = '/ms-daily/happen',
 }
 
 export enum HappenPublicStatus {
   PUBLIC = 'PUBLIC',
   PRIVATE = 'PRIVATE',
   FOLLWERS = 'FOLLOWERS',
+}
+
+export enum FollowingStatus {
+  FOLLOWING = 'FOLLOWING',
+  REQUESTED = 'REQUESTED',
+  CANCEL_REQUEST = 'CANCEL_REQUEST',
+  REJECTED = 'REJECTED',
+  PRIVATE = 'PRIVATE',
+  PUBLIC = 'PUBLIC',
 }

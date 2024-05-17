@@ -3,13 +3,13 @@
     <mat-card>
       <mat-card-header>
         <div
+          class="avatar"
+          *ngIf="profile"
           matTooltipPosition="left"
           [matTooltip]="profile.name || ''"
           [queryParams]="{ name: profile.nameId }"
-          routerLink="/public"
-          mat-card-avatar
-          class="example-header-image">
-          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" class="w-[64px] rounded-full" />
+          routerLink="/public">
+          <img width="64" height="64" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
         </div>
         <mat-card-title>
           <div>
@@ -50,46 +50,12 @@
               </span>
             </p>
           </div>
-          <div class="container-buttons">
-            <ng-container *ngIf="userId$ | async as uuid">
-              <ng-container *ngIf="uuid !== profile.id">
-                <button
-                  matTooltipPosition="above"
-                  matTooltip="deixar de seguir"
-                  role="button"
-                  aria-describedby="deixar de seguir"
-                  *ngIf="profile.isFollowing"
-                  (click)="follow(profile, uuid)"
-                  mat-button>
-                  <span class="btn-follow">Deixar</span>
-                  <mat-icon>remove</mat-icon>
-                </button>
-                <button
-                  matTooltip="seguir"
-                  matTooltipPosition="above"
-                  aria-describedby="seguir"
-                  role="button"
-                  *ngIf="!profile.isFollowing && profile.profilePublic"
-                  (click)="follow(profile, uuid)"
-                  mat-button>
-                  <span class="btn-follow">Seguir</span>
-                  <mat-icon>add</mat-icon>
-                </button>
-                <button
-                  matTooltip="privado"
-                  matTooltipPosition="above"
-                  aria-describedby="privado"
-                  role="button"
-                  class="btn-private"
-                  *ngIf="!profile.isFollowing && !profile.profilePublic"
-                  (click)="requestFollow(profile)"
-                  mat-button>
-                  <span class="btn-follow">Privado</span>
-                  <mat-icon style="font-size: 1.1rem">lock</mat-icon>
-                </button>
-              </ng-container>
-            </ng-container>
-          </div>
+          <app-button-follower
+            style="display: flex; justify-content: center; align-items: center"
+            (onLogin)="requestLoginToFollow()"
+            (socketio)="onFollow($event)"
+            [profile]="profile"
+            [id]="userId$ | async"></app-button-follower>
         </mat-card-title>
       </mat-card-header>
     </mat-card>

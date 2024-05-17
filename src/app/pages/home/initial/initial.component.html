@@ -1,5 +1,5 @@
 <div [ngClass]="theme$ | async" class="">
-  <mat-tab-group class="w-full" selectedIndex="0" disablePagination="">
+  <mat-tab-group class="w-full" selectedIndex="1" disablePagination="">
     <mat-tab>
       <ng-template mat-tab-label>
         <div class="flex items-center">
@@ -7,13 +7,13 @@
           <mat-icon class="text-xl ml-1 mb-1">explore</mat-icon>
         </div>
       </ng-template>
-      <div class="bg-slate-200 h-[86.6vh] text-gray-800">
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-icon matPrefix>search</mat-icon>
-          <input matInput type="text" placeholder="Pesquisar" />
-        </mat-form-field>
-
-        <!-- <app-initial-explore></app-initial-explore> -->
+      <div class="bg-slate-200 h-[86.6vh] text-gray-800" class="container-pup">
+        <app-input-search></app-input-search>
+        <p>Novos feelingers</p>
+        <app-initial-explore
+          *ngFor="let profile of userPageble$ | async"
+          (socketio)="onSocketio($event)"
+          [profile]="profile"></app-initial-explore>
       </div>
     </mat-tab>
 

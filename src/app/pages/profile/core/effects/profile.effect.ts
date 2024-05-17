@@ -55,8 +55,8 @@ export class ProfileEffect {
               return actionProfileError({ error: response });
             }
 
-            const socketio = io(environment.ws + '/follows');
-            socketio.emit(payload.ev, payload.followId, payload.userId);
+            const socketio = io(environment.ws + '/profile');
+            socketio.emit(payload.ev, payload.followingId, payload.userId);
             return actionUserFollowSuccess(payload);
           })
         )

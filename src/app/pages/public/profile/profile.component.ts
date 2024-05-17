@@ -5,7 +5,7 @@ import { selectorTheme } from '../../profile/core/selectors/color.selector';
 import { actionColor } from '../../profile/core/actions/color.action';
 import { stringType } from '../../profile/core/types/color.type';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
+import { Observable, Observer, delay, filter, map, mergeMap, tap } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { actionProfilePublic, actionUserFollow } from '../../profile/core/actions/profile.action';
 import { selectorPageablePub, selectorUserPub } from '../../profile/core/selectors/profile.selector';
@@ -15,6 +15,8 @@ import { Socket, io } from 'socket.io-client';
 import { environment } from '../../../../environments/environment';
 import { JsonMapProperties } from '../../../core/decorators/json.decorator';
 import { actionUserFollowers } from '../../profile/core/actions/user.action';
+import { pageableProfilePublicMock } from '../../../mock/profile.mock';
+import { User } from '../../profile/core/interfaces/profile.interface';
 
 @Component({
   selector: 'app-profile-component',
@@ -23,6 +25,7 @@ import { actionUserFollowers } from '../../profile/core/actions/user.action';
 })
 export class ProfileComponent extends Public implements OnInit {
   public theme$ = this.store.select(selectorTheme);
+  public mock = pageableProfilePublicMock as Array<User>;
   public userId$: Observable<string | undefined> = this.store.select(selectorId);
   public userPageble$ = this.store.select(selectorPageablePub).pipe(map((res) => res?.content));
   public userProfile$ = this.store.select(selectorUserPub);

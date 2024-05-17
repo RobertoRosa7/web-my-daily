@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/json.decorator';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
 import { PageableUser, SingletonOrPageable } from '../../../../interface/pageable.interface';
+import { FollowingStatus } from '../../../../core/enums/base.enum';
 
 export type PageableOrUserProfile = PageableUser | UserProfile;
 export type ProfileResponse = HttpResponseDefault<PageableOrUserProfile>;
@@ -51,8 +52,8 @@ export class User {
 
   @JsonProperty('profile_public')
   public profilePublic: boolean | undefined = undefined;
-  @JsonProperty('is_following')
-  public isFollowing: boolean | undefined = undefined;
+  @JsonProperty('following_status')
+  public followingStatus: FollowingStatus | undefined = undefined;
   @JsonProperty('name_id')
   public nameId: string | undefined = undefined;
   @JsonProperty('auth_id')

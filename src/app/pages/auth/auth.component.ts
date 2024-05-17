@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as selectAuth from './core/selectors/auth.selector';
 import { Observable, Subscription, delay, filter, from, map, mergeMap } from 'rxjs';
@@ -8,6 +8,8 @@ import { HttpResponseDefault } from '../../interface/http-response.interface';
 import { actionClear, actionRegiser, actionLogin, actionGoto, actionLoading } from './core/actions/auth.action';
 import { authType } from './core/types/auth.type';
 import { Router } from '@angular/router';
+import { AuthService } from './core/services/auth.services';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
@@ -26,8 +28,15 @@ export class AuthComponent implements OnDestroy {
   // inject action subject dependency only super class?
   private actionSubject = inject(ActionsSubject);
   private router = inject(Router);
+  private authService = inject(AuthService);
+  private platform = inject(PLATFORM_ID);
 
   constructor(protected readonly store: Store<IAuthState>) {
+    // clear previous session
+    if (isPlatformBrowser(this.platform)) {
+      this.authService.clearSession();
+    }
+
     // listening action loading happens
     this.isLoading$ = this.actionSubject.pipe(
       // layer filer only action loading

@@ -45,6 +45,8 @@
   --color-dark-blue-intensive: #03002e;
   --color-dark-blue-darkness: rgb(2, 0, 36);
 
+  --color-yellow-light: #fd7d1457;
+
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -77,7 +79,7 @@ html,
 body {
   height: 100%;
   overflow-x: hidden;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 body {
   margin: 0;
@@ -133,6 +135,26 @@ body {
   }
 }
 
+.loading {
+  position: relative;
+
+  * {
+    visibility: hidden;
+  }
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 70%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  animation: lines 2s linear infinite;
+}
+
 ::-webkit-scrollbar {
   width: 0.6rem;
   height: 1rem;
@@ -140,6 +162,16 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: var(--text-light);
   border-radius: 2rem;
+  padding-top: 1rem;
+}
+
+@keyframes lines {
+  from {
+    width: 50%;
+  }
+  to {
+    width: 100%;
+  }
 }

@@ -17,7 +17,9 @@
 
     <div class="container-feelings">
       @for (happen of profileHappens$ | async; track $index) {
-      <app-feelings [happen]="happen"></app-feelings>
+      <app-feelings [index]="$index" [happen]="happen"></app-feelings>
+      } @empty {
+      <li>There are no items.</li>
       }
     </div>
   </div>

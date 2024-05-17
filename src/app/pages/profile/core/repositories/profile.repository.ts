@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Paths } from '../../../../core/enums/base.enum';
 import { Url } from '../../../../core/decorators/url.decorator';
 import { Observable } from 'rxjs';
-import { ProfileHappenResponse } from '../interfaces/profile.happen.interface';
+import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happen.interface';
 import { ProfileResponse } from '../interfaces/profile.interface';
 import { FollowRequest } from '../../../../interface/follow.interface';
 import { HttpResponseDefault } from '../../../../interface/http-response.interface';
@@ -61,6 +61,15 @@ export class ProfileRepository {
    * @returns Observable<HttpResponseDefault<string>>
    */
   public following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
-    return this.http.put<HttpResponseDefault<string>>(`${this.urlUserFollowing}/${follower.followId}`, follower);
+    return this.http.put<HttpResponseDefault<string>>(`${this.urlUserFollowing}`, follower);
+  }
+
+  /**
+   * INFO:
+   * deleteHappen - delete one happen
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public deleteHappen(happen: ProfileHappen): Observable<HttpResponseDefault<void>> {
+    return this.http.delete<HttpResponseDefault<void>>(`${this.urlUserFollowing}/${happen.id}`);
   }
 }

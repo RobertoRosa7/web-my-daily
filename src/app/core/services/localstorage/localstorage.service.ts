@@ -37,6 +37,10 @@ export class LocalStorageService {
     localStorage.removeItem(key);
   }
 
+  public clearAll() {
+    localStorage.clear();
+  }
+
   private serealizeKey<T>({ data }: IData<T>) {
     return JSON.stringify(data);
   }

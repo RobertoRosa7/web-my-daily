@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ProfileResponse, ProfileSingleResponse } from '../interfaces/profile.interface';
 import { ProfileRepository } from '../repositories/profile.repository';
-import { ProfileHappenResponse } from '../interfaces/profile.happen.interface';
+import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happen.interface';
 import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
 import { PageableUser } from '../../../../interface/pageable.interface';
 import { FollowRequest } from '../../../../interface/follow.interface';
@@ -32,6 +32,15 @@ export class ProfileService {
     return this.profileRespository
       .getHappens()
       .pipe(map((data) => JsonMapProperties.deserialize(ProfileHappenResponse, data)));
+  }
+
+  /**
+   * INFO:
+   * deleteHappen - delete one happen
+   * @returns Observable<HttpResponseDefault<void>>
+   */
+  public deleteHappen(happen: ProfileHappen): Observable<HttpResponseDefault<void>> {
+    return this.profileRespository.deleteHappen(happen);
   }
 
   /**

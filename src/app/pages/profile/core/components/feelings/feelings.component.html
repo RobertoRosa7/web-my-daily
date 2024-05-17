@@ -5,9 +5,22 @@
         <span matTooltipPosition="left" matTooltip="Apelido" role="none" aria-describedby="name">{{
           (userName$ | async)?.name
         }}</span>
-        <button matTooltipPosition="above" matTooltip="Menu" mat-icon-button role="button" aria-describedby="menu">
+        <button
+          matTooltip="Menu"
+          [matMenuTriggerFor]="menus"
+          matTooltipPosition="right"
+          matTooltip="Menu"
+          mat-icon-button
+          role="button"
+          aria-describedby="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
+        <mat-menu #menus="matMenu" overlapTrigger="true">
+          <button (click)="remove(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Remover">
+            <mat-icon>remove</mat-icon>
+            <span>Excluir</span>
+          </button>
+        </mat-menu>
       </mat-card-title>
       <mat-card-subtitle>
         <span
