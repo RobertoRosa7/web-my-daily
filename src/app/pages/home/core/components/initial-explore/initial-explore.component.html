@@ -8,7 +8,7 @@
           matTooltipPosition="left"
           [matTooltip]="profile.name || ''"
           [queryParams]="{ name: profile.nameId }"
-          routerLink="/public">
+          routerLink="/public/details">
           <img width="64" height="64" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
         </div>
         <mat-card-title>
@@ -22,7 +22,7 @@
                 [matTooltip]="profile.nameId || ''"
                 style="cursor: pointer"
                 [queryParams]="{ name: profile.nameId }"
-                routerLink="/public"
+                routerLink="/public/details"
                 >{{ profile.nameId }}
               </span>
               <span class="public">

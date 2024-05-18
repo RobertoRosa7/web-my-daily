@@ -4,9 +4,12 @@ import { HttpResponseDefault } from '../../../../interface/http-response.interfa
 
 // declare type to simply
 type auth = HttpResponseDefault<IAuthState>;
+type SelectorMessage = MemoizedSelector<object, auth>;
 
 // recovery state from store
 const state: MemoizedSelector<object, auth> = createFeatureSelector<auth>('auth');
 
+const callbackMessage = (states: auth) => states;
+
 // create selector
-export const selectorMessage: MemoizedSelector<object, auth> = createSelector(state, (states: auth) => states);
+export const selectorMessage: SelectorMessage = createSelector(state, callbackMessage);

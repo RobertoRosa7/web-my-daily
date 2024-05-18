@@ -1,0 +1,33 @@
+@import '../../../../themes//mixins';
+
+.public-details {
+  .page {
+    @include size-page;
+
+    // container app-photo and app-followers
+    .box {
+      display: flex;
+      min-height: 20rem;
+      align-items: center;
+      gap: 1rem;
+
+      * {
+        flex: 1;
+      }
+
+      app-input-photo {
+        flex: 0.2;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .public-details {
+    .page {
+      .box {
+        min-height: 12rem;
+        margin-bottom: 3rem;
+      }
+    }
+  }
+}

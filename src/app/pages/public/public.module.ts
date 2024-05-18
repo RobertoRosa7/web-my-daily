@@ -20,9 +20,12 @@ import { DialogAlertComponent } from '../../core/components/dialog-alert/dialog-
 import { InputSearchComponent } from '../../core/components/input-search/input-search.component';
 import { InputPhotoComponent } from '../../core/components/input-photo/input-photo.component';
 import { ButtonBackComponent } from '../../core/components/button-back/button-back.component';
+import { DetailsComponentProfilePublic } from './details/details.component';
+import { Page404Component } from './404/page-404.component';
+import { ToolbarComponent } from '../../core/components/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [Public, ProfileComponent],
+  declarations: [Public, ProfileComponent, DetailsComponentProfilePublic],
   imports: [
     CommonModule,
     SharedModule,
@@ -36,13 +39,13 @@ import { ButtonBackComponent } from '../../core/components/button-back/button-ba
     InputSearchComponent,
     InputPhotoComponent,
     ButtonBackComponent,
+    Page404Component,
+    ToolbarComponent
   ],
 
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),
     provideState({ name: 'user', reducer: userReducer }),
-    provideEffects([ProfileEffect]),
-    ProfileService,
-  ],
+    provideEffects([ProfileEffect]), ProfileService],
 })
 export class PublicModule {}

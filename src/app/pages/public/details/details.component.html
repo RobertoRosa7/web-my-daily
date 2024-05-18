@@ -1,0 +1,23 @@
+<main class="public-details" *ngIf="userProfile$ | async; else notFound" [ngClass]="theme$ | async">
+  <div class="page">
+    <app-cover></app-cover>
+
+    <!-- <app-button-back></app-button-back> -->
+
+    <div class="box">
+      <app-input-photo></app-input-photo>
+      <app-follwers (socketio)="onSocketio($event)"></app-follwers>
+    </div>
+
+    <app-user-details></app-user-details>
+  </div>
+</main>
+
+<ng-template #notFound>
+  <!-- <app-404 [title]="'404'" [message]="'Pagina não encontrada!'"></app-404> -->
+
+  <div [ngClass]="theme$ | async" style="height: 100%">
+    <app-cover></app-cover>
+    <app-follwers></app-follwers>
+  </div>
+</ng-template>

@@ -12,10 +12,12 @@ import {
 import { PageableUser } from '../../../../interface/pageable.interface';
 import { actionUserFollowers } from '../actions/user.action';
 import { FollowRequest, ListeningFollowResponse } from '../../../../interface/follow.interface';
+import { actionCoreReset } from '../../../../core/actions/reset.action';
 
 type States = Partial<ProfileResponse>;
 const states: States = {};
 
+const callbackResetStore = (_: States) => states;
 const callbackOnProfileSuccess = (_: States, { data, message, error }: ProfileResponse) => {
   return {
     ..._,
@@ -68,5 +70,6 @@ export const profileReducer = createReducer(
   on(actionProfileSuccess, callbackOnProfileSuccess),
   on(actionUserFollowSuccess, callbackOnSuccess),
   on(actionSocketUserMetrics, callbackOnProfileMetrics),
-  on(actionUserFollowers, callbackOnUserFollowers)
+  on(actionUserFollowers, callbackOnUserFollowers),
+  on(actionCoreReset, callbackResetStore)
 );

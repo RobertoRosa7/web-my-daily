@@ -13,7 +13,6 @@
 }
 .input-photo {
   .image {
-    background: rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
     flex: 1;
   }
@@ -25,6 +24,7 @@
     height: 10rem;
   }
 }
+
 @media screen and (max-width: 768px) {
   .input-photo .image {
     background: transparent;

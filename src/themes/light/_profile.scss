@@ -6,9 +6,25 @@
   position: relative;
   color: var(--color-dark-default);
 
-  // show profile public in details
+  // show profile public in details card profile user
   .user-details {
-    background-color: var(--white);
+    background: var(--white);
+    box-shadow: 0.2rem 0.3rem 0.3rem rgba(0, 0, 0, 0.15);
+
+    .body {
+      background-color: transparent;
+    }
+    .infos,
+    .scores {
+      background-color: transparent;
+    }
+  }
+
+  // card feeling theme profile
+  .card-feeling {
+    .mat-mdc-card-content {
+      background-color: var(--color-white-light);
+    }
   }
 
   // customize card profil public app-initial
@@ -22,6 +38,26 @@
   .card-explore .div-main .container-buttons button.btn-private {
     color: var(--black);
     background-color: var(--color-yellow-light);
+  }
+
+  // customize card profil public app-initial change color button request
+  .card-explore .div-main .container-buttons button.btn-request {
+    color: var(--black);
+    background-color: var(--color-green-light);
+  }
+
+  // customize buttom color default theme profile
+  .container-buttons button {
+    background-color: var(--white);
+  }
+
+  // customize button private public profile
+  .container-buttons button.btn-private {
+    background-color: var(--yellow);
+  }
+  // customize button private public request
+  .container-buttons button.btn-request {
+    background-color: var(--success);
   }
 
   // customize background toolbar theme profile
@@ -108,6 +144,51 @@
   ::ng-deep mat-dialog-actions {
     button {
       color: var(--primary);
+    }
+  }
+
+  // search all profile public
+  .container-pup {
+    background: rgb(255, 255, 255, 0.09);
+    border-top: 1px solid rgb(255, 255, 255, 0.2);
+    border-left: 1px solid rgb(255, 255, 255, 0.2);
+    border-right: 1px solid rgb(255, 255, 255, 0.2);
+  }
+
+  // spinner box centralize content
+  .spinner {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // customize spinner to theme profile
+  .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: var(--primary) !important;
+  }
+
+  // input-photo - customize
+  .input-photo {
+    .image {
+      background: rgb(255, 255, 255, 0.09);
+      .img {
+        background: var(--white);
+      }
+    }
+  }
+
+  // app-followers
+  .follow {
+    .follwing {
+      border-left: 1px solid var(--yellow);
+      border-right: 1px solid var(--yellow);
+    }
+    p {
+      background: rgb(255, 255, 255, 0.05);
+      color: white;
+      font-weight: 100;
     }
   }
 }

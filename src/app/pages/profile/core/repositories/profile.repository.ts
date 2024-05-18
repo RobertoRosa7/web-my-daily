@@ -24,6 +24,9 @@ export class ProfileRepository {
   @Url(Paths.userFollow)
   private urlUserFollowing!: string;
 
+  @Url(Paths.deleteHappen)
+  private urlDeleteHappen!: string;
+
   constructor(private readonly http: HttpClient) {}
 
   /**
@@ -70,6 +73,6 @@ export class ProfileRepository {
    * @returns Observable<HttpResponseDefault<string>>
    */
   public deleteHappen(happen: ProfileHappen): Observable<HttpResponseDefault<void>> {
-    return this.http.delete<HttpResponseDefault<void>>(`${this.urlUserFollowing}/${happen.id}`);
+    return this.http.delete<HttpResponseDefault<void>>(`${this.urlDeleteHappen}/${happen.id}`);
   }
 }

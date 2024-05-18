@@ -3,24 +3,25 @@ import { profileType } from '../types/profile.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happen.interface';
 
-export const actionProfileHappensRequest = createAction(profileType.USER_PROFILE_HAPPENS);
-export const actionProfileHappensPost = createAction(
-  profileType.USER_PROFILE_HAPPENS_POST,
-  (payload: { index: number; data: ProfileHappen }) => payload
-);
-export const actionProfileHappensDelete = createAction(
-  profileType.USER_PROFILE_HAPPENS_DELETE,
-  (payload: { index: number; data: ProfileHappen }) => payload
-);
-export const actionProfileHappensUpdate = createAction(
-  profileType.USER_PROFILE_HAPPENS_UPDATE,
-  (payload: ProfileHappen) => payload
-);
-export const actionProfileHappensSuccess = createAction(
-  profileType.USER_PROFILE_HAPPEN_SUCESS,
-  (payload: ProfileHappenResponse) => payload
-);
-export const actionProfileHappensError = createAction(
-  profileType.USER_PROFILE_HAPPEN_ERROR,
-  (payload: { error: HttpErrorResponse }) => payload
-);
+const profileHappens = profileType.USER_PROFILE_HAPPENS;
+const deleteRemote = profileType.USER_PROFILE_HAPPENS_DELETE_REMOTE;
+const deleteLocal = profileType.USER_PROFILE_HAPPENS_DELETE_LOCAL;
+const postLocal = profileType.USER_PROFILE_HAPPENS_POST_LOCAL;
+const update = profileType.USER_PROFILE_HAPPENS_UPDATE;
+const success = profileType.USER_PROFILE_HAPPEN_SUCESS;
+const error = profileType.USER_PROFILE_HAPPEN_ERROR;
+
+const callbackHappenPost = (payload: { index: number; data: ProfileHappen }) => payload;
+const callbackHappenDelete = (payload: { index: number; data: ProfileHappen }) => payload;
+const callbackHappenUpdate = (payload: ProfileHappen) => payload;
+const callbackHappenSuccess = (payload: ProfileHappenResponse) => payload;
+const callbackHappenError = (payload: { failed: HttpErrorResponse }) => payload;
+
+export const actionProfileHappensRequest = createAction(profileHappens);
+
+export const actionProfileHappenDeleteRemote = createAction(deleteRemote, callbackHappenUpdate);
+export const actionProfileHappensPost = createAction(postLocal, callbackHappenPost);
+export const actionProfileHappensDelete = createAction(deleteLocal, callbackHappenDelete);
+export const actionProfileHappensUpdate = createAction(update, callbackHappenUpdate);
+export const actionProfileHappensSuccess = createAction(success, callbackHappenSuccess);
+export const actionProfileHappensError = createAction(error, callbackHappenError);

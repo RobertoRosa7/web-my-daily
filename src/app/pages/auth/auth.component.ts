@@ -10,6 +10,7 @@ import { authType } from './core/types/auth.type';
 import { Router } from '@angular/router';
 import { AuthService } from './core/services/auth.services';
 import { isPlatformBrowser } from '@angular/common';
+import { actionCoreReset } from '../../core/actions/reset.action';
 
 @Component({
   selector: 'app-auth',
@@ -34,7 +35,10 @@ export class AuthComponent implements OnDestroy {
   constructor(protected readonly store: Store<IAuthState>) {
     // clear previous session
     if (isPlatformBrowser(this.platform)) {
+      // clean localstorage
       this.authService.clearSession();
+      // clean redux store
+      this.store.dispatch(actionCoreReset());
     }
 
     // listening action loading happens

@@ -7,50 +7,55 @@
   }
 }
 
-.follow {
+.follow,
+.follow div {
   display: flex;
-  background-color: inherit;
-  min-height: 5rem;
   justify-content: center;
   align-items: center;
+}
+
+// container where is all button metrics
+.follow {
+  min-height: 5rem;
+  margin-bottom: 1.5rem;
+
   // custom style for all divs
   div {
     flex: 1;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+    // reset values default cards with metrics - number
+    p {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
     // firt paragraph bolder
     p:first-child {
       font-weight: bold;
       font-size: 1.3rem;
+      border-radius: 1rem 1rem 0 0;
+    }
+    p:last-child {
+      border-radius: 0 0 1rem 1rem;
     }
   }
   div:nth-child(1) {
     position: relative;
   }
-  div:nth-child(1)::before {
-    content: '';
-    width: 1px;
-    height: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: var(--primary);
-    transform: translateY(50%);
-  }
-  div:nth-child(3) {
+
+  .follwing {
     position: relative;
-  }
-  div:nth-child(3)::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 50%;
-    background-color: var(--primary);
-    transform: translateY(50%);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 48px;
   }
 }
 @media screen and (max-width: 768px) {
@@ -65,6 +70,14 @@
     justify-content: center;
     align-items: center;
     margin-left: -1.5rem;
+    margin-bottom: 0.5rem;
+    
+    .follwing {
+      margin-left: 0.1rem;
+      margin-right: 0.1rem;
+      padding-left: 0.1rem;
+      padding-right: 0.1rem;
+    }
     div {
       display: flex;
       padding: 0.5rem;

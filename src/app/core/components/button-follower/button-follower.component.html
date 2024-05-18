@@ -31,11 +31,12 @@
             matTooltip="Aguardando confirmação"
             matTooltipPosition="above"
             aria-describedby="solicitado"
+            class="btn-request"
             role="button"
             (click)="follow(profile, id, followingStatus.PRIVATE)"
             mat-button>
             <span class="btn-follow">Solicitado</span>
-            <mat-icon iconPositionEndstyle="font-size: 1.1rem">check</mat-icon>
+            <mat-icon iconPositionEnd style="font-size: 1.1rem">check</mat-icon>
           </button>
         </ng-container>
         <ng-container *ngIf="profile.profilePublic">

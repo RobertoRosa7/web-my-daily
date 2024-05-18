@@ -1,10 +1,15 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happen.interface';
+import { HttpErrorResponse } from '@angular/common/http';
 
-const profileHappens: MemoizedSelector<object, ProfileHappenResponse> =
-  createFeatureSelector<ProfileHappenResponse>('profileHappens');
+type SelectorHappens = MemoizedSelector<object, ProfileHappenResponse>;
+type SelectorProfileHappen = MemoizedSelector<object, Array<ProfileHappen> | undefined>;
+type SelectorHappenError = MemoizedSelector<object, HttpErrorResponse | null>;
 
-export const selectorHappens: MemoizedSelector<object, Array<ProfileHappen> | undefined> = createSelector(
-  profileHappens,
-  ({ data }: ProfileHappenResponse) => data
-);
+const profileHappens: SelectorHappens = createFeatureSelector<ProfileHappenResponse>('profileHappens');
+
+const callbackProfileHappen = ({ data }: ProfileHappenResponse) => data;
+const callbackHappenError = ({ error }: ProfileHappenResponse) => (error instanceof HttpErrorResponse ? error : null);
+
+export const selectHappenError: SelectorHappenError = createSelector(profileHappens, callbackHappenError);
+export const selectorHappens: SelectorProfileHappen = createSelector(profileHappens, callbackProfileHappen);
