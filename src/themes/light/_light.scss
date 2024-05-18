@@ -1,13 +1,17 @@
 @import '../mixins';
 
+// theme light
 .light-mode {
   // button menu
+  background: var(--color-white-brightness);
+
   .btn-menu {
     @include btn-icon-radio;
-    background-color: var(--white);
+    background-color: var(--color-white-light);
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
   }
 
+  // custom theme of eatch page
   @import './profile';
   @import './settings';
   @import './home';

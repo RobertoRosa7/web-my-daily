@@ -51,6 +51,8 @@ export class FeelingsComponent {
     private readonly snackbar: MatSnackBar
   ) {}
 
+  public edit(happen: ProfileHappen) {}
+  public details(happen: ProfileHappen) {}
   /**
    * INFO:
    * remove - dispatch pipe to remove card
@@ -130,7 +132,7 @@ export class FeelingsComponent {
   private openSnackerbar(happen: ProfileHappen) {
     // open snackbar to show option to cancel before delete on remote serve
     return this.snackbar
-      .open(happen.whatHappen, 'cancelar', { duration: 3000 })
+      .open(`${happen.whatHappen.substring(0, 20)}...`, 'cancelar', { duration: 3000 })
       .afterDismissed()
       .pipe(concatMap(({ dismissedByAction }) => this.removeOrCancel(dismissedByAction, happen)));
   }

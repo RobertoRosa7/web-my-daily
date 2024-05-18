@@ -9,13 +9,16 @@
         <p aria-label="following">{{ profile.follows.totalFollowing | follows }}</p>
         <p aria-label="following">Seguindo</p>
       </div>
-      <div role="div" aria-describedby="posts" matTooltipPosition="above" matTooltip="Posts" class="likes">
+      <div role="div" aria-describedby="posts" matTooltipPosition="above" matTooltip="Posts" class="posts">
         <p aria-label="posts">{{ profile.profile.totalRegisters | follows }}</p>
         <p aria-label="posts">Posts</p>
       </div>
     </div>
-    <app-button-follower (onLogin)="requestLoginToFollow()"
-    (socketio)="onFollow($event)" [profile]="profile" [id]="userId$ | async"></app-button-follower>
+    <app-button-follower
+      (onLogin)="requestLoginToFollow()"
+      (socketio)="onFollow($event)"
+      [profile]="profile"
+      [id]="userId$ | async"></app-button-follower>
   </main>
 </ng-container>
 
@@ -23,15 +26,15 @@
   <div class="follow">
     <div class="followers loading-waves">
       <p>0</p>
-      <p>seguidores</p>
+      <p>Seguidores</p>
     </div>
     <div class="follwing loading-waves">
       <p>0</p>
-      <p>seguindo</p>
+      <p>Seguindo</p>
     </div>
-    <div class="likes loading-waves">
+    <div class="posts loading-waves">
       <p>0</p>
-      <p>posts</p>
+      <p>Posts</p>
     </div>
   </div>
 </ng-template>

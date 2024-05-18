@@ -25,6 +25,16 @@
     .mat-mdc-card-content {
       background-color: var(--color-white-light);
     }
+
+    // button score negative on card feeling
+    .container-scores div button.btn-score-neg {
+      color: var(--primary);
+    }
+
+    //
+    .container-scores div button.btn-score-pos {
+      color: var(--green);
+    }
   }
 
   // customize card profil public app-initial
@@ -181,10 +191,17 @@
 
   // app-followers
   .follow {
+    background: transparent;
+
+    div {
+      background: transparent;
+    }
+
     .follwing {
       border-left: 1px solid var(--yellow);
       border-right: 1px solid var(--yellow);
     }
+
     p {
       background: rgb(255, 255, 255, 0.05);
       color: white;

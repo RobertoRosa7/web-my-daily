@@ -16,6 +16,14 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menus="matMenu" overlapTrigger="true">
+          <button (click)="details(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Detalhes">
+            <mat-icon>info</mat-icon>
+            <span>Detalhes</span>
+          </button>
+          <button (click)="edit(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
           <button (click)="remove(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Remover">
             <mat-icon>remove</mat-icon>
             <span>Excluir</span>
@@ -70,25 +78,58 @@
     </mat-card-content>
 
     <mat-card-actions>
-      <div>
-        <small>{{ happen.likes.likedCount | follows }}</small>
-        <button matTooltipPosition="above" matTooltip="Cutir" mat-icon-button role="button" aria-describedby="favorite">
-          <ng-container *ngIf="userName$ | async as data">
-            <mat-icon *ngIf="data.id !== happen.userId" aria-label="favorite">favorite_outline</mat-icon>
-            <mat-icon *ngIf="data.id === happen.userId" aria-label="favorite">favorite</mat-icon>
-          </ng-container>
-        </button>
+      <div class="container-scores">
+        <div>
+          <button
+            class="btn-score-pos"
+            matTooltipPosition="above"
+            matTooltip="Score Nositivo"
+            mat-icon-button
+            role="button"
+            aria-describedby="arrow_upward">
+            <mat-icon aria-label="arrow_upward">arrow_upward</mat-icon>
+          </button>
+          <small>{{ happen.likes.likedCount | follows }}</small>
+        </div>
+        <div>
+          <button
+            class="btn-score-neg"
+            matTooltipPosition="above"
+            matTooltip="Score Negativo"
+            mat-icon-button
+            role="button"
+            aria-describedby="arrow_downward">
+            <mat-icon aria-label="arrow_downward">arrow_downward</mat-icon>
+          </button>
+          <small>{{ happen.likes.likedCount | follows }}</small>
+        </div>
       </div>
-      <div>
-        <small>{{ happen.likes.dislikedCount | follows }}</small>
-        <button
-          matTooltipPosition="above"
-          matTooltip="Não curtir"
-          mat-icon-button
-          role="button"
-          aria-describedby="not-favorite">
-          <span aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </span>
-        </button>
+      <div class="container-likes">
+        <div>
+          <small>{{ happen.likes.likedCount | follows }}</small>
+          <button
+            matTooltipPosition="above"
+            matTooltip="Cutir"
+            mat-icon-button
+            role="button"
+            aria-describedby="favorite">
+            <ng-container *ngIf="userName$ | async as data">
+              <mat-icon *ngIf="data.id !== happen.userId" aria-label="favorite">favorite_outline</mat-icon>
+              <mat-icon *ngIf="data.id === happen.userId" aria-label="favorite">favorite</mat-icon>
+            </ng-container>
+          </button>
+        </div>
+        <div>
+          <small>{{ happen.likes.dislikedCount | follows }}</small>
+          <button
+            matTooltipPosition="above"
+            matTooltip="Não curtir"
+            mat-icon-button
+            role="button"
+            aria-describedby="not-favorite">
+            <span aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </span>
+          </button>
+        </div>
       </div>
     </mat-card-actions>
   </mat-card>
