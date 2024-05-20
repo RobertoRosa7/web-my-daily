@@ -6,10 +6,10 @@
 
     <div class="box">
       <app-input-photo></app-input-photo>
-      <app-follwers (socketio)="onSocketio($event)"></app-follwers>
+      <app-follwers [profile]="userProfile$ | async" (socketio)="onSocketio($event)"></app-follwers>
     </div>
 
-    <app-user-details></app-user-details>
+    <app-user-details [profile]="userProfile$ | async"></app-user-details>
   </div>
 </main>
 
@@ -18,6 +18,6 @@
 
   <div [ngClass]="theme$ | async" style="height: 100%">
     <app-cover></app-cover>
-    <app-follwers></app-follwers>
+    <!-- <app-follwers></app-follwers> -->
   </div>
 </ng-template>

@@ -1,27 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectorTheme } from '../profile/core/selectors/color.selector';
-import { selectorPageablePub } from '../profile/core/selectors/profile.selector';
-import { map } from 'rxjs';
+import { selectorTheme } from '../../core/selectors/color.selector';
 import { actionColor } from '../profile/core/actions/color.action';
-import { stringType } from '../profile/core/types/color.type';
-import { actionProfilePublic } from '../profile/core/actions/profile.action';
+import { stringType } from '../../core/types/color.type';
+import { selectorId } from '../profile/core/selectors/user.selector';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   template: `
-    <app-toolbar></app-toolbar>
+    <app-toolbar [id]="userId$ | async"></app-toolbar>
     <router-outlet></router-outlet>
   `,
 })
 export class HomeComponent implements OnInit {
-  public theme$ = this.store.select(selectorTheme);
-  public userPageble$ = this.store.select(selectorPageablePub).pipe(map((res) => res?.content));
+  public readonly theme$ = this.store.select(selectorTheme);
+  public userId$: Observable<string | undefined> = this.store.select(selectorId);
 
   constructor(protected readonly store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(actionProfilePublic({ name: null }));
     this.store.dispatch(
       actionColor({
         theme: 'home',

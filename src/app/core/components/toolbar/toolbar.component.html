@@ -1,9 +1,16 @@
 <main [ngClass]="theme$ | async">
   <mat-toolbar>
     <mat-toolbar-row class="toolbar-row">
-      <app-button-back></app-button-back>
+      <div class="logo">
+        <span>Diário</span>
+      </div>
+      <app-input-search></app-input-search>
+
       <span class="spacer"></span>
-      <app-button-menu></app-button-menu>
-    </mat-toolbar-row
-  ></mat-toolbar>
+      <app-button-menu *ngIf="id"></app-button-menu>
+      <button routerLink="/auth/login" role="button" aria-describedby="signin" mat-raised-button *ngIf="!id">
+        entrar
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </main>

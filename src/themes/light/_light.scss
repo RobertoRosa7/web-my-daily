@@ -3,8 +3,6 @@
 // theme light
 .light-mode {
   // button menu
-  background: var(--color-white-brightness);
-
   .btn-menu {
     @include btn-icon-radio;
     background-color: var(--color-white-light);
@@ -15,4 +13,5 @@
   @import './profile';
   @import './settings';
   @import './home';
+  @import './public';
 }

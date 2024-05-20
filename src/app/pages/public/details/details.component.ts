@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FollowRequest } from '../../../interface/follow.interface';
 import { Profile } from '../../profile/profile';
 import { Store } from '@ngrx/store';
-import { selectorUserPub } from '../../profile/core/selectors/profile.selector';
 import { ActivatedRoute } from '@angular/router';
-import { actionProfilePublic } from '../../profile/core/actions/profile.action';
+import { actionProfilePublic, actionUserFollow } from '../../profile/core/actions/profile.action';
+import { selectorUserPub } from '../core/selectors/public-profile.selector';
+import { stringType } from '../../../core/types/color.type';
+import { actionColor } from '../../profile/core/actions/color.action';
 
 @Component({
   selector: 'app-details-public-profile',
@@ -22,9 +24,15 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
     this.activeRoute.queryParamMap.subscribe((params) =>
       this.store.dispatch(actionProfilePublic({ name: params.get('name') }))
     );
+    this.store.dispatch(
+      actionColor({
+        theme: 'public',
+        background: stringType.publicProfileCover,
+      })
+    );
   }
 
   public onSocketio(event: FollowRequest) {
-    // this.store.dispatch(actionUserFollow(event));
+    this.store.dispatch(actionUserFollow(event));
   }
 }

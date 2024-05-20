@@ -5,17 +5,12 @@ import { RouterModule } from '@angular/router';
 import { CoverComponent } from '../../core/components/cover/cover.component';
 import { routes } from './public.route';
 import { Public } from './public';
-import { FollowersComponent } from '../profile/core/components/followers/followers.component';
-import { UserDetailsComponent } from '../profile/core/components/user-details/user-details.component';
+import { UserDetailsComponent } from '../../core/components/user-details/user-details.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileService } from '../profile/core/services/profile.service';
-import { profileReducer } from '../profile/core/reducers/profile.reducer';
 import { provideState } from '@ngrx/store';
-import { ProfileEffect } from '../profile/core/effects/profile.effect';
 import { provideEffects } from '@ngrx/effects';
-import { InitialExploreComponent } from '../home/core/components/initial-explore/initial-explore.component';
-import { userReducer } from '../profile/core/reducers/user.reducer';
+import { InitialExploreComponent } from '../../core/components/initial-explore/initial-explore.component';
 import { DialogAlertComponent } from '../../core/components/dialog-alert/dialog-alert.component';
 import { InputSearchComponent } from '../../core/components/input-search/input-search.component';
 import { InputPhotoComponent } from '../../core/components/input-photo/input-photo.component';
@@ -23,6 +18,11 @@ import { ButtonBackComponent } from '../../core/components/button-back/button-ba
 import { DetailsComponentProfilePublic } from './details/details.component';
 import { Page404Component } from './404/page-404.component';
 import { ToolbarComponent } from '../../core/components/toolbar/toolbar.component';
+import { publicProfileReducer } from './core/reducers/profile.reducer';
+import { PublicProfileEffect } from './core/effects/public-profile.effect';
+import { PublicProfileService } from './core/services/public-profile.service';
+import { FollowersComponent } from '../../core/components/followers/followers.component';
+import { FooterComponent } from '../../core/components/footer/footer.component';
 
 @NgModule({
   declarations: [Public, ProfileComponent, DetailsComponentProfilePublic],
@@ -40,12 +40,14 @@ import { ToolbarComponent } from '../../core/components/toolbar/toolbar.componen
     InputPhotoComponent,
     ButtonBackComponent,
     Page404Component,
-    ToolbarComponent
+    ToolbarComponent,
+    FooterComponent,
   ],
 
   providers: [
-    provideState({ name: 'profile', reducer: profileReducer }),
-    provideState({ name: 'user', reducer: userReducer }),
-    provideEffects([ProfileEffect]), ProfileService],
+    provideState({ name: 'public', reducer: publicProfileReducer }),
+    provideEffects([PublicProfileEffect]),
+    PublicProfileService,
+  ],
 })
 export class PublicModule {}

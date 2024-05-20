@@ -9,7 +9,7 @@ import { DialogAlert } from '../../../interface/dialogs.interface';
   template: `
     <h2 mat-dialog-title>{{ data.title }}</h2>
     <mat-dialog-content>{{ data.message }}</mat-dialog-content>
-    <mat-dialog-actions style="display: flex; justify-content: space-between; gap:1rem; flex-wrap: nowrap;">
+    <mat-dialog-actions class="action-alert">
       <button class="submit" style="flex: 1;" mat-button [mat-dialog-close]="true">
         {{ data.actions.messageAction }}
       </button>

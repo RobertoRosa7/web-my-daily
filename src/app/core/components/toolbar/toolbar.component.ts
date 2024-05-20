@@ -1,28 +1,32 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
-import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
+import { selectorTheme } from '../../selectors/color.selector';
+import { InputSearchComponent } from '../input-search/input-search.component';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
   standalone: true,
-  imports: [SharedModule, CommonModule, ButtonMenuComponent, ButtonBackComponent],
+  imports: [SharedModule, CommonModule, ButtonMenuComponent, ButtonBackComponent, InputSearchComponent, RouterModule],
 })
 export class ToolbarComponent implements OnInit {
   public theme$ = this.store.select(selectorTheme);
 
   @Output() send = new EventEmitter();
   @Output() updateRegisters = new EventEmitter();
+
+  @Input()
+  public id!: string | null | undefined;
 
   public autocomplete$!: Observable<string[]>;
   public notifications$!: Observable<any[]>;

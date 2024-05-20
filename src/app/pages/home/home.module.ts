@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { InitialComponent } from './initial/initial.component';
 import { CoverComponent } from '../../core/components/cover/cover.component';
 import { SharedModule } from '../../shared/shared.module';
-import { InitialExploreComponent } from './core/components/initial-explore/initial-explore.component';
+import { InitialExploreComponent } from '../../core/components/initial-explore/initial-explore.component';
 import { InitialFeelingsComponent } from './core/components/initial-feelings/initial-feelings.component';
 import { InitialMainComponent } from './core/components/initial-main/initial-main.component';
 import { InputSearchComponent } from '../../core/components/input-search/input-search.component';

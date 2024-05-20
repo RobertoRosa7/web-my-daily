@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
+import { selectorTheme } from '../../selectors/color.selector';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
@@ -36,7 +36,7 @@ import { SharedModule } from '../../../shared/shared.module';
         <span>Configurações</span>
       </button>
 
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Sair" routerLink="/auth/login">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Sair" routerLink="/public">
         <mat-icon>logout</mat-icon>
         <span>Sair</span>
       </button>

@@ -1,21 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { ProfileObservable } from '../../interfaces/profile.interface';
-import { selectorProfile } from '../../selectors/profile.selector';
-import { Store } from '@ngrx/store';
-import { FollowerPipe } from '../../../../../core/pipes/follwers.pipe';
-import { SharedModule } from '../../../../../shared/shared.module';
-import { AuthService } from '../../../../auth/core/services/auth.services';
-import { DialogAlertComponent } from '../../../../../core/components/dialog-alert/dialog-alert.component';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { selectorId } from '../../selectors/user.selector';
-import { FollowRequest } from '../../../../../interface/follow.interface';
-import { DialogService } from '../../../../../core/services/dialog/dialog.service';
-import { DialogActions, DialogAlert } from '../../../../../interface/dialogs.interface';
-import { FollowingStatus } from '../../../../../core/enums/base.enum';
-import { ButtonFollowerComponent } from '../../../../../core/components/button-follower/button-follower.component';
+import { FollowerPipe } from '../../pipes/follwers.pipe';
+import { SharedModule } from '../../../shared/shared.module';
+import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
+import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
+import { DialogService } from '../../services/dialog/dialog.service';
+import { AuthService } from '../../../pages/auth/core/services/auth.services';
+import { FollowRequest } from '../../../interface/follow.interface';
+import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
+import { FollowingStatus } from '../../enums/base.enum';
+import { DialogActions, DialogAlert } from '../../../interface/dialogs.interface';
 
 @Component({
   selector: 'app-follwers',
@@ -24,16 +20,22 @@ import { ButtonFollowerComponent } from '../../../../../core/components/button-f
   standalone: true,
   imports: [CommonModule, FollowerPipe, SharedModule, DialogAlertComponent, ButtonFollowerComponent],
   providers: [AuthService, DialogService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FollowersComponent {
   @Output()
   public readonly socketio: EventEmitter<FollowRequest> = new EventEmitter();
+
+  @Input({ required: true })
+  public profile!: UserProfile | null;
+
+  @Input()
+  public id!: string | undefined | null;
+
   public readonly followingStatus = FollowingStatus;
-  public readonly userId$: Observable<string | undefined> = this.store.select(selectorId);
-  public readonly userProfile$: ProfileObservable = this.store.select(selectorProfile);
   private readonly dialogService = inject(DialogService);
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog, private readonly router: Router) {}
+  constructor(private readonly dialog: MatDialog, private readonly router: Router) {}
 
   public get dialogOpen(): MatDialogRef<DialogAlertComponent, boolean> {
     const dialogData = new DialogAlert();

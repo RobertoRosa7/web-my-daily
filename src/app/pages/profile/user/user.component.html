@@ -6,13 +6,13 @@
       <app-input-photo class="photo"></app-input-photo>
 
       <div class="container-followers">
-        <app-follwers></app-follwers>
+        <app-follwers [id]="userId$ | async" [profile]="userProfile$ | async"></app-follwers>
       </div>
       <div class="border-top-radious"></div>
     </div>
 
     <div class="container-user-details">
-      <app-user-details></app-user-details>
+      <app-user-details [profile]="userProfile$ | async"></app-user-details>
     </div>
     @for (happen of profileHappens$ | async; track $index) {
     <app-feelings [index]="$index" [happen]="happen"></app-feelings>

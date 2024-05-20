@@ -37,8 +37,6 @@ export class ProfileHappensEffect {
             if (response instanceof HttpErrorResponse) {
               return actionProfileHappensError({ failed: response });
             }
-            // dispatch action to home after login
-            // this.store.dispatch(authAction.actionGoto({ paths: [RoutePaths.login] }));
             return actionProfileHappensSuccess(response);
           })
         )

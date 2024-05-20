@@ -9,9 +9,8 @@ import { UserComponent } from './user/user.component';
 import { SettingComponent } from './settings/setting.component';
 import { provideState } from '@ngrx/store';
 import { CoverComponent } from '../../core/components/cover/cover.component';
-import { FollowersComponent } from './core/components/followers/followers.component';
-import { FeelingsComponent } from './core/components/feelings/feelings.component';
-import { UserDetailsComponent } from './core/components/user-details/user-details.component';
+import { FeelingsComponent } from '../../core/components/feelings/feelings.component';
+import { UserDetailsComponent } from '../../core/components/user-details/user-details.component';
 import { ProfileRepository } from './core/repositories/profile.repository';
 import { ProfileService } from './core/services/profile.service';
 import { LocalStorageService } from '../../core/services/localstorage/localstorage.service';
@@ -22,6 +21,7 @@ import { ProfileHappensEffect } from './core/effects/profile.happens.effect';
 import { InputPhotoComponent } from '../../core/components/input-photo/input-photo.component';
 import { profileReducer } from './core/reducers/profile.reducer';
 import { userReducer } from './core/reducers/user.reducer';
+import { FollowersComponent } from '../../core/components/followers/followers.component';
 
 @NgModule({
   declarations: [Profile, UserComponent, SettingComponent],
@@ -38,8 +38,8 @@ import { userReducer } from './core/reducers/user.reducer';
   ],
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),
-    provideState({ name: 'user', reducer: userReducer }),
     provideState({ name: 'profileHappens', reducer: profileHappenReducer }),
+    provideState({ name: 'user', reducer: userReducer }),
     provideEffects([ProfileEffect, ProfileHappensEffect]),
     ProfileRepository,
     ProfileService,

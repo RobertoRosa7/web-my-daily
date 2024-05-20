@@ -11,7 +11,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { authInterceptor } from './core/interceptors/core.interceptor';
-import { colorReducer } from './pages/profile/core/reducers/color.reducer';
+import { colorReducer } from './core/reducers/color.reducer';
 
 registerLocaleData(localePt, 'pt');
 

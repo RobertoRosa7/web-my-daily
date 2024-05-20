@@ -1,4 +1,4 @@
-<ng-container *ngIf="userProfile$ | async as profile; else loading">
+<ng-container *ngIf="profile; else loading">
   <main class="main-follows">
     <div class="follow">
       <div role="div" aria-describedby="followers" matTooltipPosition="above" matTooltip="Seguidores" class="followers">
@@ -18,7 +18,7 @@
       (onLogin)="requestLoginToFollow()"
       (socketio)="onFollow($event)"
       [profile]="profile"
-      [id]="userId$ | async"></app-button-follower>
+      [id]="id"></app-button-follower>
   </main>
 </ng-container>
 

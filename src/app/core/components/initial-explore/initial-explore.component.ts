@@ -1,19 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { SharedModule } from '../../../../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { Router, RouterModule } from '@angular/router';
-import { User } from '../../../../profile/core/interfaces/profile.interface';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { selectorId } from '../../../../profile/core/selectors/user.selector';
-import { AuthService } from '../../../../auth/core/services/auth.services';
+import { User } from '../../../pages/profile/core/interfaces/profile.interface';
+import { AuthService } from '../../../pages/auth/core/services/auth.services';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogAlertComponent } from '../../../../../core/components/dialog-alert/dialog-alert.component';
-import { FollowRequest } from '../../../../../interface/follow.interface';
-import { DialogService } from '../../../../../core/services/dialog/dialog.service';
-import { DialogActions, DialogAlert } from '../../../../../interface/dialogs.interface';
-import { FollowingStatus } from '../../../../../core/enums/base.enum';
-import { ButtonFollowerComponent } from '../../../../../core/components/button-follower/button-follower.component';
+import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
+import { FollowRequest } from '../../../interface/follow.interface';
+import { DialogService } from '../../services/dialog/dialog.service';
+import { DialogActions, DialogAlert } from '../../../interface/dialogs.interface';
+import { FollowingStatus } from '../../enums/base.enum';
+import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
 
 @Component({
   selector: 'app-initial-explore',
@@ -26,16 +23,18 @@ import { ButtonFollowerComponent } from '../../../../../core/components/button-f
 })
 export class InitialExploreComponent {
   public followingStatus = FollowingStatus;
-  public readonly userId$: Observable<string | undefined> = this.store.select(selectorId);
 
   @Input({ required: true })
   public profile!: User;
+
+  @Input()
+  public id!: string | undefined | null;
 
   @Output()
   public readonly socketio: EventEmitter<FollowRequest> = new EventEmitter();
   private readonly dialogService = inject(DialogService);
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog, private readonly router: Router) {}
+  constructor(private readonly dialog: MatDialog, private readonly router: Router) {}
 
   public get dialogOpen(): MatDialogRef<DialogAlertComponent, boolean> {
     const dialogData = new DialogAlert();

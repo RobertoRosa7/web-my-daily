@@ -8,3 +8,7 @@ export class DialogAlert {
   public message!: string;
   public actions!: DialogActions;
 }
+
+export class dialogData<T> {
+  data!: T;
+}

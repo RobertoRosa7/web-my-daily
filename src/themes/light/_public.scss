@@ -1,0 +1,204 @@
+.public {
+  width: 100%;
+  position: relative;
+
+  // show profile public in details card profile user
+  .user-details {
+    background: var(--white);
+    box-shadow: 0.2rem 0.3rem 0.3rem rgba(0, 0, 0, 0.15);
+
+    .body {
+      background-color: transparent;
+    }
+    .infos,
+    .scores {
+      background-color: transparent;
+    }
+  }
+
+  // card feeling theme profile
+  .card-feeling {
+    .mat-mdc-card-content {
+      background-color: var(--color-white-light);
+    }
+
+    // button score negative on card feeling
+    .container-scores div button.btn-score-neg {
+      color: var(--primary);
+    }
+
+    //
+    .container-scores div button.btn-score-pos {
+      color: var(--green);
+    }
+  }
+
+  // customize card profil public app-initial
+  .card-explore .div-main button {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 1rem;
+    color: var(--color-dark-red-medium);
+  }
+
+  // customize card profil public app-initial change color button private
+  .card-explore .div-main .container-buttons button.btn-private {
+    color: var(--black);
+    background-color: var(--color-yellow-light);
+  }
+
+  // customize card profil public app-initial change color button request
+  .card-explore .div-main .container-buttons button.btn-request {
+    color: var(--black);
+    background-color: var(--color-green-light);
+  }
+
+  // customize buttom color default theme profile
+  .container-buttons button {
+    background-color: var(--white);
+  }
+
+  // customize button private public profile
+  .container-buttons button.btn-private {
+    background-color: var(--yellow);
+  }
+  // customize button private public request
+  .container-buttons button.btn-request {
+    background-color: var(--success);
+  }
+
+  // customize background toolbar theme profile
+  mat-toolbar {
+    background-color: transparent;
+  }
+
+  // mat card
+  .mdc-card {
+    background-color: var(--white);
+  }
+
+  // customize color mat card subititle
+  .mat-mdc-card-subtitle {
+    color: var(--gray);
+  }
+
+  // profile private and public container fo followers
+  .container-followers p {
+    color: var(--white);
+  }
+
+  // profile private and public container fo followers button
+  .container-followers button {
+    background-color: var(--white);
+    color: var(--primary) !important;
+  }
+
+  // customize container photo profile public and private
+  .page .container-photo .img {
+    background-color: var(--white);
+  }
+
+  // button back
+  .btn-back {
+    // change color icon from btn back
+    mat-icon {
+      color: var(--white);
+    }
+  }
+
+  // button menu
+  .btn-menu {
+    // change color icon from button
+    mat-icon {
+      color: var(--primary);
+    }
+  }
+
+  // customize mat card theme profile
+  .mat-mdc-card-title {
+    p {
+      color: var(--color-light-soft);
+    }
+  }
+
+  // remove filled background search input
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  // input search remove underline coloer
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent;
+  }
+
+  // profile private and public container fo followers
+  .page .container-pup .text {
+    color: var(--text-middle-light);
+  }
+
+  // customize text inside input field search
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: var(--color-dark-red-medium);
+    caret-color: var(--color-dark-red-medium);
+  }
+
+  // customize border radius input search
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    border-radius: 2rem;
+  }
+
+  // customize action dialog button color when ask
+  ::ng-deep mat-dialog-actions {
+    button {
+      color: var(--primary);
+    }
+  }
+
+  // color text logo before input search
+  .logo span {
+    color: var(--black);
+  }
+
+  // spinner box centralize content
+  .spinner {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // customize spinner to theme profile
+  .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: var(--primary) !important;
+  }
+
+  // input-photo - customize
+  .input-photo {
+    .image {
+      background: rgb(255, 255, 255, 0.09);
+      .img {
+        background: var(--white);
+      }
+    }
+  }
+
+  // app-followers
+  .follow {
+    background: transparent;
+
+    div {
+      background: transparent;
+    }
+
+    .follwing {
+      border-left: 1px solid var(--yellow);
+      border-right: 1px solid var(--yellow);
+    }
+
+    p {
+      background: rgb(255, 255, 255, 0.05);
+      color: white;
+      font-weight: 100;
+    }
+  }
+}

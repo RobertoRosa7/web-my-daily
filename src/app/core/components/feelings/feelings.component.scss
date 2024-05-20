@@ -1,6 +1,7 @@
 // card feeling - post of users
 .card-feeling {
   // mat-card material
+  margin-bottom: 0.5rem;
 
   .mdc-card {
     margin: 0;
@@ -14,11 +15,19 @@
   .mdc-card__actions {
     justify-content: space-between;
   }
+  .container-scores,
+  .container-likes,
+  .container-likes div,
+  .container-scores div {
+    display: flex;
+  }
 
   .container-scores,
   .container-likes {
     flex: 1;
-    display: flex;
+    div {
+      align-items: center;
+    }
   }
 
   .container-likes {

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CoverComponent } from '../../../core/components/cover/cover.component';
 import { Store } from '@ngrx/store';
-import { selectorTheme } from '../../profile/core/selectors/color.selector';
+import { selectorTheme } from '../../../core/selectors/color.selector';
 
 @Component({
   selector: 'app-404',

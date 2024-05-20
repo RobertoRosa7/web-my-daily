@@ -65,18 +65,28 @@
   --gray: #6c757d;
   --gray-dark: #343a40;
   --primary: #df3636;
-  --secondary: #6c757d;
+  --secondary: #fff3b1;
   --success: #28a745;
   --info: #17a2b8;
   --warning: #ffc107;
   --danger: #dc3545;
   --light: #f8f9fa;
   --dark: #343a40;
+  --gold: gold;
+  --brown: brown;
   --green-microsoft: #488a84ad;
+  --brown-light: #d8c9c2;
+  --brown-dark: #73635b;
+  --brown-darker: #4e433f;
 
   --profile-cover: linear-gradient(-45deg, var(--dark) 20%, var(--color-dark-blue-darkness) 80%, var(--primary) 5%);
   --home-cover: linear-gradient(-45deg, var(--primary) 20%, var(--dark) 80%, var(--color-dark-blue-darkness) 5%);
-  --public-profile-cover: linear-gradient(-45deg, var(--color-dark-blue-darkness) -10%, var(--red) 160%, var(--red) 0%);
+  --public-profile-cover: linear-gradient(
+    -45deg,
+    var(--dark) 10%,
+    var(--color-dark-blue-intensive) 80%,
+    var(--white) 0%
+  );
 }
 
 html,

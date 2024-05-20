@@ -1,26 +1,27 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SharedModule } from '../../../../../shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { ProfileHappen } from '../../interfaces/profile.happen.interface';
-import { FollowerPipe } from '../../../../../core/pipes/follwers.pipe';
-import { HappenPublicStatus } from '../../../../../core/enums/base.enum';
+import { ProfileHappen } from '../../../pages/profile/core/interfaces/profile.happen.interface';
+import { FollowerPipe } from '../../pipes/follwers.pipe';
+import { HappenPublicStatus } from '../../enums/base.enum';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { Observable, concatMap, filter, first, map, of } from 'rxjs';
-import { selectorProfileName } from '../../selectors/profile.selector';
-import { UserProfile } from '../../interfaces/profile.interface';
-import { DialogAlertComponent } from '../../../../../core/components/dialog-alert/dialog-alert.component';
-import { DialogService } from '../../../../../core/services/dialog/dialog.service';
+import { selectorProfileName } from '../../../pages/profile/core/selectors/profile.selector';
+import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
+import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
+import { DialogService } from '../../services/dialog/dialog.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogActions, DialogAlert } from '../../../../../interface/dialogs.interface';
+import { DialogActions, DialogAlert } from '../../../interface/dialogs.interface';
 import {
   actionProfileHappenDeleteRemote,
   actionProfileHappensDelete,
   actionProfileHappensPost,
-} from '../../actions/profile.happens.action';
-import { profileType } from '../../types/profile.type';
+} from '../../../pages/profile/core/actions/profile.happens.action';
+import { profileType } from '../../../pages/profile/core/types/profile.type';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { selectHappenError } from '../../selectors/profile.happens.selector';
+import { selectHappenError } from '../../../pages/profile/core/selectors/profile.happens.selector';
+import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
 
 const deleteLocal = profileType.USER_PROFILE_HAPPENS_DELETE_LOCAL;
 type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
@@ -30,7 +31,7 @@ type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
   templateUrl: `./feelings.component.html`,
   styleUrl: './feelings.component.scss',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, FollowerPipe, DialogAlertComponent],
+  imports: [CommonModule, SharedModule, RouterModule, FollowerPipe, DialogAlertComponent, DialogHappenComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeelingsComponent {
@@ -51,7 +52,13 @@ export class FeelingsComponent {
     private readonly snackbar: MatSnackBar
   ) {}
 
-  public edit(happen: ProfileHappen) {}
+  public edit(data: ProfileHappen) {
+    this.dialog
+      .open(DialogHappenComponent, this.dialogService.dialogConfigHappen({ data }))
+      .afterClosed()
+      .subscribe(console.log);
+  }
+
   public details(happen: ProfileHappen) {}
   /**
    * INFO:

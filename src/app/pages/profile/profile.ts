@@ -6,25 +6,28 @@ import { Socket, io } from 'socket.io-client';
 import { actionProfileRequest } from './core/actions/profile.action';
 import { actionProfileHappensRequest } from './core/actions/profile.happens.action';
 import { selectorId } from './core/selectors/user.selector';
-import { selectorTheme } from './core/selectors/color.selector';
+import { selectorTheme } from '../../core/selectors/color.selector';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
 import { ListeningFollowResponse } from '../../interface/follow.interface';
 import { actionSocketUserMetrics } from './core/actions/socketio.action';
 import { actionUserFollowers } from './core/actions/user.action';
 import { JsonMapProperties } from '../../core/decorators/json.decorator';
+import { actionColor } from './core/actions/color.action';
+import { stringType } from '../../core/types/color.type';
 
 @Component({
   selector: 'app-profile',
   template: `
-    <app-toolbar></app-toolbar>
+    <app-toolbar [id]="userId$ | async"></app-toolbar>
     <router-outlet></router-outlet>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Profile implements OnInit {
-  public theme$ = this.store.select(selectorTheme);
-  public userId$: Observable<string | undefined> = this.store.select(selectorId);
-  protected platform = inject(PLATFORM_ID);
+  public readonly theme$ = this.store.select(selectorTheme);
+  public readonly userId$: Observable<string | undefined> = this.store.select(selectorId);
+
+  protected readonly platform = inject(PLATFORM_ID);
   protected socketio!: Socket;
 
   constructor(protected readonly store: Store) {}
@@ -55,6 +58,12 @@ export class Profile implements OnInit {
         }
       });
     }
+    this.store.dispatch(
+      actionColor({
+        theme: 'profile',
+        background: stringType.profileCover,
+      })
+    );
   }
 
   public listeningFollows$() {

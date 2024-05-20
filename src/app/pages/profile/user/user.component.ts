@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from '../profile';
 import { Store } from '@ngrx/store';
-import { actionColor } from '../core/actions/color.action';
-import { stringType } from '../core/types/color.type';
-import { selectorProfile, isSelectorProfilePublic } from '../core/selectors/profile.selector';
+import { selectorProfile } from '../core/selectors/profile.selector';
 import { ProfileHappenObservable } from '../core/interfaces/profile.happen.interface';
 import { selectorHappens } from '../core/selectors/profile.happens.selector';
-import { ProfileObservable, ProfilePublicObservable } from '../core/interfaces/profile.interface';
+import { ProfileObservable } from '../core/interfaces/profile.interface';
 
 @Component({
   selector: 'app-user',
@@ -15,19 +13,11 @@ import { ProfileObservable, ProfilePublicObservable } from '../core/interfaces/p
 })
 export class UserComponent extends Profile implements OnInit {
   public userProfile$: ProfileObservable = this.store.select(selectorProfile);
-  public profilePublic$: ProfilePublicObservable = this.store.select(isSelectorProfilePublic);
   public profileHappens$: ProfileHappenObservable = this.store.select(selectorHappens);
 
   constructor(protected override readonly store: Store) {
     super(store);
   }
 
-  override ngOnInit(): void {
-    this.store.dispatch(
-      actionColor({
-        theme: 'profile',
-        background: stringType.profileCover,
-      })
-    );
-  }
+  override ngOnInit(): void {}
 }

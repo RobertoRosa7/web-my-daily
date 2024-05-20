@@ -42,7 +42,7 @@
         >
         <span>|</span>
         <span matTooltipPosition="above" matTooltip="Data" role="timer" aria-describedby="date">{{
-          happen.createdAt | date
+          happen.updateAt | date
         }}</span>
         <ng-container [ngSwitch]="happen.visibility">
           <mat-icon
@@ -79,54 +79,32 @@
 
     <mat-card-actions>
       <div class="container-scores">
-        <div>
-          <button
-            class="btn-score-pos"
-            matTooltipPosition="above"
-            matTooltip="Score Nositivo"
-            mat-icon-button
-            role="button"
-            aria-describedby="arrow_upward">
+        <div matTooltipPosition="above" matTooltip="Score Positivo">
+          <button class="btn-score-pos" mat-icon-button role="button" aria-describedby="arrow_upward">
             <mat-icon aria-label="arrow_upward">arrow_upward</mat-icon>
           </button>
-          <small>{{ happen.likes.likedCount | follows }}</small>
+          <small>{{ happen.feelings.scorePositive | percent : '1.2-2' }}</small>
         </div>
-        <div>
-          <button
-            class="btn-score-neg"
-            matTooltipPosition="above"
-            matTooltip="Score Negativo"
-            mat-icon-button
-            role="button"
-            aria-describedby="arrow_downward">
+        <div matTooltipPosition="above" matTooltip="Score Negativo">
+          <button class="btn-score-neg" mat-icon-button role="button" aria-describedby="arrow_downward">
             <mat-icon aria-label="arrow_downward">arrow_downward</mat-icon>
           </button>
-          <small>{{ happen.likes.likedCount | follows }}</small>
+          <small>{{ happen.feelings.scoreNegative | percent : '1.2-2' }}</small>
         </div>
       </div>
       <div class="container-likes">
-        <div>
+        <div matTooltipPosition="above" matTooltip="Cutir">
           <small>{{ happen.likes.likedCount | follows }}</small>
-          <button
-            matTooltipPosition="above"
-            matTooltip="Cutir"
-            mat-icon-button
-            role="button"
-            aria-describedby="favorite">
+          <button mat-icon-button role="button" aria-describedby="favorite">
             <ng-container *ngIf="userName$ | async as data">
               <mat-icon *ngIf="data.id !== happen.userId" aria-label="favorite">favorite_outline</mat-icon>
               <mat-icon *ngIf="data.id === happen.userId" aria-label="favorite">favorite</mat-icon>
             </ng-container>
           </button>
         </div>
-        <div>
+        <div matTooltipPosition="above" matTooltip="Não curtir">
           <small>{{ happen.likes.dislikedCount | follows }}</small>
-          <button
-            matTooltipPosition="above"
-            matTooltip="Não curtir"
-            mat-icon-button
-            role="button"
-            aria-describedby="not-favorite">
+          <button mat-icon-button role="button" aria-describedby="not-favorite">
             <span aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </span>
           </button>
         </div>

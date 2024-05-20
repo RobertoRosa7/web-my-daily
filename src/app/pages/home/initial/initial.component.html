@@ -11,6 +11,7 @@
         <app-input-search></app-input-search>
         <p>Novos feelingers</p>
         <app-initial-explore
+          [id]="userId$ | async"
           *ngFor="let profile of userPageble$ | async"
           (socketio)="onSocketio($event)"
           [profile]="profile"></app-initial-explore>

@@ -150,19 +150,27 @@
     border-radius: 2rem;
   }
 
+  // input happen texteare
+  .dialog-happen .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+  }
+  .mat-form-field.no-underline .mat-form-field-underline {
+    display: none;
+  }
+  .mdc-line-ripple::before {
+    border-bottom-width: 0;
+  }
+
   // customize action dialog button color when ask
-  ::ng-deep mat-dialog-actions {
+  ::ng-deep .action-alert mat-dialog-actions {
     button {
       color: var(--primary);
     }
   }
 
-  // search all profile public
-  .container-pup {
-    background: rgb(255, 255, 255, 0.09);
-    border-top: 1px solid rgb(255, 255, 255, 0.2);
-    border-left: 1px solid rgb(255, 255, 255, 0.2);
-    border-right: 1px solid rgb(255, 255, 255, 0.2);
+  // color text logo before input search
+  .logo span {
+    color: var(--white);
   }
 
   // spinner box centralize content

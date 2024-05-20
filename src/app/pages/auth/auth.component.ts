@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './core/services/auth.services';
 import { isPlatformBrowser } from '@angular/common';
 import { actionCoreReset } from '../../core/actions/reset.action';
+import { actionColor } from '../profile/core/actions/color.action';
 
 @Component({
   selector: 'app-auth',
@@ -74,6 +75,12 @@ export class AuthComponent implements OnDestroy {
           mergeMap(this.navigate.bind(this))
         )
         .subscribe()
+    );
+
+    this.store.dispatch(
+      actionColor({
+        theme: 'login',
+      })
     );
   }
 

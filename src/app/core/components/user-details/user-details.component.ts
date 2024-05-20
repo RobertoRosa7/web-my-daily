@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { selectorProfile } from '../../selectors/profile.selector';
-import { Store } from '@ngrx/store';
-import { SharedModule } from '../../../../../shared/shared.module';
-import { ProfileObservable } from '../../interfaces/profile.interface';
+import { Component, Input } from '@angular/core';
+import { SharedModule } from '../../../shared/shared.module';
+import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
 
 /**
  * @see: https://angular.io/api/common/PercentPipe
@@ -18,7 +16,8 @@ import { ProfileObservable } from '../../interfaces/profile.interface';
   imports: [CommonModule, SharedModule],
 })
 export class UserDetailsComponent {
-  public userProfile$: ProfileObservable = this.store.select(selectorProfile);
+  @Input({ required: true })
+  public profile!: UserProfile | null;
 
-  constructor(private readonly store: Store) {}
+  constructor() {}
 }

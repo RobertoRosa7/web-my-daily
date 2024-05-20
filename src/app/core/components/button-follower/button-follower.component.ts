@@ -49,6 +49,4 @@ export class ButtonFollowerComponent {
   public requestLoginToFollow() {
     this.onLogin.emit();
   }
-
-  public requestFollow(followUser: User) {}
 }

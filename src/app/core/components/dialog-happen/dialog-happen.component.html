@@ -1,0 +1,42 @@
+<form class="dialog-happen" [ngClass]="theme$ | async">
+  <span mat-dialog-title>
+    <button matTooltip="fechar" matTooltipPosition="below" [mat-dialog-close]="null" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+  <h2 mat-dialog-title>
+    <small>{{ data.data.updateAt | date }}</small>
+  </h2>
+  <mat-dialog-content>
+    <mat-form-field class="input-happen">
+      <textarea
+        required
+        cols="20"
+        rows="10"
+        [formControl]="form"
+        placeholder="Digite aqui sua historia"
+        matInput
+        type="text"
+        name="text"
+        id="happen-text"></textarea>
+      <small>{{ totalLength }}</small>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button matTooltipPosition="above" matTooltip="cancelar" role="button" [mat-dialog-close]="null" mat-raised-button>
+      cancel
+    </button>
+    <button
+      aria-describedby="salvar"
+      [disabled]="form.invalid"
+      type="submit"
+      matTooltipPosition="above"
+      matTooltip="salvar"
+      role="button"
+      [mat-dialog-close]="form.value"
+      mat-raised-button>
+      salvar
+    </button>
+  </mat-dialog-actions>
+</form>
