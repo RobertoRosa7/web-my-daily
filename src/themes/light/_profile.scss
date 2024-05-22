@@ -162,11 +162,11 @@
   }
 
   // customize action dialog button color when ask
-  ::ng-deep .action-alert mat-dialog-actions {
-    button {
-      color: var(--primary);
-    }
-  }
+  // ::ng-deep .action-alert mat-dialog-actions {
+  //   button {
+  //     color: var(--primary);
+  //   }
+  // }
 
   // color text logo before input search
   .logo span {

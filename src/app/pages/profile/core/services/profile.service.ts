@@ -2,11 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ProfileResponse, ProfileSingleResponse } from '../interfaces/profile.interface';
 import { ProfileRepository } from '../repositories/profile.repository';
-import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happen.interface';
+import {
+  ProfileHappen,
+  HappenSingleton,
+  HappenResponsePageable,
+  HttpResponseHappen,
+} from '../interfaces/profile.happen.interface';
 import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
-import { PageableUser } from '../../../../interface/pageable.interface';
-import { FollowRequest } from '../../../../interface/follow.interface';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { PageableUser } from '../../../../interfaces/pageable.interface';
+import { FollowRequest } from '../../../../interfaces/follow.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,10 +33,10 @@ export class ProfileService {
    * getHappens - layer 1
    * @returns Observable<ProfileHappenResponse>
    */
-  public getHappens(): Observable<ProfileHappenResponse> {
+  public getHappens(): Observable<HappenResponsePageable> {
     return this.profileRespository
       .getHappens()
-      .pipe(map((data) => JsonMapProperties.deserialize(ProfileHappenResponse, data)));
+      .pipe(map((data) => JsonMapProperties.deserialize(HappenResponsePageable, data)));
   }
 
   /**
@@ -43,6 +48,27 @@ export class ProfileService {
     return this.profileRespository.deleteHappen(happen);
   }
 
+  /**
+   * INFO:
+   * updateHappen - update one happen
+   * @returns Observable<HttpResponseDefault<updateHappen>>
+   */
+  public updateHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
+    return this.profileRespository
+      .updateHappen(happen)
+      .pipe(map((data) => JsonMapProperties.deserialize(HappenSingleton, data)));
+  }
+
+  /**
+   * INFO:
+   * updateHappen - update one happen
+   * @returns Observable<HttpResponseDefault<updateHappen>>
+   */
+  public postHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
+    return this.profileRespository
+      .postHappen(happen)
+      .pipe(map((data) => JsonMapProperties.deserialize(HappenSingleton, data)));
+  }
   /**
    * INFO:
    * getProfilePublic - Public any can access information from users

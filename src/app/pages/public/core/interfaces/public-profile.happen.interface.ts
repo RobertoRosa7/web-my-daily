@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/json.decorator';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
 
 export type ProfileHappenObservable = Observable<Array<ProfileHappen> | undefined>;
 

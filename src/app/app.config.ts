@@ -12,6 +12,7 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { authInterceptor } from './core/interceptors/core.interceptor';
 import { colorReducer } from './core/reducers/color.reducer';
+import { userReducer } from './pages/profile/core/reducers/user.reducer';
 
 registerLocaleData(localePt, 'pt');
 
@@ -21,6 +22,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideState({ name: 'colors', reducer: colorReducer }),
+    provideState({ name: 'user', reducer: userReducer }),
+
     provideStore(),
     // provideClientHydration(withNoHttpTransferCache()),
     // withHttpTransferCacheOptions({

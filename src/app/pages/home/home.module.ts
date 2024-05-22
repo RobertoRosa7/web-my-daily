@@ -12,6 +12,7 @@ import { InitialExploreComponent } from '../../core/components/initial-explore/i
 import { InitialFeelingsComponent } from './core/components/initial-feelings/initial-feelings.component';
 import { InitialMainComponent } from './core/components/initial-main/initial-main.component';
 import { InputSearchComponent } from '../../core/components/input-search/input-search.component';
+import { ButtonFabCreateComponent } from '../../core/components/button-fab-create/button-fab-create.component';
 import { profileReducer } from '../profile/core/reducers/profile.reducer';
 import { userReducer } from '../profile/core/reducers/user.reducer';
 import { ProfileEffect } from '../profile/core/effects/profile.effect';
@@ -28,6 +29,7 @@ import { provideEffects } from '@ngrx/effects';
     InitialFeelingsComponent,
     InitialMainComponent,
     InputSearchComponent,
+    ButtonFabCreateComponent,
   ],
   declarations: [HomeComponent, InitialComponent],
   providers: [

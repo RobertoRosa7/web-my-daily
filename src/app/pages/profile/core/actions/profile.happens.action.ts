@@ -1,27 +1,46 @@
 import { createAction } from '@ngrx/store';
 import { profileType } from '../types/profile.type';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProfileHappen, ProfileHappenResponse } from '../interfaces/profile.happen.interface';
+import { ProfileHappen, HappenResponsePageable } from '../interfaces/profile.happen.interface';
 
-const profileHappens = profileType.USER_PROFILE_HAPPENS;
-const deleteRemote = profileType.USER_PROFILE_HAPPENS_DELETE_REMOTE;
-const deleteLocal = profileType.USER_PROFILE_HAPPENS_DELETE_LOCAL;
-const postLocal = profileType.USER_PROFILE_HAPPENS_POST_LOCAL;
-const update = profileType.USER_PROFILE_HAPPENS_UPDATE;
-const success = profileType.USER_PROFILE_HAPPEN_SUCESS;
-const error = profileType.USER_PROFILE_HAPPEN_ERROR;
+const voidTypes = profileType.happenVoid;
+const happens = profileType.happens;
+const deleteRemote = profileType.happenDeleteRemote;
+const deleteLocal = profileType.happenDeleteLocal;
+const deleteRollback = profileType.happenDeleteRollback;
 
-const callbackHappenPost = (payload: { index: number; data: ProfileHappen }) => payload;
-const callbackHappenDelete = (payload: { index: number; data: ProfileHappen }) => payload;
-const callbackHappenUpdate = (payload: ProfileHappen) => payload;
-const callbackHappenSuccess = (payload: ProfileHappenResponse) => payload;
+const postLocal = profileType.happenPostLocal;
+const postRollback = profileType.happenPostRollback;
+const postRemote = profileType.happenPostRemote;
+const postSuccess = profileType.happenPostSuccess;
+
+const updateLocal = profileType.happenUpdateLocal;
+const updateRemote = profileType.happenUpdateRemote;
+const updateSuccess = profileType.happenUpdateSuccess;
+
+const success = profileType.happenSuccess;
+const error = profileType.happenError;
+
+const callbackHappen = (payload: { index: number; data: ProfileHappen }) => payload;
+const callbackHappenSuccess = (payload: HappenResponsePageable) => payload;
 const callbackHappenError = (payload: { failed: HttpErrorResponse }) => payload;
 
-export const actionProfileHappensRequest = createAction(profileHappens);
+export const happenRequest = createAction(happens);
+export const happenVoid = createAction(voidTypes);
 
-export const actionProfileHappenDeleteRemote = createAction(deleteRemote, callbackHappenUpdate);
-export const actionProfileHappensPost = createAction(postLocal, callbackHappenPost);
-export const actionProfileHappensDelete = createAction(deleteLocal, callbackHappenDelete);
-export const actionProfileHappensUpdate = createAction(update, callbackHappenUpdate);
-export const actionProfileHappensSuccess = createAction(success, callbackHappenSuccess);
-export const actionProfileHappensError = createAction(error, callbackHappenError);
+export const happenPostLocal = createAction(postLocal, callbackHappen);
+export const happenPostRollback = createAction(postRollback, callbackHappen);
+export const happenPostRemote = createAction(postRemote, callbackHappen);
+export const happenPostSuccess = createAction(postSuccess, callbackHappen);
+
+export const happenDeleteRollback = createAction(deleteRollback, callbackHappen);
+export const happenDeleteRemote = createAction(deleteRemote, callbackHappen);
+export const happenDeleteLocal = createAction(deleteLocal, callbackHappen);
+
+export const happenUpdateLocal = createAction(updateLocal, callbackHappen);
+export const happenUpdateRollback = createAction(updateLocal, callbackHappen);
+export const happenUpdateRemote = createAction(updateRemote, callbackHappen);
+export const happenUpdateSuccess = createAction(updateSuccess, callbackHappen);
+
+export const happenSuccess = createAction(success, callbackHappenSuccess);
+export const happenError = createAction(error, callbackHappenError);

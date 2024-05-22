@@ -22,6 +22,7 @@ import { InputPhotoComponent } from '../../core/components/input-photo/input-pho
 import { profileReducer } from './core/reducers/profile.reducer';
 import { userReducer } from './core/reducers/user.reducer';
 import { FollowersComponent } from '../../core/components/followers/followers.component';
+import { ButtonFabCreateComponent } from '../../core/components/button-fab-create/button-fab-create.component';
 
 @NgModule({
   declarations: [Profile, UserComponent, SettingComponent],
@@ -35,6 +36,7 @@ import { FollowersComponent } from '../../core/components/followers/followers.co
     FeelingsComponent,
     UserDetailsComponent,
     InputPhotoComponent,
+    ButtonFabCreateComponent,
   ],
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),

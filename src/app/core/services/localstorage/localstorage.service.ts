@@ -1,5 +1,5 @@
 import { Injectable, afterNextRender } from '@angular/core';
-import { IData } from '../../../interface/localstorage.interface';
+import { IData } from '../../../interfaces/localstorage.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { actionUser } from '../../../pages/profile/core/actions/user.action';
@@ -15,8 +15,6 @@ export class LocalStorageService {
   constructor(private readonly store: Store) {
     afterNextRender(() => {
       try {
-        this.token$.next(this.deserealizeKey('token'));
-        this.store.dispatch(actionUser(JsonMapProperties.deserialize(User, this.deserealizeKey('user'))));
       } catch (err) {}
     });
   }

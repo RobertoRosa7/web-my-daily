@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FollowRequest } from '../../../interface/follow.interface';
+import { FollowRequest } from '../../../interfaces/follow.interface';
 import { Profile } from '../../profile/profile';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { actionProfilePublic, actionUserFollow } from '../../profile/core/actions/profile.action';
+import { actionUserFollow } from '../../profile/core/actions/profile.action';
 import { selectorUserPub } from '../core/selectors/public-profile.selector';
 import { stringType } from '../../../core/types/color.type';
 import { actionColor } from '../../profile/core/actions/color.action';
+import { actionProfilePublic } from '../core/actions/public-profile.action';
 
 @Component({
   selector: 'app-details-public-profile',

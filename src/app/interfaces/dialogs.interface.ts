@@ -12,3 +12,9 @@ export class DialogAlert {
 export class dialogData<T> {
   data!: T;
 }
+
+export const enum SnackBarActions {
+  update = 'update',
+  delete = 'delete',
+  create = 'create',
+}

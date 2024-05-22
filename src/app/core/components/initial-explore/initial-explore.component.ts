@@ -6,9 +6,9 @@ import { User } from '../../../pages/profile/core/interfaces/profile.interface';
 import { AuthService } from '../../../pages/auth/core/services/auth.services';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
-import { FollowRequest } from '../../../interface/follow.interface';
+import { FollowRequest } from '../../../interfaces/follow.interface';
 import { DialogService } from '../../services/dialog/dialog.service';
-import { DialogActions, DialogAlert } from '../../../interface/dialogs.interface';
+import { DialogActions, DialogAlert } from '../../../interfaces/dialogs.interface';
 import { FollowingStatus } from '../../enums/base.enum';
 import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
 

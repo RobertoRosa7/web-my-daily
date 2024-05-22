@@ -9,8 +9,9 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   template: `
-    <app-toolbar [id]="userId$ | async"></app-toolbar>
+    <app-toolbar [id]="userId$ | async" />
     <router-outlet></router-outlet>
+    <app-button-fab-create />
   `,
 })
 export class HomeComponent implements OnInit {

@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 import { Socket, io } from 'socket.io-client';
 import { actionProfileRequest } from './core/actions/profile.action';
-import { actionProfileHappensRequest } from './core/actions/profile.happens.action';
+import { happenRequest } from './core/actions/profile.happens.action';
 import { selectorId } from './core/selectors/user.selector';
 import { selectorTheme } from '../../core/selectors/color.selector';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
-import { ListeningFollowResponse } from '../../interface/follow.interface';
+import { ListeningFollowResponse } from '../../interfaces/follow.interface';
 import { actionSocketUserMetrics } from './core/actions/socketio.action';
 import { actionUserFollowers } from './core/actions/user.action';
 import { JsonMapProperties } from '../../core/decorators/json.decorator';
@@ -20,6 +20,7 @@ import { stringType } from '../../core/types/color.type';
   template: `
     <app-toolbar [id]="userId$ | async"></app-toolbar>
     <router-outlet></router-outlet>
+    <app-button-fab-create />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,7 +37,7 @@ export class Profile implements OnInit {
     if (isPlatformBrowser(this.platform)) {
       this.socketio = io(environment.ws + '/profile');
       this.store.dispatch(actionProfileRequest());
-      this.store.dispatch(actionProfileHappensRequest());
+      this.store.dispatch(happenRequest());
 
       this.userId$
         .pipe(

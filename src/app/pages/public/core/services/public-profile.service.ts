@@ -3,7 +3,7 @@ import { Observable, map } from 'rxjs';
 import { ProfileResponse, ProfileSingleResponse } from '../interfaces/public-profile.interface';
 import { ProfileRepository } from '../repositories/public-profile.repository';
 import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
-import { PageableUser } from '../../../../interface/pageable.interface';
+import { PageableUser } from '../../../../interfaces/pageable.interface';
 
 @Injectable({
   providedIn: 'root',

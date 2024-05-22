@@ -1,7 +1,13 @@
 import { createAction } from '@ngrx/store';
 import { userType } from '../types/user.type';
 import { User } from '../interfaces/profile.interface';
-import { ListeningFollowResponse } from '../../../../interface/follow.interface';
+import { ListeningFollowResponse } from '../../../../interfaces/follow.interface';
 
-export const actionUser = createAction(userType.USER, (payload: User) => payload);
-export const actionUserFollowers = createAction(userType.FOLLOWERS, (payload: ListeningFollowResponse) => payload);
+const user = userType.USER;
+const userFollowers = userType.FOLLOWERS;
+
+const callbackUser = (payload: User) => payload;
+const callbackFollowers = (payload: ListeningFollowResponse) => payload;
+
+export const actionUser = createAction(user, callbackUser);
+export const actionUserFollowers = createAction(userFollowers, callbackFollowers);

@@ -5,8 +5,13 @@ import { catchError, map, mergeMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../types/profile.type';
 import { ProfileService } from '../services/profile.service';
-import { actionProfileHappensError, actionProfileHappensSuccess } from '../actions/profile.happens.action';
-import { actionProfileRequest } from '../actions/profile.action';
+import {
+  happenError,
+  happenPostSuccess,
+  happenSuccess,
+  happenUpdateSuccess,
+  happenVoid,
+} from '../actions/profile.happens.action';
 
 /**
  * @see: https://ngrx.io/guide/effects
@@ -24,7 +29,7 @@ export class ProfileHappensEffect {
   public happen: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(profileType.USER_PROFILE_HAPPENS),
+      ofType(profileType.happens),
       // layer to fetch payload from action
       mergeMap(() =>
         // layer to service send payload to backend
@@ -35,9 +40,9 @@ export class ProfileHappensEffect {
           map((response) => {
             // check if response if http error and then dispatch action of error
             if (response instanceof HttpErrorResponse) {
-              return actionProfileHappensError({ failed: response });
+              return happenError({ failed: response });
             }
-            return actionProfileHappensSuccess(response);
+            return happenSuccess(response);
           })
         )
       ),
@@ -54,25 +59,61 @@ export class ProfileHappensEffect {
   public deleteHappen: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(profileType.USER_PROFILE_HAPPENS_DELETE_REMOTE),
+      ofType(profileType.happenDeleteRemote),
       // layer to fetch payload from action
-      mergeMap((payload) =>
+      mergeMap(({ data }) =>
         // layer to service send payload to backend
-        this.profileService.deleteHappen(payload).pipe(
+        this.profileService.deleteHappen(data).pipe(
           // layer resolve http error to handler
           catchError((e) => of(e)),
           // layer map when login made success
           map((response) => {
             // check if response if http error and then dispatch action of error
             if (response instanceof HttpErrorResponse) {
-              return actionProfileHappensError({ failed: response });
+              return happenError({ failed: response });
             }
 
-            return actionProfileRequest();
+            return happenVoid();
           })
         )
       ),
       // layer to catch error from effect
+      catchError((e) => of(e))
+    )
+  );
+
+  public updateHappen: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      ofType(profileType.happenUpdateRemote),
+      mergeMap(({ data, index }) =>
+        this.profileService.updateHappen(data).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return happenError({ failed: response });
+            }
+            return happenUpdateSuccess({ index, data: response.data });
+          })
+        )
+      ),
+      catchError((e) => of(e))
+    )
+  );
+
+  public postHappen: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      ofType(profileType.happenPostRemote),
+      mergeMap(({ data, index }) =>
+        this.profileService.postHappen(data).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return happenError({ failed: response });
+            }
+            return happenPostSuccess({ index, data: response.data });
+          })
+        )
+      ),
       catchError((e) => of(e))
     )
   );

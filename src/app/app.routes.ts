@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { resolver } from './core/resolvers/user.resolver';
 
 export const routes: Routes = [
   {
@@ -8,10 +9,12 @@ export const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
+    resolve: { user: resolver },
   },
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then((m) => m.ProfileModule),
+    resolve: { user: resolver },
   },
   {
     path: 'public',

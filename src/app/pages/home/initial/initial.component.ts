@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from '../home';
 import { Store } from '@ngrx/store';
 import { selectorPageablePub } from '../../profile/core/selectors/profile.selector';
-import { FollowRequest } from '../../../interface/follow.interface';
-import { actionProfilePublic, actionUserFollow } from '../../profile/core/actions/profile.action';
+import { FollowRequest } from '../../../interfaces/follow.interface';
+import { actionUserFollow } from '../../profile/core/actions/profile.action';
 import { map } from 'rxjs';
 
 @Component({
@@ -17,9 +17,7 @@ export class InitialComponent extends HomeComponent implements OnInit {
     super(store);
   }
 
-  override ngOnInit(): void {
-    this.store.dispatch(actionProfilePublic({ name: null }));
-  }
+  override ngOnInit(): void {}
 
   public onSocketio(event: FollowRequest) {
     this.store.dispatch(actionUserFollow(event));

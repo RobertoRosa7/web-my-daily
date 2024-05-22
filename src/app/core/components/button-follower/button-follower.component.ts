@@ -7,7 +7,7 @@ import { FollowingStatus } from '../../enums/base.enum';
 import { Observable } from 'rxjs';
 import { selectorId } from '../../../pages/profile/core/selectors/user.selector';
 import { User } from '../../../pages/profile/core/interfaces/profile.interface';
-import { FollowRequest } from '../../../interface/follow.interface';
+import { FollowRequest } from '../../../interfaces/follow.interface';
 import { Store } from '@ngrx/store';
 
 @Component({

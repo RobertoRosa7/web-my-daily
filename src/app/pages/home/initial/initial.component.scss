@@ -1,17 +1,20 @@
 @import '../../../../themes/mixins';
 
-::ng-deep .mat-mdc-tab {
-  width: 1rem;
-}
+.home {
+  position: relative;
+  ::ng-deep .mat-mdc-tab {
+    width: 1rem;
+  }
 
-::ng-deep .mat-mdc-focus-indicator {
-  background-color: transparent !important;
-}
+  ::ng-deep .mat-mdc-focus-indicator {
+    background-color: transparent !important;
+  }
 
-.container-pup {
-  @include size-page;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  border-radius: 2rem 2rem 0 0;
-  overflow-y: auto;
+  .container-pup {
+    @include size-page;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 2rem 2rem 0 0;
+    overflow-y: auto;
+  }
 }

@@ -2,8 +2,8 @@ import { createAction } from '@ngrx/store';
 import { profileType } from '../types/public-profile.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProfileResponse } from '../interfaces/public-profile.interface';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
-import { FollowRequest } from '../../../../interface/follow.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
+import { FollowRequest } from '../../../../interfaces/follow.interface';
 
 export const actionProfileRequest = createAction(profileType.USER_PROFILE);
 export const actionProfileSuccess = createAction(

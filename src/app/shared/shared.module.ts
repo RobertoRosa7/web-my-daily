@@ -15,6 +15,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 const commons = [
   MatCheckboxModule,
@@ -33,6 +35,8 @@ const commons = [
   MatDialogModule,
   MatSnackBarModule,
   MatStepperModule,
+  MatCheckboxModule,
+  MatRadioModule
 ];
 @NgModule({
   declarations: [],

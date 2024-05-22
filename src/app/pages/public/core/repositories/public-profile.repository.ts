@@ -5,8 +5,8 @@ import { Url } from '../../../../core/decorators/url.decorator';
 import { Observable } from 'rxjs';
 import { ProfileHappen, ProfileHappenResponse } from '../interfaces/public-profile.happen.interface';
 import { ProfileResponse } from '../interfaces/public-profile.interface';
-import { FollowRequest } from '../../../../interface/follow.interface';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { FollowRequest } from '../../../../interfaces/follow.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
 
 @Injectable({
   providedIn: 'root',

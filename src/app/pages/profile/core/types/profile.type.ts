@@ -1,17 +1,28 @@
 export enum profileType {
-  USER_PROFILE = 'userProfile@types',
-  USER_RESET = 'userReset@types',
-  USER_PROFILE_SUCESS = 'userProfileSuccess@types',
-  USER_PROFILE_ERROR = 'userProfileError@types',
+  userProfile = 'userProfile@types',
+  userReset = 'userReset@types',
+  userProfileSuccess = 'userProfileSuccess@types',
+  userProfileError = 'userProfileError@types',
 
-  USER_PROFILE_HAPPENS = 'userProfileHappens@types',
-  USER_PROFILE_HAPPENS_POST_LOCAL = 'userProfileHappensPostLocal@types',
-  USER_PROFILE_HAPPENS_DELETE_LOCAL = 'userProfileHappensDeleteLocal@types',
-  USER_PROFILE_HAPPENS_DELETE_REMOTE = 'userProfileHappensDeleteRemote@types',
-  USER_PROFILE_HAPPENS_UPDATE = 'userProfileHappensUpdate@types',
-  USER_PROFILE_HAPPEN_SUCESS = 'userProfileHappensSuccess@types',
-  USER_PROFILE_HAPPEN_ERROR = 'userProfileHappensError@types',
-  USER_PROFILE_PUBLIC = 'userProfilePublic@types',
-  USER_FOLLOW = 'userFollow@types',
-  USER_FOLLOW_SUCCESS = 'userFollowSuccess@types',
+  happens = 'happens@types',
+  happenUpdateLocal = 'happensUpateLocal@types',
+  happenUpdateRollback = 'happensUpdateRollback@types',
+  happenUpdateRemote = 'happensUpdateRomote@types',
+  happenUpdateSuccess = 'happensUpdateSuccess@types',
+
+  happenPostLocal = 'happensPostLocal@types',
+  happenPostRollback = 'happensPostRollback@types',
+  happenPostRemote = 'happensPostRemote@types',
+  happenPostSuccess = 'happensPostSuccess@types',
+
+  happenDeleteLocal = 'happensDeleteLocal@types',
+  happenDeleteRemote = 'happensDeleteRemote@types',
+  happenDeleteRollback = 'happensDeleteRollback@types',
+
+  happenSuccess = 'happensSuccess@types',
+  happenError = 'happensError@types',
+  happenVoid = 'void@types',
+
+  userFollow = 'userFollow@types',
+  userFollowSuccess = 'userFollowSuccess@types',
 }

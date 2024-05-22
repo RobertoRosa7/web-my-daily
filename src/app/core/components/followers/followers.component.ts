@@ -8,10 +8,10 @@ import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { AuthService } from '../../../pages/auth/core/services/auth.services';
-import { FollowRequest } from '../../../interface/follow.interface';
+import { FollowRequest } from '../../../interfaces/follow.interface';
 import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
 import { FollowingStatus } from '../../enums/base.enum';
-import { DialogActions, DialogAlert } from '../../../interface/dialogs.interface';
+import { DialogActions, DialogAlert } from '../../../interfaces/dialogs.interface';
 
 @Component({
   selector: 'app-follwers',

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, PLATFORM_ID, inject } from 
 import { Store } from '@ngrx/store';
 import { Observable, Observer } from 'rxjs';
 import { Socket } from 'socket.io-client';
-import { ListeningFollowResponse } from '../../interface/follow.interface';
+import { ListeningFollowResponse } from '../../interfaces/follow.interface';
 import { selectorTheme } from '../../core/selectors/color.selector';
 import { selectorId } from '../profile/core/selectors/user.selector';
 

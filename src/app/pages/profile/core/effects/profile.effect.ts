@@ -10,7 +10,7 @@ import { actionProfileError, actionProfileSuccess, actionUserFollowSuccess } fro
 import { actionLoading } from '../../../auth/core/actions/auth.action';
 import { io } from 'socket.io-client';
 import { environment } from '../../../../../environments/environment';
-import { FollowRequest } from '../../../../interface/follow.interface';
+import { FollowRequest } from '../../../../interfaces/follow.interface';
 
 /**
  * @see: https://ngrx.io/guide/effects
@@ -21,32 +21,9 @@ export class ProfileEffect {
   private readonly store: Store = inject(Store);
   private readonly profileService = inject(ProfileService);
 
-  /**
-   * INFO:
-   * profilePublic - responsilbe to fetch Pageable or Single public profile of user
-   */
-  public profilePublic$: Observable<Actions> = createEffect(() =>
-    this.action.pipe(
-      ofType(profileType.USER_PROFILE_PUBLIC),
-      mergeMap(({ name }) =>
-        this.profileService.getProfilePublic(name).pipe(
-          catchError((e) => of(e)),
-          map((response) => {
-            if (response instanceof HttpErrorResponse) {
-              return actionProfileError({ error: response });
-            }
-            return actionProfileSuccess(response);
-          })
-        )
-      ),
-      // layer to catch error from effect
-      catchError((e) => of(e))
-    )
-  );
-
   public userProfileFollow$: Observable<Actions> = createEffect(() =>
     this.action.pipe(
-      ofType(profileType.USER_FOLLOW),
+      ofType(profileType.userFollow),
       mergeMap((payload: FollowRequest) =>
         this.profileService.following(payload).pipe(
           catchError((e) => of(e)),
@@ -72,7 +49,7 @@ export class ProfileEffect {
   public profile$: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(profileType.USER_PROFILE),
+      ofType(profileType.userProfile),
       // layer to fetch payload from action
       mergeMap(() =>
         // layer to service send payload to backend

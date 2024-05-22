@@ -9,8 +9,8 @@ import {
   User,
   UserProfile,
 } from '../interfaces/public-profile.interface';
-import { PageableUser } from '../../../../interface/pageable.interface';
-import { FollowRequest, ListeningFollowResponse } from '../../../../interface/follow.interface';
+import { PageableUser } from '../../../../interfaces/pageable.interface';
+import { FollowRequest, ListeningFollowResponse } from '../../../../interfaces/follow.interface';
 import { actionCoreReset } from '../../../../core/actions/reset.action';
 
 type States = Partial<ProfileResponse>;

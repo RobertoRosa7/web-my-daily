@@ -3,16 +3,22 @@
   flex-direction: column;
   height: 100%;
 
+  .container-options,
   mat-dialog-actions {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  mat-dialog-actions {
     justify-content: flex-end;
 
     button {
       min-width: 120px;
     }
   }
-
   .input-happen {
     width: 100%;
+    height: 90%;
   }
 }

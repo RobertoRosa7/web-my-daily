@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/json.decorator';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
 
+export type HttpResponseHappen = HttpResponseDefault<ProfileHappen>;
 export type ProfileHappenObservable = Observable<Array<ProfileHappen> | undefined>;
 
 export class ProfileHappenLike {
@@ -43,13 +44,13 @@ export class ProfileHappen {
   @JsonProperty('name_id')
   public nameId: string | null = '';
   @JsonProperty('updated_at')
-  public updateAt: string | null = '';
+  public updateAt: string | null = new Date().toDateString();
   @JsonProperty('created_at')
-  public createdAt: string | null = '';
+  public createdAt: string | null = new Date().toDateString();
   @JsonProperty('user_id')
   public userId: string = '';
   @JsonProperty('visibility')
-  public visibility: boolean | null = null;
+  public visibility: string | null = null;
   @JsonProperty('what_happen')
   public whatHappen: string = '';
   @JsonProperty({ clazz: ProfileHappenLike })
@@ -59,7 +60,12 @@ export class ProfileHappen {
   public feelings: Feelings = new Feelings();
 }
 
-export class ProfileHappenResponse extends HttpResponseDefault<Array<ProfileHappen>> {
+export class HappenResponsePageable extends HttpResponseDefault<Array<ProfileHappen>> {
   @JsonProperty({ clazz: ProfileHappen })
   public override data: ProfileHappen[] | undefined = undefined;
+}
+
+export class HappenSingleton extends HttpResponseDefault<ProfileHappen> {
+  @JsonProperty({ clazz: ProfileHappen })
+  public override data: ProfileHappen | undefined = undefined;
 }

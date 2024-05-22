@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/json.decorator';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
-import { PageableUser, SingletonOrPageable } from '../../../../interface/pageable.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
+import { PageableUser, SingletonOrPageable } from '../../../../interfaces/pageable.interface';
 import { FollowingStatus } from '../../../../core/enums/base.enum';
 
 export type PageableOrUserProfile = PageableUser | UserProfile;

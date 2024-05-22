@@ -2,7 +2,7 @@ import { createAction } from '@ngrx/store';
 import { authType } from '../types/auth.type';
 import { IAuthState, ILogin, IRegister } from '../interfaces/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
 
 const login = authType.LOGIN;
 const register = authType.LOGIN_REGISTER;

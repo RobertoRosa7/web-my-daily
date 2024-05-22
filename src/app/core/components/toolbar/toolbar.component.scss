@@ -16,3 +16,18 @@
 .spacer {
   flex: 1 1 auto;
 }
+@media screen and (max-width: 768px) {
+  app-input-search {
+    display: none;
+  }
+  .toolbar-row {
+    padding: 0 1rem;
+    .logo {
+      margin-right: 1rem;
+    }
+    button {
+      background-color: var(--white);
+      min-width: 120px;
+    }
+  }
+}

@@ -5,25 +5,16 @@ import { RouterModule } from '@angular/router';
 import { ProfileHappen } from '../../../pages/profile/core/interfaces/profile.happen.interface';
 import { FollowerPipe } from '../../pipes/follwers.pipe';
 import { HappenPublicStatus } from '../../enums/base.enum';
-import { ActionsSubject, Store } from '@ngrx/store';
-import { Observable, concatMap, filter, first, map, of } from 'rxjs';
+import { Observable, concatMap, of } from 'rxjs';
 import { selectorProfileName } from '../../../pages/profile/core/selectors/profile.selector';
 import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogActions, DialogAlert } from '../../../interface/dialogs.interface';
-import {
-  actionProfileHappenDeleteRemote,
-  actionProfileHappensDelete,
-  actionProfileHappensPost,
-} from '../../../pages/profile/core/actions/profile.happens.action';
-import { profileType } from '../../../pages/profile/core/types/profile.type';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { selectHappenError } from '../../../pages/profile/core/selectors/profile.happens.selector';
+import { happenDeleteRollback, happenUpdateRollback } from '../../../pages/profile/core/actions/profile.happens.action';
 import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
+import { Store } from '@ngrx/store';
 
-const deleteLocal = profileType.USER_PROFILE_HAPPENS_DELETE_LOCAL;
 type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
 
 @Component({
@@ -47,123 +38,76 @@ export class FeelingsComponent {
   constructor(
     private readonly store: Store,
     private readonly dialogService: DialogService,
-    private readonly dialog: MatDialog,
-    private readonly actionSubject: ActionsSubject,
-    private readonly snackbar: MatSnackBar
+    private readonly dialog: MatDialog
   ) {}
 
   public edit(data: ProfileHappen) {
-    this.dialog
-      .open(DialogHappenComponent, this.dialogService.dialogConfigHappen({ data }))
-      .afterClosed()
-      .subscribe(console.log);
+    this.dialogService.previousText$.next(data.whatHappen);
+
+    this.openDialogToUpdate(data).subscribe({
+      next: (_) => {},
+      error: (error) => {
+        this.dialogService.showSnackbar(error, 'Não foi possível editar seu post.');
+        this.store.dispatch(
+          happenUpdateRollback({
+            index: this.index,
+            data: { ...data, whatHappen: this.dialogService.previousText$.getValue() },
+          })
+        );
+      },
+    });
   }
 
   public details(happen: ProfileHappen) {}
+
   /**
    * INFO:
    * remove - dispatch pipe to remove card
    *
-   * @param happen ProfileHappen
+   * @param data ProfileHappen
    */
-  public remove(happen: ProfileHappen): void {
+  public remove(data: ProfileHappen): void {
     // open dialog to confirm
-    this.openDialogToDelete(happen).subscribe({
+    this.openDialogToDelete(data).subscribe({
       next: (_) => {},
       error: (error) => {
-        this.snackbar.open(error.error ? error.error.message : 'Não foi possível exlcuir seu post.', 'ok', {
-          duration: 1000,
-        });
-
-        this.store.dispatch(actionProfileHappensPost({ index: this.index, data: happen }));
+        this.dialogService.showSnackbar(error, 'Não foi possível exlcuir seu post.');
+        this.store.dispatch(happenDeleteRollback({ index: this.index, data }));
       },
     });
   }
 
   /**
    * INFO:
-   * create dialog config info
+   * openDialogToUpdate - open dialog to confirm remove
+   *
+   * @param data  ProfileHappen (required)
+   * @returns
    */
-  private get createDialogConfig() {
-    const dataDialog = new DialogAlert();
-    const dialogAction = new DialogActions();
-
-    dataDialog.title = 'Você vai remover este feeling?';
-    dataDialog.message = 'Para continuar clique no em confirmar';
-
-    dialogAction.messageAction = 'Confirmar';
-    dialogAction.messageClose = 'Fechar';
-
-    dataDialog.actions = dialogAction;
-    return dataDialog;
+  private openDialogToUpdate(data: ProfileHappen) {
+    return this.dialog
+      .open(DialogHappenComponent, this.dialogService.dialogConfigHappen({ data }))
+      .afterClosed()
+      .pipe(
+        concatMap((response: ProfileHappen) =>
+          response ? this.dialogService.listeningUpdate(this.index, { ...data, whatHappen: response.whatHappen }) : of()
+        )
+      );
   }
 
   /**
    * INFO:
    * open dialog to confirm remove
-   * @param happen  ProfileHappen (required)
+   *
+   * @param data  ProfileHappen (required)
    * @returns
    */
-  private openDialogToDelete(happen: ProfileHappen) {
-    // open dialog to confirm remove
-
+  private openDialogToDelete(data: ProfileHappen) {
     return this.dialog
-      .open(DialogAlertComponent, this.dialogService.dialogConfig(this.createDialogConfig))
+      .open(DialogAlertComponent, this.dialogService.dialogConfig(this.dialogService.createDialogConfig))
       .afterClosed()
-      .pipe(concatMap((res) => (res ? this.listeningEventDelete(happen) : of())));
-  }
-
-  /**
-   * INFO:
-   * dispatch action local to remove - listening event delete local and show snackbar
-   * @param happen ProfileHappen (required)
-   * @returns Observable<boolean>
-   */
-  private listeningEventDelete(happen: ProfileHappen) {
-    // dispatch action local to remove
-    this.store.dispatch(actionProfileHappensDelete({ index: this.index, data: happen }));
-
-    return this.actionSubject.pipe(
-      filter(({ type }) => type === deleteLocal),
-      first(),
-      concatMap(() => this.openSnackerbar(happen))
-    );
-  }
-
-  /**
-   * INFO:
-   * open snackbar to show option to cancel before delete on remote serve
-   * @param happen ProfileHappen (required)
-   * @returns Observable<boolean>
-   */
-  private openSnackerbar(happen: ProfileHappen) {
-    // open snackbar to show option to cancel before delete on remote serve
-    return this.snackbar
-      .open(`${happen.whatHappen.substring(0, 20)}...`, 'cancelar', { duration: 3000 })
-      .afterDismissed()
-      .pipe(concatMap(({ dismissedByAction }) => this.removeOrCancel(dismissedByAction, happen)));
-  }
-
-  /**
-   * INFO:
-   * removeOrCancel - responsible to excluir on backend or cancel
-   *
-   * @param dismissedByAction boolean
-   * @param happen ProfileHappen
-   * @returns null or Error
-   */
-  private removeOrCancel(dismissedByAction: boolean, happen: ProfileHappen) {
-    if (dismissedByAction) {
-      this.store.dispatch(actionProfileHappensPost({ index: this.index, data: happen }));
-      return of();
-    } else {
-      this.store.dispatch(actionProfileHappenDeleteRemote(happen));
-      return this.store.select(selectHappenError).pipe(
-        filter((error) => !!error),
-        map((e) => {
-          throw new Error(e?.error);
-        })
+      .pipe(
+        concatMap((response: ProfileHappen) => (response ? this.dialogService.listeningDelete(this.index, data) : of()))
       );
-    }
   }
 }

@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { IAuthState } from '../interfaces/auth.interface';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
 import { actionClear, actionLoginError, actionLoginSuccess } from '../actions/auth.action';
 import { HttpErrorResponse } from '@angular/common/http';
 

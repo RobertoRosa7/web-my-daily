@@ -15,6 +15,8 @@ export enum Paths {
 
   getHappen = '/ms-daily/happen/user',
   deleteHappen = '/ms-daily/happen',
+  updateHappen = '/ms-daily/happen',
+  postHappen = '/ms-daily/happen',
 }
 
 export enum HappenPublicStatus {

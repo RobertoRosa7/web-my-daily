@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 import { ProfileResponse, UserProfile } from '../interfaces/profile.interface';
-import { PageableUser } from '../../../../interface/pageable.interface';
+import { PageableUser } from '../../../../interfaces/pageable.interface';
 
 type Profile = MemoizedSelector<object, ProfileResponse>;
 type SelectorProfile = MemoizedSelector<object, UserProfile | null>;
