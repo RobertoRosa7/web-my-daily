@@ -151,7 +151,7 @@
   }
 
   // input happen texteare
-  .dialog-happen .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: rgba(255, 255, 255, 0.5) !important;
   }
   .mat-form-field.no-underline .mat-form-field-underline {
@@ -200,21 +200,23 @@
   // app-followers
   .follow {
     background: transparent;
-
     div {
       background: transparent;
     }
-
     .follwing {
       border-left: 1px solid var(--yellow);
       border-right: 1px solid var(--yellow);
     }
-
     p {
       background: rgb(255, 255, 255, 0.05);
       color: white;
       font-weight: 100;
     }
+  }
+
+  // dialog happen create
+  .dialog-happen .btn-save {
+    color: red;
   }
 }
 

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProfileHappen } from '../../../pages/profile/core/interfaces/profile.happen.interface';
+import { HappenVisibility, ProfileHappen } from '../../../pages/profile/core/interfaces/profile.happen.interface';
 import { dialogData } from '../../../interfaces/dialogs.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -19,13 +19,15 @@ import { selectorUser } from '../../../pages/profile/core/selectors/user.selecto
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class DialogHappenComponent implements OnInit {
+  public readonly happenVisibilty = HappenVisibility;
+
   private readonly store: Store = inject(Store);
   private readonly dialogRef = inject(MatDialogRef<DialogHappenComponent>);
 
   public readonly user$: Observable<User | undefined> = this.store.select(selectorUser);
   public readonly theme$ = this.store.select(selectorTheme);
   public readonly form: FormControl = new FormControl('');
-  public readonly visibility: FormControl = new FormControl('PRIVATE');
+  public readonly visibility: FormControl = new FormControl(HappenVisibility.PRIVATE);
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: dialogData<ProfileHappen>) {}
 
@@ -38,20 +40,31 @@ export class DialogHappenComponent implements OnInit {
     return this.form.value.length;
   }
 
-  public close(value: string, user: User) {
-    console.log(this.visibility.value);
-    this.dialogRef.close(this.buildNewHappen(value, user));
+  public get getVisibility() {
+    return this.visibility.value;
   }
 
-  public buildNewHappen(text: string | null, user: User | null): ProfileHappen {
+  public get getText() {
+    return this.form.value;
+  }
+
+  public close(user: User) {
+    this.dialogRef.close(this.buildNewHappen(user));
+  }
+
+  public buildNewHappen(user: User | null): ProfileHappen {
     const happen = new ProfileHappen();
 
     if (user) {
-      happen.whatHappen = text || '';
       happen.userId = user?.id || '';
       happen.nameId = user?.nameId || '';
-      return happen;
     }
+
+    happen.whatHappen = this.getText || '';
+    happen.visibility = this.getVisibility;
+
+    console.log(happen);
+
     return happen;
   }
 }

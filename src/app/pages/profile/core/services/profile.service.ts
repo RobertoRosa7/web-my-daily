@@ -61,7 +61,7 @@ export class ProfileService {
 
   /**
    * INFO:
-   * updateHappen - update one happen
+   * postHappen - post one happen
    * @returns Observable<HttpResponseDefault<updateHappen>>
    */
   public postHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {

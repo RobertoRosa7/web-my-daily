@@ -90,6 +90,7 @@ export class ProfileRepository {
   public updateHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
     return this.http.put<HttpResponseHappen>(`${this.urlUpdateHappen}/${happen.id}`, {
       text: happen.whatHappen,
+      visibility: happen.visibility,
     });
   }
 
@@ -101,6 +102,7 @@ export class ProfileRepository {
   public postHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
     return this.http.post<HttpResponseHappen>(`${this.urlPostHappen}`, {
       text: happen.whatHappen,
+      visibility: happen.visibility,
     });
   }
 }

@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { happenDeleteRollback, happenUpdateRollback } from '../../../pages/profile/core/actions/profile.happens.action';
 import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
 import { Store } from '@ngrx/store';
+import { BreakLine } from '../../pipes/break-line.pipe';
+import { DialogHappenDetailCompoent } from '../dialog-happen-detail/dialog-happen-detail.component';
 
 type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
 
@@ -22,7 +24,16 @@ type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
   templateUrl: `./feelings.component.html`,
   styleUrl: './feelings.component.scss',
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, FollowerPipe, DialogAlertComponent, DialogHappenComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule,
+    FollowerPipe,
+    DialogAlertComponent,
+    DialogHappenComponent,
+    DialogHappenDetailCompoent,
+    BreakLine,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeelingsComponent {
@@ -58,7 +69,9 @@ export class FeelingsComponent {
     });
   }
 
-  public details(happen: ProfileHappen) {}
+  public details(data: ProfileHappen) {
+    this.dialog.open(DialogHappenDetailCompoent, this.dialogService.dialogConfigHappen({ data }));
+  }
 
   /**
    * INFO:
@@ -90,7 +103,13 @@ export class FeelingsComponent {
       .afterClosed()
       .pipe(
         concatMap((response: ProfileHappen) =>
-          response ? this.dialogService.listeningUpdate(this.index, { ...data, whatHappen: response.whatHappen }) : of()
+          response
+            ? this.dialogService.listeningUpdate(this.index, {
+                ...data,
+                whatHappen: response.whatHappen,
+                visibility: response.visibility,
+              })
+            : of()
         )
       );
   }

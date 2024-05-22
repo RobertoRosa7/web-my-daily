@@ -5,6 +5,12 @@ import { HttpResponseDefault } from '../../../../interfaces/http-response.interf
 export type HttpResponseHappen = HttpResponseDefault<ProfileHappen>;
 export type ProfileHappenObservable = Observable<Array<ProfileHappen> | undefined>;
 
+export enum HappenVisibility {
+  PUBLIC = 'PUBLIC',
+  PRIVATE = 'PRIVATE',
+  FOLLOWERS = 'FOLLOWERS',
+}
+
 export class ProfileHappenLike {
   @JsonProperty('disliked_count')
   public dislikedCount: number = 0;
@@ -44,13 +50,13 @@ export class ProfileHappen {
   @JsonProperty('name_id')
   public nameId: string | null = '';
   @JsonProperty('updated_at')
-  public updateAt: string | null = new Date().toDateString();
+  public updatedAt: string | null = new Date().toDateString();
   @JsonProperty('created_at')
   public createdAt: string | null = new Date().toDateString();
   @JsonProperty('user_id')
   public userId: string = '';
   @JsonProperty('visibility')
-  public visibility: string | null = null;
+  public visibility: HappenVisibility | null = null;
   @JsonProperty('what_happen')
   public whatHappen: string = '';
   @JsonProperty({ clazz: ProfileHappenLike })

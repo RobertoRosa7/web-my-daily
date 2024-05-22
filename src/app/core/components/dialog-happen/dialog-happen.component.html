@@ -1,13 +1,13 @@
 <ng-container *ngIf="user$ | async as user">
   <form class="dialog-happen" [ngClass]="theme$ | async">
-    <span mat-dialog-title>
+    <div class="btn-close">
       <button [tabindex]="-1" matTooltip="fechar" matTooltipPosition="above" [mat-dialog-close]="null" mat-icon-button>
         <mat-icon>close</mat-icon>
       </button>
-    </span>
-    <p>
-      <small>{{ user.nameId }}</small>
-      <small>{{ data.data.updateAt | date }}</small>
+    </div>
+    <p class="title">
+      <span>{{ user.nameId }}</span>
+      <small>{{ data.data.updatedAt | date }}</small>
     </p>
     <mat-dialog-content>
       <mat-form-field class="input-happen">
@@ -26,9 +26,9 @@
       </mat-form-field>
       <div class="container-options">
         <mat-radio-group [formControl]="visibility" aria-label="Select an option">
-          <mat-radio-button value="PUBLIC">Público</mat-radio-button>
-          <mat-radio-button value="FOLLOWERS">Seguidores</mat-radio-button>
-          <mat-radio-button value="PRIVATE">Privado</mat-radio-button>
+          <mat-radio-button [tabindex]="0" [value]="happenVisibilty.PUBLIC">Público</mat-radio-button>
+          <mat-radio-button [tabindex]="0" [value]="happenVisibilty.FOLLOWERS">Seguidores</mat-radio-button>
+          <mat-radio-button [tabindex]="0" [value]="happenVisibilty.PRIVATE">Privado</mat-radio-button>
         </mat-radio-group>
         <small aria-label="total caracteres">Caracteres: {{ totalLength }}</small>
       </div>
@@ -42,7 +42,8 @@
         matTooltip="cancelar"
         role="button"
         [mat-dialog-close]="null"
-        mat-raised-button>
+        class="close"
+        mat-stroked-button>
         cancel
       </button>
       <button
@@ -54,8 +55,9 @@
         matTooltipPosition="above"
         matTooltip="salvar"
         role="button"
-        (click)="close(form.value, user)"
-        mat-raised-button>
+        class="submit"
+        (click)="close(user)"
+        mat-stroked-button>
         salvar
       </button>
     </mat-dialog-actions>

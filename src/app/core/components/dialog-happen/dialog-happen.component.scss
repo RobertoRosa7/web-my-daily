@@ -2,23 +2,51 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 2rem;
+  position: relative;
 
+  .btn-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+  mat-dialog-content {
+    padding: 0;
+    * {
+      word-break: break-all;
+    }
+  }
+  .container-options {
+    * {
+      flex: 1;
+    }
+    small {
+      text-align: end;
+    }
+  }
   .container-options,
-  mat-dialog-actions {
+  mat-dialog-actions,
+  p.title {
     display: flex;
-    align-items: center;
     justify-content: space-between;
   }
 
   mat-dialog-actions {
-    justify-content: flex-end;
-
+    align-items: center;
     button {
-      min-width: 120px;
+      flex: 1;
     }
   }
+
   .input-happen {
     width: 100%;
-    height: 90%;
+    height: 70%;
+  }
+
+  p.title {
+    flex-direction: column;
+    span {
+      font-size: 1.5rem;
+    }
   }
 }

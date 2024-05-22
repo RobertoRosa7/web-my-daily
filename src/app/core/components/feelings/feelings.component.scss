@@ -51,13 +51,10 @@
     align-items: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
-  }
-
-  // content of post
-  .mat-mdc-card-content p {
     font-size: 1.2rem;
     font-weight: 100;
     text-indent: 2rem;
+    word-break: break-all;
   }
 
   // counter of likes
@@ -111,5 +108,15 @@
   // customize material outline icon fill
   .material-symbols-outlined.fill {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  mat-card-subtitle span,
+  mat-card-subtitle mat-icon {
+    font-size: 0.8rem;
+  }
+  .mat-mdc-card-content div {
+    font-size: 1rem;
   }
 }
