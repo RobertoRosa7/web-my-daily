@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Paths } from '../../../../core/enums/base.enum';
-import { Url } from '../../../../core/decorators/url.decorator';
+import { Paths } from '../../../../core/enums/bases/base.enum';
+import { Url } from '../../../../core/decorators/urls/url.decorator';
 import { Observable } from 'rxjs';
 import { ProfileHappen, ProfileHappenResponse } from '../interfaces/public-profile.happen.interface';
 import { ProfileResponse } from '../interfaces/public-profile.interface';
-import { FollowRequest } from '../../../../interfaces/follow.interface';
-import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
+import { FollowRequest } from '../../../../core/interfaces/follows/follow.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 
 @Injectable({
   providedIn: 'root',

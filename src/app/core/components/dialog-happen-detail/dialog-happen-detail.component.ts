@@ -8,18 +8,19 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { dialogData } from '../../../interfaces/dialogs.interface';
-import { HappenVisibility, ProfileHappen } from '../../../pages/profile/core/interfaces/profile.happen.interface';
+import { dialogData } from '../../interfaces/dialogs/dialogs.interface';
+import { HappenVisibility, ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
 import * as Highcharts from 'highcharts';
+import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
 
 @Component({
   selector: 'app-dialog-happen-detail',
   templateUrl: './dialog-happen-detail.component.html',
   styleUrl: './dialog-happen-detail.component.scss',
   standalone: true,
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, FollowerPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogHappenDetailCompoent implements OnInit, AfterViewInit {

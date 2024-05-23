@@ -4,13 +4,13 @@ import * as selectAuth from './core/selectors/auth.selector';
 import { Observable, Subscription, delay, filter, from, map, mergeMap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { IAuthState } from './core/interfaces/auth.interface';
-import { HttpResponseDefault } from '../../interfaces/http-response.interface';
+import { HttpResponseDefault } from '../../core/interfaces/https/http-response.interface';
 import { actionClear, actionRegiser, actionLogin, actionGoto, actionLoading } from './core/actions/auth.action';
 import { authType } from './core/types/auth.type';
 import { Router } from '@angular/router';
 import { AuthService } from './core/services/auth.services';
 import { isPlatformBrowser } from '@angular/common';
-import { actionCoreReset } from '../../core/actions/reset.action';
+import { actionCoreReset } from '../../core/actions/resets/reset.action';
 import { actionColor } from '../profile/core/actions/color.action';
 
 @Component({

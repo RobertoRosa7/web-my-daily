@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ILogin, IRegister, loginResponse, registerResponse } from '../interfaces/auth.interface';
 import { Observable } from 'rxjs';
-import { Paths } from '../../../../core/enums/base.enum';
-import { Url } from '../../../../core/decorators/url.decorator';
+import { Paths } from '../../../../core/enums/bases/base.enum';
+import { Url } from '../../../../core/decorators/urls/url.decorator';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { actionProfileSuccess, actionUserFollowSuccess } from '../actions/public-profile.action';
 import { actionSocketUserMetrics } from '../actions/public-socketio.action';
-import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
+import { JsonMapProperties } from '../../../../core/decorators/jsons/json.decorator';
 import {
   MsUserProfileResponse,
   ProfileResponse,
@@ -9,9 +9,9 @@ import {
   User,
   UserProfile,
 } from '../interfaces/public-profile.interface';
-import { PageableUser } from '../../../../interfaces/pageable.interface';
-import { FollowRequest, ListeningFollowResponse } from '../../../../interfaces/follow.interface';
-import { actionCoreReset } from '../../../../core/actions/reset.action';
+import { PageableUser } from '../../../../core/interfaces/pageables/pageable.interface';
+import { FollowRequest, ListeningFollowResponse } from '../../../../core/interfaces/follows/follow.interface';
+import { actionCoreReset } from '../../../../core/actions/resets/reset.action';
 
 type States = Partial<ProfileResponse>;
 const states: States = {};

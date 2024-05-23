@@ -10,8 +10,8 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
-import { authInterceptor } from './core/interceptors/core.interceptor';
-import { colorReducer } from './core/reducers/color.reducer';
+import { authInterceptor } from './core/interceptors/colors/core.interceptor';
+import { colorReducer } from './core/reducers/colors/color.reducer';
 import { userReducer } from './pages/profile/core/reducers/user.reducer';
 
 registerLocaleData(localePt, 'pt');

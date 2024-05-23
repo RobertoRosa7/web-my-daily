@@ -6,9 +6,9 @@ import { pageableProfilePublicMock } from '../../../mock/profile.mock';
 import { User } from '../../profile/core/interfaces/profile.interface';
 import { selectorPageablePub } from '../core/selectors/public-profile.selector';
 import { actionProfilePublic, actionUserFollow } from '../core/actions/public-profile.action';
-import { FollowRequest } from '../../../interfaces/follow.interface';
+import { FollowRequest } from '../../../core/interfaces/follows/follow.interface';
 import * as Highcharts from 'highcharts';
-import { stringType } from '../../../core/types/color.type';
+import { stringType } from '../../../core/types/colors/color.type';
 import { actionColor } from '../../profile/core/actions/color.action';
 
 @Component({

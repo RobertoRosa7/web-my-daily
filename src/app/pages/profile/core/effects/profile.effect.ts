@@ -10,7 +10,7 @@ import { actionProfileError, actionProfileSuccess, actionUserFollowSuccess } fro
 import { actionLoading } from '../../../auth/core/actions/auth.action';
 import { io } from 'socket.io-client';
 import { environment } from '../../../../../environments/environment';
-import { FollowRequest } from '../../../../interfaces/follow.interface';
+import { FollowRequest } from '../../../../core/interfaces/follows/follow.interface';
 
 /**
  * @see: https://ngrx.io/guide/effects

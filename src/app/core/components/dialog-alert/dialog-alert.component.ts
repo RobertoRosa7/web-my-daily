@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogAlert } from '../../../interfaces/dialogs.interface';
+import { DialogAlert } from '../../interfaces/dialogs/dialogs.interface';
 
 @Component({
   selector: 'app-dialog-alert',

@@ -2,11 +2,11 @@ import { Component, inject } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogService } from '../../services/dialog/dialog.service';
-import { ProfileHappen } from '../../../pages/profile/core/interfaces/profile.happen.interface';
+import { DialogService } from '../../services/dialogs/dialog.service';
+import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { concatMap, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { happenPostRollback } from '../../../pages/profile/core/actions/profile.happens.action';
+import { happenPostRollback } from '../../actions/happens/profile.happens.action';
 
 @Component({
   selector: 'app-button-fab-create',

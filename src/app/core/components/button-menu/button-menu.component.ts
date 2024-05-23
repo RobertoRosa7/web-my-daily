@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { selectorTheme } from '../../selectors/color.selector';
+import { selectorTheme } from '../../selectors/colors/color.selector';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';

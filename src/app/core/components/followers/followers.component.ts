@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { FollowerPipe } from '../../pipes/follwers.pipe';
+import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
 import { SharedModule } from '../../../shared/shared.module';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
-import { DialogService } from '../../services/dialog/dialog.service';
+import { DialogService } from '../../services/dialogs/dialog.service';
 import { AuthService } from '../../../pages/auth/core/services/auth.services';
-import { FollowRequest } from '../../../interfaces/follow.interface';
+import { FollowRequest } from '../../interfaces/follows/follow.interface';
 import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
-import { FollowingStatus } from '../../enums/base.enum';
-import { DialogActions, DialogAlert } from '../../../interfaces/dialogs.interface';
+import { FollowingStatus } from '../../enums/bases/base.enum';
+import { DialogActions, DialogAlert } from '../../interfaces/dialogs/dialogs.interface';
 
 @Component({
   selector: 'app-follwers',

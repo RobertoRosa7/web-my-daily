@@ -4,16 +4,16 @@ import { Store } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 import { Socket, io } from 'socket.io-client';
 import { actionProfileRequest } from './core/actions/profile.action';
-import { happenRequest } from './core/actions/profile.happens.action';
+import { happenRequest } from '../../core/actions/happens/profile.happens.action';
 import { selectorId } from './core/selectors/user.selector';
-import { selectorTheme } from '../../core/selectors/color.selector';
+import { selectorTheme } from '../../core/selectors/colors/color.selector';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
-import { ListeningFollowResponse } from '../../interfaces/follow.interface';
+import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.interface';
 import { actionSocketUserMetrics } from './core/actions/socketio.action';
 import { actionUserFollowers } from './core/actions/user.action';
-import { JsonMapProperties } from '../../core/decorators/json.decorator';
+import { JsonMapProperties } from '../../core/decorators/jsons/json.decorator';
 import { actionColor } from './core/actions/color.action';
-import { stringType } from '../../core/types/color.type';
+import { stringType } from '../../core/types/colors/color.type';
 
 @Component({
   selector: 'app-profile',

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector, MemoizedSelector } from '@ngrx/store';
 import { IAuthState } from '../interfaces/auth.interface';
-import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 
 // declare type to simply
 type auth = HttpResponseDefault<IAuthState>;

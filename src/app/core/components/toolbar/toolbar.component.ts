@@ -9,7 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
-import { selectorTheme } from '../../selectors/color.selector';
+import { selectorTheme } from '../../selectors/colors/color.selector';
 import { InputSearchComponent } from '../input-search/input-search.component';
 
 @Component({

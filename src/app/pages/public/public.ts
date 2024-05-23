@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit, PLATFORM_ID, inject } from 
 import { Store } from '@ngrx/store';
 import { Observable, Observer } from 'rxjs';
 import { Socket } from 'socket.io-client';
-import { ListeningFollowResponse } from '../../interfaces/follow.interface';
-import { selectorTheme } from '../../core/selectors/color.selector';
+import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.interface';
+import { selectorTheme } from '../../core/selectors/colors/color.selector';
 import { selectorId } from '../profile/core/selectors/user.selector';
 
 @Component({

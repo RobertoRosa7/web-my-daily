@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Profile } from '../profile';
 import { Store } from '@ngrx/store';
 import { selectorProfile } from '../core/selectors/profile.selector';
-import { ProfileHappenObservable } from '../core/interfaces/profile.happen.interface';
-import { selectorHappens } from '../core/selectors/profile.happens.selector';
+import { ProfileHappenObservable } from '../../../core/interfaces/happens/profile.happen.interface';
+import { selectorHappens } from '../../../core/selectors/happens/profile.happens.selector';
 import { ProfileObservable } from '../core/interfaces/profile.interface';
 
 @Component({

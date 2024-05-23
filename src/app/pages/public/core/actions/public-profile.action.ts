@@ -2,32 +2,28 @@ import { createAction } from '@ngrx/store';
 import { profileType } from '../types/public-profile.type';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProfileResponse } from '../interfaces/public-profile.interface';
-import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
-import { FollowRequest } from '../../../../interfaces/follow.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
+import { FollowRequest } from '../../../../core/interfaces/follows/follow.interface';
 
-export const actionProfileRequest = createAction(profileType.USER_PROFILE);
-export const actionProfileSuccess = createAction(
-  profileType.USER_PROFILE_SUCESS,
-  (payload: ProfileResponse) => payload
-);
+const profile = profileType.USER_PROFILE;
+const success = profileType.USER_PROFILE_SUCESS;
+const publicProfile = profileType.USER_PROFILE_PUBLIC;
+const error = profileType.USER_PROFILE_ERROR;
+const followSuccess = profileType.USER_FOLLOW_SUCCESS;
+const follow = profileType.USER_FOLLOW;
 
-export const actionProfilePublicSuccess = createAction(
-  profileType.USER_PROFILE_SUCESS,
-  (payload: ProfileResponse | HttpResponseDefault<null>) => payload
-);
+const callbackSuccess = (payload: ProfileResponse) => payload;
+const callbackProfile = (payload: ProfileResponse | HttpResponseDefault<null>) => payload;
+const callbackProfilePublic = (payload: { name: string | null }) => payload;
+const callbackError = (payload: { error: HttpErrorResponse }) => payload;
+const callbackRequestFollow = (payload: FollowRequest) => payload;
+const callbackFollowSuccess = (payload: FollowRequest) => payload;
 
-export const actionProfilePublic = createAction(
-  profileType.USER_PROFILE_PUBLIC,
-  (payload: { name: string | null }) => payload
-);
+export const actionProfileRequest = createAction(profile);
+export const actionProfileSuccess = createAction(success, callbackSuccess);
+export const actionProfilePublicSuccess = createAction(success, callbackProfile);
 
-export const actionProfileError = createAction(
-  profileType.USER_PROFILE_ERROR,
-  (payload: { error: HttpErrorResponse }) => payload
-);
-
-export const actionUserFollow = createAction(profileType.USER_FOLLOW, (payload: FollowRequest) => payload);
-export const actionUserFollowSuccess = createAction(
-  profileType.USER_FOLLOW_SUCCESS,
-  (payload: FollowRequest) => payload
-);
+export const actionProfilePublic = createAction(publicProfile, callbackProfilePublic);
+export const actionProfileError = createAction(error, callbackError);
+export const actionUserFollow = createAction(follow, callbackRequestFollow);
+export const actionUserFollowSuccess = createAction(followSuccess, callbackFollowSuccess);

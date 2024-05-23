@@ -2,7 +2,7 @@
 
 // theme light
 .light-mode {
-  background: var(--color-white-brightness);
+  background: var(--white);
   // button menu
   .btn-menu {
     @include btn-icon-radio;

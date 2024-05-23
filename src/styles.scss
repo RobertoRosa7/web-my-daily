@@ -9,8 +9,11 @@
 // root pallet colors
 :root {
   // light
+  --border-dark-light: #999;
+
   --text-accent: #ff4081;
   --text-light: #08090c50;
+  --text-white: #333;
   --text-middle-orange: #e67e22;
   --text-middle-light: #585858;
   --text-green: #009688;
@@ -20,7 +23,6 @@
   --color-whitesmoke: whitesmoke;
   --color-medium-white: #fafafa;
   --color-white-brightness: rgba(224, 224, 224, 1);
-
   --color-light-soft: #8b8b8b;
 
   //dark
@@ -79,7 +81,7 @@
   --brown-dark: #73635b;
   --brown-darker: #4e433f;
 
-  --profile-cover: linear-gradient(-45deg, var(--dark) 20%, var(--color-dark-blue-darkness) 80%, var(--primary) 5%);
+  --profile-cover: linear-gradient(-45deg, rgba(59, 59, 59, 0.5) 20%, var(--white) 80%, var(--color-whitesmoke) 5%);
   --home-cover: linear-gradient(-45deg, var(--primary) 20%, var(--dark) 80%, var(--color-dark-blue-darkness) 5%);
   --public-profile-cover: linear-gradient(
     -45deg,

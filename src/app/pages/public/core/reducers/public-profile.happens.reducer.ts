@@ -7,7 +7,7 @@ import {
   actionProfileHappensSuccess,
 } from '../actions/public-profile.happens.action';
 
-import { actionCoreReset } from '../../../../core/actions/reset.action';
+import { actionCoreReset } from '../../../../core/actions/resets/reset.action';
 import { HttpErrorResponse } from '@angular/common/http';
 
 type States = Partial<ProfileHappenResponse>;

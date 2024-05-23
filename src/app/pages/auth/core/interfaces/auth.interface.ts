@@ -1,4 +1,4 @@
-import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 
 export interface ILogin {
   email: string;

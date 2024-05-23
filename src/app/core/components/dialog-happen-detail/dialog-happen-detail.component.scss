@@ -14,8 +14,7 @@
   .thumbs-down,
   .thumbs-up,
   .visibility,
-  .row,
-  .icon {
+  .row {
     display: flex;
     gap: 1rem;
   }
@@ -43,8 +42,7 @@
   .accuracy,
   .thumbs-down,
   .thumbs-up,
-  .visibility,
-  .icon {
+  .visibility {
     flex-direction: column;
     flex: 1;
     align-items: center;
@@ -53,17 +51,29 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    color: var(--white);
+    color: var(--dark);
+    z-index: 1;
   }
   .top {
-    background: #303547;
-    box-shadow: inset 0rem 1rem 15rem rgba(0, 0, 0, 0.5);
+    // background: rgba(59, 59, 59, 0.5);
+    // box-shadow: inset 0rem 1rem 15rem rgba(0, 0, 0, 0.5);
     min-height: 10rem;
-    color: var(--white);
+    color: var(--dark);
     padding: 2rem;
   }
   .section {
     flex: 1;
+  }
+  .satisfied,
+  .accuracy,
+  .score-pos,
+  .score-neg,
+  .visibility,
+  .thumbs-up,
+  .thumbs-down {
+    border: 1px solid var(--border-dark-light);
+    border-radius: 0.5rem;
+    // background-color: rgba(59, 59, 59, 0.1);
   }
   .score-avg-pace {
     color: var(--yellow);
@@ -77,9 +87,13 @@
   .classifications {
     flex-wrap: wrap;
     * {
-      min-width: 150px;
       text-align: center;
     }
+  }
+  .updated-at {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
   }
   .updated-at,
   .updated-at .icon {
@@ -93,5 +107,15 @@
   }
   .happy {
     color: var(--green);
+  }
+  .icon {
+    display: flex;
+    align-items: center;
+    min-width: 6rem;
+    justify-content: space-evenly;
+  }
+
+  .section {
+    margin-top: 1rem;
   }
 }

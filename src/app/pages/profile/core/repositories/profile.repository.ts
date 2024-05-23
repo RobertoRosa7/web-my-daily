@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Paths } from '../../../../core/enums/base.enum';
-import { Url } from '../../../../core/decorators/url.decorator';
+import { Paths } from '../../../../core/enums/bases/base.enum';
+import { Url } from '../../../../core/decorators/urls/url.decorator';
 import { Observable } from 'rxjs';
-import { HttpResponseHappen, ProfileHappen, HappenResponsePageable } from '../interfaces/profile.happen.interface';
 import { ProfileResponse } from '../interfaces/profile.interface';
-import { FollowRequest } from '../../../../interfaces/follow.interface';
-import { HttpResponseDefault } from '../../../../interfaces/http-response.interface';
+import { FollowRequest } from '../../../../core/interfaces/follows/follow.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,23 +14,11 @@ export class ProfileRepository {
   @Url(Paths.getProfile)
   private urlProfile!: string;
 
-  @Url(Paths.getHappen)
-  private urlProfileHappen!: string;
-
   @Url(Paths.profilePublic)
   private urlProfilePublic!: string;
 
   @Url(Paths.userFollow)
   private urlUserFollowing!: string;
-
-  @Url(Paths.deleteHappen)
-  private urlDeleteHappen!: string;
-
-  @Url(Paths.updateHappen)
-  private urlUpdateHappen!: string;
-
-  @Url(Paths.postHappen)
-  private urlPostHappen!: string;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -43,15 +30,6 @@ export class ProfileRepository {
    */
   public getUseProfile(): Observable<ProfileResponse> {
     return this.http.get<ProfileResponse>(this.urlProfile);
-  }
-
-  /**
-   * INFO:
-   * getHappens - layer 0
-   * @returns Observable<ProfileHappenResponseAsList>
-   */
-  public getHappens(): Observable<HappenResponsePageable> {
-    return this.http.get<HappenResponsePageable>(this.urlProfileHappen);
   }
 
   /**
@@ -71,38 +49,5 @@ export class ProfileRepository {
    */
   public following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
     return this.http.put<HttpResponseDefault<string>>(`${this.urlUserFollowing}`, follower);
-  }
-
-  /**
-   * INFO:
-   * deleteHappen - delete one happen
-   * @returns Observable<HttpResponseDefault<string>>
-   */
-  public deleteHappen(happen: ProfileHappen): Observable<HttpResponseDefault<void>> {
-    return this.http.delete<HttpResponseDefault<void>>(`${this.urlDeleteHappen}/${happen.id}`);
-  }
-
-  /**
-   * INFO:
-   * updateHappen - update one happen
-   * @returns Observable<HttpResponseDefault<string>>
-   */
-  public updateHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
-    return this.http.put<HttpResponseHappen>(`${this.urlUpdateHappen}/${happen.id}`, {
-      text: happen.whatHappen,
-      visibility: happen.visibility,
-    });
-  }
-
-  /**
-   * INFO:
-   * postHappen - update one happen
-   * @returns Observable<HttpResponseDefault<string>>
-   */
-  public postHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
-    return this.http.post<HttpResponseHappen>(`${this.urlPostHappen}`, {
-      text: happen.whatHappen,
-      visibility: happen.visibility,
-    });
   }
 }

@@ -8,3 +8,46 @@
     background-color: transparent;
   }
 }
+
+.home.timeline {
+  background-color: #f9930024;
+  // tab timeline
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border: none;
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: inherit;
+  }
+  .mat-form-field.no-underline .mat-form-field-underline {
+    display: none;
+  }
+  // input search remove underline coloer
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent;
+  }
+  // remove filled background search input
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background: transparent;
+    border: 1px solid var(--border-dark-light);
+    border-radius: 1rem;
+  }
+  // button menu
+  .btn-menu {
+    // change color icon from button
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+
+    mat-icon {
+      color: var(--color-dark);
+    }
+  }
+}
+
+.home.sentiment {
+  background-color: blue;
+}
+
+.home.explore {
+  background-color: yellow;
+}

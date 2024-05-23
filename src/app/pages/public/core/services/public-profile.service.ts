@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ProfileResponse, ProfileSingleResponse } from '../interfaces/public-profile.interface';
 import { ProfileRepository } from '../repositories/public-profile.repository';
-import { JsonMapProperties } from '../../../../core/decorators/json.decorator';
-import { PageableUser } from '../../../../interfaces/pageable.interface';
+import { JsonMapProperties } from '../../../../core/decorators/jsons/json.decorator';
+import { PageableUser } from '../../../../core/interfaces/pageables/pageable.interface';
 
 @Injectable({
   providedIn: 'root',

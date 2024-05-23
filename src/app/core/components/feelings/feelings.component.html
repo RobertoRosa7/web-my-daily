@@ -95,16 +95,19 @@
         <div matTooltipPosition="above" matTooltip="Cutir">
           <small>{{ happen.likes.likedCount | follows }}</small>
           <button mat-icon-button role="button" aria-describedby="favorite">
-            <ng-container *ngIf="userName$ | async as data">
-              <mat-icon *ngIf="data.id !== happen.userId" aria-label="favorite">favorite_outline</mat-icon>
-              <mat-icon *ngIf="data.id === happen.userId" aria-label="favorite">favorite</mat-icon>
-            </ng-container>
+            <mat-icon *ngIf="!happen.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
+            <mat-icon *ngIf="happen.likes.isLiked" aria-label="favorite">favorite</mat-icon>
           </button>
         </div>
         <div matTooltipPosition="above" matTooltip="Não curtir">
           <small>{{ happen.likes.dislikedCount | follows }}</small>
           <button mat-icon-button role="button" aria-describedby="not-favorite">
-            <span aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </span>
+            <span *ngIf="!happen.likes.isDisliked" aria-label="not-favorite" class="material-symbols-outlined">
+              thumb_down
+            </span>
+            <mat-icon *ngIf="happen.likes.isDisliked" aria-label="not-favorite" class="material-symbols-outlined">
+              thumb_down
+            </mat-icon>
           </button>
         </div>
       </div>

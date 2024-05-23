@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectorTheme } from '../../core/selectors/color.selector';
+import { selectorTheme } from '../../core/selectors/colors/color.selector';
 import { actionColor } from '../profile/core/actions/color.action';
-import { stringType } from '../../core/types/color.type';
+import { stringType } from '../../core/types/colors/color.type';
 import { selectorId } from '../profile/core/selectors/user.selector';
 import { Observable } from 'rxjs';
 
@@ -23,8 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(
       actionColor({
-        theme: 'home',
-        background: stringType.profileCover,
+        theme: 'home timeline',
       })
     );
   }

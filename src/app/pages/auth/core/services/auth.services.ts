@@ -3,7 +3,7 @@ import { ILogin, IRegister, loginResponse, registerResponse } from '../interface
 import { clearText } from '../../../../utils/regex/utils.regex.validators';
 import { Observable } from 'rxjs';
 import { AuthRepository } from '../repositories/auth.repository';
-import { LocalStorageService } from '../../../../core/services/localstorage/localstorage.service';
+import { LocalStorageService } from '../../../../core/services/localstorages/localstorage.service';
 
 @Injectable({
   providedIn: 'root',

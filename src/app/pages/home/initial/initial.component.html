@@ -1,5 +1,5 @@
 <div [ngClass]="theme$ | async" class="home">
-  <mat-tab-group class="w-full" selectedIndex="1" disablePagination="">
+  <mat-tab-group (selectedTabChange)="onTabChange($event)" class="w-full" selectedIndex="1" disablePagination="">
     <mat-tab>
       <ng-template mat-tab-label>
         <div class="flex items-center">
@@ -7,14 +7,9 @@
           <mat-icon class="text-xl ml-1 mb-1">explore</mat-icon>
         </div>
       </ng-template>
-      <div class="bg-slate-200 h-[86.6vh] text-gray-800" class="container-pup">
+      <div>
         <app-input-search></app-input-search>
         <p>Novos feelingers</p>
-        <app-initial-explore
-          [id]="userId$ | async"
-          *ngFor="let profile of userPageble$ | async"
-          (socketio)="onSocketio($event)"
-          [profile]="profile"></app-initial-explore>
       </div>
     </mat-tab>
 
@@ -25,9 +20,7 @@
           <mat-icon class="text-xl ml-1 mb-1">home</mat-icon>
         </div>
       </ng-template>
-      <div class="bg-slate-300 h-[86.6vh] text-gray-800">
-        <app-initial-main></app-initial-main>
-      </div>
+      <app-timeline></app-timeline>
     </mat-tab>
 
     <mat-tab>
@@ -37,9 +30,7 @@
           <mat-icon class="text-xl ml-1 mb-1">sentiment_satisfied</mat-icon>
         </div>
       </ng-template>
-      <div class="bg-slate-400 h-[86.6vh] text-gray-800">
-        <app-initial-feelings></app-initial-feelings>
-      </div>
+      <app-feelingers></app-feelingers>
     </mat-tab>
   </mat-tab-group>
 </div>

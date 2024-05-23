@@ -3,11 +3,11 @@ import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { FollowingStatus } from '../../enums/base.enum';
+import { FollowingStatus } from '../../enums/bases/base.enum';
 import { Observable } from 'rxjs';
 import { selectorId } from '../../../pages/profile/core/selectors/user.selector';
 import { User } from '../../../pages/profile/core/interfaces/profile.interface';
-import { FollowRequest } from '../../../interfaces/follow.interface';
+import { FollowRequest } from '../../interfaces/follows/follow.interface';
 import { Store } from '@ngrx/store';
 
 @Component({
