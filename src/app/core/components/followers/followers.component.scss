@@ -78,8 +78,8 @@
     min-height: 6rem;
     justify-content: center;
     align-items: center;
-    margin-left: -1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
 
     .follwing {
       margin-left: 0.1rem;
@@ -88,11 +88,14 @@
       padding-right: 0.1rem;
     }
     div {
+      flex: 0.5;
       display: flex;
       padding: 0.5rem;
+
       p {
         font-size: 0.7rem;
         line-height: 0.7rem;
+        min-width: 120px;
       }
       p:first-child {
         font-weight: bold;

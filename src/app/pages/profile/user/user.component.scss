@@ -2,8 +2,6 @@
 
 // user page
 .user {
-  // page
-  @include mt;
   .page {
     @include size-page;
     .container-feelings {
@@ -86,9 +84,6 @@
         max-height: 30rem;
         overflow-y: auto;
       }
-      .container-user-details {
-        margin-top: -9.5rem;
-      }
       .container-photo,
       .container-followers,
       .image,
@@ -96,11 +91,13 @@
         display: flex;
       }
       .container-photo {
-        min-height: 20rem;
+        background-color: white;
+        min-height: 0;
         gap: 1rem;
         position: relative;
         padding-left: 1rem;
         padding-right: 1rem;
+        align-items: center;
         .photo {
           width: inherit;
           height: inherit;
