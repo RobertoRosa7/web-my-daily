@@ -15,7 +15,7 @@
       <app-user-details [profile]="userProfile$ | async"></app-user-details>
     </div>
     @for (happen of profileHappens$ | async; track $index) {
-    <app-feelings [index]="$index" [happen]="happen"></app-feelings>
+    <app-feelings [id]="userId$ | async" [index]="$index" [happen]="happen"></app-feelings>
     }
   </div>
 </main>

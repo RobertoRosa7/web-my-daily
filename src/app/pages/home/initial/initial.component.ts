@@ -7,6 +7,7 @@ import { actionUserFollow } from '../../profile/core/actions/profile.action';
 import { map } from 'rxjs';
 import { actionColor } from '../../profile/core/actions/color.action';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { backgroundType } from '../../../core/types/colors/color.type';
 
 @Component({
   selector: 'app-initial',
@@ -15,6 +16,7 @@ import { MatTabChangeEvent } from '@angular/material/tabs';
 })
 export class InitialComponent extends HomeComponent implements OnInit {
   public readonly userPageble$ = this.store.select(selectorPageablePub).pipe(map((res) => res?.content));
+
   constructor(protected override readonly store: Store) {
     super(store);
   }
@@ -27,8 +29,8 @@ export class InitialComponent extends HomeComponent implements OnInit {
 
   public onTabChange({ index }: MatTabChangeEvent): void {
     const tabIndex: any = {
-      0: () => this.store.dispatch(actionColor({ theme: 'home explore' })),
-      1: () => this.store.dispatch(actionColor({ theme: 'home timeline' })),
+      0: () => this.store.dispatch(actionColor({ theme: 'home explore', background: backgroundType.profileCover })),
+      1: () => this.store.dispatch(actionColor({ theme: 'home timeline', background: backgroundType.socialHub })),
       2: () => this.store.dispatch(actionColor({ theme: 'home sentiment' })),
     };
     tabIndex[index]();

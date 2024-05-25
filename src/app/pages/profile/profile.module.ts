@@ -16,8 +16,7 @@ import { ProfileService } from './core/services/profile.service';
 import { LocalStorageService } from '../../core/services/localstorages/localstorage.service';
 import { provideEffects } from '@ngrx/effects';
 import { ProfileEffect } from './core/effects/profile.effect';
-import { profileHappenReducer } from '../../core/reducers/happens/profile.happens.reducer';
-import { ProfileHappensEffect } from '../../core/effects/happens/profile.happens.effect';
+import { happenReducer } from '../../core/reducers/happens/profile.happens.reducer';
 import { InputPhotoComponent } from '../../core/components/input-photo/input-photo.component';
 import { profileReducer } from './core/reducers/profile.reducer';
 import { userReducer } from './core/reducers/user.reducer';
@@ -25,6 +24,8 @@ import { FollowersComponent } from '../../core/components/followers/followers.co
 import { ButtonFabCreateComponent } from '../../core/components/button-fab-create/button-fab-create.component';
 import { HappenService } from '../../core/services/happens/happen.service';
 import { HappenRepository } from '../../core/repositories/happen.repository';
+import { HappensEffect } from '../../core/effects/happens/profile.happens.effect';
+import { LikeEffect } from '../../core/effects/happens/like.effect';
 
 @NgModule({
   declarations: [Profile, UserComponent, SettingComponent],
@@ -36,15 +37,16 @@ import { HappenRepository } from '../../core/repositories/happen.repository';
     CoverComponent,
     FollowersComponent,
     FeelingsComponent,
+    FeelingsComponent,
     UserDetailsComponent,
     InputPhotoComponent,
     ButtonFabCreateComponent,
   ],
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),
-    provideState({ name: 'profileHappens', reducer: profileHappenReducer }),
+    provideState({ name: 'profileHappens', reducer: happenReducer }),
     provideState({ name: 'user', reducer: userReducer }),
-    provideEffects([ProfileEffect, ProfileHappensEffect]),
+    provideEffects([ProfileEffect, HappensEffect, LikeEffect]),
     ProfileRepository,
     ProfileService,
     LocalStorageService,

@@ -5,10 +5,10 @@
     @include size-page;
 
     // container app-photo and app-followers
+    .container-followers,
     .box {
       display: flex;
       gap: 1rem;
-      margin-top: 9rem;
       * {
         flex: 1;
       }

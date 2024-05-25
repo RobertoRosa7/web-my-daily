@@ -1,4 +1,6 @@
 <div [ngClass]="theme$ | async" class="home">
+  <app-cover></app-cover>
+
   <mat-tab-group (selectedTabChange)="onTabChange($event)" class="w-full" selectedIndex="1" disablePagination="">
     <mat-tab>
       <ng-template mat-tab-label>
@@ -10,6 +12,11 @@
       <div>
         <app-input-search></app-input-search>
         <p>Novos feelingers</p>
+        <app-initial-explore
+          [id]="userId$ | async"
+          *ngFor="let profile of userPageble$ | async"
+          (socketio)="onSocketio($event)"
+          [profile]="profile"></app-initial-explore>
       </div>
     </mat-tab>
 

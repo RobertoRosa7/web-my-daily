@@ -12,13 +12,12 @@ import { SharedModule } from '../../../shared/shared.module';
   template: `
     <button
       class="btn-menu"
-      [ngClass]="theme$ | async"
       disableRipple="true"
       matTooltip="Menu"
       [matMenuTriggerFor]="menus"
-      mat-icon-button
+      mat-button
       aria-label="Menu">
-      <mat-icon>menu</mat-icon>
+      Menu
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
       <button matTooltipPosition="left" mat-menu-item matTooltip="Inicial" routerLink="/home/initial">

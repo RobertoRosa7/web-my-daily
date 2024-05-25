@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
+import { DisLikeRequest, LikeRequest, ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
 import { HappenPublicStatus } from '../../enums/bases/base.enum';
 import { Observable, concatMap, of } from 'rxjs';
@@ -16,6 +16,9 @@ import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component'
 import { Store } from '@ngrx/store';
 import { BreakLine } from '../../pipes/break-line/break-line.pipe';
 import { DialogHappenDetailCompoent } from '../dialog-happen-detail/dialog-happen-detail.component';
+import { actionDislikedLocal, actionLikedLocal, actionLikedRemote } from '../../actions/happens/likes.action';
+import { SnackBarActions } from '../../interfaces/dialogs/dialogs.interface';
+import { DialogHelperService } from '../../services/dialogs/dialog-helper.service';
 
 type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
 
@@ -46,14 +49,31 @@ export class FeelingsComponent {
   @Input({ required: true })
   public index!: number;
 
+  @Input()
+  public id!: undefined | string | null;
+
   constructor(
     private readonly store: Store,
     private readonly dialogService: DialogService,
     private readonly dialog: MatDialog
   ) {}
 
+  public disliked(disliked: boolean, happen: ProfileHappen): void {
+    DialogHelperService.previousDisLike$.next(!disliked);
+    const request = DialogHelperService.dislikeBuilder(disliked, happen);
+    this.store.dispatch(actionDislikedLocal({ index: this.index, request }));
+    this.dialogService.openSnackerbar(this.index, happen, SnackBarActions.disliked).subscribe(console.log);
+  }
+
+  public liked(liked: boolean, happen: ProfileHappen): void {
+    DialogHelperService.previousLike$.next(!liked);
+    const request = DialogHelperService.likedBuilder(liked, happen);
+    this.store.dispatch(actionLikedLocal({ index: this.index, request }));
+    this.dialogService.openSnackerbar(this.index, happen, SnackBarActions.liked).subscribe(console.log);
+  }
+
   public edit(data: ProfileHappen) {
-    this.dialogService.previousText$.next(data.whatHappen);
+    DialogHelperService.previousText$.next(data.whatHappen);
 
     this.openDialogToUpdate(data).subscribe({
       next: (_) => {},
@@ -62,7 +82,7 @@ export class FeelingsComponent {
         this.store.dispatch(
           happenUpdateRollback({
             index: this.index,
-            data: { ...data, whatHappen: this.dialogService.previousText$.getValue() },
+            data: { ...data, whatHappen: DialogHelperService.previousText$.getValue() },
           })
         );
       },

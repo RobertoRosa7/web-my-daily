@@ -8,7 +8,7 @@ import { selectorPageablePub } from '../core/selectors/public-profile.selector';
 import { actionProfilePublic, actionUserFollow } from '../core/actions/public-profile.action';
 import { FollowRequest } from '../../../core/interfaces/follows/follow.interface';
 import * as Highcharts from 'highcharts';
-import { stringType } from '../../../core/types/colors/color.type';
+import { backgroundType } from '../../../core/types/colors/color.type';
 import { actionColor } from '../../profile/core/actions/color.action';
 
 @Component({

@@ -1,5 +1,7 @@
 export enum happenTypes {
   happens = 'happens@types',
+  getTimeline = 'happensTimeline@types',
+
   happenUpdateLocal = 'happensUpateLocal@types',
   happenUpdateRollback = 'happensUpdateRollback@types',
   happenUpdateRemote = 'happensUpdateRomote@types',

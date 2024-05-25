@@ -3,7 +3,6 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProfileService } from '../../../pages/profile/core/services/profile.service';
 import {
   happenError,
   happenPostSuccess,
@@ -18,7 +17,7 @@ import { HappenService } from '../../services/happens/happen.service';
  * @see: https://ngrx.io/guide/effects
  */
 @Injectable()
-export class ProfileHappensEffect {
+export class HappensEffect {
   private readonly action: Actions = inject(Actions);
   private readonly happenService = inject(HappenService);
 
@@ -115,6 +114,30 @@ export class ProfileHappensEffect {
           })
         )
       ),
+      catchError((e) => of(e))
+    )
+  );
+
+  /**
+   * INFO:
+   *
+   * profile - layer 2 effect profile responsible to handler layer between services, store states, reducers and components
+   */
+  public timeline: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      ofType(happenTypes.getTimeline),
+      mergeMap(() =>
+        this.happenService.getTimeline().pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return happenError({ failed: response });
+            }
+            return happenSuccess(response);
+          })
+        )
+      ),
+      // layer to catch error from effect
       catchError((e) => of(e))
     )
   );

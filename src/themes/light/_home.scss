@@ -1,18 +1,39 @@
 @import '../mixins';
 
 .home {
-  .text {
-    color: red;
+  .cover {
+    border-bottom: 1px solid var(--border-default);
   }
   mat-toolbar {
     background-color: transparent;
   }
+  .dialog-happen p.title {
+    .name-id {
+      color: var(--color-dark);
+    }
+    .date {
+      background-color: var(--social-muted);
+      color: var(--social-blue-accent);
+    }
+  }
+  // button menu
+  .container-buttons .btn-menu {
+    @include btn-default;
+    border: none;
+    box-shadow: none;
+    background-color: var(--social-blue-accent);
+    color: white;
+  }
+
+  // tab timeline
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border: none;
+  }
 }
 
 .home.timeline {
-  background-color: #f9930024;
-  // tab timeline
-  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+  .mdc-line-ripple::before,
+  .mdc-line-ripple::after {
     border: none;
   }
   .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
@@ -28,26 +49,48 @@
   // remove filled background search input
   .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background: transparent;
-    border: 1px solid var(--border-dark-light);
+    border: 1px solid #d0d7deb3;
     border-radius: 1rem;
   }
-  // button menu
-  .btn-menu {
-    // change color icon from button
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
 
-    mat-icon {
+  // card feeling theme profile
+  .card-feeling {
+    border: 1px solid #d0d7deb3;
+
+    mat-card-header {
+      background-color: #d0d7de39;
+    }
+
+    span.name-id {
+      background-color: var(--social-muted);
+      color: var(--social-blue-accent);
+    }
+    .mat-mdc-card-content {
+      background-color: var(--color-white);
+    }
+    // button score negative on card feeling
+    .container-scores div button.btn-score-neg {
+      color: var(--primary);
+    }
+    .container-scores div button.btn-score-pos {
+      color: var(--green);
+    }
+  }
+  p.title {
+    .name-id {
       color: var(--color-dark);
+    }
+    .date {
+      background-color: var(--social-muted);
+      color: var(--social-blue-accent);
     }
   }
 }
 
 .home.sentiment {
-  background-color: blue;
+  background-color: white;
 }
 
 .home.explore {
-  background-color: yellow;
+  background-color: white;
 }

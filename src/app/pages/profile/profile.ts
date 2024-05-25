@@ -13,7 +13,7 @@ import { actionSocketUserMetrics } from './core/actions/socketio.action';
 import { actionUserFollowers } from './core/actions/user.action';
 import { JsonMapProperties } from '../../core/decorators/jsons/json.decorator';
 import { actionColor } from './core/actions/color.action';
-import { stringType } from '../../core/types/colors/color.type';
+import { backgroundType } from '../../core/types/colors/color.type';
 
 @Component({
   selector: 'app-profile',
@@ -62,7 +62,7 @@ export class Profile implements OnInit {
     this.store.dispatch(
       actionColor({
         theme: 'profile',
-        background: stringType.profileCover,
+        background: backgroundType.profileCover,
       })
     );
   }

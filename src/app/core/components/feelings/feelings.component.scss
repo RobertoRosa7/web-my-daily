@@ -1,6 +1,18 @@
 // card feeling - post of users
 .card-feeling {
   // mat-card material
+  span.name-id {
+    padding: 2px 8px;
+    border-radius: 0.4rem;
+    font-size: 0.7.5rem;
+  }
+  span.nickname {
+    font-weight: 100;
+    font-size: 1.1rem;
+  }
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 0.5rem;
   .mdc-card {
     margin: 0;
@@ -9,7 +21,9 @@
     border-radius: 0;
     box-shadow: none;
   }
-
+  .mat-mdc-card-header {
+    padding: 0.5rem 1rem;
+  }
   // mat-card action of material
   .mdc-card__actions {
     justify-content: space-between;

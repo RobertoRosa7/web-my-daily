@@ -2,8 +2,8 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <span matTooltipPosition="left" matTooltip="Apelido" role="none" aria-describedby="name">{{
-          (userName$ | async)?.name
+        <span class="nickname" matTooltipPosition="left" matTooltip="Apelido" role="none" aria-describedby="name">{{
+          happen.nickname
         }}</span>
         <button
           matTooltip="Menu"
@@ -16,15 +16,30 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menus="matMenu" overlapTrigger="true">
-          <button (click)="details(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Detalhes">
-            <mat-icon>info</mat-icon>
-            <span>Detalhes</span>
+          <button
+            *ngIf="id !== happen.userId"
+            (click)="edit(happen)"
+            matTooltipPosition="right"
+            mat-menu-item
+            matTooltip="Editar">
+            <mat-icon iconPositionEnd>remove</mat-icon>
+            <span>Deixar de Visualizar</span>
           </button>
-          <button (click)="edit(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
+          <button
+            *ngIf="id === happen.userId"
+            (click)="edit(happen)"
+            matTooltipPosition="right"
+            mat-menu-item
+            matTooltip="Editar">
             <mat-icon>edit</mat-icon>
             <span>Editar</span>
           </button>
-          <button (click)="remove(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Remover">
+          <button
+            *ngIf="id === happen.userId"
+            (click)="remove(happen)"
+            matTooltipPosition="right"
+            mat-menu-item
+            matTooltip="Remover">
             <mat-icon>remove</mat-icon>
             <span>Excluir</span>
           </button>
@@ -32,9 +47,11 @@
       </mat-card-title>
       <mat-card-subtitle>
         <span
+          class="name-id"
           matTooltipPosition="left"
           style="cursor: pointer"
-          routerLink="/profile/user"
+          [queryParams]="{ name: happen.nameId }"
+          routerLink="/public/details"
           matTooltip="Nome de domínio"
           role="link"
           aria-describedby="nameId"
@@ -94,15 +111,27 @@
       <div class="container-likes">
         <div matTooltipPosition="above" matTooltip="Cutir">
           <small>{{ happen.likes.likedCount | follows }}</small>
-          <button mat-icon-button role="button" aria-describedby="favorite">
+          <button
+            (click)="liked(happen.likes.isLiked, happen)"
+            mat-icon-button
+            role="button"
+            aria-describedby="favorite">
             <mat-icon *ngIf="!happen.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
             <mat-icon *ngIf="happen.likes.isLiked" aria-label="favorite">favorite</mat-icon>
           </button>
         </div>
         <div matTooltipPosition="above" matTooltip="Não curtir">
           <small>{{ happen.likes.dislikedCount | follows }}</small>
-          <button mat-icon-button role="button" aria-describedby="not-favorite">
-            <span *ngIf="!happen.likes.isDisliked" aria-label="not-favorite" class="material-symbols-outlined">
+          <button
+            (click)="disliked(happen.likes.isDisliked, happen)"
+            mat-icon-button
+            role="button"
+            aria-describedby="not-favorite">
+            <span
+              class="thumb-down"
+              *ngIf="!happen.likes.isDisliked"
+              aria-label="not-favorite"
+              class="material-symbols-outlined">
               thumb_down
             </span>
             <mat-icon *ngIf="happen.likes.isDisliked" aria-label="not-favorite" class="material-symbols-outlined">

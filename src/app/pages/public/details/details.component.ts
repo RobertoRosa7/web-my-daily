@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { actionUserFollow } from '../../profile/core/actions/profile.action';
 import { selectorUserPub } from '../core/selectors/public-profile.selector';
-import { stringType } from '../../../core/types/colors/color.type';
+import { backgroundType } from '../../../core/types/colors/color.type';
 import { actionColor } from '../../profile/core/actions/color.action';
 import { actionProfilePublic } from '../core/actions/public-profile.action';
 
@@ -28,7 +28,7 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
     this.store.dispatch(
       actionColor({
         theme: 'public',
-        background: stringType.publicProfileCover,
+        background: backgroundType.profileCover,
       })
     );
   }

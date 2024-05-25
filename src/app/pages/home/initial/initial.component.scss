@@ -1,8 +1,9 @@
-@import '../../../../themes/mixins';
-
 .home {
-  position: relative;
-  ::ng-deep .mat-mdc-tab {
-    width: 1rem;
+  ::ng-deep .mat-mdc-tab-header {
+    margin-bottom: 2rem;
+  }
+
+  .mat-mdc-tab-group {
+    margin-top: 2rem;
   }
 }

@@ -1,16 +1,13 @@
+@import '../../../../themes/mixins';
+
 .toolbar-row {
   min-height: 80px;
   align-items: center;
   justify-content: center;
   display: flex;
   padding: 0 10rem;
-
   .logo {
     margin-right: 1rem;
-  }
-  button {
-    background-color: var(--white);
-    min-width: 120px;
   }
 }
 .spacer {

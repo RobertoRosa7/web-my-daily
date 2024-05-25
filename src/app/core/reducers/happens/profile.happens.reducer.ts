@@ -13,8 +13,9 @@ import {
   happenUpdateSuccess,
 } from '../../actions/happens/profile.happens.action';
 
-import { actionCoreReset } from '../../actions/resets/reset.action';
 import { HttpErrorResponse } from '@angular/common/http';
+import { actionDislikedLocal, actionLikedLocal } from '../../actions/happens/likes.action';
+import { callbackDislikedLocal, callbackLikedLocal } from './like.reducer';
 
 type States = Partial<HappenResponsePageable>;
 type ProfileHappenIndex = { index: number; data: ProfileHappen };
@@ -23,7 +24,6 @@ const states: States = {};
 const getReferenceArray = (_: States) => [...(_.data || [])];
 const updateDataStates = <T>(_: States, data: T) => ({ ..._, data });
 
-const callbackResetStore = (_: States) => states;
 const callbackSuccess = (_: States, payload: HappenResponsePageable) => payload;
 const callbackDeleteRollback = (states: States, { index, data }: ProfileHappenIndex) => {
   const happens = getReferenceArray(states);
@@ -56,7 +56,7 @@ const callbackPost = (states: States, { data }: ProfileHappenIndex) => {
   return updateDataStates(states, happens);
 };
 
-export const profileHappenReducer = createReducer(
+export const happenReducer = createReducer(
   states,
   on(happenDeleteLocal, callbackDelete),
   on(happenDeleteRollback, callbackDeleteRollback),
@@ -69,7 +69,9 @@ export const profileHappenReducer = createReducer(
   on(happenPostLocal, callbackPost),
   on(happenPostSuccess, callbackUpdate),
 
+  on(actionDislikedLocal, callbackDislikedLocal),
+  on(actionLikedLocal, callbackLikedLocal),
+
   on(happenSuccess, callbackSuccess),
-  on(happenError, callbackError),
-  on(actionCoreReset, callbackResetStore)
+  on(happenError, callbackError)
 );

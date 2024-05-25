@@ -5,6 +5,8 @@ import { happenTypes } from '../../types/happens/happen.type';
 
 const voidTypes = happenTypes.happenVoid;
 const happens = happenTypes.happens;
+const getTimeline = happenTypes.getTimeline;
+
 const deleteRemote = happenTypes.happenDeleteRemote;
 const deleteLocal = happenTypes.happenDeleteLocal;
 const deleteRollback = happenTypes.happenDeleteRollback;
@@ -27,6 +29,7 @@ const callbackHappenError = (payload: { failed: HttpErrorResponse }) => payload;
 
 export const happenRequest = createAction(happens);
 export const happenVoid = createAction(voidTypes);
+export const happenTimeline = createAction(getTimeline);
 
 export const happenPostLocal = createAction(postLocal, callbackHappen);
 export const happenPostRollback = createAction(postRollback, callbackHappen);

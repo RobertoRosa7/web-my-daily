@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { Url } from '../decorators/urls/url.decorator';
 import { Paths } from '../enums/bases/base.enum';
 import {
+  DisLikeRequest,
   HappenResponsePageable,
   HttpResponseHappen,
+  LikeRequest,
   ProfileHappen,
 } from '../interfaces/happens/profile.happen.interface';
 import { HttpResponseDefault } from '../interfaces/https/http-response.interface';
@@ -14,6 +16,9 @@ import { HttpResponseDefault } from '../interfaces/https/http-response.interface
   providedIn: 'root',
 })
 export class HappenRepository {
+  @Url(Paths.getTimeline)
+  private urlGetTimeline!: string;
+
   @Url(Paths.getHappen)
   private urlProfileHappen!: string;
 
@@ -26,7 +31,17 @@ export class HappenRepository {
   @Url(Paths.postHappen)
   private urlPostHappen!: string;
 
+  @Url(Paths.disliked)
+  private urlDisliked!: string;
+
+  @Url(Paths.liked)
+  private urlLiked!: string;
+
   constructor(private readonly http: HttpClient) {}
+
+  public getTimeline(): Observable<HappenResponsePageable> {
+    return this.http.get<HappenResponsePageable>(this.urlGetTimeline);
+  }
 
   /**
    * INFO:
@@ -68,5 +83,23 @@ export class HappenRepository {
       text: happen.whatHappen,
       visibility: happen.visibility,
     });
+  }
+
+  /**
+   * INFO:
+   * postLiked - update one happen
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public postLiked(happen: LikeRequest): Observable<HttpResponseDefault<void>> {
+    return this.http.post<HttpResponseDefault<void>>(`${this.urlLiked}`, happen);
+  }
+
+  /**
+   * INFO:
+   * postDisliked - update one happen
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public postDisliked(happen: DisLikeRequest): Observable<HttpResponseDefault<void>> {
+    return this.http.post<HttpResponseDefault<void>>(`${this.urlDisliked}`, happen);
   }
 }

@@ -1,4 +1,4 @@
-// set styel button icon
+//set styel button icon
 @mixin btn-icon-radio {
   min-width: 3.5rem;
   min-height: 3.5rem;
@@ -12,12 +12,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   width: inherit;
-  color: var(--color-dark-red-medium) !important;
+
   :focus {
     background: var(--color-dark-red-light);
   }
+  min-width: 90px;
 }
 
 // set size page default

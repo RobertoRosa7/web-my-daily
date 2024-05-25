@@ -3,23 +3,13 @@ import { MatDialogConfig } from '@angular/material/dialog';
 import { DialogActions, DialogAlert, SnackBarActions, dialogData } from '../../interfaces/dialogs/dialogs.interface';
 import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
-import { BehaviorSubject, concatMap, filter, first, map, of } from 'rxjs';
+import { concatMap, filter, first } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { selectHappenError } from '../../selectors/happens/profile.happens.selector';
-import {
-  happenDeleteLocal,
-  happenDeleteRemote,
-  happenDeleteRollback,
-  happenPostLocal,
-  happenPostRemote,
-  happenPostRollback,
-  happenUpdateLocal,
-  happenUpdateRemote,
-  happenUpdateRollback,
-} from '../../actions/happens/profile.happens.action';
+import { happenDeleteLocal, happenPostLocal, happenUpdateLocal } from '../../actions/happens/profile.happens.action';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { happenTypes } from '../../types/happens/happen.type';
+import { DialogHelperService } from './dialog-helper.service';
 
 const createLocal = happenTypes.happenPostLocal;
 const deleteLocal = happenTypes.happenDeleteLocal;
@@ -34,7 +24,6 @@ export class DialogService {
   private readonly store = inject(Store);
   private readonly actionSubject = inject(ActionsSubject);
   private readonly snackbar = inject(MatSnackBar);
-  public readonly previousText$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   /**
    * INFO:
@@ -119,6 +108,7 @@ export class DialogService {
    * @returns Observable<boolean>
    */
   public listeningDelete(index: number, data: ProfileHappen) {
+    // dispatch action to delete on reducer store
     this.store.dispatch(happenDeleteLocal({ index, data }));
 
     return this.listeningEvent(index, data, SnackBarActions.delete, deleteLocal);
@@ -131,6 +121,7 @@ export class DialogService {
    * @returns Observable<boolean>
    */
   public listeningUpdate(index: number, data: ProfileHappen) {
+    // dispatch action to update on reducer store
     this.store.dispatch(happenUpdateLocal({ index, data }));
 
     return this.listeningEvent(index, data, SnackBarActions.update, updateLocal);
@@ -143,24 +134,10 @@ export class DialogService {
    * @returns Observable<boolean>
    */
   public listeningEventCreate(data: ProfileHappen) {
+    // dispatch action to create on reducer store
     this.store.dispatch(happenPostLocal({ index: index, data }));
 
     return this.listeningEvent(index, data, SnackBarActions.create, createLocal);
-  }
-
-  /**
-   * INFO:
-   * listeningError - responsible to listening some error comes from backend service
-   *
-   * @returns void or throw Error
-   */
-  public listeningError() {
-    return this.store.select(selectHappenError).pipe(
-      filter((error) => !!error),
-      map((e) => {
-        throw new Error(e?.error);
-      })
-    );
   }
 
   /**
@@ -170,10 +147,19 @@ export class DialogService {
    * @returns Observable<boolean>
    */
   public openSnackerbar(index: number, data: ProfileHappen, action: SnackBarActions) {
-    return this.snackbar
-      .open(`${data.whatHappen.substring(0, 20)}...`, 'cancelar', { duration: 2000 })
-      .afterDismissed()
-      .pipe(concatMap(({ dismissedByAction }) => this.executeActions(index, dismissedByAction, data)[action]()));
+    // show snackbar to give to the user option to cancel or not
+    return (
+      this.snackbar
+        .open(`${data.whatHappen.substring(0, 20)}...`, 'desfazer', { duration: 2000 })
+        // layer convert snackbar into observable
+        .afterDismissed()
+        .pipe(
+          // layer to call dialog helper service
+          concatMap(({ dismissedByAction }) =>
+            new DialogHelperService(index, dismissedByAction, data, this.store)[action]()
+          )
+        )
+    );
   }
 
   /**
@@ -183,85 +169,14 @@ export class DialogService {
    * @param actionType string (required)
    */
   private listeningEvent(index: number, data: ProfileHappen, action: SnackBarActions, actionType: string) {
+    // listening some event on reducers
     return this.actionSubject.pipe(
+      // layer filter only events according type passing in the parameter
       filter(({ type }) => type === actionType),
+      // layer first event only
       first(),
+      // layer open snackbar
       concatMap(() => this.openSnackerbar(index, data, action))
     );
-  }
-
-  /**
-   * INFO:
-   * executeActions - execute action according by type
-   *
-   * @param isDismissed boolean (required)
-   * @param data ProfileHappen
-   * @returns Observable
-   */
-  private executeActions(index: number, isDismissed: boolean, data: ProfileHappen) {
-    return {
-      [SnackBarActions.create]: () => this.createOrCancel(index, isDismissed, data),
-      [SnackBarActions.update]: () => this.updateOrCancel(index, isDismissed, data),
-      [SnackBarActions.delete]: () => this.removeOrCancel(index, isDismissed, data),
-    };
-  }
-
-  /**
-   * INFO:
-   * removeOrCancel - responsible to excluir on backend or cancel
-   *
-   * @param dismissedByAction boolean
-   * @param happen ProfileHappen
-   * @returns null or Error
-   */
-  private removeOrCancel(index: number, dismissedByAction: boolean, data: ProfileHappen) {
-    if (dismissedByAction) {
-      this.store.dispatch(happenDeleteRollback({ index, data }));
-      return of();
-    } else {
-      this.store.dispatch(happenDeleteRemote({ index, data }));
-      return this.listeningError();
-    }
-  }
-
-  /**
-   * INFO:
-   * createOrCancel - responsible to excluir on backend or cancel
-   *
-   * @param dismissedByAction boolean
-   * @param happen ProfileHappen
-   * @returns null or Error
-   */
-  private createOrCancel(index: number, dismissedByAction: boolean, data: ProfileHappen) {
-    if (dismissedByAction) {
-      this.store.dispatch(happenPostRollback({ index, data }));
-      return of();
-    } else {
-      this.store.dispatch(happenPostRemote({ index, data }));
-      return this.listeningError();
-    }
-  }
-
-  /**
-   * INFO:
-   * updateOrCancel - responsible to excluir on backend or cancel
-   *
-   * @param dismissedByAction boolean
-   * @param happen ProfileHappen
-   * @returns null or Error
-   */
-  private updateOrCancel(index: number, dismissedByAction: boolean, data: ProfileHappen) {
-    if (dismissedByAction) {
-      this.store.dispatch(
-        happenUpdateRollback({
-          index,
-          data: { ...data, whatHappen: this.previousText$.getValue() },
-        })
-      );
-      return of();
-    } else {
-      this.store.dispatch(happenUpdateRemote({ index, data }));
-      return this.listeningError();
-    }
   }
 }

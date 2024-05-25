@@ -1,9 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import {
+  DisLikeRequest,
   HappenResponsePageable,
   HappenSingleton,
   HttpResponseHappen,
+  LikeRequest,
   ProfileHappen,
 } from '../../interfaces/happens/profile.happen.interface';
 import { JsonMapProperties } from '../../decorators/jsons/json.decorator';
@@ -14,15 +16,25 @@ import { HappenRepository } from '../../repositories/happen.repository';
   providedIn: 'root',
 })
 export class HappenService {
-  private readonly profileRespository: HappenRepository = inject(HappenRepository);
+  private readonly repository: HappenRepository = inject(HappenRepository);
 
+  /**
+   * INFO:
+   * getTimeline - responsible to get timeline from users
+   * @returns Observable<HappenResponsePageable>
+   */
+  public getTimeline(): Observable<HappenResponsePageable> {
+    return this.repository
+      .getTimeline()
+      .pipe(map((data) => JsonMapProperties.deserialize(HappenResponsePageable, data)));
+  }
   /**
    * INFO:
    * getHappens - layer 1
    * @returns Observable<ProfileHappenResponse>
    */
   public getHappens(): Observable<HappenResponsePageable> {
-    return this.profileRespository
+    return this.repository
       .getHappens()
       .pipe(map((data) => JsonMapProperties.deserialize(HappenResponsePageable, data)));
   }
@@ -33,7 +45,7 @@ export class HappenService {
    * @returns Observable<HttpResponseDefault<void>>
    */
   public deleteHappen(happen: ProfileHappen): Observable<HttpResponseDefault<void>> {
-    return this.profileRespository.deleteHappen(happen);
+    return this.repository.deleteHappen(happen);
   }
 
   /**
@@ -42,7 +54,7 @@ export class HappenService {
    * @returns Observable<HttpResponseDefault<updateHappen>>
    */
   public updateHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
-    return this.profileRespository
+    return this.repository
       .updateHappen(happen)
       .pipe(map((data) => JsonMapProperties.deserialize(HappenSingleton, data)));
   }
@@ -53,8 +65,24 @@ export class HappenService {
    * @returns Observable<HttpResponseDefault<updateHappen>>
    */
   public postHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
-    return this.profileRespository
-      .postHappen(happen)
-      .pipe(map((data) => JsonMapProperties.deserialize(HappenSingleton, data)));
+    return this.repository.postHappen(happen).pipe(map((data) => JsonMapProperties.deserialize(HappenSingleton, data)));
+  }
+
+  /**
+   * INFO:
+   * postLiked - update one happen
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public postLiked(liked: LikeRequest): Observable<HttpResponseDefault<void>> {
+    return this.repository.postLiked(liked);
+  }
+
+  /**
+   * INFO:
+   * postDisliked - update one happen
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public postDisliked(disliked: DisLikeRequest): Observable<HttpResponseDefault<void>> {
+    return this.repository.postDisliked(disliked);
   }
 }

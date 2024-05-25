@@ -11,6 +11,18 @@ export enum HappenVisibility {
   FOLLOWERS = 'FOLLOWERS',
 }
 
+export class LikeRequest {
+  public happenId!: string;
+  public happenOwnerId!: string;
+  public isLiked!: boolean;
+}
+
+export class DisLikeRequest {
+  public happenId!: string;
+  public happenOwnerId!: string;
+  public disliked!: boolean;
+}
+
 export class ProfileHappenLike {
   @JsonProperty('disliked_count')
   public dislikedCount: number = 0;
@@ -53,6 +65,7 @@ export class ProfileHappen {
   public id: string = '';
   @JsonProperty('name_id')
   public nameId: string | null = '';
+  public nickname: string | null = '';
   @JsonProperty('updated_at')
   public updatedAt: string | null = new Date().toDateString();
   @JsonProperty('created_at')

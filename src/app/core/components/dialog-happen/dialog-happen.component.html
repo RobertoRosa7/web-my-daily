@@ -6,17 +6,16 @@
       </button>
     </div>
     <p class="title">
-      <span>{{ user.nameId }}</span>
-      <small>{{ data.data.updatedAt | date }}</small>
+      <span class="name-id">{{ user.nameId }}</span>
+      <small class="date">{{ data.data.updatedAt | date }}</small>
     </p>
     <mat-dialog-content>
       <mat-form-field class="input-happen">
         <textarea
           maxlength="600"
           [tabindex]="0"
-          required
-          cols="20"
-          rows="20"
+          cols="12"
+          rows="16"
           [formControl]="form"
           placeholder="Digite aqui sua historia"
           matInput
@@ -26,9 +25,15 @@
       </mat-form-field>
       <div class="container-options">
         <mat-radio-group [formControl]="visibility" aria-label="Select an option">
-          <mat-radio-button [tabindex]="0" [value]="happenVisibilty.PUBLIC">Público</mat-radio-button>
-          <mat-radio-button [tabindex]="0" [value]="happenVisibilty.FOLLOWERS">Seguidores</mat-radio-button>
-          <mat-radio-button [tabindex]="0" [value]="happenVisibilty.PRIVATE">Privado</mat-radio-button>
+          <mat-radio-button [disableRipple]="true" [tabindex]="0" [value]="happenVisibilty.PUBLIC"
+            >Público</mat-radio-button
+          >
+          <mat-radio-button [disableRipple]="true" [tabindex]="0" [value]="happenVisibilty.FOLLOWERS"
+            >Seguidores</mat-radio-button
+          >
+          <mat-radio-button [disableRipple]="true" [tabindex]="0" [value]="happenVisibilty.PRIVATE"
+            >Privado</mat-radio-button
+          >
         </mat-radio-group>
         <small aria-label="total caracteres">Caracteres: {{ totalLength }}</small>
       </div>

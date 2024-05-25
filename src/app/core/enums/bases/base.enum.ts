@@ -13,6 +13,9 @@ export enum Paths {
   profilePublic = '/ms-users/public/user',
   userFollow = '/ms-users/follows',
 
+  liked = '/ms-users/user/likes/like',
+  disliked = '/ms-users/user/likes/dislike',
+
   getTimeline = '/ms-daily/happen/user/timeline',
   getHappen = '/ms-daily/happen/user',
   deleteHappen = '/ms-daily/happen',
