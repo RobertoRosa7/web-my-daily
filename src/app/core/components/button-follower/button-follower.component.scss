@@ -1,0 +1,14 @@
+.container-buttons {
+  button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container-buttons {
+    padding-right: 1rem;
+  }
+  .container-buttons button mat-icon {
+    display: none;
+  }
+}

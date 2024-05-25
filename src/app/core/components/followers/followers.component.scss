@@ -1,0 +1,103 @@
+// media queries max width 768px - mobile first
+// container follow and likes
+.main-follows {
+  width: inherit;
+  button {
+    width: inherit;
+  }
+}
+
+.follow,
+.follow div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// container where is all button metrics
+.follow {
+  min-height: 5rem;
+  margin-bottom: 1.5rem;
+
+  // custom style for all divs
+  div {
+    flex: 1;
+    flex-direction: column;
+
+    // reset values default cards with metrics - number
+    p {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    // firt paragraph bolder
+    p:first-child {
+      font-weight: bold;
+      font-size: 1.3rem;
+      border-radius: 1rem 1rem 0 0;
+    }
+
+    p:last-child {
+      border-radius: 0 0 1rem 1rem;
+    }
+  }
+
+  // card of followers first div
+  .followers {
+    border-radius: 0 1rem 1rem 1rem;
+  }
+
+  // card of posts last div
+  .posts {
+    border-radius: 1rem;
+  }
+
+  // center div counter of following
+  .follwing {
+    position: relative;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  // container follow and posts
+  .main-follows {
+    width: inherit;
+    text-align: center;
+  }
+  .follow {
+    display: flex;
+    min-height: 6rem;
+    justify-content: center;
+    align-items: center;
+    margin-left: -1.5rem;
+    margin-bottom: 0.5rem;
+
+    .follwing {
+      margin-left: 0.1rem;
+      margin-right: 0.1rem;
+      padding-left: 0.1rem;
+      padding-right: 0.1rem;
+    }
+    div {
+      display: flex;
+      padding: 0.5rem;
+      p {
+        font-size: 0.7rem;
+        line-height: 0.7rem;
+      }
+      p:first-child {
+        font-weight: bold;
+        font-size: 1rem;
+      }
+    }
+  }
+}

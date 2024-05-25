@@ -1,4 +1,4 @@
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 
 export interface ILogin {
   email: string;
@@ -37,16 +37,4 @@ export type registerResponse = HttpResponseDefault<IAuthState>;
 export enum AuthVars {
   token = 'token',
   user = 'user',
-}
-//paths do frotend
-export enum RoutePaths {
-  register = '/auth/register',
-  login = '/auth/login',
-  home = '/home',
-}
-
-//paths do backend
-export enum Paths {
-  signup = '/ms-users/auth',
-  signin = '/ms-users/auth/login',
 }

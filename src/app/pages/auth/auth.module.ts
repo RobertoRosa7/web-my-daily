@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './core/services/auth.services';
 import { AuthComponent } from './auth.component';
 import { AuthRepository } from './core/repositories/auth.repository';
-import { ConstantsRepository } from './core/repositories/constants.repository';
 import { HttpClientModule } from '@angular/common/http';
 import { EmailComponent } from './core/components/input-email/email.component';
 import { PasswordComponent } from './core/components/input-password/password.component';
@@ -44,7 +43,6 @@ import { provideEffects } from '@ngrx/effects';
   providers: [
     AuthService,
     AuthRepository,
-    ConstantsRepository,
     provideState({ name: 'auth', reducer: authReducer }),
     provideEffects(AuthEffect),
   ],

@@ -1,0 +1,70 @@
+<ng-container *ngIf="user$ | async as user">
+  <form class="dialog-happen" [ngClass]="theme$ | async">
+    <div class="btn-close">
+      <button [tabindex]="-1" matTooltip="fechar" matTooltipPosition="above" [mat-dialog-close]="null" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <p class="title">
+      <span class="name-id">{{ user.nameId }}</span>
+      <small class="date">{{ data.data.updatedAt | date }}</small>
+    </p>
+    <mat-dialog-content>
+      <mat-form-field class="input-happen">
+        <textarea
+          maxlength="600"
+          [tabindex]="0"
+          cols="12"
+          rows="16"
+          [formControl]="form"
+          placeholder="Digite aqui sua historia"
+          matInput
+          type="text"
+          name="text"
+          id="happen-text"></textarea>
+      </mat-form-field>
+      <div class="container-options">
+        <mat-radio-group [formControl]="visibility" aria-label="Select an option">
+          <mat-radio-button [disableRipple]="true" [tabindex]="0" [value]="happenVisibilty.PUBLIC"
+            >Público</mat-radio-button
+          >
+          <mat-radio-button [disableRipple]="true" [tabindex]="0" [value]="happenVisibilty.FOLLOWERS"
+            >Seguidores</mat-radio-button
+          >
+          <mat-radio-button [disableRipple]="true" [tabindex]="0" [value]="happenVisibilty.PRIVATE"
+            >Privado</mat-radio-button
+          >
+        </mat-radio-group>
+        <small aria-label="total caracteres">Caracteres: {{ totalLength }}</small>
+      </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button
+        style="flex: 1"
+        [tabindex]="0"
+        matTooltipPosition="above"
+        matTooltip="cancelar"
+        role="button"
+        [mat-dialog-close]="null"
+        class="close"
+        mat-stroked-button>
+        cancel
+      </button>
+      <button
+        style="flex: 1"
+        [tabindex]="0"
+        aria-describedby="salvar"
+        [disabled]="form.invalid"
+        type="submit"
+        matTooltipPosition="above"
+        matTooltip="salvar"
+        role="button"
+        class="submit"
+        (click)="close(user)"
+        mat-stroked-button>
+        salvar
+      </button>
+    </mat-dialog-actions>
+  </form>
+</ng-container>

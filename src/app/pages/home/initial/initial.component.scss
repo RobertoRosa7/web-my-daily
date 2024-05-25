@@ -1,11 +1,9 @@
-::ng-deep .mat-mdc-tab {
-  width: 1rem;
+.home {
+  ::ng-deep .mat-mdc-tab-header {
+    margin-bottom: 2rem;
+  }
+
+  .mat-mdc-tab-group {
+    margin-top: 2rem;
+  }
 }
-
-
-::ng-deep .mat-mdc-focus-indicator {
-  background-color: transparent !important;
-}
-
-
-

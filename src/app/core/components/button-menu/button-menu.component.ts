@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
+import { selectorTheme } from '../../selectors/colors/color.selector';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
@@ -12,27 +12,32 @@ import { SharedModule } from '../../../shared/shared.module';
   template: `
     <button
       class="btn-menu"
-      [ngClass]="theme$ | async"
       disableRipple="true"
       matTooltip="Menu"
       [matMenuTriggerFor]="menus"
-      mat-icon-button
+      mat-button
       aria-label="Menu">
-      <mat-icon>menu</mat-icon>
+      Menu
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
-      <button mat-menu-item matTooltip="Inicial" routerLink="/home/initial">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Inicial" routerLink="/home/initial">
         <mat-icon>home</mat-icon>
         <span>Inicial</span>
       </button>
 
-      <button mat-menu-item matTooltip="Perfil" [queryParams]="{ name: 'rosa@daily' }" [routerLink]="['/profile/user']">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Perfil" routerLink="/profile/user">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>
-      <button mat-menu-item matTooltip="Configurações" routerLink="/profile/setting">
+
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Configurações" routerLink="/profile/setting">
         <mat-icon>settings</mat-icon>
         <span>Configurações</span>
+      </button>
+
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Sair" routerLink="/public">
+        <mat-icon>logout</mat-icon>
+        <span>Sair</span>
       </button>
     </mat-menu>
   `,

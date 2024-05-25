@@ -1,0 +1,40 @@
+<ng-container *ngIf="profile; else loading">
+  <main class="main-follows">
+    <div class="follow">
+      <div role="div" aria-describedby="followers" matTooltipPosition="above" matTooltip="Seguidores" class="followers">
+        <p aria-label="followers">{{ profile.follows.totalFollowers | follows }}</p>
+        <p aria-label="followers">Seguidores</p>
+      </div>
+      <div role="div" aria-describedby="following" matTooltipPosition="above" matTooltip="Seguindo" class="follwing">
+        <p aria-label="following">{{ profile.follows.totalFollowing | follows }}</p>
+        <p aria-label="following">Seguindo</p>
+      </div>
+      <div role="div" aria-describedby="posts" matTooltipPosition="above" matTooltip="Posts" class="posts">
+        <p aria-label="posts">{{ profile.profile.totalRegisters | follows }}</p>
+        <p aria-label="posts">Posts</p>
+      </div>
+    </div>
+    <app-button-follower
+      (onLogin)="requestLoginToFollow()"
+      (socketio)="onFollow($event)"
+      [profile]="profile"
+      [id]="id"></app-button-follower>
+  </main>
+</ng-container>
+
+<ng-template #loading>
+  <div class="follow">
+    <div class="followers loading-waves">
+      <p>0</p>
+      <p>Seguidores</p>
+    </div>
+    <div class="follwing loading-waves">
+      <p>0</p>
+      <p>Seguindo</p>
+    </div>
+    <div class="posts loading-waves">
+      <p>0</p>
+      <p>Posts</p>
+    </div>
+  </div>
+</ng-template>

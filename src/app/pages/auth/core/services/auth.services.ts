@@ -3,12 +3,16 @@ import { ILogin, IRegister, loginResponse, registerResponse } from '../interface
 import { clearText } from '../../../../utils/regex/utils.regex.validators';
 import { Observable } from 'rxjs';
 import { AuthRepository } from '../repositories/auth.repository';
+import { LocalStorageService } from '../../../../core/services/localstorages/localstorage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private readonly authRepository: AuthRepository) {}
+  constructor(
+    private readonly authRepository: AuthRepository,
+    private readonly localStorageService: LocalStorageService
+  ) {}
 
   /**
    * INFO:
@@ -36,5 +40,22 @@ export class AuthService {
     clearText(payload.email);
 
     return this.authRepository.register(payload);
+  }
+
+  /**
+   * INFO:
+   * isSessionUser - check if user have session active
+   * @returns boolean
+   */
+  public isSessionUser(): boolean {
+    return !!this.localStorageService.token$.getValue();
+  }
+
+  /**
+   * INFO:
+   * clearSession - clear session from user
+   */
+  public clearSession(): void {
+    this.localStorageService.clearAll();
   }
 }

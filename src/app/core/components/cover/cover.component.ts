@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectorBg } from '../../../pages/profile/core/selectors/color.selector';
+import { selectorBg } from '../../selectors/colors/color.selector';
 
 @Component({
   selector: 'app-cover',

@@ -17,6 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "reflect-metadata",
+              "moment"
+            ],
             "outputPath": "dist/web-my-daily",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -51,13 +55,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 }
               ],
               "outputHashing": "all"
@@ -112,6 +116,9 @@
     }
   },
   "cli": {
-    "analytics": "29a09f41-cf4d-4671-b9e4-58c4026e83cf"
+    "analytics": "29a09f41-cf4d-4671-b9e4-58c4026e83cf",
+    "cache": {
+      "enabled": false
+    }
   }
 }

@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
-import { ConstantsRepository } from './constants.repository';
 import { HttpClient } from '@angular/common/http';
-import { ILogin, IRegister, Paths, loginResponse, registerResponse } from '../interfaces/auth.interface';
+import { ILogin, IRegister, loginResponse, registerResponse } from '../interfaces/auth.interface';
 import { Observable } from 'rxjs';
+import { Paths } from '../../../../core/enums/bases/base.enum';
+import { Url } from '../../../../core/decorators/urls/url.decorator';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthRepository {
-  constructor(private readonly constansts: ConstantsRepository, private readonly http: HttpClient) {}
+  @Url(Paths.signin)
+  private signin!: string;
+
+  @Url(Paths.signup)
+  private signup!: string;
+
+  constructor(private readonly http: HttpClient) {}
 
   /**
    * INFO:
@@ -18,7 +25,7 @@ export class AuthRepository {
    * @returns Observable<HttpResponseDefault<string>>
    */
   public login(payload: ILogin): Observable<loginResponse> {
-    return this.http.post<loginResponse>(this.constansts.get(Paths.signin), payload);
+    return this.http.post<loginResponse>(this.signin, payload);
   }
 
   /**
@@ -29,6 +36,6 @@ export class AuthRepository {
    * @returns Observable<HttpResponseDefault<string>>
    */
   public register(payload: IRegister): Observable<registerResponse> {
-    return this.http.post<registerResponse>(this.constansts.get(Paths.signup), payload);
+    return this.http.post<registerResponse>(this.signup, payload);
   }
 }

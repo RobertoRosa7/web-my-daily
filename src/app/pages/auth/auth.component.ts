@@ -1,13 +1,17 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as selectAuth from './core/selectors/auth.selector';
 import { Observable, Subscription, delay, filter, from, map, mergeMap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { IAuthState } from './core/interfaces/auth.interface';
-import { HttpResponseDefault } from '../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../core/interfaces/https/http-response.interface';
 import { actionClear, actionRegiser, actionLogin, actionGoto, actionLoading } from './core/actions/auth.action';
 import { authType } from './core/types/auth.type';
 import { Router } from '@angular/router';
+import { AuthService } from './core/services/auth.services';
+import { isPlatformBrowser } from '@angular/common';
+import { actionCoreReset } from '../../core/actions/resets/reset.action';
+import { actionColor } from '../profile/core/actions/color.action';
 
 @Component({
   selector: 'app-auth',
@@ -26,8 +30,18 @@ export class AuthComponent implements OnDestroy {
   // inject action subject dependency only super class?
   private actionSubject = inject(ActionsSubject);
   private router = inject(Router);
+  private authService = inject(AuthService);
+  private platform = inject(PLATFORM_ID);
 
   constructor(protected readonly store: Store<IAuthState>) {
+    // clear previous session
+    if (isPlatformBrowser(this.platform)) {
+      // clean localstorage
+      this.authService.clearSession();
+      // clean redux store
+      this.store.dispatch(actionCoreReset());
+    }
+
     // listening action loading happens
     this.isLoading$ = this.actionSubject.pipe(
       // layer filer only action loading
@@ -61,6 +75,12 @@ export class AuthComponent implements OnDestroy {
           mergeMap(this.navigate.bind(this))
         )
         .subscribe()
+    );
+
+    this.store.dispatch(
+      actionColor({
+        theme: 'login',
+      })
     );
   }
 

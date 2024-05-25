@@ -1,0 +1,5 @@
+<main class="tab-timeline">
+  @for (happen of timeline$ | async; track $index) {
+  <app-feelings [id]="userId$ | async" [index]="$index" [happen]="happen"></app-feelings>
+  }
+</main>

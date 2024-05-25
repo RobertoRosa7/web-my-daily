@@ -5,10 +5,11 @@ import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.services';
 import * as authAction from '../actions/auth.action';
 import { authType } from '../types/auth.type';
-import { LocalStorageService } from '../../../../../services/localstorage.service';
+import { LocalStorageService } from '../../../../core/services/localstorages/localstorage.service';
 import { Store } from '@ngrx/store';
-import { AuthVars, RoutePaths } from '../interfaces/auth.interface';
+import { AuthVars } from '../interfaces/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
+import { RoutePaths } from '../../../../core/enums/bases/base.enum';
 
 /**
  * @see: https://ngrx.io/guide/effects

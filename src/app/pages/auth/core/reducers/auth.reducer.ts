@@ -1,23 +1,25 @@
 import { createReducer, on } from '@ngrx/store';
 import { IAuthState } from '../interfaces/auth.interface';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 import { actionClear, actionLoginError, actionLoginSuccess } from '../actions/auth.action';
+import { HttpErrorResponse } from '@angular/common/http';
 
-const STATES: HttpResponseDefault<IAuthState> = {
-  data: null,
+type States = HttpResponseDefault<IAuthState>;
+type Success = HttpResponseDefault<IAuthState>;
+type Error = { fail: HttpErrorResponse };
+
+const states: States = {
+  data: undefined,
   error: false,
   message: '',
 };
 
+const callbackSuccess = (_: States, { data, message, error }: Success) => ({ data, message, error });
+const callbackError = (_: States, { fail }: Error) => ({ ..._, message: fail.error.message, error: fail.error.error });
+
 export const authReducer = createReducer(
-  STATES,
-
-  // case success
-  on(actionLoginSuccess, (_, { data, message, error }) => ({ data, message, error })),
-
-  // case error
-  on(actionLoginError, (_, { fail }) => ({ ..._, message: fail.error.message, error: fail.error.error })),
-
-  // clear states - reset all values
-  on(actionClear, () => STATES)
+  states,
+  on(actionLoginSuccess, callbackSuccess),
+  on(actionLoginError, callbackError),
+  on(actionClear, () => states)
 );

@@ -3,7 +3,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectorTheme } from '../../../pages/profile/core/selectors/color.selector';
+import { selectorTheme } from '../../selectors/colors/color.selector';
 import { CommonModule, Location } from '@angular/common';
 
 @Component({

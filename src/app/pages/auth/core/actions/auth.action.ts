@@ -2,16 +2,28 @@ import { createAction } from '@ngrx/store';
 import { authType } from '../types/auth.type';
 import { IAuthState, ILogin, IRegister } from '../interfaces/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
-import { HttpResponseDefault } from '../../../../interface/http-response.interface';
+import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 
-export const actionLogin = createAction(authType.LOGIN, (payload: ILogin) => payload);
-export const actionRegiser = createAction(authType.LOGIN_REGISTER, (payload: IRegister) => payload);
-export const actionLoginError = createAction(authType.LOGIN_ERROR, (payload: { fail: HttpErrorResponse }) => payload);
-export const actionLoginSuccess = createAction(
-  authType.LOGIN_SUCCESS,
-  (payload: HttpResponseDefault<IAuthState>) => payload
-);
+const login = authType.LOGIN;
+const register = authType.LOGIN_REGISTER;
+const error = authType.LOGIN_ERROR;
+const success = authType.LOGIN_SUCCESS;
+const clear = authType.CLEAR;
+const goto = authType.LOGIN_GOTO;
+const loading = authType.LOGIN_LOADING;
 
-export const actionClear = createAction(authType.CLEAR);
-export const actionGoto = createAction(authType.LOGIN_GOTO, (payload: { paths: Array<string> }) => payload);
-export const actionLoading = createAction(authType.LOGIN_LOADING, (payload: { isLoading: boolean }) => payload);
+const callbackLogin = (payload: ILogin) => payload;
+const callbackRegister = (payload: IRegister) => payload;
+const callbackError = (payload: { fail: HttpErrorResponse }) => payload;
+const callbackSuccess = (payload: HttpResponseDefault<IAuthState>) => payload;
+const callbackGoto = (payload: { paths: Array<string> }) => payload;
+const callbackLoading = (payload: { isLoading: boolean }) => payload;
+
+export const actionClear = createAction(clear);
+
+export const actionLogin = createAction(login, callbackLogin);
+export const actionRegiser = createAction(register, callbackRegister);
+export const actionLoginError = createAction(error, callbackError);
+export const actionLoginSuccess = createAction(success, callbackSuccess);
+export const actionGoto = createAction(goto, callbackGoto);
+export const actionLoading = createAction(loading, callbackLoading);
