@@ -21,6 +21,12 @@
     display: flex;
   }
 
+  .nickname {
+    padding: 2px 8px;
+    border-radius: 0.5rem;
+    flex: 0.1;
+  }
+
   .div-main {
     width: inherit;
     margin: 0 auto;
@@ -55,7 +61,7 @@
         max-height: 64px;
         min-width: 64px;
         min-height: 64px;
-        
+
         // image inside class avatar side left
         img {
           cursor: pointer;
@@ -79,7 +85,7 @@
 
         // div inside de title content info from users
         div {
-          max-width: 230px;
+          max-width: 260px;
           line-height: 1.5rem;
         }
 
@@ -96,11 +102,17 @@
           overflow: hidden;
           margin: 0;
 
+          span.divider {
+            flex: 0.1;
+          }
+
           // custom specify only public
           span.public {
             display: flex;
             align-items: center;
             flex-wrap: nowrap;
+            flex: 1;
+            justify-content: right;
           }
 
           // custom icon from card title

@@ -2,6 +2,9 @@ import {
   DisLikeRequest,
   HappenResponsePageable,
   LikeRequest,
+  LikeResponse,
+  LikeSocketio,
+  ProfileHappen,
   ProfileHappenLike,
 } from '../../interfaces/happens/profile.happen.interface';
 
@@ -11,32 +14,56 @@ type Liked = { index: number; request: LikeRequest };
 const states: States = {};
 
 const getReferenceArray = (_: States) => [...(_.data || [])];
-const updateDataStates = <T>(_: States, data: T) => ({ ..._, data });
+const updateStates = (_: States, data: Array<ProfileHappen>, happenActive: ProfileHappen) => ({
+  ...states,
+  data,
+  happenActive,
+});
 
 export const callbackLikedLocal = (states: States, { index, request }: Liked) => {
   const happens = getReferenceArray(states);
-  const likes = new ProfileHappenLike();
+  const likes = Object.assign(new ProfileHappenLike(), {
+    ...happens[index].likes,
+    isLiked: request.isLiked,
+    isDisliked: false,
+  });
 
-  likes.dislikedCount = Math.max(0, happens[index].likes.dislikedCount - 1);
-  likes.likedCount = request.isLiked ? happens[index].likes.likedCount + 1 : happens[index].likes.likedCount - 1;
-  likes.isLiked = request.isLiked;
-  likes.isDisliked = false;
   happens[index] = { ...happens[index], likes };
-
-  return updateDataStates(states, happens);
+  return updateStates(states, happens, { ...happens[index], likes });
 };
 
 export const callbackDislikedLocal = (states: States, { index, request }: Disliked) => {
   const happens = getReferenceArray(states);
-  const likes = new ProfileHappenLike();
+  const likes = Object.assign(new ProfileHappenLike(), {
+    ...happens[index].likes,
+    isDisliked: request.disliked,
+    isLiked: false,
+  });
 
-  likes.likedCount = Math.max(0, happens[index].likes.likedCount - 1);
-  likes.dislikedCount = request.disliked
-    ? happens[index].likes.dislikedCount + 1
-    : happens[index].likes.dislikedCount - 1;
-  likes.isDisliked = request.disliked;
-  likes.isLiked = false;
+  happens[index] = { ...happens[index], likes };
+  return updateStates(states, happens, { ...happens[index], likes });
+};
+
+export const callbackUpdateLikeSocketio = (states: States, { data, happenId }: LikeSocketio) => {
+  const happens = getReferenceArray(states);
+  const index = happens.findIndex((h) => h.id === happenId);
+
+  const likes = Object.assign(new ProfileHappenLike(), {
+    ...happens[index].likes,
+    dislikedCount: data.dislikedCount,
+    likedCount: data.likedCount,
+  });
+
+  happens[index] = { ...happens[index], likes };
+  return updateStates(states, happens, { ...happens[index], likes });
+};
+
+export const callbackLikeSuccess = (states: States, { happenId, dislikedCount, likedCount }: LikeResponse) => {
+  const happens = getReferenceArray(states);
+  const index = happens.findIndex((h) => h.id === happenId);
+  const likes = Object.assign(new ProfileHappenLike(), { ...happens[index].likes, dislikedCount, likedCount });
+
   happens[index] = { ...happens[index], likes };
 
-  return updateDataStates(states, happens);
+  return updateStates(states, happens, { ...happens[index], likes });
 };

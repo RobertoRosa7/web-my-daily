@@ -6,7 +6,7 @@ import { DialogService } from '../../services/dialogs/dialog.service';
 import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { concatMap, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { happenPostRollback } from '../../actions/happens/profile.happens.action';
+import { happenFindOneLocal, happenPostRollback } from '../../actions/happens/profile.happens.action';
 
 @Component({
   selector: 'app-button-fab-create',
@@ -48,8 +48,7 @@ export class ButtonFabCreateComponent {
    * @returns
    */
   private openDialogCreateHappen() {
-    return this.dialog
-      .open(DialogHappenComponent, this.dialogService.dialogConfigHappen({ data: new ProfileHappen() }))
-      .afterClosed();
+    this.store.dispatch(happenFindOneLocal({ index: 0, data: new ProfileHappen() }));
+    return this.dialog.open(DialogHappenComponent, this.dialogService.dialogConfigHappen()).afterClosed();
   }
 }

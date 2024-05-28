@@ -15,8 +15,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
-import {MatRadioModule} from '@angular/material/radio';
-
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AsyncPipe } from '@angular/common';
 
 const commons = [
   MatCheckboxModule,
@@ -35,8 +38,12 @@ const commons = [
   MatDialogModule,
   MatSnackBarModule,
   MatStepperModule,
-  MatCheckboxModule,
-  MatRadioModule
+  MatRadioModule,
+  MatAutocompleteModule,
+  FormsModule,
+  MatFormFieldModule,
+  ReactiveFormsModule,
+  AsyncPipe,
 ];
 @NgModule({
   declarations: [],

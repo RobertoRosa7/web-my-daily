@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  host: 'http://189.68.40.172:8080',
-  ws: 'ws://192.168.15.200:5001',
+  host: 'http://177.189.1.213:9091',
+  ws: 'ws://177.189.1.213:5001',
 };

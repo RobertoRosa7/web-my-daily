@@ -87,6 +87,8 @@
   --social-green-accent: #1f883d;
   --social-green-muted: #1f883d1a;
   --social-green-header: #d0dede39;
+  --social-warning-muted: #bf87001a;
+  --social-purple: purple;
 
   --profile-cover: linear-gradient(-45deg, #d0d7deb3 20%, var(--white) 80%, #d0d7de00 5%);
   --home-cover: linear-gradient(-45deg, var(--primary) 20%, var(--dark) 80%, var(--color-dark-blue-darkness) 5%);
@@ -162,7 +164,8 @@ body {
     background-color: transparent;
   }
 }
-.dialog-custom .home {
+.dialog-custom .home,
+.dialog-cutom .explore {
   // remove filled background search input
   .mat-focused .mat-mdc-form-field-focus-overlay {
     background-color: var(--white);

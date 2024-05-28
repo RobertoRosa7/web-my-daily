@@ -16,14 +16,6 @@
       color: var(--social-blue-accent);
     }
   }
-  // button menu
-  .container-buttons .btn-menu {
-    @include btn-default;
-    border: none;
-    box-shadow: none;
-    background-color: var(--social-blue-accent);
-    color: white;
-  }
 
   // tab timeline
   .mat-mdc-tab .mdc-tab-indicator__content--underline {
@@ -85,6 +77,14 @@
       color: var(--social-blue-accent);
     }
   }
+  // button menu
+  .container-buttons .btn-menu {
+    @include btn-default;
+    border: none;
+    box-shadow: none;
+    background-color: var(--social-blue-accent);
+    color: var(--white);
+  }
 }
 
 .home.sentiment {
@@ -92,5 +92,58 @@
 }
 
 .home.explore {
-  background-color: white;
+  .cover {
+    border-bottom: 1px solid var(--social-warning-muted);
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: inherit;
+  }
+  .mat-form-field.no-underline .mat-form-field-underline {
+    display: none;
+  }
+  // customize text inside input field search
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: var(--color-dark);
+    caret-color: var(--color-dark);
+  }
+  // input search remove underline color
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent;
+  }
+
+  // remove filled background search input
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: 1rem;
+  }
+  // tab timeline
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border: none;
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border: none;
+  }
+  // button menu
+  .container-buttons .btn-menu {
+    @include btn-default;
+    border: none;
+    box-shadow: none;
+    background-color: var(--warning);
+    color: var(--color-dark);
+  }
+
+  // Title feelingers
+  .feelingers {
+    background-color: var(--social-hub);
+    color: var(--color-dark);
+  }
+
+  // card-explore
+  .card-explore {
+    .nickname {
+      background-color: var(--social-warning-muted);
+      color: var(--color-dark);
+    }
+  }
 }

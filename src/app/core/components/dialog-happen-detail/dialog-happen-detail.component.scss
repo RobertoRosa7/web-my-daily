@@ -1,121 +1,55 @@
+@import '../../../../themes/mixins';
 .dialog-happen-detail {
+  background-color: rgba(0, 0, 0, 0.9);
   font-weight: 100;
   height: 100%;
-  .authors,
-  .social,
-  .classifications,
-  .created-at,
-  .updated-at,
-  .name-id,
-  .score-neg,
-  .score-pos,
-  .satisfied,
-  .accuracy,
-  .thumbs-down,
-  .thumbs-up,
-  .visibility,
-  .row {
-    display: flex;
-    gap: 1rem;
-  }
-  .created-at,
-  .updated-at,
-  .name-id,
-  .score-neg,
-  .score-pos,
-  .satisfied,
-  .accuracy,
-  .thumbs-down,
-  .thumbs-up,
-  .visibility {
-    border-radius: 1rem;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-  }
-  .created-at,
-  .updated-at,
-  .name-id,
-  .score-neg,
-  .score-pos,
-  .satisfied,
-  .accuracy,
-  .thumbs-down,
-  .thumbs-up,
-  .visibility {
-    flex-direction: column;
-    flex: 1;
-    align-items: center;
-  }
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
   .btn-close {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: var(--dark);
-    z-index: 1;
-  }
-  .top {
-    // background: rgba(59, 59, 59, 0.5);
-    // box-shadow: inset 0rem 1rem 15rem rgba(0, 0, 0, 0.5);
-    min-height: 10rem;
-    color: var(--dark);
-    padding: 2rem;
-  }
-  .section {
-    flex: 1;
-  }
-  .satisfied,
-  .accuracy,
-  .score-pos,
-  .score-neg,
-  .visibility,
-  .thumbs-up,
-  .thumbs-down {
-    border: 1px solid var(--border-dark-light);
-    border-radius: 0.5rem;
-    // background-color: rgba(59, 59, 59, 0.1);
-  }
-  .score-avg-pace {
-    color: var(--yellow);
-  }
-  .score-positive {
-    color: var(--green);
-  }
-  .score-negative {
-    color: var(--primary);
-  }
-  .classifications {
-    flex-wrap: wrap;
-    * {
-      text-align: center;
+    top: 0;
+    left: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    .title {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
     }
   }
-  .updated-at {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-  }
-  .updated-at,
-  .updated-at .icon {
-    flex-direction: row;
-  }
-  .updated-at .icon {
-    justify-content: flex-end;
-  }
-  .sad {
-    color: var(--primary);
-  }
-  .happy {
-    color: var(--green);
-  }
-  .icon {
-    display: flex;
-    align-items: center;
-    min-width: 6rem;
-    justify-content: space-evenly;
-  }
 
-  .section {
-    margin-top: 1rem;
+  mat-dialog-content {
+    height: 100%;
+    position: relative;
+    span.inner {
+      font-size: 3rem;
+      line-height: 3rem;
+      color: white;
+    }
+
+    .container-likes {
+      position: absolute;
+      bottom: 0;
+      right: 1rem;
+      color: white;
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  span.inner {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    color: white;
   }
 }

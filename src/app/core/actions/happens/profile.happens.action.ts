@@ -20,6 +20,8 @@ const updateLocal = happenTypes.happenUpdateLocal;
 const updateRemote = happenTypes.happenUpdateRemote;
 const updateSuccess = happenTypes.happenUpdateSuccess;
 
+const findOne = happenTypes.happenFindOneLocal;
+
 const success = happenTypes.happenSuccess;
 const error = happenTypes.happenError;
 
@@ -44,6 +46,7 @@ export const happenUpdateLocal = createAction(updateLocal, callbackHappen);
 export const happenUpdateRollback = createAction(updateLocal, callbackHappen);
 export const happenUpdateRemote = createAction(updateRemote, callbackHappen);
 export const happenUpdateSuccess = createAction(updateSuccess, callbackHappen);
+export const happenFindOneLocal = createAction(findOne, callbackHappen);
 
 export const happenSuccess = createAction(success, callbackHappenSuccess);
 export const happenError = createAction(error, callbackHappenError);

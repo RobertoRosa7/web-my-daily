@@ -34,6 +34,25 @@ export class ProfileHappenLike {
   public isLiked: boolean = false;
 }
 
+export class LikeSocketio {
+  @JsonProperty('happen_id')
+  public happenId: string = '';
+  @JsonProperty('owner_id')
+  public ownerId: string = '';
+  @JsonProperty({ clazz: ProfileHappenLike })
+  public data: ProfileHappenLike = new ProfileHappenLike();
+}
+
+export class LikeResponse extends ProfileHappenLike {
+  @JsonProperty('happen_id')
+  public happenId: string = '';
+}
+
+export class LikeHttpResponse extends HttpResponseDefault<LikeResponse> {
+  @JsonProperty({ clazz: LikeResponse })
+  public override data: LikeResponse = new LikeResponse();
+}
+
 export class Feelings {
   @JsonProperty('_id')
   public id: string | undefined = undefined;
@@ -86,6 +105,8 @@ export class ProfileHappen {
 export class HappenResponsePageable extends HttpResponseDefault<Array<ProfileHappen>> {
   @JsonProperty({ clazz: ProfileHappen })
   public override data: ProfileHappen[] | undefined = undefined;
+  public happenActive: ProfileHappen = new ProfileHappen();
+  public index: number = 0;
 }
 
 export class HappenSingleton extends HttpResponseDefault<ProfileHappen> {

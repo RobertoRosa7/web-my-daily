@@ -34,31 +34,7 @@ export class Profile implements OnInit {
   constructor(protected readonly store: Store) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platform)) {
-      this.socketio = io(environment.ws + '/profile');
-      this.store.dispatch(actionProfileRequest());
-      this.store.dispatch(happenRequest());
-
-      this.userId$
-        .pipe(
-          tap((id) => this.socketio.emit('dispatch_following', id, id)),
-          mergeMap((id) =>
-            this.listeningFollows$().pipe(
-              map((response) => JsonMapProperties.deserialize(ListeningFollowResponse, response)),
-              filter(({ followId }: ListeningFollowResponse) => followId === id)
-            )
-          )
-        )
-        .subscribe({
-          next: (data) => this.store.dispatch(actionUserFollowers(data)),
-        });
-
-      this.socketio.on('listening_profile_metrics', (data) => {
-        if (data) {
-          this.store.dispatch(actionSocketUserMetrics(data));
-        }
-      });
-    }
+    
     this.store.dispatch(
       actionColor({
         theme: 'profile',
@@ -67,17 +43,4 @@ export class Profile implements OnInit {
     );
   }
 
-  public listeningFollows$() {
-    return new Observable((observer: Observer<ListeningFollowResponse>) => {
-      this.socketio.on('listening_following', (data) => {
-        if (data) {
-          observer.next(data);
-        } else {
-          observer.error('Unable To Reach Server');
-        }
-      });
-
-      return () => this.socketio.disconnect();
-    });
-  }
 }

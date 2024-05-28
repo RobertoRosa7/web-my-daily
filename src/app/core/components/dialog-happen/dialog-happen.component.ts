@@ -1,15 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { HappenVisibility, ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
-import { dialogData } from '../../interfaces/dialogs/dialogs.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectorTheme } from '../../selectors/colors/color.selector';
 import { User } from '../../../pages/profile/core/interfaces/profile.interface';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest, tap } from 'rxjs';
 import { selectorUser } from '../../../pages/profile/core/selectors/user.selector';
+import { selectHappenActive } from '../../selectors/happens/profile.happens.selector';
 
 @Component({
   selector: 'app-dialog-happen',
@@ -25,16 +25,20 @@ export class DialogHappenComponent implements OnInit {
   private readonly dialogRef = inject(MatDialogRef<DialogHappenComponent>);
 
   public readonly user$: Observable<User | undefined> = this.store.select(selectorUser);
+  public readonly happen$ = this.store.select(selectHappenActive);
+
+  public comb$ = combineLatest({ user: this.user$, happen: this.happen$ }).pipe(
+    tap(({ happen }) => {
+      this.form.setValue(happen.happenActive.whatHappen);
+      this.visibility.setValue(happen.happenActive.visibility);
+    })
+  );
+
   public readonly theme$ = this.store.select(selectorTheme);
   public readonly form: FormControl = new FormControl('');
   public readonly visibility: FormControl = new FormControl(HappenVisibility.PRIVATE);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: dialogData<ProfileHappen>) {}
-
-  ngOnInit(): void {
-    const { data } = this.data;
-    this.form.setValue(data.whatHappen);
-  }
+  ngOnInit(): void {}
 
   public get totalLength() {
     return this.form.value.length;
@@ -48,11 +52,11 @@ export class DialogHappenComponent implements OnInit {
     return this.form.value;
   }
 
-  public close(user: User) {
+  public close(user?: User) {
     this.dialogRef.close(this.buildNewHappen(user));
   }
 
-  public buildNewHappen(user: User | null): ProfileHappen {
+  public buildNewHappen(user?: User | null): ProfileHappen {
     const happen = new ProfileHappen();
 
     if (user) {
@@ -62,8 +66,6 @@ export class DialogHappenComponent implements OnInit {
 
     happen.whatHappen = this.getText || '';
     happen.visibility = this.getVisibility;
-
-    console.log(happen);
 
     return happen;
   }

@@ -3,6 +3,12 @@
     <mat-toolbar-row class="toolbar-row">
       <div class="logo">
         <span>Diário</span>
+        <ng-container>
+          @if (id) {
+          <span>/</span>
+          <small routerLink="/profile/user" class="nickaname">{{ name$ | async }}</small>
+          }
+        </ng-container>
       </div>
       <span class="spacer"></span>
       <div class="container-buttons">

@@ -1,10 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Observer } from 'rxjs';
-import { Socket } from 'socket.io-client';
+import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
+import { Socket, io } from 'socket.io-client';
 import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.interface';
 import { selectorTheme } from '../../core/selectors/colors/color.selector';
 import { selectorId } from '../profile/core/selectors/user.selector';
+import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../../environments/environment';
+import { JsonMapProperties } from '../../core/decorators/jsons/json.decorator';
+import { actionUserFollowers } from '../profile/core/actions/user.action';
 
 @Component({
   selector: 'app-public',
@@ -42,16 +46,16 @@ export class Public implements OnInit {
     // }
   }
 
-  public listeningFollows$() {
-    return new Observable((observer: Observer<ListeningFollowResponse>) => {
-      this.socketio.on('listening_following', (data) => {
-        if (data) {
-          observer.next(data);
-        } else {
-          observer.error('Unable To Reach Server');
-        }
-      });
-      return () => this.socketio.disconnect();
-    });
-  }
+  // public listeningFollows$() {
+  //   return new Observable((observer: Observer<ListeningFollowResponse>) => {
+  //     this.socketio.on('listening_following', (data) => {
+  //       if (data) {
+  //         observer.next(data);
+  //       } else {
+  //         observer.error('Unable To Reach Server');
+  //       }
+  //     });
+  //     return () => this.socketio.disconnect();
+  //   });
+  // }
 }

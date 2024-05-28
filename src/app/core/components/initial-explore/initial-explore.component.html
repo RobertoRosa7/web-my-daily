@@ -18,13 +18,15 @@
             }}</span>
             <p class="container-details">
               <span
+                class="nickname"
                 matTooltipPosition="below"
                 [matTooltip]="profile.nameId || ''"
                 style="cursor: pointer"
                 [queryParams]="{ name: profile.nameId }"
                 routerLink="/public/details"
-                >{{ profile.nameId }}
+                >{{ profile.nameId?.trim() }}
               </span>
+              <span class="divider"></span>
               <span class="public">
                 <span matTooltipPosition="above" [matTooltip]="(profile.createdAt | date) || ''">{{
                   profile.createdAt | date

@@ -24,7 +24,6 @@ export class DialogService {
   private readonly store = inject(Store);
   private readonly actionSubject = inject(ActionsSubject);
   private readonly snackbar = inject(MatSnackBar);
-
   /**
    * INFO:
    * dialogConfigHappen - responsible to config dialog to happen create
@@ -32,15 +31,31 @@ export class DialogService {
    * @param data Dialog
    * @returns DialogRef
    */
-  public dialogConfigHappen(data: dialogData<ProfileHappen>) {
+  public dialogConfigHappenComments(data: dialogData<{ index: number; data: ProfileHappen }>) {
     return {
       panelClass: 'dialog-custom',
       scrollStrategy: this.scrollStrategy.noop(),
       width: '100%',
       height: '100%',
       maxWidth: '920px',
-      maxHeight: '768px',
       data,
+    };
+  }
+  /**
+   * INFO:
+   * dialogConfigHappen - responsible to config dialog to happen create
+   *
+   * @param data Dialog
+   * @returns DialogRef
+   */
+  public dialogConfigHappen() {
+    return {
+      panelClass: 'dialog-custom',
+      scrollStrategy: this.scrollStrategy.noop(),
+      width: '100%',
+      height: '100%',
+      maxWidth: '100%',
+      maxHeight: '100%',
     };
   }
 

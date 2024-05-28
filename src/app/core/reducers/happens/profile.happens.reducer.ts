@@ -4,6 +4,7 @@ import {
   happenDeleteLocal,
   happenDeleteRollback,
   happenError,
+  happenFindOneLocal,
   happenPostLocal,
   happenPostRollback,
   happenPostSuccess,
@@ -14,8 +15,18 @@ import {
 } from '../../actions/happens/profile.happens.action';
 
 import { HttpErrorResponse } from '@angular/common/http';
-import { actionDislikedLocal, actionLikedLocal } from '../../actions/happens/likes.action';
-import { callbackDislikedLocal, callbackLikedLocal } from './like.reducer';
+import {
+  actionDislikedLocal,
+  actionLikedLocal,
+  actionLikedSocketio,
+  likeSuccess,
+} from '../../actions/happens/likes.action';
+import {
+  callbackDislikedLocal,
+  callbackLikeSuccess,
+  callbackLikedLocal,
+  callbackUpdateLikeSocketio,
+} from './like.reducer';
 
 type States = Partial<HappenResponsePageable>;
 type ProfileHappenIndex = { index: number; data: ProfileHappen };
@@ -56,6 +67,14 @@ const callbackPost = (states: States, { data }: ProfileHappenIndex) => {
   return updateDataStates(states, happens);
 };
 
+const callbackFindOne = (states: States, { data, index }: ProfileHappenIndex) => {
+  return {
+    ...states,
+    happenActive: data,
+    index,
+  };
+};
+
 export const happenReducer = createReducer(
   states,
   on(happenDeleteLocal, callbackDelete),
@@ -68,10 +87,12 @@ export const happenReducer = createReducer(
   on(happenPostRollback, callbackDelete),
   on(happenPostLocal, callbackPost),
   on(happenPostSuccess, callbackUpdate),
-
+  on(happenFindOneLocal, callbackFindOne),
   on(actionDislikedLocal, callbackDislikedLocal),
   on(actionLikedLocal, callbackLikedLocal),
+  on(likeSuccess, callbackLikeSuccess),
 
+  on(actionLikedSocketio, callbackUpdateLikeSocketio),
   on(happenSuccess, callbackSuccess),
   on(happenError, callbackError)
 );

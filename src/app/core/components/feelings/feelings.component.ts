@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { DisLikeRequest, LikeRequest, ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
+import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
 import { HappenPublicStatus } from '../../enums/bases/base.enum';
 import { Observable, concatMap, of } from 'rxjs';
@@ -11,14 +11,19 @@ import { UserProfile } from '../../../pages/profile/core/interfaces/profile.inte
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { DialogService } from '../../services/dialogs/dialog.service';
 import { MatDialog } from '@angular/material/dialog';
-import { happenDeleteRollback, happenUpdateRollback } from '../../actions/happens/profile.happens.action';
+import {
+  happenDeleteRollback,
+  happenFindOneLocal,
+  happenUpdateRollback,
+} from '../../actions/happens/profile.happens.action';
 import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
 import { Store } from '@ngrx/store';
 import { BreakLine } from '../../pipes/break-line/break-line.pipe';
 import { DialogHappenDetailCompoent } from '../dialog-happen-detail/dialog-happen-detail.component';
-import { actionDislikedLocal, actionLikedLocal, actionLikedRemote } from '../../actions/happens/likes.action';
+import { actionDislikedLocal, actionLikedLocal } from '../../actions/happens/likes.action';
 import { SnackBarActions } from '../../interfaces/dialogs/dialogs.interface';
 import { DialogHelperService } from '../../services/dialogs/dialog-helper.service';
+import { DialogHappenCommentsComponent } from '../dialog-happen-comments/dialog-happen-comments.component';
 
 type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
 
@@ -35,6 +40,7 @@ type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
     DialogAlertComponent,
     DialogHappenComponent,
     DialogHappenDetailCompoent,
+    DialogHappenCommentsComponent,
     BreakLine,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -59,22 +65,56 @@ export class FeelingsComponent {
   ) {}
 
   public disliked(disliked: boolean, happen: ProfileHappen): void {
+    // previous like to rollback
     DialogHelperService.previousDisLike$.next(!disliked);
-    const request = DialogHelperService.dislikeBuilder(disliked, happen);
-    this.store.dispatch(actionDislikedLocal({ index: this.index, request }));
-    this.dialogService.openSnackerbar(this.index, happen, SnackBarActions.disliked).subscribe(console.log);
+
+    // builder like request
+    const builder = (value: boolean) => ({
+      index: this.index,
+      request: DialogHelperService.dislikeBuilder(value, happen),
+    });
+
+    // dispatch like local
+    this.store.dispatch(actionDislikedLocal(builder(disliked)));
+
+    // open snackabar
+    this.dialogService.openSnackerbar(this.index, happen, SnackBarActions.disliked).subscribe({
+      next: (_) => {},
+      error: (error) => {
+        this.dialogService.showSnackbar(error, 'Não foi possível curtir este post');
+        this.store.dispatch(actionDislikedLocal(builder(disliked)));
+      },
+    });
   }
 
   public liked(liked: boolean, happen: ProfileHappen): void {
+    // previous like to rollback
     DialogHelperService.previousLike$.next(!liked);
-    const request = DialogHelperService.likedBuilder(liked, happen);
-    this.store.dispatch(actionLikedLocal({ index: this.index, request }));
-    this.dialogService.openSnackerbar(this.index, happen, SnackBarActions.liked).subscribe(console.log);
+
+    // builder like request
+    const builder = (value: boolean) => ({
+      index: this.index,
+      request: DialogHelperService.likedBuilder(value, happen),
+    });
+
+    // dispatch like local
+    this.store.dispatch(actionLikedLocal(builder(liked)));
+
+    // open snackabar
+    this.dialogService.openSnackerbar(this.index, happen, SnackBarActions.liked).subscribe({
+      next: (_) => {},
+      error: (error) => {
+        this.dialogService.showSnackbar(error, 'Não foi possível curtir este post');
+        this.store.dispatch(actionLikedLocal(builder(liked)));
+      },
+    });
   }
 
   public edit(data: ProfileHappen) {
+    // previous text to rollback
     DialogHelperService.previousText$.next(data.whatHappen);
 
+    // open dialog to update happen
     this.openDialogToUpdate(data).subscribe({
       next: (_) => {},
       error: (error) => {
@@ -89,8 +129,27 @@ export class FeelingsComponent {
     });
   }
 
+  /**
+   * INFO: details - it's deprecated until find some web designer to create this page
+   *
+   * @deprecated
+   * @param data ProfileHappen
+   */
   public details(data: ProfileHappen) {
-    this.dialog.open(DialogHappenDetailCompoent, this.dialogService.dialogConfigHappen({ data }));
+    this.store.dispatch(happenFindOneLocal({ index: this.index, data }));
+    this.dialog.open(DialogHappenDetailCompoent, this.dialogService.dialogConfigHappen());
+  }
+
+  /**
+   * INFO: comments - it's deprecated until find some web designer to create this page
+   *
+   * @param data ProfileHappen
+   */
+  public comments(data: ProfileHappen) {
+    this.dialog.open(
+      DialogHappenCommentsComponent,
+      this.dialogService.dialogConfigHappenComments({ data: { index: this.index, data } })
+    );
   }
 
   /**
@@ -118,8 +177,9 @@ export class FeelingsComponent {
    * @returns
    */
   private openDialogToUpdate(data: ProfileHappen) {
+    this.store.dispatch(happenFindOneLocal({ index: this.index, data }));
     return this.dialog
-      .open(DialogHappenComponent, this.dialogService.dialogConfigHappen({ data }))
+      .open(DialogHappenComponent, this.dialogService.dialogConfigHappen())
       .afterClosed()
       .pipe(
         concatMap((response: ProfileHappen) =>

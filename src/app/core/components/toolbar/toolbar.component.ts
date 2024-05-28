@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
 import { selectorTheme } from '../../selectors/colors/color.selector';
 import { InputSearchComponent } from '../input-search/input-search.component';
+import { selectName } from '../../../pages/profile/core/selectors/user.selector';
 
 @Component({
   selector: 'app-toolbar',
@@ -20,7 +21,12 @@ import { InputSearchComponent } from '../input-search/input-search.component';
   imports: [SharedModule, CommonModule, ButtonMenuComponent, ButtonBackComponent, InputSearchComponent, RouterModule],
 })
 export class ToolbarComponent implements OnInit {
+  private readonly router: Router = inject(Router);
+  private readonly store: Store = inject(Store);
+  protected readonly dialog?: MatDialog = inject(MatDialog);
+
   public theme$ = this.store.select(selectorTheme);
+  public name$ = this.store.select(selectName);
 
   @Output() send = new EventEmitter();
   @Output() updateRegisters = new EventEmitter();
@@ -34,8 +40,6 @@ export class ToolbarComponent implements OnInit {
   public searchTerms: FormControl = new FormControl();
   public user: any;
   public isDark!: boolean;
-
-  constructor(private readonly router: Router, private readonly store: Store, protected readonly dialog?: MatDialog) {}
 
   ngOnInit(): void {
     // this.store

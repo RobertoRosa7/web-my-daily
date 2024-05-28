@@ -1,0 +1,7 @@
+@import '../../../../themes/mixins';
+
+.tab-timeline {
+  .page {
+    @include size-page;
+  }
+}

@@ -28,9 +28,10 @@ import { PublicProfileService } from '../public/core/services/public-profile.ser
 import { PublicProfileEffect } from '../public/core/effects/public-profile.effect';
 import { LikeEffect } from '../../core/effects/happens/like.effect';
 import { HappensEffect } from '../../core/effects/happens/profile.happens.effect';
+import { ExploreComponent } from './explore/explore.component';
 
 @NgModule({
-  declarations: [HomeComponent, InitialComponent, TimelineComponent],
+  declarations: [HomeComponent, InitialComponent, TimelineComponent, ExploreComponent],
   imports: [
     RouterModule.forChild(routes),
     ToolbarComponent,

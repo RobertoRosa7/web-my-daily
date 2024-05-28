@@ -5,6 +5,7 @@ import {
   HappenResponsePageable,
   HappenSingleton,
   HttpResponseHappen,
+  LikeHttpResponse,
   LikeRequest,
   ProfileHappen,
 } from '../../interfaces/happens/profile.happen.interface';
@@ -74,7 +75,7 @@ export class HappenService {
    * @returns Observable<HttpResponseDefault<string>>
    */
   public postLiked(liked: LikeRequest): Observable<HttpResponseDefault<void>> {
-    return this.repository.postLiked(liked);
+    return this.repository.postLiked(liked).pipe(map((data) => JsonMapProperties.deserialize(LikeHttpResponse, data)));
   }
 
   /**
@@ -83,6 +84,8 @@ export class HappenService {
    * @returns Observable<HttpResponseDefault<string>>
    */
   public postDisliked(disliked: DisLikeRequest): Observable<HttpResponseDefault<void>> {
-    return this.repository.postDisliked(disliked);
+    return this.repository
+      .postDisliked(disliked)
+      .pipe(map((data) => JsonMapProperties.deserialize(LikeHttpResponse, data)));
   }
 }

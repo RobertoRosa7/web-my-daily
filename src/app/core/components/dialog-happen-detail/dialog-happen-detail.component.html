@@ -1,99 +1,42 @@
-<main class="dialog-happen-detail">
+<main class="dialog-happen-detail" *ngIf="happen$ | async as data">
   <div class="btn-close">
     <button [tabindex]="-1" matTooltip="fechar" matTooltipPosition="above" [mat-dialog-close]="null" mat-icon-button>
-      <mat-icon>close</mat-icon>
+      <mat-icon>arrow_back</mat-icon>
     </button>
+    <div class="title">
+      <span>{{ data.happenActive.nickname }}</span>
+      <span>{{ data.happenActive.nameId }}</span>
+    </div>
   </div>
   <mat-dialog-content>
-    <div #donuts></div>
-  </mat-dialog-content>
-  <div class="top">
-    <div class="row">
-      <section class="section">
-        <p>Classificação</p>
-        <div class="classifications">
-          <div class="satisfied" matTooltip="Sentimento" matTooltipPosition="above">
-            <div class="icon sentiment" [ngClass]="classSentiments">
-              <ng-container [ngSwitch]="data.data.feelings.sentiment">
-                <ng-container *ngSwitchCase="'positive'">
-                  <span> Positivo </span>
-                  <span class="material-symbols-outlined"> sentiment_satisfied </span>
-                </ng-container>
-                <ng-container *ngSwitchCase="'negative'">
-                  <span> Negativo </span>
-                  <span class="material-symbols-outlined"> sentiment_sad </span>
-                </ng-container>
-              </ng-container>
-            </div>
-          </div>
-          <div class="accuracy" matTooltip="Confiança" matTooltipPosition="above">
-            <div class="icon score-avg-pace">
-              <span>{{ data.data.feelings.accuracyScore | percent : '1.2-2' }} </span>
-              <span class="material-symbols-outlined"> avg_pace </span>
-            </div>
-          </div>
-          <div class="score-neg" matTooltip="Negativo" matTooltipPosition="above">
-            <div class="icon score-negative">
-              <span>{{ data.data.feelings.scoreNegative | percent : '1.2-2' }} </span>
-              <span aria-label="not-favorite" class="material-symbols-outlined"> arrow_downward </span>
-            </div>
-          </div>
-          <div class="score-pos" matTooltip="Positivo" mmatTooltipPosition="above">
-            <div class="icon score-positive">
-              <span>{{ data.data.feelings.scorePositive | percent : '1.2-2' }} </span>
-              <span aria-label="not-favorite" class="material-symbols-outlined"> arrow_upward </span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="row">
-      <section class="section">
-        <p>Social</p>
-        <div class="social">
-          <div class="visibility" matTooltip="Visibilidade" matTooltipPosition="above">
-            <div class="icon show-visibility">
-              <ng-container [ngSwitch]="data.data.visibility">
-                <ng-container *ngSwitchCase="visibility.PRIVATE">
-                  <span>Privado</span>
-                  <span *ngSwitchCase="visibility.PRIVATE" aria-label="private" class="material-symbols-outlined">
-                    lock
-                  </span>
-                </ng-container>
-                <ng-container *ngSwitchCase="visibility.FOLLOWERS">
-                  <span>Seguidores</span>
-                  <span aria-label="followers" class="material-symbols-outlined"> person </span>
-                </ng-container>
-                <ng-container *ngSwitchCase="visibility.PUBLIC">
-                  <span>Público</span>
-                  <span aria-label="public" class="material-symbols-outlined"> public </span>
-                </ng-container>
-              </ng-container>
-            </div>
-          </div>
-          <div class="thumbs-up" matTooltip="curtidas" matTooltipPosition="above">
-            <div class="icon">
-              <span>{{ data.data.likes.likedCount | follows }} </span>
-              <span aria-label="not-favorite" class="material-symbols-outlined"> thumb_up </span>
-            </div>
-          </div>
-          <div class="thumbs-down" matTooltip="não curtidas" matTooltipPosition="above">
-            <div class="icon">
-              <span>{{ data.data.likes.dislikedCount | follows }} </span>
-              <span aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-
-  <mat-dialog-actions>
-    <div class="updated-at">
-      <div class="icon">
-        <small>{{ data.data.updatedAt | date : 'medium' }} </small>
-        <small aria-label="not-favorite" class="material-symbols-outlined"> timer </small>
+    <span class="inner" [innerHTML]="data.happenActive.whatHappen"></span>
+    <div class="container-likes">
+      <div matTooltipPosition="above" matTooltip="Cutir">
+        <button (click)="liked(data.happenActive.likes.isLiked, data.index, data.happenActive)" mat-icon-button role="button" aria-describedby="favorite">
+          <mat-icon *ngIf="!data.happenActive.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
+          <mat-icon *ngIf="data.happenActive.likes.isLiked" aria-label="favorite">favorite</mat-icon>
+        </button>
+        <small>{{ data.happenActive.likes.likedCount | follows }}</small>
+      </div>
+      <div matTooltipPosition="above" matTooltip="Não curtir">
+        <button
+          (click)="disliked(data.happenActive.likes.isDisliked, data.index, data.happenActive)"
+          mat-icon-button
+          role="button"
+          aria-describedby="not-favorite">
+          <span
+            class="thumb-down"
+            *ngIf="!data.happenActive.likes.isDisliked"
+            aria-label="not-favorite"
+            class="material-symbols-outlined">
+            thumb_down
+          </span>
+          <mat-icon *ngIf="data.happenActive.likes.isDisliked" aria-label="not-favorite" class="material-symbols-outlined">
+            thumb_down
+          </mat-icon>
+        </button>
+        <small>{{ data.happenActive.likes.dislikedCount | follows }}</small>
       </div>
     </div>
-  </mat-dialog-actions>
+  </mat-dialog-content>
 </main>

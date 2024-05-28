@@ -16,12 +16,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menus="matMenu" overlapTrigger="true">
-          <button
-            *ngIf="id !== happen.userId"
-            (click)="edit(happen)"
-            matTooltipPosition="right"
-            mat-menu-item
-            matTooltip="Editar">
+          <button *ngIf="id !== happen.userId" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
             <mat-icon iconPositionEnd>remove</mat-icon>
             <span>Deixar de Visualizar</span>
           </button>
@@ -89,7 +84,7 @@
         </ng-container>
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content role="doc-epigraph" aria-describedby="post" aria-details="post content">
+    <mat-card-content (click)="details(happen)" role="doc-epigraph" aria-describedby="post" aria-details="post content">
       <div [innerHTML]="happen.whatHappen | breakline"></div>
     </mat-card-content>
 
@@ -109,8 +104,13 @@
         </div>
       </div>
       <div class="container-likes">
+        <div matTooltipPosition="above" matTooltip="comentários">
+          <button (click)="comments(happen)" mat-icon-button role="button" aria-describedby="comments">
+            <mat-icon>comment</mat-icon>
+          </button>
+          <small>0</small>
+        </div>
         <div matTooltipPosition="above" matTooltip="Cutir">
-          <small>{{ happen.likes.likedCount | follows }}</small>
           <button
             (click)="liked(happen.likes.isLiked, happen)"
             mat-icon-button
@@ -119,9 +119,9 @@
             <mat-icon *ngIf="!happen.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
             <mat-icon *ngIf="happen.likes.isLiked" aria-label="favorite">favorite</mat-icon>
           </button>
+          <small>{{ happen.likes.likedCount | follows }}</small>
         </div>
         <div matTooltipPosition="above" matTooltip="Não curtir">
-          <small>{{ happen.likes.dislikedCount | follows }}</small>
           <button
             (click)="disliked(happen.likes.isDisliked, happen)"
             mat-icon-button
@@ -138,6 +138,7 @@
               thumb_down
             </mat-icon>
           </button>
+          <small>{{ happen.likes.dislikedCount | follows }}</small>
         </div>
       </div>
     </mat-card-actions>

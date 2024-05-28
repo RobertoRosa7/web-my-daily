@@ -7,6 +7,8 @@ export enum likesTypes {
   likedPostRemote = 'likedPostRemote@types',
   likedPostSuccess = 'likedPostSuccess@types',
 
+  likedSocketio = 'likedSocketio@types',
+
   success = 'likedSuccess@types',
   error = 'likedError@types',
 }
