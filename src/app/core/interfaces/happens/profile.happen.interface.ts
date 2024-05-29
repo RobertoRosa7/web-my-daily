@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 import { JsonProperty } from '../../decorators/jsons/json.decorator';
 import { HttpResponseDefault } from '../https/http-response.interface';
+import { HappenComment } from './happen.comment.interface';
 
 export type HttpResponseHappen = HttpResponseDefault<ProfileHappen>;
 export type ProfileHappenObservable = Observable<Array<ProfileHappen> | undefined>;
@@ -13,13 +14,13 @@ export enum HappenVisibility {
 
 export class LikeRequest {
   public happenId!: string;
-  public happenOwnerId!: string;
+  public ownerId!: string;
   public isLiked!: boolean;
 }
 
 export class DisLikeRequest {
   public happenId!: string;
-  public happenOwnerId!: string;
+  public ownerId!: string;
   public disliked!: boolean;
 }
 
@@ -92,14 +93,15 @@ export class ProfileHappen {
   @JsonProperty('user_id')
   public userId: string = '';
   @JsonProperty('visibility')
-  public visibility: HappenVisibility | null = null;
+  public visibility: HappenVisibility | null = HappenVisibility.PUBLIC;
   @JsonProperty('what_happen')
   public whatHappen: string = '';
   @JsonProperty({ clazz: ProfileHappenLike })
   public likes: ProfileHappenLike = new ProfileHappenLike();
-
   @JsonProperty({ clazz: Feelings })
   public feelings: Feelings = new Feelings();
+  @JsonProperty('comments_counter')
+  public commentsCounter: number = 0;
 }
 
 export class HappenResponsePageable extends HttpResponseDefault<Array<ProfileHappen>> {
@@ -107,6 +109,7 @@ export class HappenResponsePageable extends HttpResponseDefault<Array<ProfileHap
   public override data: ProfileHappen[] | undefined = undefined;
   public happenActive: ProfileHappen = new ProfileHappen();
   public index: number = 0;
+  public comments: Array<HappenComment> | null = [];
 }
 
 export class HappenSingleton extends HttpResponseDefault<ProfileHappen> {

@@ -11,6 +11,11 @@ import {
   ProfileHappen,
 } from '../interfaces/happens/profile.happen.interface';
 import { HttpResponseDefault } from '../interfaces/https/http-response.interface';
+import {
+  CommentRequest,
+  HappenCommentHttpResponse,
+  HappenCommentSingleTon,
+} from '../interfaces/happens/happen.comment.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +41,12 @@ export class HappenRepository {
 
   @Url(Paths.liked)
   private urlLiked!: string;
+
+  @Url(Paths.getHappenComments)
+  private urlGetHappenComments!: string;
+
+  @Url(Paths.postHappenComment)
+  private urlPostHappenComment!: string;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -87,7 +98,7 @@ export class HappenRepository {
 
   /**
    * INFO:
-   * postLiked - update one happen
+   * postLiked - post one happen
    * @returns Observable<HttpResponseDefault<string>>
    */
   public postLiked(happen: LikeRequest): Observable<HttpResponseDefault<void>> {
@@ -96,10 +107,46 @@ export class HappenRepository {
 
   /**
    * INFO:
-   * postDisliked - update one happen
+   * postDisliked - post one happen
    * @returns Observable<HttpResponseDefault<string>>
    */
   public postDisliked(happen: DisLikeRequest): Observable<HttpResponseDefault<void>> {
     return this.http.post<HttpResponseDefault<void>>(`${this.urlDisliked}`, happen);
+  }
+
+  /**
+   * INFO:
+   * getHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public getHappenComments(happen: ProfileHappen): Observable<HappenCommentHttpResponse> {
+    return this.http.get<HappenCommentHttpResponse>(`${this.urlGetHappenComments}/${happen.id}`);
+  }
+
+  /**
+   * INFO:
+   * addHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public addHappenComments(comment: CommentRequest): Observable<HappenCommentSingleTon> {
+    return this.http.post<HappenCommentSingleTon>(`${this.urlPostHappenComment}`, comment);
+  }
+
+  /**
+   * INFO:
+   * updateHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public updateHappenComments(commentId: string, comment: CommentRequest): Observable<HappenCommentSingleTon> {
+    return this.http.put<HappenCommentSingleTon>(`${this.urlPostHappenComment}/${commentId}`, comment);
+  }
+
+  /**
+   * INFO:
+   * deleteHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public deleteHappenComments(commentId: string): Observable<void> {
+    return this.http.delete<void>(`${this.urlPostHappenComment}/${commentId}`);
   }
 }

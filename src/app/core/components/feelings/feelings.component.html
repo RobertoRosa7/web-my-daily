@@ -108,7 +108,7 @@
           <button (click)="comments(happen)" mat-icon-button role="button" aria-describedby="comments">
             <mat-icon>comment</mat-icon>
           </button>
-          <small>0</small>
+          <small>{{ happen.commentsCounter | follows }}</small>
         </div>
         <div matTooltipPosition="above" matTooltip="Cutir">
           <button

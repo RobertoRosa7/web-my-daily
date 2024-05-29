@@ -12,6 +12,11 @@ import {
 import { JsonMapProperties } from '../../decorators/jsons/json.decorator';
 import { HttpResponseDefault } from '../../interfaces/https/http-response.interface';
 import { HappenRepository } from '../../repositories/happen.repository';
+import {
+  CommentRequest,
+  HappenCommentHttpResponse,
+  HappenCommentSingleTon,
+} from '../../interfaces/happens/happen.comment.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -87,5 +92,47 @@ export class HappenService {
     return this.repository
       .postDisliked(disliked)
       .pipe(map((data) => JsonMapProperties.deserialize(LikeHttpResponse, data)));
+  }
+
+  /**
+   * INFO:
+   * getHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public getHappenComments(happen: ProfileHappen): Observable<HappenCommentHttpResponse> {
+    return this.repository
+      .getHappenComments(happen)
+      .pipe(map((data) => JsonMapProperties.deserialize(HappenCommentHttpResponse, data)));
+  }
+
+  /**
+   * INFO:
+   * addHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public addHappenComments(request: CommentRequest): Observable<HappenCommentSingleTon> {
+    return this.repository
+      .addHappenComments(request)
+      .pipe(map((data) => JsonMapProperties.deserialize(HappenCommentSingleTon, data)));
+  }
+
+  /**
+   * INFO:
+   * updateHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public updateHappenComments(commentId: string, request: CommentRequest): Observable<HappenCommentSingleTon> {
+    return this.repository
+      .updateHappenComments(commentId, request)
+      .pipe(map((data) => JsonMapProperties.deserialize(HappenCommentSingleTon, data)));
+  }
+
+  /**
+   * INFO:
+   * deleteHappenComments - get comments from happen
+   * @returns HappenCommentHttpResponse
+   */
+  public deleteHappenComments(commentId: string): Observable<void> {
+    return this.repository.deleteHappenComments(commentId);
   }
 }

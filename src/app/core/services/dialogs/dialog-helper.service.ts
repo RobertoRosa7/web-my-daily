@@ -41,7 +41,7 @@ export class DialogHelperService implements ISnackBarActions {
   public static likedBuilder(isLiked: boolean, data: ProfileHappen): LikeRequest {
     const request = new LikeRequest();
     request.isLiked = !isLiked;
-    request.happenOwnerId = data.userId;
+    request.ownerId = data.userId;
     request.happenId = data.id;
 
     return request;
@@ -58,7 +58,7 @@ export class DialogHelperService implements ISnackBarActions {
   public static dislikeBuilder(isDisliked: boolean, data: ProfileHappen): DisLikeRequest {
     const request = new DisLikeRequest();
     request.disliked = !isDisliked;
-    request.happenOwnerId = data.userId;
+    request.ownerId = data.userId;
     request.happenId = data.id;
 
     return request;

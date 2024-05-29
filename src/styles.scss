@@ -239,6 +239,33 @@ body {
   }
 }
 
+.dialog-comments {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border: none;
+  }
+  .mat-form-field.no-underline .mat-form-field-underline {
+    display: none;
+  }
+  .mat-focused .mat-mdc-form-field-focus-overlay {
+    background-color: var(--white);
+  }
+  // customize text inside input field search
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: var(--color-dark);
+    caret-color: var(--color-dark);
+  }
+  // input search remove underline color
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent;
+  }
+
+  // remove filled background search input
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background: transparent;
+    border: 1px solid var(--border-default);
+  }
+}
+
 .loading {
   position: relative;
 

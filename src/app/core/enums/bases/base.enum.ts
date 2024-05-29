@@ -17,6 +17,8 @@ export enum Paths {
   disliked = '/ms-users/user/likes/dislike',
 
   getTimeline = '/ms-daily/happen/user/timeline',
+  getHappenComments = '/ms-daily/happen/comments/find',
+  postHappenComment = '/ms-daily/happen/comments',
   getHappen = '/ms-daily/happen/user',
   deleteHappen = '/ms-daily/happen',
   updateHappen = '/ms-daily/happen',

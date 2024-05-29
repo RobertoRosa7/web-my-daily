@@ -5,7 +5,7 @@ import { catchError, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HappenService } from '../../services/happens/happen.service';
 import { likesTypes } from '../../types/happens/likes.type';
-import { actionLikesError, likeSuccess } from '../../actions/happens/likes.action';
+import { actionLikesError, actionLikeSuccess } from '../../actions/happens/likes.action';
 import { environment } from '../../../../environments/environment';
 import { io } from 'socket.io-client';
 import { LikeHttpResponse, LikeRequest } from '../../interfaces/happens/profile.happen.interface';
@@ -32,12 +32,12 @@ export class LikeEffect {
         }
 
         // verify if card happen is not my own card
-        if (id !== request.happenOwnerId) {
+        if (id !== request.ownerId) {
           const socketio = io(environment.ws + '/likes');
-          socketio.emit('dispatch_likes', request.happenId, request.happenOwnerId);
+          socketio.emit('dispatch_likes', request.happenId, request.ownerId);
         }
 
-        return likeSuccess(response.data);
+        return actionLikeSuccess(response.data);
       })
     );
   }

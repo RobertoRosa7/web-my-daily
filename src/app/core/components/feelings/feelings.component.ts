@@ -12,6 +12,7 @@ import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { DialogService } from '../../services/dialogs/dialog.service';
 import { MatDialog } from '@angular/material/dialog';
 import {
+  happenComments,
   happenDeleteRollback,
   happenFindOneLocal,
   happenUpdateRollback,
@@ -44,6 +45,7 @@ type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
     BreakLine,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DialogService],
 })
 export class FeelingsComponent {
   public readonly status = HappenPublicStatus;
@@ -146,9 +148,13 @@ export class FeelingsComponent {
    * @param data ProfileHappen
    */
   public comments(data: ProfileHappen) {
+    const payload = { index: this.index, data };
+
+    this.store.dispatch(happenComments(payload));
+    this.store.dispatch(happenFindOneLocal(payload));
     this.dialog.open(
       DialogHappenCommentsComponent,
-      this.dialogService.dialogConfigHappenComments({ data: { index: this.index, data } })
+      this.dialogService.dialogConfigHappenComments()
     );
   }
 

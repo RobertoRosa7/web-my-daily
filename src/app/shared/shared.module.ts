@@ -20,6 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AsyncPipe } from '@angular/common';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 const commons = [
   MatCheckboxModule,
@@ -43,6 +44,7 @@ const commons = [
   FormsModule,
   MatFormFieldModule,
   ReactiveFormsModule,
+  CdkAccordionModule,
   AsyncPipe,
 ];
 @NgModule({

@@ -31,14 +31,13 @@ export class DialogService {
    * @param data Dialog
    * @returns DialogRef
    */
-  public dialogConfigHappenComments(data: dialogData<{ index: number; data: ProfileHappen }>) {
+  public dialogConfigHappenComments() {
     return {
-      panelClass: 'dialog-custom',
+      panelClass: 'dialog-comments',
       scrollStrategy: this.scrollStrategy.noop(),
       width: '100%',
       height: '100%',
       maxWidth: '920px',
-      data,
     };
   }
   /**

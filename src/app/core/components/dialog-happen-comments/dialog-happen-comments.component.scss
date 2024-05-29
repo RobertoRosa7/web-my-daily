@@ -28,16 +28,21 @@
     margin-right: auto;
     margin-top: 1rem;
   }
+  .body {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2.2rem;
+  }
   .container {
     display: flex;
     flex-direction: column;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    min-width: 300px;
     .dialog-content {
       display: flex;
       gap: 1rem;
       .timeline {
-        flex: 0.5;
+        flex: 0.3;
         display: flex;
         z-index: 1;
         align-items: flex-start;
@@ -45,7 +50,7 @@
         flex-direction: column;
         position: relative;
         .author {
-          line-height: 0.5rem;
+          line-height: 1rem;
           color: var(--social-blue-accent);
           border-radius: 0.5rem;
           padding: 2px 8px;
@@ -153,7 +158,6 @@
     background-color: var(--white);
     border: 2px solid var(--social-purple);
   }
-
   .author::after {
     content: '';
     position: absolute;
@@ -164,25 +168,24 @@
     background-color: var(--social-purple);
     z-index: -1;
   }
-
   .input {
     display: flex;
     position: fixed;
-    bottom: 0;
+    bottom: 1rem;
     width: 100%;
-    max-width: 900px;
+    max-width: 880px;
     min-height: 48px;
     gap: 1rem;
     justify-content: space-around;
     z-index: 2;
+    padding-left: 2rem;
     .field {
       width: 100%;
       background-color: white;
     }
-    button {
-      border: 1px solid var(--border-default);
-      border-radius: 50%;
-    }
+  }
+  .edit-input {
+    width: 100%;
   }
 }
 
@@ -192,5 +195,9 @@
     .date {
       line-height: 1rem;
     }
+  }
+
+  .dialog-happen-comments .input {
+    padding: 0;
   }
 }

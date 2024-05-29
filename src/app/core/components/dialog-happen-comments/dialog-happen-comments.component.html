@@ -1,4 +1,4 @@
-<main class="dialog-happen-comments">
+<main class="dialog-happen-comments" *ngIf="happen$ | async as data">
   <header class="dialog-header">
     <div class="btn-close">
       <button tabindex="-1" [mat-dialog-close]="false" mat-icon-button>
@@ -7,84 +7,34 @@
     </div>
     <div class="header">
       <div class="title">
-        <span class="nickname">{{ happen.nickname }}</span>
-        <span class="domain-name">{{ happen.nameId }} {{ happen.updatedAt | date }}</span>
+        <span class="nickname">{{ data.nickname }}</span>
+        <span class="domain-name">{{ data.nameId }} {{ data.updatedAt | date }}</span>
       </div>
       <div class="subtitle">Comentários!</div>
     </div>
   </header>
+  <app-comment
+    (onDelete)="onDelete($event)"
+    (onComment)="onComment($event)"
+    [id]="userId$ | async"
+    [comment]="data"></app-comment>
 
-  <div class="body">
-    <div class="container">
-      <section class="dialog-content">
-        <div class="timeline">
-          <div class="author">
-            <span class="nickname">{{ happen.nickname }}</span>
-            <span class="date">{{ happen.updatedAt | date : 'medium' }}</span>
-          </div>
-        </div>
-        <div class="card-comments">
-          <div class="card-header">{{ happen.nameId }}</div>
-          <div class="card-body">
-            <div [innerHTML]="happen.whatHappen"></div>
-          </div>
-          <div class="container-scores">
-            <div matTooltipPosition="above" matTooltip="Score Positivo">
-              <button disabled class="btn-score-pos" mat-icon-button role="button" aria-describedby="arrow_upward">
-                <mat-icon aria-label="arrow_upward">arrow_upward</mat-icon>
-              </button>
-              <small>{{ happen.feelings.scorePositive | percent : '1.2-2' }}</small>
-            </div>
-            <div matTooltipPosition="above" matTooltip="Score Negativo">
-              <button disabled class="btn-score-neg" mat-icon-button role="button" aria-describedby="arrow_downward">
-                <mat-icon aria-label="arrow_downward">arrow_downward</mat-icon>
-              </button>
-              <small>{{ happen.feelings.scoreNegative | percent : '1.2-2' }}</small>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-    <div class="container comments">
-      @for (item of [0,1,2,3,5,5,2,2,4,24,2,2,2,2,2,2]; track $index) {
-      <section class="dialog-content">
-        <div class="timeline">
-          <div class="author">
-            <span class="nickname">{{ happen.nickname }}</span>
-            <span class="date">{{ happen.updatedAt | date : 'medium' }}</span>
-          </div>
-        </div>
-        <div class="card-comments">
-          <div class="card-header">{{ happen.nameId }}</div>
-          <div class="card-body">
-            <div [innerHTML]="happen.whatHappen"></div>
-          </div>
-          <div class="container-scores">
-            <div matTooltipPosition="above" matTooltip="Score Positivo">
-              <button disabled class="btn-score-pos" mat-icon-button role="button" aria-describedby="arrow_upward">
-                <mat-icon aria-label="arrow_upward">arrow_upward</mat-icon>
-              </button>
-              <small>{{ happen.feelings.scorePositive | percent : '1.2-2' }}</small>
-            </div>
-            <div matTooltipPosition="above" matTooltip="Score Negativo">
-              <button disabled class="btn-score-neg" mat-icon-button role="button" aria-describedby="arrow_downward">
-                <mat-icon aria-label="arrow_downward">arrow_downward</mat-icon>
-              </button>
-              <small>{{ happen.feelings.scoreNegative | percent : '1.2-2' }}</small>
-            </div>
-          </div>
-        </div>
-      </section>
-      }
-    </div>
-  </div>
+  <ng-container *ngIf="comments$ | async as data">
+    @for(item of data.comments; track $index) {
+    <app-comment
+      (onDelete)="onDelete($event)"
+      (onComment)="onComment($event)"
+      [id]="userId$ | async"
+      [comment]="item"></app-comment>
+    }
+  </ng-container>
 
-  <div class="input">
+  <form class="input" (ngSubmit)="addComment(data)">
     <mat-form-field class="field">
-      <input [tabindex]="0" placeholder="Digite aqui" matInput type="text" />
+      <input required [formControl]="form" [tabindex]="0" placeholder="Digite aqui" matInput type="text" />
+      <button (click)="addComment(data)" [disabled]="form.invalid" matSuffix mat-icon-button>
+        <mat-icon>add</mat-icon>
+      </button>
     </mat-form-field>
-    <button mat-icon-button>
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+  </form>
 </main>

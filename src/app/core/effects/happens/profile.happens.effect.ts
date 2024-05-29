@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
+  happenCommentError,
+  happenCommentSuccess,
   happenError,
   happenPostSuccess,
   happenSuccess,
@@ -12,6 +14,13 @@ import {
 } from '../../actions/happens/profile.happens.action';
 import { happenTypes } from '../../types/happens/happen.type';
 import { HappenService } from '../../services/happens/happen.service';
+import { commentTypes } from '../../types/happens/comment.type';
+import {
+  actionCommentError,
+  happenCommentDeleteRemoteSuccess,
+  happenCommentLocal,
+  happenCommentPutSuccess,
+} from '../../actions/happens/comment.action';
 
 /**
  * @see: https://ngrx.io/guide/effects
@@ -121,7 +130,7 @@ export class HappensEffect {
   /**
    * INFO:
    *
-   * profile - layer 2 effect profile responsible to handler layer between services, store states, reducers and components
+   * timeline - layer 2 effect profile responsible to handler layer between services, store states, reducers and components
    */
   public timeline: Observable<Actions> = createEffect(() =>
     this.action.pipe(
@@ -141,4 +150,82 @@ export class HappensEffect {
       catchError((e) => of(e))
     )
   );
+
+  private callbackFindOneLocal() {
+    return this.action.pipe(
+      ofType(happenTypes.happenComments),
+      // layer call service http
+      mergeMap(({ data }) =>
+        this.happenService.getHappenComments(data).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return happenCommentError({ failed: response });
+            }
+            return happenCommentSuccess(response);
+          })
+        )
+      ),
+      // layer to catch error from effect
+      catchError((e) => of(e))
+    );
+  }
+
+  private callbackAddComments() {
+    return this.action.pipe(
+      ofType(commentTypes.commentPostRemote),
+      mergeMap((payload) =>
+        this.happenService.addHappenComments(payload).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return actionCommentError({ failed: response });
+            }
+            return happenCommentLocal(response);
+          })
+        )
+      ),
+      catchError((e) => of(e))
+    );
+  }
+  private callbackPutComments() {
+    return this.action.pipe(
+      ofType(commentTypes.commentPutRemote),
+      mergeMap(({ commentId, request }) =>
+        this.happenService.updateHappenComments(commentId, request).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return actionCommentError({ failed: response });
+            }
+            return happenCommentPutSuccess(response);
+          })
+        )
+      ),
+      catchError((e) => of(e))
+    );
+  }
+
+  private callbackDelComments() {
+    return this.action.pipe(
+      ofType(commentTypes.commentDeleteRemote),
+      mergeMap(({ commentId }) =>
+        this.happenService.deleteHappenComments(commentId).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return actionCommentError({ failed: response });
+            }
+            return happenCommentDeleteRemoteSuccess({ commentId });
+          })
+        )
+      ),
+      catchError((e) => of(e))
+    );
+  }
+
+  public getComments: Observable<Actions> = createEffect(() => this.callbackFindOneLocal());
+  public addComments: Observable<Actions> = createEffect(() => this.callbackAddComments());
+  public putComments: Observable<Actions> = createEffect(() => this.callbackPutComments());
+  public delComments: Observable<Actions> = createEffect(() => this.callbackDelComments());
 }

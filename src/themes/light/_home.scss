@@ -85,6 +85,12 @@
     background-color: var(--social-blue-accent);
     color: var(--white);
   }
+  .logo {
+    .nickaname {
+      background-color: var(--social-hub);
+      color: var(--social-blue-accent);
+    }
+  }
 }
 
 .home.sentiment {
@@ -144,6 +150,12 @@
     .nickname {
       background-color: var(--social-warning-muted);
       color: var(--color-dark);
+    }
+  }
+  .logo {
+    .nickaname {
+      background-color: var(--social-hub);
+      color: var(--black);
     }
   }
 }

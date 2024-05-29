@@ -3,6 +3,8 @@ export enum happenTypes {
   getTimeline = 'happensTimeline@types',
 
   happenFindOneLocal = 'happenFindOneLocal@types',
+  happenComments = 'happenComments@types',
+  happenCommentsSuccess = 'happenCommentsSuccess@types',
 
   happenUpdateLocal = 'happensUpateLocal@types',
   happenUpdateRollback = 'happensUpdateRollback@types',

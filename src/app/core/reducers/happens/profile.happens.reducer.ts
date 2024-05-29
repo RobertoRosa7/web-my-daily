@@ -1,6 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
 import { ProfileHappen, HappenResponsePageable } from '../../interfaces/happens/profile.happen.interface';
 import {
+  happenCommentError,
+  happenCommentSuccess,
   happenDeleteLocal,
   happenDeleteRollback,
   happenError,
@@ -19,7 +21,7 @@ import {
   actionDislikedLocal,
   actionLikedLocal,
   actionLikedSocketio,
-  likeSuccess,
+  actionLikeSuccess,
 } from '../../actions/happens/likes.action';
 import {
   callbackDislikedLocal,
@@ -27,6 +29,18 @@ import {
   callbackLikedLocal,
   callbackUpdateLikeSocketio,
 } from './like.reducer';
+import {
+  callbackAddCommentLocal,
+  callbackCommentDeleteRemoteSuccess,
+  callbackCommentError,
+  callbackCommentSuccess,
+  callbackPutComment,
+} from './comment.reducer';
+import {
+  happenCommentDeleteRemoteSuccess,
+  happenCommentLocal,
+  happenCommentPutSuccess,
+} from '../../actions/happens/comment.action';
 
 type States = Partial<HappenResponsePageable>;
 type ProfileHappenIndex = { index: number; data: ProfileHappen };
@@ -88,9 +102,16 @@ export const happenReducer = createReducer(
   on(happenPostLocal, callbackPost),
   on(happenPostSuccess, callbackUpdate),
   on(happenFindOneLocal, callbackFindOne),
+
+  on(happenCommentError, callbackCommentError),
+  on(happenCommentSuccess, callbackCommentSuccess),
+  on(happenCommentLocal, callbackAddCommentLocal),
+  on(happenCommentPutSuccess, callbackPutComment),
+  on(happenCommentDeleteRemoteSuccess, callbackCommentDeleteRemoteSuccess),
+
   on(actionDislikedLocal, callbackDislikedLocal),
   on(actionLikedLocal, callbackLikedLocal),
-  on(likeSuccess, callbackLikeSuccess),
+  on(actionLikeSuccess, callbackLikeSuccess),
 
   on(actionLikedSocketio, callbackUpdateLikeSocketio),
   on(happenSuccess, callbackSuccess),

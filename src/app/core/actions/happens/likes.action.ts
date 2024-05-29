@@ -30,7 +30,7 @@ const callbackLikesError = (payload: { failed: HttpErrorResponse }) => payload;
 const callbackSocketio = (payload: LikeSocketio) => payload;
 const callbackLikeResponse = (payload: LikeResponse) => payload;
 
-export const likeSuccess = createAction(success, callbackLikeResponse);
+export const actionLikeSuccess = createAction(success, callbackLikeResponse);
 
 export const actionDislikedLocal = createAction(dislikedLocal, callbackDislikedRequest);
 export const actionDislikedRemote = createAction(dislikedRemote, callbackDislikedRequest);
