@@ -44,12 +44,18 @@
     flex-wrap: wrap;
     min-height: 5rem;
     align-items: center;
+    color: var(--color-light-soft);
+    font-family: 'Open Sans';
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: 'wdth' 100;
+    font-weight: 700;
   }
   .score-positive {
-    color: var(--green);
+    color: var(--feeling-pos);
   }
   .score-negative {
-    color: var(--primary);
+    color: var(--feeling-neg);
   }
   .scores div {
     flex: 1;

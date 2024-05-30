@@ -11,6 +11,7 @@
     background: var(--white);
     box-shadow: none;
     border: 1px solid var(--border-default);
+    border-radius: 0.5rem;
     .body {
       background-color: transparent;
     }
@@ -23,6 +24,7 @@
   // card feeling theme profile
   .card-feeling {
     border: 1px solid var(--border-default);
+    border-radius: 0.5rem;
     mat-card-header {
       background-color: var(--social-green-header);
     }
@@ -36,10 +38,10 @@
     }
     // button score negative on card feeling
     .container-scores div button.btn-score-neg {
-      color: var(--primary);
+      color: var(--feeling-neg);
     }
     .container-scores div button.btn-score-pos {
-      color: var(--green);
+      color: var(--feeling-pos);
     }
   }
 
@@ -217,7 +219,6 @@
     }
   }
   .btn-close {
-    background-color: var(--social-green-muted);
     color: var(--social-green-accent);
   }
   p.title {

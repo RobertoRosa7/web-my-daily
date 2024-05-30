@@ -1,5 +1,10 @@
 @import '../../../../themes/mixins';
-
+.main-toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+}
 .toolbar-row {
   min-height: 80px;
   align-items: center;

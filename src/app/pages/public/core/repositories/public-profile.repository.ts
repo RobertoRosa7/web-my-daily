@@ -12,19 +12,19 @@ import { HttpResponseDefault } from '../../../../core/interfaces/https/http-resp
   providedIn: 'root',
 })
 export class ProfileRepository {
-  @Url(Paths.getProfile)
+  @Url(Paths.pathGetProfile)
   private urlProfile!: string;
 
-  @Url(Paths.getHappen)
+  @Url(Paths.pathGetHappen)
   private urlProfileHappen!: string;
 
-  @Url(Paths.profilePublic)
+  @Url(Paths.pathGetprofilePublic)
   private urlProfilePublic!: string;
 
-  @Url(Paths.userFollow)
+  @Url(Paths.pathPostUserFollow)
   private urlUserFollowing!: string;
 
-  @Url(Paths.deleteHappen)
+  @Url(Paths.pathDelHappen)
   private urlDeleteHappen!: string;
 
   constructor(private readonly http: HttpClient) {}

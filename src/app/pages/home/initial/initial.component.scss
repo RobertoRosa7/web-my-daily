@@ -1,6 +1,12 @@
 .home {
+  margin-top: 10rem;
   ::ng-deep .mat-mdc-tab-header {
-    margin-bottom: 2rem;
+    top: 5rem;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 2;
+    border-bottom: 1px solid var(--social-hub);
   }
 
   .mat-mdc-tab-group {

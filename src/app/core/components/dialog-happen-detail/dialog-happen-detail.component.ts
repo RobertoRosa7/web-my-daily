@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -10,7 +9,6 @@ import { SnackBarActions, dialogData } from '../../interfaces/dialogs/dialogs.in
 import { HappenVisibility, ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
-import * as Highcharts from 'highcharts';
 import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
 import { Store } from '@ngrx/store';
 import { DialogService } from '../../services/dialogs/dialog.service';

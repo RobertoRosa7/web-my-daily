@@ -16,7 +16,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menus="matMenu" overlapTrigger="true">
-          <button *ngIf="id !== happen.userId" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
+          <button (click)="stoppingViewing(happen)" *ngIf="id !== happen.userId" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
             <mat-icon iconPositionEnd>remove</mat-icon>
             <span>Deixar de Visualizar</span>
           </button>

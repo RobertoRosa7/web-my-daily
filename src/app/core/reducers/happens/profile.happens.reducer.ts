@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { ProfileHappen, HappenResponsePageable } from '../../interfaces/happens/profile.happen.interface';
+import {
+  ProfileHappen,
+  HappenResponsePageable,
+  HappenRequest,
+} from '../../interfaces/happens/profile.happen.interface';
 import {
   happenCommentError,
   happenCommentSuccess,
@@ -10,6 +14,7 @@ import {
   happenPostLocal,
   happenPostRollback,
   happenPostSuccess,
+  happenStoppingViewingOk,
   happenSuccess,
   happenUpdateLocal,
   happenUpdateRollback,
@@ -76,7 +81,6 @@ const callbackUpdate = (states: States, { index, data }: ProfileHappenIndex) => 
 
 const callbackPost = (states: States, { data }: ProfileHappenIndex) => {
   const happens = getReferenceArray(states);
-
   happens.unshift(data);
   return updateDataStates(states, happens);
 };
@@ -87,6 +91,13 @@ const callbackFindOne = (states: States, { data, index }: ProfileHappenIndex) =>
     happenActive: data,
     index,
   };
+};
+
+const callbackStoppingViewing = (states: States, { happenId }: HappenRequest) => {
+  const happens = getReferenceArray(states);
+  const index = happens.findIndex((happen) => happen.id === happenId);
+  happens.splice(index, 1);
+  return updateDataStates(states, happens);
 };
 
 export const happenReducer = createReducer(
@@ -108,6 +119,8 @@ export const happenReducer = createReducer(
   on(happenCommentLocal, callbackAddCommentLocal),
   on(happenCommentPutSuccess, callbackPutComment),
   on(happenCommentDeleteRemoteSuccess, callbackCommentDeleteRemoteSuccess),
+
+  on(happenStoppingViewingOk, callbackStoppingViewing),
 
   on(actionDislikedLocal, callbackDislikedLocal),
   on(actionLikedLocal, callbackLikedLocal),

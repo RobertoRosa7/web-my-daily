@@ -62,6 +62,7 @@ export class DialogHappenComponent implements OnInit {
     if (user) {
       happen.userId = user?.id || '';
       happen.nameId = user?.nameId || '';
+      happen.nickname = user.name || '';
     }
 
     happen.whatHappen = this.getText || '';

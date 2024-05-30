@@ -8,6 +8,8 @@ import {
   happenCommentSuccess,
   happenError,
   happenPostSuccess,
+  happenStoppingViewing,
+  happenStoppingViewingOk,
   happenSuccess,
   happenUpdateSuccess,
   happenVoid,
@@ -223,9 +225,27 @@ export class HappensEffect {
       catchError((e) => of(e))
     );
   }
+  private callbackStoppingViewing() {
+    return this.action.pipe(
+      ofType(happenTypes.happenStoppingViewing),
+      mergeMap((payload) =>
+        this.happenService.stoppingViewing(payload).pipe(
+          catchError((e) => of(e)),
+          map((response) => {
+            if (response instanceof HttpErrorResponse) {
+              return actionCommentError({ failed: response });
+            }
+            return happenStoppingViewingOk(payload);
+          })
+        )
+      ),
+      catchError((e) => of(e))
+    );
+  }
 
   public getComments: Observable<Actions> = createEffect(() => this.callbackFindOneLocal());
   public addComments: Observable<Actions> = createEffect(() => this.callbackAddComments());
   public putComments: Observable<Actions> = createEffect(() => this.callbackPutComments());
   public delComments: Observable<Actions> = createEffect(() => this.callbackDelComments());
+  public stoppingViewing: Observable<Actions> = createEffect(() => this.callbackStoppingViewing());
 }

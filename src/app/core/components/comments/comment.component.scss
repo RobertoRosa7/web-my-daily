@@ -124,10 +124,10 @@
   background-color: var(--social-hub);
 }
 .card-insignia.green {
-  background-color: #28a745a1;
+  background-color: var(--feeling-neg);
 }
 .card-insignia.red {
-  background-color: #df363696;
+  background-color: var(--feeling-pos);
 }
 .card-insignia::after {
   content: '';

@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import {
   DisLikeRequest,
+  HappenRequest,
   HappenResponsePageable,
   HappenSingleton,
   HttpResponseHappen,
@@ -134,5 +135,14 @@ export class HappenService {
    */
   public deleteHappenComments(commentId: string): Observable<void> {
     return this.repository.deleteHappenComments(commentId);
+  }
+
+  /**
+   * INFO:
+   * stoppingViewing - get comments from happen
+   * @returns void
+   */
+  public stoppingViewing(request: HappenRequest): Observable<void> {
+    return this.repository.stoppingViewing(request);
   }
 }

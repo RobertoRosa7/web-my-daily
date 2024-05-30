@@ -12,15 +12,16 @@ export enum HappenVisibility {
   FOLLOWERS = 'FOLLOWERS',
 }
 
-export class LikeRequest {
+export class HappenRequest {
   public happenId!: string;
   public ownerId!: string;
+}
+
+export class LikeRequest extends HappenRequest {
   public isLiked!: boolean;
 }
 
-export class DisLikeRequest {
-  public happenId!: string;
-  public ownerId!: string;
+export class DisLikeRequest extends HappenRequest {
   public disliked!: boolean;
 }
 

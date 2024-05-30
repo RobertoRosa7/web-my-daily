@@ -1,9 +1,8 @@
 import { JsonProperty } from '../../decorators/jsons/json.decorator';
 import { HttpResponseDefault } from '../https/http-response.interface';
+import { HappenRequest } from './profile.happen.interface';
 
-export class CommentRequest {
-  ownerId!: string;
-  happenId!: string;
+export class CommentRequest extends HappenRequest {
   text!: string;
 }
 
@@ -38,5 +37,5 @@ export class HappenCommentHttpResponse extends HttpResponseDefault<Array<HappenC
 
 export class HappenCommentSingleTon extends HttpResponseDefault<HappenComment> {
   @JsonProperty({ clazz: HappenComment })
-  public override data: HappenComment= new HappenComment()
+  public override data: HappenComment = new HappenComment();
 }

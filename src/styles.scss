@@ -90,6 +90,9 @@
   --social-warning-muted: #bf87001a;
   --social-purple: purple;
 
+  --feeling-pos: #ef201d;
+  --feeling-neg: #321d66;
+
   --profile-cover: linear-gradient(-45deg, #d0d7deb3 20%, var(--white) 80%, #d0d7de00 5%);
   --home-cover: linear-gradient(-45deg, var(--primary) 20%, var(--dark) 80%, var(--color-dark-blue-darkness) 5%);
   --public-profile-cover: linear-gradient(
@@ -290,12 +293,14 @@ body {
   width: 0.6rem;
   height: 1rem;
   background: transparent;
+  z-index: 10;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--text-light);
   border-radius: 2rem;
   padding-top: 1rem;
+  z-index: 10;
 }
 
 @keyframes lines {

@@ -15,6 +15,7 @@ import {
   happenComments,
   happenDeleteRollback,
   happenFindOneLocal,
+  happenStoppingViewing,
   happenUpdateRollback,
 } from '../../actions/happens/profile.happens.action';
 import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
@@ -152,10 +153,7 @@ export class FeelingsComponent {
 
     this.store.dispatch(happenComments(payload));
     this.store.dispatch(happenFindOneLocal(payload));
-    this.dialog.open(
-      DialogHappenCommentsComponent,
-      this.dialogService.dialogConfigHappenComments()
-    );
+    this.dialog.open(DialogHappenCommentsComponent, this.dialogService.dialogConfigHappenComments());
   }
 
   /**
@@ -173,6 +171,15 @@ export class FeelingsComponent {
         this.store.dispatch(happenDeleteRollback({ index: this.index, data }));
       },
     });
+  }
+
+  /**
+   * INFO:
+   * stoppingViewing - stopping receive feelings cards from followers
+   * @param happen ProfileHappen
+   */
+  public stoppingViewing(happen: ProfileHappen) {
+    this.store.dispatch(happenStoppingViewing({ happenId: happen.id, ownerId: happen.userId }));
   }
 
   /**

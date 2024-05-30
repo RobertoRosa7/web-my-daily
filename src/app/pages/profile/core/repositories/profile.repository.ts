@@ -11,13 +11,13 @@ import { HttpResponseDefault } from '../../../../core/interfaces/https/http-resp
   providedIn: 'root',
 })
 export class ProfileRepository {
-  @Url(Paths.getProfile)
+  @Url(Paths.pathGetProfile)
   private urlProfile!: string;
 
-  @Url(Paths.profilePublic)
+  @Url(Paths.pathGetprofilePublic)
   private urlProfilePublic!: string;
 
-  @Url(Paths.userFollow)
+  @Url(Paths.pathPostUserFollow)
   private urlUserFollowing!: string;
 
   constructor(private readonly http: HttpClient) {}

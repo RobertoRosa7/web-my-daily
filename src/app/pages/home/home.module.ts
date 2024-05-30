@@ -29,17 +29,18 @@ import { PublicProfileEffect } from '../public/core/effects/public-profile.effec
 import { LikeEffect } from '../../core/effects/happens/like.effect';
 import { HappensEffect } from '../../core/effects/happens/profile.happens.effect';
 import { ExploreComponent } from './explore/explore.component';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
-  declarations: [HomeComponent, InitialComponent, TimelineComponent, ExploreComponent],
+  declarations: [HomeComponent, InitialComponent, TimelineComponent, ExploreComponent, FeelingersComponent],
   imports: [
     RouterModule.forChild(routes),
     ToolbarComponent,
     CommonModule,
     CoverComponent,
     SharedModule,
+    HighchartsChartModule,
     InitialExploreComponent,
-    FeelingersComponent,
     InputSearchComponent,
     ButtonFabCreateComponent,
     FeelingsComponent,

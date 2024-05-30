@@ -9,10 +9,10 @@ import { Url } from '../../../../core/decorators/urls/url.decorator';
   providedIn: 'root',
 })
 export class AuthRepository {
-  @Url(Paths.signin)
+  @Url(Paths.pathPostSignin)
   private signin!: string;
 
-  @Url(Paths.signup)
+  @Url(Paths.pathPostSignup)
   private signup!: string;
 
   constructor(private readonly http: HttpClient) {}

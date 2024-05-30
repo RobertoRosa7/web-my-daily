@@ -6,6 +6,9 @@ export enum happenTypes {
   happenComments = 'happenComments@types',
   happenCommentsSuccess = 'happenCommentsSuccess@types',
 
+  happenStoppingViewing = 'happenStoppingViewing@types',
+  happenStoppingViewingSuccess = 'happenStoppingViewingSuccess@types',
+
   happenUpdateLocal = 'happensUpateLocal@types',
   happenUpdateRollback = 'happensUpdateRollback@types',
   happenUpdateRemote = 'happensUpdateRomote@types',

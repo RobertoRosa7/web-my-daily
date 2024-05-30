@@ -1,8 +1,15 @@
 import { createAction } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProfileHappen, HappenResponsePageable } from '../../interfaces/happens/profile.happen.interface';
+import {
+  ProfileHappen,
+  HappenResponsePageable,
+  HappenRequest,
+} from '../../interfaces/happens/profile.happen.interface';
 import { happenTypes } from '../../types/happens/happen.type';
 import { HappenCommentHttpResponse } from '../../interfaces/happens/happen.comment.interface';
+
+const stoppingViewing = happenTypes.happenStoppingViewing;
+const stoppingViewingOk = happenTypes.happenStoppingViewingSuccess;
 
 const voidTypes = happenTypes.happenVoid;
 const happens = happenTypes.happens;
@@ -32,6 +39,10 @@ const callbackHappen = (payload: { index: number; data: ProfileHappen }) => payl
 const callbackHappenSuccess = (payload: HappenResponsePageable) => payload;
 const callbackCommentSuccess = (payload: HappenCommentHttpResponse) => payload;
 const callbackHappenError = (payload: { failed: HttpErrorResponse }) => payload;
+const callbackHappenRequest = (payload: HappenRequest) => payload;
+
+export const happenStoppingViewing = createAction(stoppingViewing, callbackHappenRequest);
+export const happenStoppingViewingOk = createAction(stoppingViewingOk, callbackHappenRequest);
 
 export const happenRequest = createAction(happens);
 export const happenVoid = createAction(voidTypes);

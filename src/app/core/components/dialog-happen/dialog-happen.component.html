@@ -1,14 +1,21 @@
 <ng-container *ngIf="comb$ | async as data">
   <form class="dialog-happen" [ngClass]="theme$ | async">
-    <div class="btn-close">
-      <button [tabindex]="-1" matTooltip="fechar" matTooltipPosition="above" [mat-dialog-close]="null" mat-icon-button>
-        <mat-icon>arrow_back</mat-icon>
-      </button>
+    <div class="header">
+      <div class="btn-close">
+        <button
+          [tabindex]="-1"
+          matTooltip="fechar"
+          matTooltipPosition="above"
+          [mat-dialog-close]="null"
+          mat-icon-button>
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      </div>
+      <p class="title">
+        <span class="name-id">{{ data.user?.nameId }}</span>
+        <small class="date">{{ data.happen.happenActive.updatedAt | date }}</small>
+      </p>
     </div>
-    <p class="title">
-      <span class="name-id">{{ data.user?.nameId }}</span>
-      <small class="date">{{ data.happen.happenActive.updatedAt | date }}</small>
-    </p>
     <mat-dialog-content>
       <mat-form-field class="input-happen">
         <textarea

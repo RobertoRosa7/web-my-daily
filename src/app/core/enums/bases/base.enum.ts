@@ -7,22 +7,22 @@ export enum RoutePaths {
 
 //paths do backend
 export enum Paths {
-  signup = '/ms-users/auth',
-  signin = '/ms-users/auth/login',
-  getProfile = '/ms-users/user/profile',
-  profilePublic = '/ms-users/public/user',
-  userFollow = '/ms-users/follows',
+  pathPostSignup = '/ms-users/auth',
+  pathPostSignin = '/ms-users/auth/login',
+  pathGetProfile = '/ms-users/user/profile',
+  pathGetprofilePublic = '/ms-users/public/user',
+  pathPostUserFollow = '/ms-users/follows',
+  pathPostLiked = '/ms-users/user/likes/like',
+  pathPostDisliked = '/ms-users/user/likes/dislike',
 
-  liked = '/ms-users/user/likes/like',
-  disliked = '/ms-users/user/likes/dislike',
-
-  getTimeline = '/ms-daily/happen/user/timeline',
-  getHappenComments = '/ms-daily/happen/comments/find',
-  postHappenComment = '/ms-daily/happen/comments',
-  getHappen = '/ms-daily/happen/user',
-  deleteHappen = '/ms-daily/happen',
-  updateHappen = '/ms-daily/happen',
-  postHappen = '/ms-daily/happen',
+  pathPostStoppingViewing = '/ms-daily/happen/user/stop-viewing',
+  pathGetTimeline = '/ms-daily/happen/user/timeline',
+  pathGetComments = '/ms-daily/happen/comments/find',
+  pathPostComment = '/ms-daily/happen/comments',
+  pathGetHappen = '/ms-daily/happen/user',
+  pathDelHappen = '/ms-daily/happen',
+  pathPutHappen = '/ms-daily/happen',
+  pathPostHappen = '/ms-daily/happen',
 }
 
 export enum HappenPublicStatus {

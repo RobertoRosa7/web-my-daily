@@ -1,5 +1,5 @@
 <div [ngClass]="theme$ | async" class="home">
-  <app-cover></app-cover>
+  <!-- <app-cover></app-cover> -->
 
   <mat-tab-group (selectedTabChange)="onTabChange($event)" class="w-full" selectedIndex="1" disablePagination="">
     <mat-tab>
@@ -24,6 +24,8 @@
       <app-timeline></app-timeline>
     </mat-tab>
 
+    <!-- NOVO RECURSO DE FEELINGERS SERÁ DISPONIBILIZADO NA VERSÃO 2 -->
+    <!-- 
     <mat-tab>
       <ng-template mat-tab-label>
         <div class="flex items-center">
@@ -32,6 +34,6 @@
         </div>
       </ng-template>
       <app-feelingers></app-feelingers>
-    </mat-tab>
+    </mat-tab> -->
   </mat-tab-group>
 </div>

@@ -36,7 +36,7 @@ export class InitialComponent extends HomeComponent implements OnInit {
         this.store.dispatch(actionProfilePublic({ name: null }));
       },
       1: () => {
-        this.store.dispatch(actionColor({ theme: 'home timeline', background: backgroundType.socialHub }));
+        this.store.dispatch(actionColor({ theme: 'home timeline' }));
         this.store.dispatch(happenTimeline());
       },
       2: () => this.store.dispatch(actionColor({ theme: 'home sentiment' })),

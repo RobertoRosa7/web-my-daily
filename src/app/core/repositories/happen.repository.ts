@@ -5,6 +5,7 @@ import { Url } from '../decorators/urls/url.decorator';
 import { Paths } from '../enums/bases/base.enum';
 import {
   DisLikeRequest,
+  HappenRequest,
   HappenResponsePageable,
   HttpResponseHappen,
   LikeRequest,
@@ -21,32 +22,35 @@ import {
   providedIn: 'root',
 })
 export class HappenRepository {
-  @Url(Paths.getTimeline)
+  @Url(Paths.pathGetTimeline)
   private urlGetTimeline!: string;
 
-  @Url(Paths.getHappen)
+  @Url(Paths.pathGetHappen)
   private urlProfileHappen!: string;
 
-  @Url(Paths.deleteHappen)
+  @Url(Paths.pathDelHappen)
   private urlDeleteHappen!: string;
 
-  @Url(Paths.updateHappen)
+  @Url(Paths.pathPutHappen)
   private urlUpdateHappen!: string;
 
-  @Url(Paths.postHappen)
+  @Url(Paths.pathPostHappen)
   private urlPostHappen!: string;
 
-  @Url(Paths.disliked)
+  @Url(Paths.pathPostDisliked)
   private urlDisliked!: string;
 
-  @Url(Paths.liked)
+  @Url(Paths.pathPostLiked)
   private urlLiked!: string;
 
-  @Url(Paths.getHappenComments)
+  @Url(Paths.pathGetComments)
   private urlGetHappenComments!: string;
 
-  @Url(Paths.postHappenComment)
+  @Url(Paths.pathPostComment)
   private urlPostHappenComment!: string;
+
+  @Url(Paths.pathPostStoppingViewing)
+  private urlPathPostStoppingViewing!: string;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -90,7 +94,7 @@ export class HappenRepository {
    * @returns Observable<HttpResponseDefault<string>>
    */
   public postHappen(happen: ProfileHappen): Observable<HttpResponseHappen> {
-    return this.http.post<HttpResponseHappen>(`${this.urlPostHappen}`, {
+    return this.http.post<HttpResponseHappen>(this.urlPostHappen, {
       text: happen.whatHappen,
       visibility: happen.visibility,
     });
@@ -144,9 +148,18 @@ export class HappenRepository {
   /**
    * INFO:
    * deleteHappenComments - get comments from happen
-   * @returns HappenCommentHttpResponse
+   * @returns void
    */
   public deleteHappenComments(commentId: string): Observable<void> {
     return this.http.delete<void>(`${this.urlPostHappenComment}/${commentId}`);
+  }
+
+  /**
+   * INFO:
+   * stoppingViewing - get comments from happen
+   * @returns void
+   */
+  public stoppingViewing(request: HappenRequest): Observable<void> {
+    return this.http.post<void>(this.urlPathPostStoppingViewing, request);
   }
 }
