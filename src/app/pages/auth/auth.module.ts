@@ -20,12 +20,13 @@ import { provideState } from '@ngrx/store';
 import { authReducer } from './core/reducers/auth.reducer';
 import { AuthEffect } from './core/effects/auth.effect';
 import { provideEffects } from '@ngrx/effects';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 /**
  * @see: https://ngrx.io/guide/store
  */
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent, AuthComponent],
+  declarations: [RegisterComponent, LoginComponent, AuthComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     SharedModule,

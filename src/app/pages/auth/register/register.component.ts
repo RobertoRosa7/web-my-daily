@@ -43,7 +43,7 @@ export class RegisterComponent extends AuthComponent implements OnInit {
         email: this.getEmail,
         password: this.getPassword,
         checkTerms: this.getCheckTerms,
-        nameId: this.getNameId,
+        nameId: this.getNameId + '@daily',
         nickname: this.getNickName,
       })
     );

@@ -1,6 +1,5 @@
 import {
   AbstractControl,
-  AsyncValidator,
   AsyncValidatorFn,
   FormControl,
   FormGroup,
@@ -8,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { validateEmailRegex } from '../../utils/regex/utils.regex.validators';
-import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, of, switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -21,6 +19,7 @@ export const emailField = new FormControl('', [
 
 // field password
 export const passwordField = new FormControl('', [Validators.required, Validators.minLength(6)]);
+
 // field name id
 export const nameIdField = new FormControl('', [Validators.required]);
 
@@ -69,6 +68,10 @@ export class FieldsValidators {
  * FieldLogin - class field validator login
  */
 export class FieldLogin extends FieldsValidators {}
+
+export class FieldEmail {
+  public email = emailField;
+}
 
 /**
  * INFO:

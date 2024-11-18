@@ -14,11 +14,27 @@
       <div class="px-5 flex flex-col gap-y-5">
         <app-input-email (trigger)="onFireEvent('email', $event)"></app-input-email>
         <app-input-password (trigger)="onFireEvent('password', $event)"></app-input-password>
+
         <div>
           <app-button-submit [form]="form" [name]="'Realizar login'"></app-button-submit>
         </div>
+
         <div class="flex gap-2">
-          Não tem uma conta?<a routerLink="/auth/register" class="underline text-blue-500">Cadastrar-se</a>
+          Não tem uma conta?
+          <a
+            role="link"
+            aria-describedby="register new user"
+            routerLink="/auth/register"
+            class="underline text-blue-500"
+            >Cadastrar-se</a
+          >
+          <a
+            role="link"
+            aria-describedby="register new user"
+            routerLink="/auth/reset-password"
+            class="underline text-blue-500"
+            >esqueceu a senha?</a
+          >
         </div>
       </div>
     </form>

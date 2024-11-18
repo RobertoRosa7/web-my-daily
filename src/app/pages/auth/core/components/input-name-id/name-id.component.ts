@@ -11,13 +11,13 @@ import { Form } from '../../../auth.form';
 @Component({
   selector: 'app-input-name-id',
   template: `<mat-form-field class="flex flex-col w-full" floatLabel="always">
-    <label>NameId</label>
+    <label>Nome de Domínio</label>
     <input
       matInput
       required
       [formControl]="nameId"
       type="text"
-      placeholder="Insira seu nameId (nome de domínio)"
+      placeholder="(nome de domínio)"
       class="border-b outline-none pt-2" />
     <mat-hint matSuffix>{{ domainSuffix }}</mat-hint>
     <mat-hint align="end">{{ getNameId }}{{ domainSuffix }}</mat-hint></mat-form-field
