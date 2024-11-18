@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { actionColor } from '../core/actions/color.action';
 
 @Component({
-  selector: 'app-setting',
+  selector: 'app-settings',
   templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.scss'],
+  styleUrl: './setting.component.scss'
 })
 export class SettingComponent extends Profile implements OnInit {
   constructor(protected override readonly store: Store) {

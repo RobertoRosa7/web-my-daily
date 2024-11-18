@@ -15,7 +15,8 @@ import { authType } from '../../types/auth.type';
     <button
       type="submit"
       [disabled]="form.invalid || (isLoading$ | async)"
-      class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-slate-500">
+      class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-slate-500"
+      [style.backgroundColor]="color">
       <span *ngIf="!(isLoading$ | async)">{{ name }}</span>
       <mat-spinner
         style="display: inline-block; min-height: inherit"
@@ -31,8 +32,14 @@ export class ButtonSubmitComponent {
   public isLoading$!: Observable<boolean>;
   private actionSubject = inject(ActionsSubject);
 
-  @Input({ required: true }) public form!: FormGroup;
-  @Input({ required: true }) public name!: string;
+  @Input({ required: true })
+  public form!: FormGroup;
+
+  @Input({ required: true })
+  public name!: string;
+
+  @Input()
+  public color!: string;
 
   constructor() {
     this.isLoading$ = this.actionSubject.pipe(

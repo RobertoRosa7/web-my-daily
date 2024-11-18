@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ILogin, IRegister, loginResponse, registerResponse } from '../interfaces/auth.interface';
 import { clearText } from '../../../../utils/regex/utils.regex.validators';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthRepository } from '../repositories/auth.repository';
 import { LocalStorageService } from '../../../../core/services/localstorages/localstorage.service';
+import { JsonMapProperties } from '../../../../core/decorators/jsons/json.decorator';
+import { User } from '../../../profile/core/interfaces/profile.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +27,15 @@ export class AuthService {
     email = clearText(email);
     password = clearText(password);
 
-    return this.authRepository.login({ password, email });
+    return this.authRepository.login({ password, email }).pipe(
+      map((response) => ({
+        ...response,
+        data: {
+          user: JsonMapProperties.deserialize(User, response.data?.user),
+          token: response.data ? response.data.token : '',
+        },
+      }))
+    );
   }
 
   /**

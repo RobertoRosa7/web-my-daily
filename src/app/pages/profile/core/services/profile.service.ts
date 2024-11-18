@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { ProfileResponse, ProfileSingleResponse } from '../interfaces/profile.interface';
+import { HttpUserResponse, ProfileResponse, ProfileSingleResponse, User } from '../interfaces/profile.interface';
 import { ProfileRepository } from '../repositories/profile.repository';
 import { JsonMapProperties } from '../../../../core/decorators/jsons/json.decorator';
 import { PageableUser } from '../../../../core/interfaces/pageables/pageable.interface';
@@ -38,6 +38,12 @@ export class ProfileService {
    */
   public following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
     return this.profileRespository.following(follower);
+  }
+
+  public changeNickName(nickname: string): Observable<HttpUserResponse> {
+    return this.profileRespository
+      .changeNickName(nickname)
+      .pipe(map((data) => JsonMapProperties.deserialize(HttpUserResponse, data)));
   }
 
   /**

@@ -30,7 +30,7 @@ import { SharedModule } from '../../../shared/shared.module';
         <span>Perfil</span>
       </button>
 
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Configurações" routerLink="/profile/setting">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Configurações" routerLink="/profile/settings">
         <mat-icon>settings</mat-icon>
         <span>Configurações</span>
       </button>

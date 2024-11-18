@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { nickNameField } from '../../../auth.field.validators';
@@ -32,6 +32,7 @@ import { Form } from '../../../auth.form';
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class NickNameComponent extends Form {
+  @Input()
   public nickname: FormControl = nickNameField;
 
   @Output()

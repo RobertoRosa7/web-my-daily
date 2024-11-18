@@ -26,9 +26,14 @@ import { HappenService } from '../../core/services/happens/happen.service';
 import { HappenRepository } from '../../core/repositories/happen.repository';
 import { HappensEffect } from '../../core/effects/happens/profile.happens.effect';
 import { LikeEffect } from '../../core/effects/happens/like.effect';
+import { AccountComponent } from './settings/account/account.component';
+import { MenuSettingsComponent } from './settings/menu-settings/menu-settings.component';
+import { ButtonBackComponent } from '../../core/components/button-back/button-back.component';
+import { SecurityComponent } from './settings/security/security.component';
+import { ChangeNameComponent } from './settings/change-name/change-name.component';
 
 @NgModule({
-  declarations: [Profile, UserComponent, SettingComponent],
+  declarations: [Profile, UserComponent, AccountComponent, MenuSettingsComponent, SettingComponent, SecurityComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -41,6 +46,8 @@ import { LikeEffect } from '../../core/effects/happens/like.effect';
     UserDetailsComponent,
     InputPhotoComponent,
     ButtonFabCreateComponent,
+    ButtonBackComponent,
+    ChangeNameComponent,
   ],
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),

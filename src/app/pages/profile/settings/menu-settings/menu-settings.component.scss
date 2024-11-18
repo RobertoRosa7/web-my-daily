@@ -1,0 +1,21 @@
+@import '../../../../../themes/mixins';
+
+.settings {
+  .container {
+    @include size-page;
+    ::ng-deep .mat-card-header {
+      flex-direction: row-reverse !important;
+    }
+
+    mat-card {
+      cursor: pointer;
+      position: relative;
+      background-color: transparent;
+      box-shadow: none;
+      border: none;
+      &:hover {
+        background: var(--color-white-brightness);
+      }
+    }
+  }
+}

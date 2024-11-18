@@ -1,5 +1,16 @@
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidator,
+  AsyncValidatorFn,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { validateEmailRegex } from '../../utils/regex/utils.regex.validators';
+import { Injectable, inject } from '@angular/core';
+import { Observable, catchError, of, switchMap } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 // field e-mail
 export const emailField = new FormControl('', [
@@ -65,4 +76,29 @@ export class FieldLogin extends FieldsValidators {}
  */
 export class FielRegister extends FieldsValidators {
   public checkTerms = [false, [Validators.requiredTrue]];
+}
+
+// confirmPassword: ['', [Validators.required, Validators.equalTo(this.accountForm.get('password'))]]
+
+export function uniqueDomainNameValidator(store: Store): AsyncValidatorFn {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+    const domainName = control.value;
+    if (!domainName) {
+      return of(null);
+    }
+
+    // Dispara a ação para pesquisar usuários com o padrão do nome de domínio
+    // this.store.dispatch(searchUsersByDomainName({ domainName }));
+
+    // Retorna um Observable que será acionado quando o resultado da pesquisa estiver disponível
+    return store
+      .select((state: any) => state.user.searchResults)
+      .pipe(
+        switchMap((users) => {
+          const isTaken = users.length > 0;
+          return of(isTaken ? { uniqueDomainName: true } : null); // Verifica se há resultados na lista de usuários
+        }),
+        catchError(() => of(null))
+      );
+  };
 }

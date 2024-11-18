@@ -10,6 +10,8 @@ export enum Paths {
   pathPostSignup = '/ms-users/auth',
   pathPostSignin = '/ms-users/auth/login',
   pathGetProfile = '/ms-users/user/profile',
+  pathPutUserChangeNickname = '/ms-users/user/profile/change-nickname',
+  pathGetSearch = '/ms-users/public/user/search',
   pathGetprofilePublic = '/ms-users/public/user',
   pathPostUserFollow = '/ms-users/follows',
   pathPostLiked = '/ms-users/user/likes/like',

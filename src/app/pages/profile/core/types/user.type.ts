@@ -1,4 +1,7 @@
 export enum userType {
-  USER = 'user@types',
-  FOLLOWERS = 'userFolloers@types',
+  user = 'user@types',
+  userFollowers = 'userFolloers@types',
+  userChangeNickName = 'userChangeNickName@types',
+  userChangeNickNameOk = 'userChangeNickNameOk@types',
+  userChangeNickNameNok = 'userChangeNickNameNok@types',
 }

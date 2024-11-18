@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, concatMap, finalize, map, mergeMap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../types/profile.type';
@@ -11,6 +11,11 @@ import { actionLoading } from '../../../auth/core/actions/auth.action';
 import { io } from 'socket.io-client';
 import { environment } from '../../../../../environments/environment';
 import { FollowRequest } from '../../../../core/interfaces/follows/follow.interface';
+import { userType } from '../types/user.type';
+import { actionChangeNickNameOk, actionChangeNicknameNok } from '../actions/user.action';
+import { User } from '../interfaces/profile.interface';
+import { LocalStorageService } from '../../../../core/services/localstorages/localstorage.service';
+import { AuthVars } from '../../../auth/core/interfaces/auth.interface';
 
 /**
  * @see: https://ngrx.io/guide/effects
@@ -20,25 +25,21 @@ export class ProfileEffect {
   private readonly action: Actions = inject(Actions);
   private readonly store: Store = inject(Store);
   private readonly profileService = inject(ProfileService);
+  private readonly localStorage: LocalStorageService = inject(LocalStorageService);
 
-  public userProfileFollow$: Observable<Actions> = createEffect(() =>
+  public userProfileFollow$ = createEffect(() =>
     this.action.pipe(
       ofType(profileType.userFollow),
       mergeMap((payload: FollowRequest) =>
         this.profileService.following(payload).pipe(
-          catchError((e) => of(e)),
-          map((response) => {
-            if (response instanceof HttpErrorResponse) {
-              return actionProfileError({ error: response });
-            }
-
+          map(() => {
             const socketio = io(environment.ws + '/profile');
             socketio.emit(payload.ev, payload.followingId, payload.userId);
             return actionUserFollowSuccess(payload);
-          })
+          }),
+          catchError((error) => of(actionProfileError({ error })))
         )
-      ),
-      catchError((e) => of(e))
+      )
     )
   );
 
@@ -46,32 +47,36 @@ export class ProfileEffect {
    * INFO:
    * register - effect login effect responsible to handler layer between services, store states, reducers and components
    */
-  public profile$: Observable<Actions> = createEffect(() =>
+  public profile$ = createEffect(() =>
     this.action.pipe(
-      // layer types to dispatch action
       ofType(profileType.userProfile),
-      // layer to fetch payload from action
       mergeMap(() =>
-        // layer to service send payload to backend
         this.profileService.getUseProfile().pipe(
-          // layer resolve http error to handler
-          catchError((e) => of(e)),
-          // layer map when login made success
-          map((response) => {
-            // check if response if http error and then dispatch action of error
-            if (response instanceof HttpErrorResponse) {
-              return actionProfileError({ error: response });
-            }
-            // dispatch action to home after login
-            // this.store.dispatch(authAction.actionGoto({ paths: [RoutePaths.login] }));
-            return actionProfileSuccess(response);
-          }),
-          // layer finalize stopping loading
+          map((response) => actionProfileSuccess(response)),
+          catchError((error: HttpErrorResponse) => of(actionProfileError({ error }))),
           finalize(() => this.store.dispatch(actionLoading({ isLoading: false })))
         )
-      ),
-      // layer to catch error from effect
-      catchError((e) => of(e))
+      )
+    )
+  );
+
+  /**
+   * Effect to handle nickname change.
+   */
+  public changeNickName$ = createEffect(() =>
+    this.action.pipe(
+      ofType(userType.userChangeNickName),
+      concatMap(({ nickname }) =>
+        this.profileService.changeNickName(nickname).pipe(
+          map((response) => {
+            this.localStorage.setKey(AuthVars.user, { data: response.data });
+            return actionChangeNickNameOk(response);
+          }),
+          catchError((error: HttpErrorResponse) =>
+            of(actionChangeNicknameNok({ error, data: new User(), message: error.error.message }))
+          )
+        )
+      )
     )
   );
 }

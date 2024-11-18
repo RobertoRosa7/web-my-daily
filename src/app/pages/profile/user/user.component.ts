@@ -15,6 +15,8 @@ import { io } from 'socket.io-client';
 import { actionProfileRequest } from '../core/actions/profile.action';
 import { happenRequest } from '../../../core/actions/happens/profile.happens.action';
 import { environment } from '../../../../environments/environment';
+import { actionColor } from '../core/actions/color.action';
+import { backgroundType } from '../../../core/types/colors/color.type';
 
 @Component({
   selector: 'app-user',
@@ -54,6 +56,12 @@ export class UserComponent extends Profile implements OnInit {
         }
       });
     }
+    this.store.dispatch(
+      actionColor({
+        theme: 'profile',
+        background: backgroundType.profileCover,
+      })
+    );
   }
 
   public listeningFollows$() {

@@ -5,7 +5,7 @@ import 'reflect-metadata';
  * @see: https://stackoverflow.com/questions/72009995/typeerror-reflect-getmetadata-is-not-a-function
  * @see: https://blog.bitsrc.io/typescripts-reflect-metadata-what-it-is-and-how-to-use-it-fb7b19cfc7e2
  */
-const jsonMetadataKey = 'jsonProperty';
+const JSON_METADATA_KEY = 'jsonProperty';
 
 export interface IJsonMetaData<T> {
   name?: string;
@@ -14,14 +14,14 @@ export interface IJsonMetaData<T> {
 
 export function JsonProperty<T>(metadata?: IJsonMetaData<T> | string) {
   if (metadata instanceof String || typeof metadata === 'string') {
-    return Reflect.metadata(jsonMetadataKey, {
+    return Reflect.metadata(JSON_METADATA_KEY, {
       name: metadata,
       clazz: undefined,
     });
   } else {
     let metadataObj = metadata as IJsonMetaData<T>;
 
-    return Reflect.metadata(jsonMetadataKey, {
+    return Reflect.metadata(JSON_METADATA_KEY, {
       name: metadataObj ? metadataObj.name : undefined,
       clazz: metadataObj ? metadataObj.clazz : undefined,
     });
@@ -29,11 +29,11 @@ export function JsonProperty<T>(metadata?: IJsonMetaData<T> | string) {
 }
 
 export function getClazz(target: object, propertyKey: string) {
-  return Reflect.getMetadata(jsonMetadataKey, target, propertyKey);
+  return Reflect.getMetadata(JSON_METADATA_KEY, target, propertyKey);
 }
 
 export function getJsonProperty<T>(target: object, propertyKey: string): IJsonMetaData<T> {
-  return Reflect.getMetadata(jsonMetadataKey, target, propertyKey);
+  return Reflect.getMetadata(JSON_METADATA_KEY, target, propertyKey);
 }
 
 export class JsonMapProperties {

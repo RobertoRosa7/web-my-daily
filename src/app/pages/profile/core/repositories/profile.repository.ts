@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Paths } from '../../../../core/enums/bases/base.enum';
 import { Url } from '../../../../core/decorators/urls/url.decorator';
 import { Observable } from 'rxjs';
-import { ProfileResponse } from '../interfaces/profile.interface';
+import { HttpUserResponse, ProfileResponse } from '../interfaces/profile.interface';
 import { FollowRequest } from '../../../../core/interfaces/follows/follow.interface';
 import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
 
@@ -12,15 +12,18 @@ import { HttpResponseDefault } from '../../../../core/interfaces/https/http-resp
 })
 export class ProfileRepository {
   @Url(Paths.pathGetProfile)
-  private urlProfile!: string;
+  private readonly urlProfile!: string;
 
   @Url(Paths.pathGetprofilePublic)
-  private urlProfilePublic!: string;
+  private readonly urlProfilePublic!: string;
 
   @Url(Paths.pathPostUserFollow)
-  private urlUserFollowing!: string;
+  private readonly urlUserFollowing!: string;
 
-  constructor(private readonly http: HttpClient) {}
+  @Url(Paths.pathPutUserChangeNickname)
+  private readonly urlPostUserChangeNickname!: string;
+
+  private readonly http: HttpClient = inject(HttpClient);
 
   /**
    * INFO:
@@ -30,6 +33,10 @@ export class ProfileRepository {
    */
   public getUseProfile(): Observable<ProfileResponse> {
     return this.http.get<ProfileResponse>(this.urlProfile);
+  }
+
+  public changeNickName(nickname: string): Observable<HttpUserResponse> {
+    return this.http.put<HttpUserResponse>(this.urlPostUserChangeNickname, { nickname });
   }
 
   /**

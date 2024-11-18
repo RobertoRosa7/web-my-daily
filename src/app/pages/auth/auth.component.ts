@@ -95,7 +95,6 @@ export class AuthComponent implements OnDestroy {
   }
 
   public onFireEvent(field: string, form: FormControl) {
-    // this.disabledButton = Object.values(this.valid).some((value) => value);
     this.form.addControl(field, form);
   }
 

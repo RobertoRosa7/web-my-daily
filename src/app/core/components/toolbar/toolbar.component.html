@@ -1,6 +1,9 @@
 <main [ngClass]="theme$ | async" class="main-toolbar">
   <mat-toolbar>
     <mat-toolbar-row class="toolbar-row">
+      @if (id) {
+      <app-button-back></app-button-back>
+      }
       <div class="logo">
         <span>Diário</span>
         <ng-container>

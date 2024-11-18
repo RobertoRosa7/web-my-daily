@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { Observable, debounceTime, distinctUntilChanged, map, of } from 'rxjs';
 
 export abstract class Form {

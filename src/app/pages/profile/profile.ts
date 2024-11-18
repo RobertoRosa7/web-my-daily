@@ -35,12 +35,6 @@ export class Profile implements OnInit {
 
   ngOnInit(): void {
     
-    this.store.dispatch(
-      actionColor({
-        theme: 'profile',
-        background: backgroundType.profileCover,
-      })
-    );
   }
 
 }

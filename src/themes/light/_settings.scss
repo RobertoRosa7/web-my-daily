@@ -9,15 +9,24 @@
   .btn-back {
     // change color icon from btn back
     mat-icon {
-      color: var(--primary);
+      color: var(--white);
     }
   }
 
+  // logo nickaneme on toolbar
+  .logo span {
+    color: var(--social-muted);
+  }
+  .logo .nickaname {
+    background-color: var(--social-muted);
+    color: var(--color-dark);
+  }
   // button menu
-  .btn-menu {
-    // change color icon from button
-    mat-icon {
-      color: var(--primary);
-    }
+  .container-buttons .btn-menu {
+    @include btn-default;
+    border: none;
+    box-shadow: none;
+    background-color: var(--social-muted);
+    color: var(--color-dark);
   }
 }
