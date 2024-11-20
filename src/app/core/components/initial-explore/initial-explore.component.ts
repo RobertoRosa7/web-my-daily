@@ -48,6 +48,7 @@ export class InitialExploreComponent {
 
     return this.dialog.open(DialogAlertComponent, this.dialogService.dialogConfig(dialogData));
   }
+
   public onFollow(request: FollowRequest) {
     this.socketio.emit(request);
   }

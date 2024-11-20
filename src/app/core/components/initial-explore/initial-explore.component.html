@@ -1,4 +1,4 @@
-<main class="card-explore">
+<main class="card-explore" dailyMobile>
   <div class="div-main">
     <mat-card>
       <mat-card-header>
@@ -9,44 +9,39 @@
           [matTooltip]="profile.name || ''"
           [queryParams]="{ name: profile.nameId }"
           routerLink="/public/details">
-          <img width="64" height="64" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
+          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
         </div>
         <mat-card-title>
           <div>
             <p class="container-details">
-              <span matTooltipPosition="above" [matTooltip]="profile.name || ''" role="none" aria-describedby="name">
+              <span
+                class="name"
+                matTooltipPosition="above"
+                [matTooltip]="profile.name || ''"
+                role="span"
+                aria-describedby="name">
                 {{ profile.name }}
               </span>
-              <span class="divider"></span>
+
+              <span class="divider">|</span>
 
               <span class="public">
-                <span matTooltipPosition="above" [matTooltip]="(profile.createdAt | date) || ''">{{
-                  profile.createdAt | date
-                }}</span>
+                <span matTooltipPosition="above" [matTooltip]="(profile.createdAt | date) || ''">
+                  {{ profile.createdAt | date }}
+                </span>
                 <mat-icon
-                  *ngIf="profile.profilePublic"
                   class="text-sm"
                   matTooltipPosition="right"
-                  matTooltip="Público"
+                  [matTooltip]="profile.profilePublic ? 'Público' : 'Privado'"
                   role="icon"
-                  aria-describedby="post-public"
-                  >public</mat-icon
-                >
-                <mat-icon
-                  *ngIf="!profile.profilePublic"
-                  class="text-sm"
-                  matTooltipPosition="right"
-                  matTooltip="Privado"
-                  role="icon"
-                  aria-describedby="post-public"
-                  >lock</mat-icon
-                >
+                  aria-describedby="icone de visibilidade">
+                  {{ profile.profilePublic ? 'public' : 'lock' }}
+                </mat-icon>
               </span>
             </p>
 
             <p class="container-details">
               <span
-                class="nickname"
                 matTooltipPosition="below"
                 [matTooltip]="profile.nameId || ''"
                 style="cursor: pointer"

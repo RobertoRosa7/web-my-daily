@@ -22,6 +22,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AsyncPipe } from '@angular/common';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatSelectModule } from '@angular/material/select';
+import { DeviceDetectorDirective } from '../core/directives/device-detector/device-detector.directive';
 
 const commons = [
   MatCheckboxModule,
@@ -48,6 +49,7 @@ const commons = [
   CdkAccordionModule,
   MatSelectModule,
   AsyncPipe,
+  DeviceDetectorDirective,
 ];
 @NgModule({
   declarations: [],

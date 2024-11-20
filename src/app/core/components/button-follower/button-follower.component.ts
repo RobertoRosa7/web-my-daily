@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
-import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FollowingStatus } from '../../enums/bases/base.enum';
 import { Observable } from 'rxjs';
@@ -15,7 +14,7 @@ import { Store } from '@ngrx/store';
   templateUrl: './button-follower.component.html',
   styleUrls: ['./button-follower.component.scss'],
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, DialogAlertComponent],
+  imports: [CommonModule, SharedModule, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonFollowerComponent {

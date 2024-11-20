@@ -1,14 +1,28 @@
-.container-buttons {
-  button {
-    width: 100%;
-  }
+.desktop.container-buttons button {
+  width: 100%;
 }
-
+.mobile.container-buttons {
+  padding-right: 0;
+}
+.mobile.container-buttons button .btn-follow {
+  display: none;
+}
+.mobile.container-buttons button {
+  background-color: transparent;
+  min-width: 32px;
+}
 @media screen and (max-width: 768px) {
   .container-buttons {
-    padding-right: 1rem;
+    padding-right: 0;
   }
-  .container-buttons button mat-icon {
+  .container-buttons button .btn-follow {
     display: none;
+  }
+  .container-buttons button {
+    background-color: transparent;
+    min-width: 32px;
+  }
+  .mat-mdc-button .mat-icon {
+    margin-left: 0;
   }
 }
