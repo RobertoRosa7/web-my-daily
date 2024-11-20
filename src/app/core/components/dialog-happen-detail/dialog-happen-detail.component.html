@@ -12,7 +12,11 @@
     <span class="inner" [innerHTML]="data.happenActive.whatHappen"></span>
     <div class="container-likes">
       <div matTooltipPosition="above" matTooltip="Cutir">
-        <button (click)="liked(data.happenActive.likes.isLiked, data.index, data.happenActive)" mat-icon-button role="button" aria-describedby="favorite">
+        <button
+          (click)="liked(data.happenActive.likes.isLiked, data.index, data.happenActive)"
+          mat-icon-button
+          role="button"
+          aria-describedby="favorite">
           <mat-icon *ngIf="!data.happenActive.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
           <mat-icon *ngIf="data.happenActive.likes.isLiked" aria-label="favorite">favorite</mat-icon>
         </button>
@@ -31,7 +35,10 @@
             class="material-symbols-outlined">
             thumb_down
           </span>
-          <mat-icon *ngIf="data.happenActive.likes.isDisliked" aria-label="not-favorite" class="material-symbols-outlined">
+          <mat-icon
+            *ngIf="data.happenActive.likes.isDisliked"
+            aria-label="not-favorite"
+            class="material-symbols-outlined">
             thumb_down
           </mat-icon>
         </button>

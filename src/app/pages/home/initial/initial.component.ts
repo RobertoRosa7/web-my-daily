@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from '../home';
 import { Store } from '@ngrx/store';
-import { ListeningFollowResponse } from '../../../core/interfaces/follows/follow.interface';
-import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
 import { actionColor } from '../../profile/core/actions/color.action';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { backgroundType } from '../../../core/types/colors/color.type';
-import { environment } from '../../../../environments/environment';
-import { JsonMapProperties } from '../../../core/decorators/jsons/json.decorator';
-import { io } from 'socket.io-client';
-import { actionUserFollowers } from '../../profile/core/actions/user.action';
 import { happenTimeline } from '../../../core/actions/happens/profile.happens.action';
 import { actionProfilePublic } from '../../public/core/actions/public-profile.action';
 import { isPlatformBrowser } from '@angular/common';

@@ -1,18 +1,26 @@
 import { Component } from '@angular/core';
 import { HomeComponent } from '../home';
-import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
-import { FollowRequest, ListeningFollowResponse } from '../../../core/interfaces/follows/follow.interface';
+import { map } from 'rxjs';
+import { FollowRequest } from '../../../core/interfaces/follows/follow.interface';
 import { selectorPageablePub } from '../../profile/core/selectors/profile.selector';
 import { actionUserFollow } from '../../public/core/actions/public-profile.action';
 import { Store } from '@ngrx/store';
-import { io } from 'socket.io-client';
-import { environment } from '../../../../environments/environment';
-import { JsonMapProperties } from '../../../core/decorators/jsons/json.decorator';
-import { actionUserFollowers } from '../../profile/core/actions/user.action';
 
 @Component({
   selector: 'app-explore',
-  templateUrl: './explore.component.html',
+  template: `
+    <main class="explore">
+      <div class="page">
+        <app-input-search></app-input-search>
+        <p class="feelingers">Novos feelingers</p>
+        <app-initial-explore
+          [id]="userId$ | async"
+          *ngFor="let profile of userPageble$ | async"
+          (socketio)="onSocketio($event)"
+          [profile]="profile"></app-initial-explore>
+      </div>
+    </main>
+  `,
   styleUrl: './explore.component.scss',
 })
 export class ExploreComponent extends HomeComponent {

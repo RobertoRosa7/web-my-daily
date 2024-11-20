@@ -9,9 +9,6 @@
     padding: 1rem;
     border-radius: 1rem;
   }
-  .infos {
-    padding-top: 2rem;
-  }
   .infos p:first-child {
     font-family: 'Open Sans';
     font-optical-sizing: auto;
@@ -73,7 +70,7 @@
 @media screen and (max-width: 768px) {
   .user-details {
     font-weight: 100;
-    margin-top: -3rem;
+    margin-top: 3rem;
     padding: 1rem;
     margin-bottom: 1rem;
     .scores {

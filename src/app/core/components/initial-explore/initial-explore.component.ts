@@ -17,7 +17,7 @@ import { ButtonFollowerComponent } from '../button-follower/button-follower.comp
   templateUrl: './initial-explore.component.html',
   styleUrls: ['./initial-explore.component.scss'],
   standalone: true,
-  imports: [CommonModule, SharedModule, RouterModule, DialogAlertComponent, ButtonFollowerComponent],
+  imports: [CommonModule, SharedModule, RouterModule, ButtonFollowerComponent],
   providers: [AuthService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

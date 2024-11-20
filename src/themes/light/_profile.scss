@@ -80,7 +80,7 @@
 
   // customize background toolbar theme profile
   mat-toolbar {
-    background-color: transparent;
+    background-color: var(--white);
   }
 
   // mat card
@@ -95,17 +95,18 @@
   }
 
   // profile private and public container fo followers
-  .container-followers p {
-    border-left: 1px solid var(--border-default);
-    border-right: 1px solid var(--border-default);
-  }
+  // .container-followers p {
+  //   border-left: 1px solid var(--border-default);
+  //   border-right: 1px solid var(--border-default);
+  // }
 
-  .container-followers p:first-child {
-    border-top: 1px solid var(--border-default);
-  }
-  .container-followers p:last-child {
-    border-bottom: 1px solid var(--border-default);
-  }
+  // .container-followers p:first-child {
+  //   border-top: 1px solid var(--border-default);
+  // }
+  // .container-followers p:last-child {
+  //   border-bottom: 1px solid var(--border-default);
+  // }
+
   // profile private and public container fo followers button
   .container-followers button {
     background-color: var(--white);

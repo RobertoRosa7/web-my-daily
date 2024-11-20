@@ -11,13 +11,13 @@ import { SharedModule } from '../../../shared/shared.module';
   imports: [SharedModule, RouterModule, CommonModule],
   template: `
     <button
-      class="btn-menu"
+      role="button"
       disableRipple="true"
       matTooltip="Menu"
       [matMenuTriggerFor]="menus"
-      mat-button
+      mat-icon-button
       aria-label="Menu">
-      Menu
+      <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
       <button matTooltipPosition="left" mat-menu-item matTooltip="Inicial" routerLink="/home/initial">

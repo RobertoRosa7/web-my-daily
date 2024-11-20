@@ -13,20 +13,12 @@
         </div>
         <mat-card-title>
           <div>
-            <span matTooltipPosition="above" [matTooltip]="profile.name || ''" role="none" aria-describedby="name">{{
-              profile.name
-            }}</span>
             <p class="container-details">
-              <span
-                class="nickname"
-                matTooltipPosition="below"
-                [matTooltip]="profile.nameId || ''"
-                style="cursor: pointer"
-                [queryParams]="{ name: profile.nameId }"
-                routerLink="/public/details"
-                >{{ profile.nameId?.trim() }}
+              <span matTooltipPosition="above" [matTooltip]="profile.name || ''" role="none" aria-describedby="name">
+                {{ profile.name }}
               </span>
               <span class="divider"></span>
+
               <span class="public">
                 <span matTooltipPosition="above" [matTooltip]="(profile.createdAt | date) || ''">{{
                   profile.createdAt | date
@@ -49,6 +41,18 @@
                   aria-describedby="post-public"
                   >lock</mat-icon
                 >
+              </span>
+            </p>
+
+            <p class="container-details">
+              <span
+                class="nickname"
+                matTooltipPosition="below"
+                [matTooltip]="profile.nameId || ''"
+                style="cursor: pointer"
+                [queryParams]="{ name: profile.nameId }"
+                routerLink="/public/details"
+                >{{ profile.nameId?.trim() }}
               </span>
             </p>
           </div>

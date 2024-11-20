@@ -2,9 +2,9 @@
   <mat-card>
     <mat-card-header>
       <mat-card-title>
-        <span class="nickname" matTooltipPosition="left" matTooltip="Apelido" role="none" aria-describedby="name">{{
-          happen.nickname
-        }}</span>
+        <span class="nickname" matTooltipPosition="left" matTooltip="Apelido" role="span" aria-describedby="name">
+          {{ happen.nickname }}
+        </span>
         <button
           matTooltip="Menu"
           [matMenuTriggerFor]="menus"
@@ -16,7 +16,12 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menus="matMenu" overlapTrigger="true">
-          <button (click)="stoppingViewing(happen)" *ngIf="id !== happen.userId" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
+          <button
+            (click)="stoppingViewing(happen)"
+            *ngIf="id !== happen.userId"
+            matTooltipPosition="right"
+            mat-menu-item
+            matTooltip="Editar">
             <mat-icon iconPositionEnd>remove</mat-icon>
             <span>Deixar de Visualizar</span>
           </button>
@@ -84,8 +89,8 @@
         </ng-container>
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content (click)="details(happen)" role="doc-epigraph" aria-describedby="post" aria-details="post content">
-      <div [innerHTML]="happen.whatHappen | breakline"></div>
+    <mat-card-content (click)="details(happen)" role="content" aria-describedby="post" aria-details="post content">
+      <div class="word-break" [innerHTML]="happen.whatHappen"></div>
     </mat-card-content>
 
     <mat-card-actions>

@@ -125,6 +125,10 @@ body {
   }
 }
 
+.word-break {
+  word-break: keep-all;
+}
+
 .loading-waves::after {
   content: '';
   position: absolute;
