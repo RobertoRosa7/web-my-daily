@@ -110,13 +110,19 @@
       </div>
       <div class="container-likes">
         <div matTooltipPosition="above" matTooltip="comentários">
-          <button (click)="comments(happen)" mat-icon-button role="button" aria-describedby="comments">
+          <button
+            class="btn-like-comments"
+            (click)="comments(happen)"
+            mat-icon-button
+            role="button"
+            aria-describedby="comments">
             <mat-icon>comment</mat-icon>
           </button>
           <small>{{ happen.commentsCounter | follows }}</small>
         </div>
         <div matTooltipPosition="above" matTooltip="Cutir">
           <button
+            class="btn-like-up"
             (click)="liked(happen.likes.isLiked, happen)"
             mat-icon-button
             role="button"
@@ -128,6 +134,7 @@
         </div>
         <div matTooltipPosition="above" matTooltip="Não curtir">
           <button
+            class="btn-like-down"
             (click)="disliked(happen.likes.isDisliked, happen)"
             mat-icon-button
             role="button"

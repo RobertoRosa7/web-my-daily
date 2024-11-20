@@ -1,4 +1,4 @@
-// card feeling - post of users
+// customize card feeling - post of users
 .card-feeling {
   // mat-card material
   span.name-id {
@@ -7,6 +7,7 @@
     font-size: 0.7.5rem;
     font-style: italic;
   }
+  // customize span nickname
   span.nickname {
     font-weight: 100;
     font-size: 1.1rem;
@@ -15,6 +16,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0.5rem;
+  // customize mdc-card material design
   .mdc-card {
     margin: 0;
     padding: 0;
@@ -22,10 +24,11 @@
     border-radius: 0;
     box-shadow: none;
   }
+  // customize card-header from material design
   .mat-mdc-card-header {
     padding: 0.5rem 1rem;
   }
-  // mat-card action of material
+  // customize mat-card action of material
   .mdc-card__actions {
     justify-content: space-between;
   }
@@ -35,7 +38,6 @@
   .container-scores div {
     display: flex;
   }
-
   .container-scores,
   .container-likes {
     flex: 1;
@@ -43,11 +45,9 @@
       align-items: center;
     }
   }
-
   .container-likes {
     justify-content: flex-end;
   }
-
   // subtitle
   .mat-mdc-card-subtitle {
     display: flex;
@@ -56,7 +56,6 @@
     gap: 0.5rem;
     min-height: 1rem;
   }
-
   // mat-card content of material
   .mat-mdc-card-content {
     min-height: 5rem;
@@ -70,55 +69,44 @@
     text-indent: 2rem;
     word-break: break-all;
   }
-
   // counter of likes
   mat-card-actions small {
     display: inline-block;
-    padding-right: 0.5rem;
   }
-
   // flex layout to header text card material
   ::ng-deep .mdc-card .mat-mdc-card-header .mat-mdc-card-header-text {
     flex: 1 !important;
   }
-
-  // title
+  // customize title
   .mat-mdc-card-title {
     display: flex;
     justify-content: space-between;
   }
-
-  // subtitle span inside subtitle
+  // customize subtitle span inside subtitle
   .mat-mdc-card-subtitle span {
     margin-bottom: -3px;
   }
-
-  // content
+  // customize content
   .mat-mdc-card-content {
     margin-top: 1rem;
   }
-
-  // subtitle
+  // customize subtitle
   .mat-mdc-card-subtitle {
     margin-top: -1.2rem;
   }
-
-  // icon subtitle
+  // customize icon subtitle
   .mat-mdc-card-subtitle mat-icon {
     display: flex;
     align-items: center;
   }
-
   // customize material icon
   .mat-mdc-card-subtitle .material-icons {
     font-size: 1rem;
   }
-
   // customize material outline icon empty
   .material-symbols-outlined {
     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
   }
-
   // customize material outline icon fill
   .material-symbols-outlined.fill {
     font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -130,7 +118,40 @@
   mat-card-subtitle mat-icon {
     font-size: 0.8rem;
   }
-  .mat-mdc-card-content div {
+  // customize material icon
+  .mat-mdc-card-content div,
+  .container-scores .btn-score-pos .material-icons,
+  .container-scores .btn-score-neg .material-icons,
+  .container-likes .btn-like-up .material-icons,
+  .container-likes .btn-like-down .material-icons,
+  .container-likes .btn-like-comments .material-icons,
+  .container-likes .btn-like-down .thumb-down {
+    font-size: 1rem;
+  }
+  // customize material icon
+  .container-scores .btn-score-pos,
+  .container-scores .btn-score-neg,
+  .container-likes .btn-like-down,
+  .container-likes .btn-like-up,
+  .container-likes .btn-like-comments {
+    min-width: none;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .container-likes button mat-icon,
+  .container-scores button mat-icon {
+    overflow: visible;
+  }
+  // customize counter of likes
+  mat-card-actions small {
+    padding-right: 0;
+  }
+  // customize material outline icon empty
+  .material-symbols-outlined,
+  .material-symbols-outlined.fill {
     font-size: 1rem;
   }
 }
