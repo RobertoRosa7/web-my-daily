@@ -1,10 +1,11 @@
 @import '../../../../themes//mixins';
 
 .public-details {
+  margin-top: 5rem;
   .page {
     @include size-page;
 
-    // container app-photo and app-followers
+    // customize container app-photo and app-followers
     .container-followers,
     .box {
       display: flex;
@@ -14,7 +15,7 @@
       }
       app-input-photo {
         flex: 0.3;
-        min-height: 15rem;
+        min-height: 10rem;
       }
     }
   }

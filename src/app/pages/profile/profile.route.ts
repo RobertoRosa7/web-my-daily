@@ -5,6 +5,7 @@ import { SettingComponent } from './settings/setting.component';
 import { AccountComponent } from './settings/account/account.component';
 import { SecurityComponent } from './settings/security/security.component';
 import { ChangeNameComponent } from './settings/change-name/change-name.component';
+import { MenuSettingsComponent } from './settings/menu-settings/menu-settings.component';
 
 export const routes: Routes = [
   {
@@ -16,9 +17,10 @@ export const routes: Routes = [
         path: 'settings',
         component: SettingComponent,
         children: [
+          { path: 'menu', component: MenuSettingsComponent },
           { path: 'account', component: AccountComponent },
           { path: 'security', component: SecurityComponent },
-          { path: '**', redirectTo: 'account', pathMatch: 'prefix' },
+          { path: '**', redirectTo: 'menu', pathMatch: 'prefix' },
         ],
       },
       { path: 'change-name', component: ChangeNameComponent },

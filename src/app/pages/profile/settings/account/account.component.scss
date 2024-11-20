@@ -1,6 +1,7 @@
 @import '../../../../../themes/mixins';
 
 .account {
+  margin-top: 10rem;
   .container {
     @include size-page;
     .mat-mdc-card-header,
@@ -42,7 +43,6 @@
       .card-menu:last-child {
         border: none;
       }
-
       mat-card {
         box-shadow: none;
         border: none;

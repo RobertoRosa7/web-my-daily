@@ -1,6 +1,7 @@
 @import '../../../../../themes/mixins';
 
 .settings {
+  margin-top: 10rem;
   .container {
     @include size-page;
     ::ng-deep .mat-card-header {

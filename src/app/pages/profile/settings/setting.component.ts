@@ -5,8 +5,8 @@ import { actionColor } from '../core/actions/color.action';
 
 @Component({
   selector: 'app-settings',
-  templateUrl: './setting.component.html',
-  styleUrl: './setting.component.scss'
+  template: ` <router-outlet></router-outlet> `,
+  styleUrl: './setting.component.scss',
 })
 export class SettingComponent extends Profile implements OnInit {
   constructor(protected override readonly store: Store) {

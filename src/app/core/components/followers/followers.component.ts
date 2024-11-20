@@ -18,7 +18,7 @@ import { DialogActions, DialogAlert } from '../../interfaces/dialogs/dialogs.int
   styleUrl: './followers.component.scss',
   templateUrl: './followers.component.html',
   standalone: true,
-  imports: [CommonModule, FollowerPipe, SharedModule, DialogAlertComponent, ButtonFollowerComponent],
+  imports: [CommonModule, FollowerPipe, SharedModule, ButtonFollowerComponent],
   providers: [AuthService, DialogService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

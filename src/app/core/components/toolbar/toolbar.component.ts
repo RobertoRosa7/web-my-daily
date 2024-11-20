@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
 import { selectorTheme } from '../../selectors/colors/color.selector';
-import { InputSearchComponent } from '../input-search/input-search.component';
 import { selectName } from '../../../pages/profile/core/selectors/user.selector';
 
 @Component({
@@ -18,7 +17,7 @@ import { selectName } from '../../../pages/profile/core/selectors/user.selector'
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss'],
   standalone: true,
-  imports: [SharedModule, CommonModule, ButtonMenuComponent, ButtonBackComponent, InputSearchComponent, RouterModule],
+  imports: [SharedModule, CommonModule, ButtonMenuComponent, ButtonBackComponent, RouterModule],
 })
 export class ToolbarComponent implements OnInit {
   private readonly router: Router = inject(Router);

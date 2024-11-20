@@ -8,6 +8,7 @@
             matTooltipPosition="above"
             matTooltip="deixar de seguir"
             role="button"
+            class="btn-following"
             aria-describedby="deixar de seguir"
             (click)="follow(profile, id, followingStatus.PRIVATE)"
             mat-button>
@@ -31,8 +32,8 @@
             matTooltip="Aguardando confirmação"
             matTooltipPosition="above"
             aria-describedby="solicitado"
-            class="btn-request"
             role="button"
+            class="btn-request"
             (click)="follow(profile, id, followingStatus.PRIVATE)"
             mat-button>
             <span class="btn-follow">Solicitado</span>
@@ -46,6 +47,7 @@
             matTooltip="deixar de seguir"
             role="button"
             aria-describedby="deixar de seguir"
+            class="btn-following"
             (click)="follow(profile, id, followingStatus.PUBLIC)"
             mat-button>
             <span class="btn-follow">Deixar</span>
@@ -57,6 +59,7 @@
             matTooltipPosition="above"
             aria-describedby="seguir"
             role="button"
+            class="btn-public"
             (click)="follow(profile, id, followingStatus.FOLLOWING)"
             mat-button>
             <span class="btn-follow">Seguir</span>
@@ -72,6 +75,7 @@
         matTooltipPosition="above"
         aria-describedby="seguir"
         role="button"
+        class="btn-add"
         (click)="requestLoginToFollow()"
         mat-button>
         <mat-icon iconPositionEnd>add</mat-icon>
