@@ -19,7 +19,12 @@
       background-color: transparent;
     }
   }
-
+  .banner p.title {
+    color: var(--gray);
+  }
+  .daily {
+    color: var(--success);
+  }
   // card feeling theme profile
   .card-feeling {
     border: 1px solid var(--border-default);
@@ -70,7 +75,7 @@
 
   // customize background toolbar theme profile
   mat-toolbar {
-    background-color: transparent;
+    background-color: var(--white);
   }
 
   // mat card

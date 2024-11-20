@@ -2,15 +2,13 @@
 
 // user page
 .public-profile {
-  padding-left: 10rem;
-  padding-right: 10rem;
-  height: 100vh;
-
+  padding-left: 5rem;
+  padding-right: 5rem;
+  margin-top: 5rem;
   .button-back {
     display: flex;
     justify-content: flex-start;
   }
-
   .container-feelings {
     overflow-y: auto;
   }
@@ -37,9 +35,6 @@
   .highcharts-figure {
     flex: 1;
   }
-  .row {
-    min-height: 25rem;
-  }
   p {
     margin: 0;
     padding: 0;
@@ -48,18 +43,19 @@
     align-items: center;
     flex-direction: column;
     font-weight: 100;
-    justify-content: center;
-    padding: 2rem;
-    border-radius: 2rem;
+    justify-content: flex-start;
+    padding: 1rem;
     p.title {
-      margin-bottom: 3.5rem;
-      font-size: 3.5rem;
-      line-height: 3.5rem;
+      font-size: 2.5rem;
+      line-height: 2.5rem;
       font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-bottom: 1rem;
     }
     p.subtitle {
-      font-size: 1.5rem;
-      line-height: 1.5rem;
+      font-size: 1.2rem;
+      line-height: 2rem;
+      text-align: center;
     }
   }
   .section-text {
@@ -88,7 +84,6 @@
     min-height: 15rem;
     gap: 1rem;
     position: relative;
-
     .photo {
       width: inherit;
       height: inherit;
@@ -141,7 +136,6 @@
     position: relative;
     border-radius: 2rem 2rem 0 0;
     padding-top: 1.6rem;
-
     .search {
       position: absolute;
       top: 0;
@@ -240,7 +234,6 @@
       padding-right: 1rem;
       .box {
         background: transparent;
-        padding-top: 6rem;
         padding-left: 0;
         padding-right: 0;
         overflow-y: auto;
