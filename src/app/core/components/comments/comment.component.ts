@@ -68,9 +68,6 @@ export class CommentComponent implements OnChanges, OnInit {
   }
 
   public get getInsigniaColor() {
-    if (this.comment.scoreNegative > this.comment.scorePositive) {
-      return 'red';
-    }
-    return 'green';
+    return this.comment.scoreNegative > this.comment.scorePositive ? 'blue' : 'red';
   }
 }
