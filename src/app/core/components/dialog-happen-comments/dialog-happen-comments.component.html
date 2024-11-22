@@ -8,12 +8,23 @@
     <div class="header">
       <div class="title">
         <span class="nickname">{{ data.nickname }}</span>
-        <span class="domain-name">{{ data.nameId }} {{ data.updatedAt | date }}</span>
+        <span class="domain-name">{{ data.nameId }} | {{ data.updatedAt | date }}</span>
       </div>
       <div class="subtitle">Comentários!</div>
     </div>
   </header>
+
+  <form class="input" (ngSubmit)="addComment(data)">
+    <mat-form-field class="field">
+      <input required [formControl]="form" [tabindex]="0" placeholder="Digite aqui" matInput type="text" />
+      <button (click)="addComment(data)" [disabled]="form.invalid" matSuffix mat-icon-button>
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+
   <app-comment
+    [enableMenuButton]="true"
     (onDelete)="onDelete($event)"
     (onComment)="onComment($event)"
     [id]="userId$ | async"
@@ -22,19 +33,11 @@
   <ng-container *ngIf="comments$ | async as data">
     @for(item of data.comments; track $index) {
     <app-comment
+      [enableMenuButton]="false"
       (onDelete)="onDelete($event)"
       (onComment)="onComment($event)"
       [id]="userId$ | async"
       [comment]="item"></app-comment>
     }
   </ng-container>
-
-  <form class="input" (ngSubmit)="addComment(data)">
-    <mat-form-field class="field">
-      <input required [formControl]="form" [tabindex]="0" placeholder="Digite aqui" matInput type="text" />
-      <button (click)="addComment(data)" [disabled]="form.invalid" matSuffix mat-icon-button>
-        <mat-icon>add</mat-icon>
-      </button>
-    </mat-form-field>
-  </form>
 </main>

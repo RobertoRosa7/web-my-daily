@@ -20,7 +20,6 @@ import {
 } from '../../actions/happens/profile.happens.action';
 import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
 import { Store } from '@ngrx/store';
-import { BreakLine } from '../../pipes/break-line/break-line.pipe';
 import { DialogHappenDetailCompoent } from '../dialog-happen-detail/dialog-happen-detail.component';
 import { actionDislikedLocal, actionLikedLocal } from '../../actions/happens/likes.action';
 import { SnackBarActions } from '../../interfaces/dialogs/dialogs.interface';
@@ -34,17 +33,7 @@ type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
   templateUrl: `./feelings.component.html`,
   styleUrl: './feelings.component.scss',
   standalone: true,
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule,
-    FollowerPipe,
-    DialogAlertComponent,
-    DialogHappenComponent,
-    DialogHappenDetailCompoent,
-    DialogHappenCommentsComponent,
-    BreakLine,
-  ],
+  imports: [CommonModule, SharedModule, RouterModule, FollowerPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DialogService],
 })

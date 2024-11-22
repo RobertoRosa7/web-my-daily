@@ -6,6 +6,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   SimpleChanges,
   inject,
@@ -22,9 +23,9 @@ import { FormControl } from '@angular/forms';
   imports: [CommonModule, SharedModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentComponent implements OnChanges {
-  public form: FormControl = new FormControl('');
-  public expanded!: string;
+export class CommentComponent implements OnChanges, OnInit {
+  public readonly form: FormControl = new FormControl('');
+  public expanded!: boolean;
 
   private readonly detectorChange = inject(ChangeDetectorRef);
 
@@ -33,6 +34,9 @@ export class CommentComponent implements OnChanges {
 
   @Input()
   public id: string | null | undefined;
+
+  @Input({ required: true })
+  public enableMenuButton!: boolean;
 
   @Output()
   public onComment = new EventEmitter<HappenComment>();
@@ -45,14 +49,22 @@ export class CommentComponent implements OnChanges {
     this.form.setValue(this.comment.text);
   }
 
+  ngOnInit(): void {
+    this.form.setValue(this.comment.text);
+  }
+
   public onRemove(comment: HappenComment) {
     this.onDelete.emit(comment);
   }
 
   public updateComment(comment: HappenComment) {
+    if (!this.form.value) {
+      throw Error('Null nenhum valor foi passado');
+    }
+
     this.onComment.emit({ ...comment, text: this.form.value.trim() });
     this.form.reset();
-    this.expanded = '';
+    this.expanded = false;
   }
 
   public get getInsigniaColor() {

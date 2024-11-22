@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
-import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
 import { Store } from '@ngrx/store';
 import { selectHappenActive, selectorComments } from '../../selectors/happens/profile.happens.selector';
 import { CommentComponent } from '../comments/comment.component';
@@ -21,10 +20,10 @@ import {
   templateUrl: './dialog-happen-comments.component.html',
   styleUrl: './dialog-happen-comments.component.scss',
   standalone: true,
-  imports: [CommonModule, SharedModule, FollowerPipe, CommentComponent],
+  imports: [CommonModule, SharedModule, CommentComponent],
 })
 export class DialogHappenCommentsComponent {
-  public form: FormControl = new FormControl('');
+  public readonly form: FormControl = new FormControl('');
   private readonly store: Store = inject(Store);
 
   public readonly happen$ = this.store

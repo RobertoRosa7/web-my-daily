@@ -14,6 +14,7 @@
         <div class="card-header">
           <span matTooltipPosition="above" matTooltip="nome de domínio">{{ comment.nameId }}</span>
           <button
+            [hidden]="enableMenuButton"
             matTooltip="Menu"
             [matMenuTriggerFor]="menus"
             matTooltipPosition="right"
@@ -26,7 +27,7 @@
               <span>Denúnciar</span>
             </button>
             <button
-              (click)="expanded = 'block'"
+              (click)="expanded = true"
               *ngIf="id === comment.userId"
               matTooltipPosition="right"
               mat-menu-item
@@ -60,7 +61,7 @@
             <small>{{ comment.scoreNegative | percent : '1.2-2' }}</small>
           </div>
         </div>
-        <form [style.display]="expanded ? '' : 'none'" (ngSubmit)="updateComment(comment)">
+        <form *ngIf="expanded" (ngSubmit)="updateComment(comment)">
           <mat-form-field class="field edit-input">
             <textarea
               (keydown.control.enter)="updateComment(comment)"
@@ -86,7 +87,7 @@
               role="button"
               aria-describedby="close"
               *ngIf="form.value === ''"
-              (click)="expanded = ''"
+              (click)="expanded = false"
               matSuffix
               mat-icon-button>
               <mat-icon>close</mat-icon>
