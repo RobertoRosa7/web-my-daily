@@ -4,6 +4,7 @@ import { AuthComponent } from '../auth.component';
 import { FielRegister } from '../auth.field.validators';
 import { IAuthState } from '../core/interfaces/auth.interface';
 import { Store } from '@ngrx/store';
+import { Common } from '../../../core/enums/bases/base.enum';
 
 @Component({
   selector: 'app-register',
@@ -43,7 +44,7 @@ export class RegisterComponent extends AuthComponent implements OnInit {
         email: this.getEmail,
         password: this.getPassword,
         checkTerms: this.getCheckTerms,
-        nameId: this.getNameId + '@daily',
+        nameId: this.getNameId + Common.daily,
         nickname: this.getNickName,
       })
     );

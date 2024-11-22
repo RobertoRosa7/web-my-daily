@@ -30,7 +30,10 @@ import { AccountComponent } from './settings/account/account.component';
 import { MenuSettingsComponent } from './settings/menu-settings/menu-settings.component';
 import { ButtonBackComponent } from '../../core/components/button-back/button-back.component';
 import { SecurityComponent } from './settings/security/security.component';
-import { ChangeNameComponent } from './settings/change-name/change-name.component';
+import { ChangeNameComponent } from './settings/account/change-name/change-name.component';
+import { ChangeDomainNameComponent } from './settings/account/change-domain-name/change-domain-name.component';
+import { UniqueNameRepository } from '../auth/core/repositories/unique-name.repository';
+import { UniqueNameService } from '../auth/core/services/unique-name.service';
 
 @NgModule({
   declarations: [Profile, UserComponent, AccountComponent, MenuSettingsComponent, SettingComponent, SecurityComponent],
@@ -48,6 +51,7 @@ import { ChangeNameComponent } from './settings/change-name/change-name.componen
     ButtonFabCreateComponent,
     ButtonBackComponent,
     ChangeNameComponent,
+    ChangeDomainNameComponent,
   ],
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),
@@ -59,6 +63,8 @@ import { ChangeNameComponent } from './settings/change-name/change-name.componen
     LocalStorageService,
     HappenRepository,
     HappenService,
+    UniqueNameRepository,
+    UniqueNameService,
   ],
 })
 export class ProfileModule {}

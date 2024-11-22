@@ -1,7 +1,7 @@
-import { Component, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
+import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import * as selectAuth from './core/selectors/auth.selector';
-import { Observable, Subscription, delay, filter, from, map, mergeMap } from 'rxjs';
+import { Observable, delay, filter, from, map, mergeMap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { IAuthState } from './core/interfaces/auth.interface';
 import { HttpResponseDefault } from '../../core/interfaces/https/http-response.interface';
@@ -12,28 +12,34 @@ import { AuthService } from './core/services/auth.services';
 import { isPlatformBrowser } from '@angular/common';
 import { actionCoreReset } from '../../core/actions/resets/reset.action';
 import { actionColor } from '../profile/core/actions/color.action';
+import { FieldName } from '../../core/enums/bases/base.enum';
+import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-auth',
   template: '<router-outlet></router-outlet>',
 })
-export class AuthComponent implements OnDestroy {
+export class AuthComponent extends InDestroyDirective {
   public form!: FormGroup;
-  public isLoading$!: Observable<boolean>;
-  public subscriptions: Array<Subscription> = [];
+  public readonly isLoading$!: Observable<boolean>;
+  public readonly fieldNames = FieldName;
 
   // responsible to listening actions to login success
-  public message$: Observable<HttpResponseDefault<IAuthState>> = this.store
+  public readonly message$: Observable<HttpResponseDefault<IAuthState>> = this.store
     // layer selector to filter
     .select(selectAuth.selectorMessage);
 
   // inject action subject dependency only super class?
-  private actionSubject = inject(ActionsSubject);
-  private router = inject(Router);
-  private authService = inject(AuthService);
-  private platform = inject(PLATFORM_ID);
+  private readonly actionSubject = inject(ActionsSubject);
+  private readonly router = inject(Router);
+  private readonly authService = inject(AuthService);
+  private readonly platform = inject(PLATFORM_ID);
 
   constructor(protected readonly store: Store<IAuthState>) {
+    super();
+    // set theme login
+    this.store.dispatch(actionColor({ theme: 'login' }));
+
     // clear previous session
     if (isPlatformBrowser(this.platform)) {
       // clean localstorage
@@ -57,41 +63,26 @@ export class AuthComponent implements OnDestroy {
     );
 
     // after login send to home
-    this.subscriptions.push(
-      this.actionSubject
-        .pipe(
-          filter(({ type }) => type === authType.LOGIN_GOTO),
-          // layer map to return message on display
-          map((action) => {
-            // abstract paths to navigate
-            const { paths } = action as { type: string; paths: Array<string> };
+    this.actionSubject
+      .pipe(
+        // layer filer only action login goto
+        filter(({ type }) => type === authType.LOGIN_GOTO),
+        // layer map to return message on display
+        map((action) => {
+          // abstract paths to navigate
+          const { paths } = action as { type: string; paths: Array<string> };
 
-            // return data to display message
-            return paths;
-          }),
-          // layer wait 1500 ms and then got
-          delay(1500),
-          // layer navigate
-          mergeMap(this.navigate.bind(this))
-        )
-        .subscribe()
-    );
-
-    this.store.dispatch(
-      actionColor({
-        theme: 'login',
-      })
-    );
-  }
-
-  /**
-   * INFO:
-   * ngOnDestroy - destory component
-   */
-  ngOnDestroy(): void {
-    for (const sub of this.subscriptions) {
-      sub.unsubscribe();
-    }
+          // return data to display message
+          return paths;
+        }),
+        // layer wait 1500 ms and then got
+        delay(1500),
+        // layer navigate
+        mergeMap(this.navigate.bind(this)),
+        // layer - ondestroy free memory
+        this.takeUntilDestroy()
+      )
+      .subscribe();
   }
 
   public onFireEvent(field: string, form: FormControl) {
@@ -100,38 +91,26 @@ export class AuthComponent implements OnDestroy {
 
   /**
    * INFO:
-   * navigate - responsible to go to some page
-   *
-   * @param paths Array<string> paths to navigate
-   */
-  private navigate(paths: Array<string>): Observable<boolean> {
-    // clear fields message on display
-    this.store.dispatch(this.clearAction());
-
-    // navigate
-    return from(this.router.navigate(paths));
-  }
-
-  /**
-   * INFO:
    * getEmail = get name field from form
    */
   public get getEmail() {
-    return this.form.get('email')?.value;
+    return this.form.get(FieldName.email)?.value;
   }
+
   /**
    * INFO:
    * getPassword = get name field from form
    */
   public get getPassword() {
-    return this.form.get('password')?.value;
+    return this.form.get(FieldName.password)?.value;
   }
+
   /**
    * INFO:
    * getNickName = get name field from form
    */
   public get getNickName() {
-    return this.form.get('nickname')?.value;
+    return this.form.get(FieldName.nickname)?.value;
   }
 
   /**
@@ -139,7 +118,7 @@ export class AuthComponent implements OnDestroy {
    * getNameId = get name field from form
    */
   public get getNameId() {
-    return this.form.get('nameId')?.value;
+    return this.form.get(FieldName.nameId)?.value;
   }
 
   /**
@@ -147,7 +126,7 @@ export class AuthComponent implements OnDestroy {
    * getCheckTerms = get name field from form
    */
   public get getCheckTerms() {
-    return this.form.get('checkTerms')?.value;
+    return this.form.get(FieldName.checkTerms)?.value;
   }
 
   /**
@@ -188,5 +167,19 @@ export class AuthComponent implements OnDestroy {
    */
   public get loading() {
     return actionLoading;
+  }
+
+  /**
+   * INFO:
+   * navigate - responsible to go to some page
+   *
+   * @param paths Array<string> paths to navigate
+   */
+  private navigate(paths: Array<string>): Observable<boolean> {
+    // clear fields message on display
+    this.store.dispatch(this.clearAction());
+
+    // navigate
+    return from(this.router.navigate(paths));
   }
 }

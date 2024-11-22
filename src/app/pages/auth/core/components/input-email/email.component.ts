@@ -18,6 +18,9 @@ import { Form } from '../../../auth.form';
       type="text"
       placeholder="Insira seu email"
       class="border-b outline-none pt-2" />
+    <mat-error *ngIf="email.getError('required')">Email é obrigatório</mat-error>
+    <mat-error *ngIf="email.getError('pattern')">Email é inválid</mat-error>
+    <mat-error *ngIf="email.getError('email')">Email é inválid</mat-error>
   </mat-form-field>`,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: transparent !important;

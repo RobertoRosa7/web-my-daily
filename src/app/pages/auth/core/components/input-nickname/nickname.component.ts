@@ -19,6 +19,8 @@ import { Form } from '../../../auth.form';
         type="text"
         placeholder="Como gostaria de ser chamado(a)"
         class="border-b outline-none pt-2" />
+      <mat-error *ngIf="nickname.getError('required')">Apelido é obrigatório</mat-error>
+      <mat-error *ngIf="nickname.getError('minlength')">Mínimo de 4 digitos</mat-error>
     </mat-form-field>
   `,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {

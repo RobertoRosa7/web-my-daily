@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { JsonProperty } from '../../../../core/decorators/jsons/json.decorator';
-import { HttpResponseDefault } from '../../../../core/interfaces/https/http-response.interface';
+import { HttpResponseDefault, HttpResponseList } from '../../../../core/interfaces/https/http-response.interface';
 import { PageableUser, SingletonOrPageable } from '../../../../core/interfaces/pageables/pageable.interface';
 import { FollowingStatus } from '../../../../core/enums/bases/base.enum';
 
@@ -75,4 +75,9 @@ export class UserProfile extends User {
 export class ProfileSingleResponse extends HttpResponseDefault<UserProfile> {
   @JsonProperty({ clazz: UserProfile })
   public override data: UserProfile = new UserProfile();
+}
+
+export class ProfileListResponse extends HttpResponseList<User> {
+  @JsonProperty({ clazz: User })
+  public override data: Array<User> = [];
 }

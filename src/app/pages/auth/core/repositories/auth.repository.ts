@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ILogin, IRegister, loginResponse, registerResponse } from '../interfaces/auth.interface';
 import { Observable } from 'rxjs';
 import { Paths } from '../../../../core/enums/bases/base.enum';
 import { Url } from '../../../../core/decorators/urls/url.decorator';
+import { BaseRepository } from './base.respository';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthRepository {
+export class AuthRepository extends BaseRepository {
   @Url(Paths.pathPostSignin)
   private signin!: string;
 
   @Url(Paths.pathPostSignup)
   private signup!: string;
-
-  constructor(private readonly http: HttpClient) {}
 
   /**
    * INFO:

@@ -1,0 +1,11 @@
+@import '../../../../../../themes/mixins';
+
+.change-domain-name {
+  margin-top: 10rem;
+  .container {
+    @include size-page;
+    .form-group {
+      width: 100%;
+    }
+  }
+}

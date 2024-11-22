@@ -11,7 +11,7 @@ export enum Paths {
   pathPostSignin = '/ms-users/auth/login',
   pathGetProfile = '/ms-users/user/profile',
   pathPutUserChangeNickname = '/ms-users/user/profile/change-nickname',
-  pathGetSearch = '/ms-users/public/user/search',
+  pathGetSearch = '/ms-users/public/user/search?name={domainName}',
   pathGetprofilePublic = '/ms-users/public/user',
   pathPostUserFollow = '/ms-users/follows',
   pathPostLiked = '/ms-users/user/likes/like',
@@ -28,16 +28,28 @@ export enum Paths {
 }
 
 export enum HappenPublicStatus {
-  PUBLIC = 'PUBLIC',
-  PRIVATE = 'PRIVATE',
-  FOLLWERS = 'FOLLOWERS',
+  public = 'PUBLIC',
+  private = 'PRIVATE',
+  followers = 'FOLLOWERS',
 }
 
 export enum FollowingStatus {
-  FOLLOWING = 'FOLLOWING',
-  REQUESTED = 'REQUESTED',
-  CANCEL_REQUEST = 'CANCEL_REQUEST',
-  REJECTED = 'REJECTED',
-  PRIVATE = 'PRIVATE',
-  PUBLIC = 'PUBLIC',
+  following = 'FOLLOWING',
+  requested = 'REQUESTED',
+  cancelRequest = 'CANCEL_REQUEST',
+  rejected = 'REJECTED',
+  private = 'PRIVATE',
+  public = 'PUBLIC',
+}
+
+export enum FieldName {
+  nameId = 'nameId',
+  nickname = 'nickname',
+  email = 'email',
+  password = 'password',
+  confirmPassword = 'confirmPassword',
+  checkTerms = 'checkTerms',
+}
+export enum Common {
+  daily = '@daily',
 }

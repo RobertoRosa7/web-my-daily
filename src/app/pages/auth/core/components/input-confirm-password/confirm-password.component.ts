@@ -53,8 +53,8 @@ export class ConfirmPasswordComponent extends Form {
     return this.password && this.password.value === control.value ? null : { mustMatch: true };
   };
 
-  public confirmPassword: FormControl = new FormControl('', {
-    validators: [this.confirmPasswordValidator, Validators.required, Validators.minLength(6)],
+  public confirmPassword: FormControl = new FormControl(null, {
+    validators: [this.confirmPasswordValidator.bind(this), Validators.required, Validators.minLength(6)],
     updateOn: 'change',
   });
 

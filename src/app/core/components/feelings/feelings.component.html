@@ -63,7 +63,7 @@
         }}</span>
         <ng-container [ngSwitch]="happen.visibility">
           <mat-icon
-            *ngSwitchCase="status.PRIVATE"
+            *ngSwitchCase="status.private"
             matTooltipPosition="right"
             matTooltip="Somente você pode visualizar"
             role="icon"
@@ -71,7 +71,7 @@
             >lock</mat-icon
           >
           <mat-icon
-            *ngSwitchCase="status.FOLLWERS"
+            *ngSwitchCase="status.followers"
             matTooltipPosition="right"
             matTooltip="Seguidores podem visualizar"
             role="icon"

@@ -12,15 +12,16 @@
     <h1 class="text-center mb-5">Cadastre sua conta</h1>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="px-5 flex flex-col gap-y-5">
-        <app-input-name-id (trigger)="onFireEvent('nameId', $event)"></app-input-name-id>
-        <app-input-nickname (trigger)="onFireEvent('nickname', $event)"></app-input-nickname>
-        <app-input-email (trigger)="onFireEvent('email', $event)"></app-input-email>
-        <app-input-password (trigger)="onFireEvent('password', $event)"></app-input-password>
+        <app-input-name-id (trigger)="onFireEvent(fieldNames.nameId, $event)"></app-input-name-id>
+        <app-input-nickname (trigger)="onFireEvent(fieldNames.nickname, $event)"></app-input-nickname>
+        <app-input-email (trigger)="onFireEvent(fieldNames.email, $event)"></app-input-email>
+        <app-input-password (trigger)="onFireEvent(fieldNames.password, $event)"></app-input-password>
         <app-input-confirm-password
-          [password]="form.get('password')"
-          (trigger)="onFireEvent('confirmPassword', $event)"></app-input-confirm-password>
+          [password]="form.get(fieldNames.password)"
+          (trigger)="onFireEvent(fieldNames.confirmPassword, $event)">
+        </app-input-confirm-password>
 
-        <mat-checkbox color="primary" formControlName="checkTerms">
+        <mat-checkbox color="primary" [formControlName]="fieldNames.checkTerms">
           Ao registrar se está aceitando os nosso
           <a routerLink="/auth/terms-conditions" class="underline text-primary">Termos e Condições</a> do aplicativo
           <a routerLink="/auth/privacy-policy" class="underline text-primary">Politica de Privacidade</a>.

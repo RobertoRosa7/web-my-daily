@@ -21,6 +21,8 @@ import { authReducer } from './core/reducers/auth.reducer';
 import { AuthEffect } from './core/effects/auth.effect';
 import { provideEffects } from '@ngrx/effects';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UniqueNameService } from './core/services/unique-name.service';
+import { UniqueNameRepository } from './core/repositories/unique-name.repository';
 
 /**
  * @see: https://ngrx.io/guide/store
@@ -44,6 +46,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   providers: [
     AuthService,
     AuthRepository,
+    UniqueNameRepository,
+    UniqueNameService,
     provideState({ name: 'auth', reducer: authReducer }),
     provideEffects(AuthEffect),
   ],

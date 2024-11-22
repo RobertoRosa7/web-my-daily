@@ -4,8 +4,9 @@ import { UserComponent } from './user/user.component';
 import { SettingComponent } from './settings/setting.component';
 import { AccountComponent } from './settings/account/account.component';
 import { SecurityComponent } from './settings/security/security.component';
-import { ChangeNameComponent } from './settings/change-name/change-name.component';
+import { ChangeNameComponent } from './settings/account/change-name/change-name.component';
 import { MenuSettingsComponent } from './settings/menu-settings/menu-settings.component';
+import { ChangeDomainNameComponent } from './settings/account/change-domain-name/change-domain-name.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,7 @@ export const routes: Routes = [
         ],
       },
       { path: 'change-name', component: ChangeNameComponent },
+      { path: 'change-domain-name', component: ChangeDomainNameComponent },
       { path: '**', redirectTo: 'user', pathMatch: 'prefix' },
     ],
   },

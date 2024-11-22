@@ -14,12 +14,7 @@ import { FieldEmail } from '../auth.field.validators';
           <h1 class="text-center mb-5">e-mail para recuperar a senha.</h1>
           <form [formGroup]="form">
             <div class="px-5 flex flex-col gap-y-5">
-              <app-input-email (trigger)="onFireEvent('email', $event)"></app-input-email>
-              <!-- <app-input-password (trigger)="onFireEvent('password', $event)"></app-input-password> -->
-              <div>
-                <!-- <app-button-submit [form]="form" [name]="'Realizar login'"></app-button-submit> -->
-              </div>
-
+              <app-input-email (trigger)="onFireEvent(fieldNames.email, $event)"></app-input-email>
               <div class="flex gap-2">
                 Não tem uma conta?
                 <a

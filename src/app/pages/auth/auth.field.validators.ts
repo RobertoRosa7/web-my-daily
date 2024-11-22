@@ -6,25 +6,80 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { validateEmailRegex } from '../../utils/regex/utils.regex.validators';
+import { validateDomainNamePattern, validateEmailPattern } from '../../utils/regex/utils.regex.validators';
 import { Observable, catchError, of, switchMap } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { UniqueNameService } from './core/services/unique-name.service';
 
 // field e-mail
-export const emailField = new FormControl('', [
-  Validators.required,
-  Validators.email,
-  Validators.pattern(validateEmailRegex),
-]);
+export const emailField = new FormControl(null, {
+  validators: [Validators.required, Validators.email, Validators.pattern(validateEmailPattern)],
+});
 
 // field password
-export const passwordField = new FormControl('', [Validators.required, Validators.minLength(6)]);
-
-// field name id
-export const nameIdField = new FormControl('', [Validators.required]);
+export const passwordField = new FormControl(null, {
+  validators: [Validators.required, Validators.minLength(6)],
+});
 
 // field nickname
-export const nickNameField = new FormControl('');
+export const nickNameField = new FormControl(null, {
+  validators: [Validators.required, Validators.minLength(4)],
+});
+
+// FieldsValidators - class field validators base
+export class FieldsValidators {
+  public email = emailField;
+  public password = passwordField;
+}
+
+// FieldLogin - class field validator login
+export class FieldLogin extends FieldsValidators {}
+
+export class FieldEmail {
+  public email = emailField;
+}
+
+// FielRegister - class field validator register
+export class FielRegister extends FieldsValidators {
+  public checkTerms = [false, [Validators.requiredTrue]];
+}
+
+/**
+ * field name id
+ *
+ * @param service UniqueNameService
+ * @returns FormControl
+ */
+export function nameIdField(service: UniqueNameService) {
+  return new FormControl(null, {
+    validators: [Validators.required, Validators.minLength(4), Validators.pattern(validateDomainNamePattern)],
+    asyncValidators: [uniqueDomainNameValidator(service)],
+    updateOn: 'blur',
+  });
+}
+
+/**
+ * confirm password validator
+ *
+ * @param password AbstractControl | null
+ * @returns
+ */
+export function confirmPasswordValidator(password: AbstractControl | null) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    return password && password.value === control.value ? null : { mustMatch: true };
+  };
+}
+
+/**
+ *
+ * @param password AbstractControl | null
+ * @returns FormControl
+ */
+export function confirmPassword(password: AbstractControl | null) {
+  return new FormControl(null, {
+    validators: [Validators.required, Validators.minLength(6), confirmPasswordValidator(password)],
+    updateOn: 'change',
+  });
+}
 
 /**
  * INFO:
@@ -55,53 +110,25 @@ export function checkPassword(controlName: string, matchingControlName: string):
 }
 
 /**
- * INFO:
- * FieldsValidators - class field validators base
+ *
+ * @param service UniqueNameService
+ * @returns AsyncValidatorFn
  */
-export class FieldsValidators {
-  public email = emailField;
-  public password = passwordField;
-}
+export function uniqueDomainNameValidator(service: UniqueNameService): AsyncValidatorFn {
+  const response = of(null);
 
-/**
- * INFO:
- * FieldLogin - class field validator login
- */
-export class FieldLogin extends FieldsValidators {}
-
-export class FieldEmail {
-  public email = emailField;
-}
-
-/**
- * INFO:
- * FielRegister - class field validator register
- */
-export class FielRegister extends FieldsValidators {
-  public checkTerms = [false, [Validators.requiredTrue]];
-}
-
-// confirmPassword: ['', [Validators.required, Validators.equalTo(this.accountForm.get('password'))]]
-
-export function uniqueDomainNameValidator(store: Store): AsyncValidatorFn {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     const domainName = control.value;
     if (!domainName) {
-      return of(null);
+      return response;
     }
 
-    // Dispara a ação para pesquisar usuários com o padrão do nome de domínio
-    // this.store.dispatch(searchUsersByDomainName({ domainName }));
-
     // Retorna um Observable que será acionado quando o resultado da pesquisa estiver disponível
-    return store
-      .select((state: any) => state.user.searchResults)
-      .pipe(
-        switchMap((users) => {
-          const isTaken = users.length > 0;
-          return of(isTaken ? { uniqueDomainName: true } : null); // Verifica se há resultados na lista de usuários
-        }),
-        catchError(() => of(null))
-      );
+    return service.isUniqueName(domainName).pipe(
+      // layer - validadora se houver resultado ou não
+      switchMap(({ data }) => of(data.length > 0 ? { uniqueDomainName: true } : null)), // Verifica se há resultados na lista de usuários
+      // layer - capturar possíveis erros
+      catchError(() => response)
+    );
   };
 }

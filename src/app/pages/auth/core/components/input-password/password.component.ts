@@ -19,9 +19,11 @@ import { Form } from '../../../auth.form';
         [type]="changeTexts ? 'password' : 'text'"
         placeholder="Insira uma senha"
         class="border-b outline-none pt-2" />
-      <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>{{
-        changeTexts ? 'visibility_off' : 'visibility'
-      }}</mat-icon>
+      <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>
+        {{ changeTexts ? 'visibility_off' : 'visibility' }}
+      </mat-icon>
+      <mat-error *ngIf="password.getError('required')">Senha é obrigatório</mat-error>
+      <mat-error *ngIf="password.getError('minlength')">Mínimo de 6 digitos</mat-error>
     </mat-form-field>
   `,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {

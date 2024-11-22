@@ -4,37 +4,37 @@
       <ng-container *ngIf="profile.id !== id">
         <ng-container *ngIf="!profile.profilePublic">
           <button
-            *ngSwitchCase="followingStatus.FOLLOWING"
+            *ngSwitchCase="followingStatus.following"
             matTooltipPosition="above"
             matTooltip="deixar de seguir"
             role="button"
             class="btn-following"
             aria-describedby="deixar de seguir"
-            (click)="follow(profile, id, followingStatus.PRIVATE)"
+            (click)="follow(profile, id, followingStatus.private)"
             mat-button>
             <span class="btn-follow">Deixar</span>
             <mat-icon iconPositionEnd>remove</mat-icon>
           </button>
           <button
-            *ngSwitchCase="followingStatus.PRIVATE"
+            *ngSwitchCase="followingStatus.private"
             matTooltip="privado"
             matTooltipPosition="above"
             aria-describedby="privado"
             role="button"
             class="btn-private"
-            (click)="follow(profile, id, followingStatus.REQUESTED)"
+            (click)="follow(profile, id, followingStatus.requested)"
             mat-button>
             <span class="btn-follow">Privado</span>
             <mat-icon iconPositionEnd style="font-size: 1.1rem">lock</mat-icon>
           </button>
           <button
-            *ngSwitchCase="followingStatus.REQUESTED"
+            *ngSwitchCase="followingStatus.requested"
             matTooltip="Aguardando confirmação"
             matTooltipPosition="above"
             aria-describedby="solicitado"
             role="button"
             class="btn-request"
-            (click)="follow(profile, id, followingStatus.PRIVATE)"
+            (click)="follow(profile, id, followingStatus.private)"
             mat-button>
             <span class="btn-follow">Solicitado</span>
             <mat-icon iconPositionEnd style="font-size: 1.1rem">check</mat-icon>
@@ -42,25 +42,25 @@
         </ng-container>
         <ng-container *ngIf="profile.profilePublic">
           <button
-            *ngSwitchCase="followingStatus.FOLLOWING"
+            *ngSwitchCase="followingStatus.following"
             matTooltipPosition="above"
             matTooltip="deixar de seguir"
             role="button"
             aria-describedby="deixar de seguir"
             class="btn-following"
-            (click)="follow(profile, id, followingStatus.PUBLIC)"
+            (click)="follow(profile, id, followingStatus.public)"
             mat-button>
             <span class="btn-follow">Deixar</span>
             <mat-icon iconPositionEnd>remove</mat-icon>
           </button>
           <button
-            *ngSwitchCase="followingStatus.PUBLIC"
+            *ngSwitchCase="followingStatus.public"
             matTooltip="seguir"
             matTooltipPosition="above"
             aria-describedby="seguir"
             role="button"
             class="btn-public"
-            (click)="follow(profile, id, followingStatus.FOLLOWING)"
+            (click)="follow(profile, id, followingStatus.following)"
             mat-button>
             <span class="btn-follow">Seguir</span>
             <mat-icon iconPositionEnd>add</mat-icon>

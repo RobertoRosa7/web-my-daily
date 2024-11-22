@@ -30,7 +30,7 @@ import { authType } from '../../types/auth.type';
 })
 export class ButtonSubmitComponent {
   public isLoading$!: Observable<boolean>;
-  private actionSubject = inject(ActionsSubject);
+  private readonly actionSubject = inject(ActionsSubject);
 
   @Input({ required: true })
   public form!: FormGroup;

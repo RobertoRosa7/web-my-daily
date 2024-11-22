@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../../../shared/shared.module';
+import { SharedModule } from '../../../../../shared/shared.module';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import {
@@ -8,11 +8,11 @@ import {
   selectorChangeNicknameNok,
   selectorIsUpdatingUser,
   selectorNicknameOk,
-} from '../../core/selectors/user.selector';
-import { actionColor } from '../../core/actions/color.action';
-import { actionChangeNickName } from '../../core/actions/user.action';
-import { MessageComponent } from '../../../../core/components/messages/message.component';
-import { InDestroyDirective } from '../../../../core/directives/destroy/destroy.directive';
+} from '../../../core/selectors/user.selector';
+import { actionColor } from '../../../core/actions/color.action';
+import { actionChangeNickName } from '../../../core/actions/user.action';
+import { MessageComponent } from '../../../../../core/components/messages/message.component';
+import { InDestroyDirective } from '../../../../../core/directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-change-name',
