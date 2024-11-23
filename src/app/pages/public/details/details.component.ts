@@ -18,7 +18,7 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
   public readonly userProfile$ = this.store.select(selectorUserPub);
 
   constructor(protected override readonly store: Store, private readonly activeRoute: ActivatedRoute) {
-    super(store);
+    super();
   }
 
   override ngOnInit(): void {

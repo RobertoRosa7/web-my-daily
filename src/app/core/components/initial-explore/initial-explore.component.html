@@ -27,7 +27,7 @@
 
               <span class="public">
                 <span matTooltipPosition="above" [matTooltip]="(profile.createdAt | date) || ''">
-                  {{ profile.createdAt | date }}
+                  {{ profile.createdAt | timeAgo }}
                 </span>
                 <mat-icon
                   class="text-sm"

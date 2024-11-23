@@ -23,14 +23,14 @@ import { Form } from '../../../auth.form';
       <input
         matInput
         required
-        [formControl]="confirmPassword"
+        [formControl]="controlName"
         [type]="changeTexts ? 'password' : 'text'"
         placeholder="Confirme a senha"
         class="border-b outline-none pt-2" />
       <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>{{
         changeTexts ? 'visibility_off' : 'visibility'
       }}</mat-icon>
-      <mat-error *ngIf="confirmPassword.getError('mustMatch')" class="text-error"> Senhas não são iguais </mat-error>
+      <mat-error *ngIf="controlName.getError('mustMatch')" class="text-error"> Senhas não são iguais </mat-error>
     </mat-form-field>
   `,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -46,18 +46,18 @@ import { Form } from '../../../auth.form';
 export class ConfirmPasswordComponent extends Form {
   public changeTexts = true;
 
-  @Input()
-  public password!: AbstractControl | null;
-
   public confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     return this.password && this.password.value === control.value ? null : { mustMatch: true };
   };
 
-  public confirmPassword: FormControl = new FormControl(null, {
+  public controlName: FormControl = new FormControl(null, {
     validators: [this.confirmPasswordValidator.bind(this), Validators.required, Validators.minLength(6)],
     updateOn: 'change',
   });
 
+  @Input()
+  public password!: AbstractControl | null;
+
   @Output()
-  public trigger = this.onChange(this.confirmPassword);
+  public trigger = this.onChange(this.controlName);
 }

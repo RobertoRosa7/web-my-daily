@@ -28,7 +28,7 @@ export class UserComponent extends Profile implements OnInit {
   public profileHappens$: ProfileHappenObservable = this.store.select(selectorHappens);
 
   constructor(protected override readonly store: Store) {
-    super(store);
+    super();
   }
 
   override ngOnInit(): void {

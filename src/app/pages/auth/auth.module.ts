@@ -23,6 +23,7 @@ import { provideEffects } from '@ngrx/effects';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UniqueNameService } from './core/services/unique-name.service';
 import { UniqueNameRepository } from './core/repositories/unique-name.repository';
+import { MessageComponent } from '../../core/components/messages/message.component';
 
 /**
  * @see: https://ngrx.io/guide/store
@@ -42,6 +43,7 @@ import { UniqueNameRepository } from './core/repositories/unique-name.repository
     NickNameComponent,
     ConfirmPasswordComponent,
     ButtonSubmitComponent,
+    MessageComponent,
   ],
   providers: [
     AuthService,

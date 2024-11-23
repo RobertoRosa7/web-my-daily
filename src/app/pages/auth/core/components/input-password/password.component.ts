@@ -15,15 +15,15 @@ import { Form } from '../../../auth.form';
       <label>Senha</label>
       <input
         matInput
-        [formControl]="password"
+        [formControl]="controlName"
         [type]="changeTexts ? 'password' : 'text'"
         placeholder="Insira uma senha"
         class="border-b outline-none pt-2" />
       <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>
         {{ changeTexts ? 'visibility_off' : 'visibility' }}
       </mat-icon>
-      <mat-error *ngIf="password.getError('required')">Senha é obrigatório</mat-error>
-      <mat-error *ngIf="password.getError('minlength')">Mínimo de 6 digitos</mat-error>
+      <mat-error *ngIf="controlName.getError('required')">Senha é obrigatório</mat-error>
+      <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 6 digitos</mat-error>
     </mat-form-field>
   `,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -38,8 +38,8 @@ import { Form } from '../../../auth.form';
 })
 export class PasswordComponent extends Form {
   public changeTexts = true;
-  public password: FormControl = passwordField;
+  public controlName: FormControl = passwordField;
 
   @Output()
-  public trigger = this.onChange(this.password);
+  public trigger = this.onChange(this.controlName);
 }

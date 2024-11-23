@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { nickNameField } from '../../../auth.field.validators';
@@ -15,12 +15,15 @@ import { Form } from '../../../auth.form';
       <label>Apelido</label>
       <input
         matInput
-        [formControl]="nickname"
+        [formControl]="controlName"
         type="text"
         placeholder="Como gostaria de ser chamado(a)"
         class="border-b outline-none pt-2" />
-      <mat-error *ngIf="nickname.getError('required')">Apelido é obrigatório</mat-error>
-      <mat-error *ngIf="nickname.getError('minlength')">Mínimo de 4 digitos</mat-error>
+      <mat-error *ngIf="controlName.getError('required')">Apelido é obrigatório</mat-error>
+      <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 4 digitos</mat-error>
+      <button role="button" [hidden]="isHideSubmit" type="submit" matSuffix mat-icon-button>
+        <span class="material-symbols-outlined"> action_key </span>
+      </button>
     </mat-form-field>
   `,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -33,10 +36,13 @@ import { Form } from '../../../auth.form';
   standalone: true,
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
-export class NickNameComponent extends Form {
-  @Input()
-  public nickname: FormControl = nickNameField;
+export class NickNameComponent extends Form implements OnInit {
+  public controlName: FormControl = nickNameField;
 
   @Output()
-  public trigger = this.onChange(this.nickname);
+  public trigger = this.onChange(this.controlName);
+
+  public ngOnInit(): void {
+    this.controlName.setValue(this.inputValue);
+  }
 }

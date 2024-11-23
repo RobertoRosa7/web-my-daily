@@ -53,3 +53,12 @@ export enum FieldName {
 export enum Common {
   daily = '@daily',
 }
+
+export enum TimeAgoMessages {
+  YEARS = 'há {time} ano(s)',
+  WEEKS = 'há {time} semana(s)',
+  DAYS = 'há {time} dia(s)',
+  HOURS = 'há {time} hora(s)',
+  MINUTES = 'há {time} minuto(s)',
+  NOW = 'agora mesmo',
+}

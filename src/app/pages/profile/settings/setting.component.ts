@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Profile } from '../profile';
-import { Store } from '@ngrx/store';
 import { actionColor } from '../core/actions/color.action';
 
 @Component({
@@ -8,11 +7,7 @@ import { actionColor } from '../core/actions/color.action';
   template: ` <router-outlet></router-outlet> `,
   styleUrl: './setting.component.scss',
 })
-export class SettingComponent extends Profile implements OnInit {
-  constructor(protected override readonly store: Store) {
-    super(store);
-  }
-
+export class SettingComponent extends Profile {
   override ngOnInit(): void {
     this.store.dispatch(actionColor({ theme: 'settings' }));
   }

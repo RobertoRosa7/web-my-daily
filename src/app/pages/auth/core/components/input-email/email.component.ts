@@ -14,13 +14,16 @@ import { Form } from '../../../auth.form';
     <label>Email</label>
     <input
       matInput
-      [formControl]="email"
+      [formControl]="controlName"
       type="text"
       placeholder="Insira seu email"
       class="border-b outline-none pt-2" />
-    <mat-error *ngIf="email.getError('required')">Email é obrigatório</mat-error>
-    <mat-error *ngIf="email.getError('pattern')">Email é inválid</mat-error>
-    <mat-error *ngIf="email.getError('email')">Email é inválid</mat-error>
+    <mat-error *ngIf="controlName.getError('required')">Email é obrigatório</mat-error>
+    <mat-error *ngIf="controlName.getError('pattern')">Email é inválid</mat-error>
+    <mat-error *ngIf="controlName.getError('email')">Email é inválid</mat-error>
+    <button role="button" [hidden]="isHideSubmit" type="submit" matSuffix mat-icon-button>
+      <span class="material-symbols-outlined"> action_key </span>
+    </button>
   </mat-form-field>`,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: transparent !important;
@@ -33,8 +36,8 @@ import { Form } from '../../../auth.form';
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class EmailComponent extends Form {
-  public email: FormControl = emailField;
+  public controlName: FormControl = emailField;
 
   @Output()
-  public trigger = this.onChange(this.email);
+  public trigger = this.onChange(this.controlName);
 }

@@ -1,12 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SettingComponent } from '../setting.component';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss',
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent extends SettingComponent {
   private fb: FormBuilder = inject(FormBuilder);
 
   public userForm: FormGroup = this.fb.group({
@@ -18,8 +19,6 @@ export class AccountComponent implements OnInit {
     profileVisibility: ['', Validators.required],
     blockedContacts: [''],
   });
-
-  ngOnInit(): void {}
 
   onSubmit() {}
 

@@ -27,6 +27,7 @@ export class LoginComponent extends AuthComponent implements OnInit {
   public ngOnInit(): void {
     // create new instance form group
     this.form = this.formBuilder.group(new FieldLogin());
+
     // clear fields when some error happens
     this.form.valueChanges.subscribe(() => this.store.dispatch(this.clearAction()));
   }
@@ -36,7 +37,7 @@ export class LoginComponent extends AuthComponent implements OnInit {
    * onSubmit - make login listening event on submit from form
    * Aqui você pode acessar os valores do formulário
    */
-  onSubmit() {
+  public onSubmit(): void {
     // starting loading
     this.store.dispatch(this.loading({ isLoading: true }));
 

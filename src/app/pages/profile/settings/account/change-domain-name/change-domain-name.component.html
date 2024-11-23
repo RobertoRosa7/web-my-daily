@@ -1,8 +1,11 @@
-<form class="change-domain-name">
+<form class="change-domain-name" (ngSubmit)="onSubmit()">
   <div class="container">
     <div class="field-session">
       <h1>Altera nome de domínio</h1>
-      <app-input-name-id></app-input-name-id>
+      <app-input-name-id
+        [isHideSubmit]="false"
+        [inputValue]="nameId$ | async"
+        (trigger)="onFireEvent(fieldNames.nameId, $event)"></app-input-name-id>
     </div>
   </div>
 </form>

@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { Subject, timer } from 'rxjs';
+import { mergeMap, timer } from 'rxjs';
+import { InDestroyDirective } from '../../directives/destroy/destroy.directive';
 
 @Component({
   selector: 'app-message',
@@ -9,7 +10,13 @@ import { Subject, timer } from 'rxjs';
   imports: [CommonModule, SharedModule],
   template: `
     <div *ngIf="visible" class="message {{ type }}" [class.fade-out]="hide">
-      {{ message }}
+      <mat-error *ngIf="type === 'error' && message">
+        {{ message }}
+      </mat-error>
+
+      <mat-hint *ngIf="type !== 'error' && message">
+        {{ message }}
+      </mat-hint>
     </div>
   `,
   styles: [
@@ -43,33 +50,40 @@ import { Subject, timer } from 'rxjs';
     `,
   ],
 })
-export class MessageComponent implements OnInit, OnDestroy {
-  @Input() message!: string;
-  @Input() type: 'success' | 'error' | 'info' = 'info';
-  @Output() onHide = new EventEmitter<boolean>();
+export class MessageComponent extends InDestroyDirective implements OnInit {
+  @Input({ required: true })
+  public message: string | undefined = undefined;
 
-  public visible: boolean = true;
+  @Input()
+  public type: 'success' | 'error' | 'info' = 'info';
+
+  @Output()
+  public onHide = new EventEmitter<boolean>();
+
+  @Input()
+  public visible: boolean = false;
   public hide: boolean = false; // Variável para controlar o início da animação de fade-out
-  private destroy$: Subject<void> = new Subject();
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.hideAfterDelay();
-  }
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-  private hideAfterDelay(): void {
-    timer(3000).subscribe(() => {
-      this.hide = true; // Ativa a classe .fade-out para iniciar a animação de fade-out
-      this.cdr.detectChanges();
-      this.onHide.emit(true);
-      timer(300).subscribe(() => {
+    timer(3000)
+      .pipe(
+        // layer - destroy component
+        this.takeUntilDestroy(),
+        // layer - wait 300
+        mergeMap(() => {
+          this.hide = true; // Ativa a classe .fade-out para iniciar a animação de fade-out
+          this.cdr.detectChanges();
+          this.onHide.emit(true);
+          return timer(500);
+        })
+      )
+      .subscribe(() => {
         this.visible = false; // Remove o componente após a animação de fade-out
         this.cdr.detectChanges();
       });
-    });
   }
 }

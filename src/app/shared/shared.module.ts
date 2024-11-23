@@ -23,6 +23,7 @@ import { AsyncPipe } from '@angular/common';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatSelectModule } from '@angular/material/select';
 import { DeviceDetectorDirective } from '../core/directives/device-detector/device-detector.directive';
+import { TimeAgoPipe } from '../core/pipes/time-ego/time-ego.pipe';
 
 const commons = [
   MatCheckboxModule,
@@ -50,6 +51,7 @@ const commons = [
   MatSelectModule,
   AsyncPipe,
   DeviceDetectorDirective,
+  TimeAgoPipe,
 ];
 @NgModule({
   declarations: [],

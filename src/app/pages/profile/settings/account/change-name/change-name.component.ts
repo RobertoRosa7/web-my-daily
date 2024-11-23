@@ -12,7 +12,7 @@ import {
 import { actionColor } from '../../../core/actions/color.action';
 import { actionChangeNickName } from '../../../core/actions/user.action';
 import { MessageComponent } from '../../../../../core/components/messages/message.component';
-import { InDestroyDirective } from '../../../../../core/directives/destroy/destroy.directive';
+import { AccountComponent } from '../account.component';
 
 @Component({
   selector: 'app-change-name',
@@ -21,27 +21,26 @@ import { InDestroyDirective } from '../../../../../core/directives/destroy/destr
   standalone: true,
   imports: [CommonModule, SharedModule, MessageComponent],
 })
-export class ChangeNameComponent extends InDestroyDirective implements OnInit {
-  private readonly store: Store = inject(Store);
-  public readonly form: FormControl = new FormControl();
+export class ChangeNameComponent extends AccountComponent {
+  public readonly formControll: FormControl = new FormControl();
 
   public readonly error$ = this.store.select(selectorChangeNicknameNok);
   public readonly isLoading$ = this.store.select(selectorIsUpdatingUser);
   public readonly success$ = this.store.select(selectorNicknameOk);
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+    this.store.dispatch(actionColor({ theme: '' }));
+
     this.store
       .select(selectName)
       .pipe(this.takeUntilDestroy())
       .subscribe({
-        next: (nickname) => this.form.setValue(nickname),
+        next: (nickname) => this.formControll.setValue(nickname),
       });
-
-    this.store.dispatch(actionColor({ theme: '' }));
   }
 
-  public onSubmit() {
-    this.store.dispatch(actionChangeNickName({ nickname: this.form.value.trim() }));
+  public override onSubmit() {
+    this.store.dispatch(actionChangeNickName({ nickname: this.formControll.value.trim() }));
   }
 
   public onHide() {}

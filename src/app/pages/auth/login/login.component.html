@@ -1,12 +1,16 @@
 <div class="flex flex-col items-center justify-center h-screen">
   <div class="py-3 px-5 w-full max-w-md">
-    <ng-container *ngIf="message$ | async as response">
-      <mat-error *ngIf="response.error">
-        {{ response.message }}
-      </mat-error>
-      <mat-hint *ngIf="!response.error">
-        {{ response.message }}
-      </mat-hint>
+    <ng-container *ngIf="message$ | async as resp">
+      <app-message
+        *ngIf="!resp.error && !!resp.data"
+        [visible]="true"
+        [message]="resp.message"
+        type="success"></app-message>
+      <app-message
+        *ngIf="resp.error && !resp.data"
+        [visible]="true"
+        [message]="resp.message"
+        type="error"></app-message>
     </ng-container>
 
     <h1 class="text-center mb-5">Entre com a sua conta</h1>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Output } from '@angular/core';
+import { Component, inject, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { nameIdField } from '../../../auth.field.validators';
@@ -17,15 +17,18 @@ import { Common } from '../../../../../core/enums/bases/base.enum';
     <input
       matInput
       required
-      [formControl]="nameId"
+      [formControl]="controlName"
       type="text"
       placeholder="ex: fulando@daily"
       class="border-b outline-none pt-2" />
-    <mat-hint align="end">{{ getNameId }}{{ domainSuffix }}</mat-hint>
-    <mat-error *ngIf="nameId.getError('pattern')">Somente letras minuscúlas e alpha numérico</mat-error>
-    <mat-error *ngIf="nameId.getError('minlength')">Mínimo de 4 letras</mat-error>
-    <mat-error *ngIf="nameId.getError('required')">Nome é obrigatório</mat-error>
-    <mat-error *ngIf="nameId.getError('uniqueDomainName')">{{ getNameId }} já em uso</mat-error>
+    <mat-hint align="end">{{ controlName.value }}{{ domainSuffix }}</mat-hint>
+    <mat-error *ngIf="controlName.getError('pattern')">Somente letras minuscúlas e alpha numérico</mat-error>
+    <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 4 letras</mat-error>
+    <mat-error *ngIf="controlName.getError('required')">Nome é obrigatório</mat-error>
+    <mat-error *ngIf="controlName.getError('uniqueDomainName')">{{ controlName.value }} já em uso</mat-error>
+    <button role="button" [hidden]="isHideSubmit" type="submit" matSuffix mat-icon-button>
+      <span class="material-symbols-outlined"> action_key </span>
+    </button>
   </mat-form-field>`,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: transparent !important;
@@ -40,14 +43,14 @@ import { Common } from '../../../../../core/enums/bases/base.enum';
   standalone: true,
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
-export class NameIdComponent extends Form {
+export class NameIdComponent extends Form implements OnInit {
   public domainSuffix = Common.daily;
-  public nameId: FormControl = nameIdField(inject(UniqueNameService));
+  public controlName: FormControl = nameIdField(inject(UniqueNameService));
 
   @Output()
-  public trigger = this.onChange(this.nameId);
+  public trigger = this.onChange(this.controlName);
 
-  public get getNameId() {
-    return this.nameId.value;
+  public ngOnInit(): void {
+    this.controlName.setValue(this.inputValue);
   }
 }
