@@ -8,13 +8,13 @@ import {
   happenPostRollback,
   happenUpdateRemote,
   happenUpdateRollback,
-} from '../../actions/happens/profile.happens.action';
+} from '../../actions/happen/profile.happens.action';
 import {
   actionDislikedLocal,
   actionDislikedRemote,
   actionLikedLocal,
   actionLikedRemote,
-} from '../../actions/happens/likes.action';
+} from '../../actions/happen/likes.action';
 import { selectHappenError } from '../../selectors/happens/profile.happens.selector';
 import { ISnackBarActions } from '../../interfaces/dialogs/dialogs.interface';
 

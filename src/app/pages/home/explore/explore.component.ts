@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { HomeComponent } from '../home';
 import { map } from 'rxjs';
 import { FollowRequest } from '../../../core/interfaces/follows/follow.interface';
-import { selectorPageablePub } from '../../profile/core/selectors/profile.selector';
-import { actionUserFollow } from '../../public/core/actions/public-profile.action';
+import { selectorPageablePub } from '../../../core/selectors/profile/profile.selector';
+import { actionUserFollow } from '../../../core/actions/public/public-profile.action';
 import { Store } from '@ngrx/store';
 
 @Component({

@@ -1,16 +1,17 @@
 //paths do frotend
-export enum RoutePaths {
+export enum RoutePathsEnum {
   register = '/auth/register',
   login = '/auth/login',
   home = '/home',
 }
 
 //paths do backend
-export enum Paths {
+export enum PathsEnum {
   pathPostSignup = '/ms-users/auth',
   pathPostSignin = '/ms-users/auth/login',
   pathGetProfile = '/ms-users/user/profile',
   pathPutUserChangeNickname = '/ms-users/user/profile/change-nickname',
+  pathPutUserChangeNameId = '/ms-users/user/profile/change-name-id',
   pathGetSearch = '/ms-users/public/user/search?name={domainName}',
   pathGetprofilePublic = '/ms-users/public/user',
   pathPostUserFollow = '/ms-users/follows',
@@ -27,13 +28,13 @@ export enum Paths {
   pathPostHappen = '/ms-daily/happen',
 }
 
-export enum HappenPublicStatus {
+export enum HappenPublicStatusEnum {
   public = 'PUBLIC',
   private = 'PRIVATE',
   followers = 'FOLLOWERS',
 }
 
-export enum FollowingStatus {
+export enum FollowingStatusEnum {
   following = 'FOLLOWING',
   requested = 'REQUESTED',
   cancelRequest = 'CANCEL_REQUEST',
@@ -42,7 +43,7 @@ export enum FollowingStatus {
   public = 'PUBLIC',
 }
 
-export enum FieldName {
+export enum FieldNameEnul {
   nameId = 'nameId',
   nickname = 'nickname',
   email = 'email',
@@ -50,7 +51,7 @@ export enum FieldName {
   confirmPassword = 'confirmPassword',
   checkTerms = 'checkTerms',
 }
-export enum Common {
+export enum CommonEnum {
   daily = '@daily',
 }
 

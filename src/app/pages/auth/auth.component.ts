@@ -1,18 +1,24 @@
 import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import * as selectAuth from './core/selectors/auth.selector';
+import * as selectAuth from '../../core/selectors/auth/auth.selector';
 import { Observable, delay, filter, from, map, mergeMap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { IAuthState } from './core/interfaces/auth.interface';
+import { IAuthState } from '../../core/interfaces/auth/auth.interface';
 import { HttpResponseDefault } from '../../core/interfaces/https/http-response.interface';
-import { actionClear, actionRegiser, actionLogin, actionGoto, actionLoading } from './core/actions/auth.action';
-import { authType } from './core/types/auth.type';
+import {
+  actionClear,
+  actionRegiser,
+  actionLogin,
+  actionGoto,
+  actionLoading,
+} from '../../core/actions/auth/auth.action';
+import { authType } from '../../core/types/auth/auth.type';
 import { Router } from '@angular/router';
-import { AuthService } from './core/services/auth.services';
+import { AuthService } from '../../core/services/auth/auth.services';
 import { isPlatformBrowser } from '@angular/common';
 import { actionCoreReset } from '../../core/actions/resets/reset.action';
-import { actionColor } from '../profile/core/actions/color.action';
-import { FieldName } from '../../core/enums/bases/base.enum';
+import { actionColor } from '../../core/actions/color/color.action';
+import { FieldNameEnul } from '../../core/enums/bases/base.enum';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 
 @Component({
@@ -22,7 +28,7 @@ import { InDestroyDirective } from '../../core/directives/destroy/destroy.direct
 export class AuthComponent extends InDestroyDirective {
   public form!: FormGroup;
   public readonly isLoading$!: Observable<boolean>;
-  public readonly fieldNames = FieldName;
+  public readonly fieldNames = FieldNameEnul;
 
   // responsible to listening actions to login success
   public readonly message$: Observable<HttpResponseDefault<IAuthState>> = this.store
@@ -94,7 +100,7 @@ export class AuthComponent extends InDestroyDirective {
    * getEmail = get name field from form
    */
   public get getEmail() {
-    return this.form.get(FieldName.email)?.value;
+    return this.form.get(FieldNameEnul.email)?.value;
   }
 
   /**
@@ -102,7 +108,7 @@ export class AuthComponent extends InDestroyDirective {
    * getPassword = get name field from form
    */
   public get getPassword() {
-    return this.form.get(FieldName.password)?.value;
+    return this.form.get(FieldNameEnul.password)?.value;
   }
 
   /**
@@ -110,7 +116,7 @@ export class AuthComponent extends InDestroyDirective {
    * getNickName = get name field from form
    */
   public get getNickName() {
-    return this.form.get(FieldName.nickname)?.value;
+    return this.form.get(FieldNameEnul.nickname)?.value;
   }
 
   /**
@@ -118,7 +124,7 @@ export class AuthComponent extends InDestroyDirective {
    * getNameId = get name field from form
    */
   public get getNameId() {
-    return this.form.get(FieldName.nameId)?.value;
+    return this.form.get(FieldNameEnul.nameId)?.value;
   }
 
   /**
@@ -126,7 +132,7 @@ export class AuthComponent extends InDestroyDirective {
    * getCheckTerms = get name field from form
    */
   public get getCheckTerms() {
-    return this.form.get(FieldName.checkTerms)?.value;
+    return this.form.get(FieldNameEnul.checkTerms)?.value;
   }
 
   /**

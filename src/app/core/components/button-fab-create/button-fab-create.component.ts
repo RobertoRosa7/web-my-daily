@@ -6,7 +6,7 @@ import { DialogService } from '../../services/dialogs/dialog.service';
 import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { concatMap, of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { happenFindOneLocal, happenPostRollback } from '../../actions/happens/profile.happens.action';
+import { happenFindOneLocal, happenPostRollback } from '../../actions/happen/profile.happens.action';
 
 @Component({
   selector: 'app-button-fab-create',

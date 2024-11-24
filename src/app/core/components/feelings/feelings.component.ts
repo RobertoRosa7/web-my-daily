@@ -4,10 +4,10 @@ import { SharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
-import { HappenPublicStatus } from '../../enums/bases/base.enum';
+import { HappenPublicStatusEnum } from '../../enums/bases/base.enum';
 import { Observable, concatMap, of } from 'rxjs';
-import { selectorProfileName } from '../../../pages/profile/core/selectors/profile.selector';
-import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
+import { selectorProfileName } from '../../selectors/profile/profile.selector';
+import { UserProfile } from '../../interfaces/profile/profile.interface';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { DialogService } from '../../services/dialogs/dialog.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,11 +17,11 @@ import {
   happenFindOneLocal,
   happenStoppingViewing,
   happenUpdateRollback,
-} from '../../actions/happens/profile.happens.action';
+} from '../../actions/happen/profile.happens.action';
 import { DialogHappenComponent } from '../dialog-happen/dialog-happen.component';
 import { Store } from '@ngrx/store';
 import { DialogHappenDetailCompoent } from '../dialog-happen-detail/dialog-happen-detail.component';
-import { actionDislikedLocal, actionLikedLocal } from '../../actions/happens/likes.action';
+import { actionDislikedLocal, actionLikedLocal } from '../../actions/happen/likes.action';
 import { SnackBarActions } from '../../interfaces/dialogs/dialogs.interface';
 import { DialogHelperService } from '../../services/dialogs/dialog-helper.service';
 import { DialogHappenCommentsComponent } from '../dialog-happen-comments/dialog-happen-comments.component';
@@ -38,7 +38,7 @@ type Name = Observable<Pick<UserProfile, 'name' | 'id'>>;
   providers: [DialogService],
 })
 export class FeelingsComponent {
-  public readonly status = HappenPublicStatus;
+  public readonly status = HappenPublicStatusEnum;
   public readonly userName$: Name = this.store.select(selectorProfileName);
 
   @Input({ required: true })

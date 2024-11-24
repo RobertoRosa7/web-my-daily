@@ -1,12 +1,12 @@
 import { JsonProperty } from '../../decorators/jsons/json.decorator';
-import { FollowingStatus } from '../../enums/bases/base.enum';
-import { TotalFollowsDto } from '../../../pages/profile/core/interfaces/profile.interface';
+import { FollowingStatusEnum } from '../../enums/bases/base.enum';
+import { TotalFollowsDto } from '../profile/profile.interface';
 
 export class FollowRequest {
   public ev!: string;
   public userId: undefined | string = undefined;
   public followingId: undefined | string = undefined;
-  public followingStatus: FollowingStatus | undefined = undefined;
+  public followingStatus: FollowingStatusEnum | undefined = undefined;
 }
 
 export class ListeningFollowResponse {

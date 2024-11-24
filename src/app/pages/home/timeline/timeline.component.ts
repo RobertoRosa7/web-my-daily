@@ -4,12 +4,12 @@ import { HomeComponent } from '../home';
 import { LikeSocketio, ProfileHappenObservable } from '../../../core/interfaces/happens/profile.happen.interface';
 import { selectorHappens } from '../../../core/selectors/happens/profile.happens.selector';
 import { isPlatformBrowser } from '@angular/common';
-import { happenTimeline } from '../../../core/actions/happens/profile.happens.action';
+import { happenTimeline } from '../../../core/actions/happen/profile.happens.action';
 import { Observable, Observer, filter, map, mergeMap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Socket, io } from 'socket.io-client';
 import { JsonMapProperties } from '../../../core/decorators/jsons/json.decorator';
-import { actionLikedSocketio } from '../../../core/actions/happens/likes.action';
+import { actionLikedSocketio } from '../../../core/actions/happen/likes.action';
 
 @Component({
   selector: 'app-timeline',
@@ -26,7 +26,7 @@ export class TimelineComponent extends HomeComponent implements OnInit {
   override ngOnInit(): void {
     if (isPlatformBrowser(this.platform)) {
       this.store.dispatch(happenTimeline());
-      
+
       const socketio = io(environment.ws + '/likes');
 
       this.userId$
@@ -44,7 +44,6 @@ export class TimelineComponent extends HomeComponent implements OnInit {
     }
   }
 
-  
   public listeningLikes$(socketio: Socket, event: string) {
     return new Observable((observer: Observer<any>) => {
       socketio.on(event, (data) => (data ? observer.next(data) : observer.error('Unable To Reach Server')));

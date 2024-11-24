@@ -1,18 +1,26 @@
 import { Component } from '@angular/core';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
-import { NameIdComponent } from '../../../../auth/core/components/input-name-id/name-id.component';
+import { NameIdComponent } from '../../../../../core/components/input-name-id/name-id.component';
 import { AccountComponent } from '../account.component';
 import { debounceTime, distinctUntilKeyChanged, map } from 'rxjs';
+import { acLoading, acNameId } from '../../../../../core/actions/user/user.action';
+import { selMessageOk, selMessageNok, selIsLoading } from '../../../../../core/selectors/user/user.selector';
+import { MessageComponent } from '../../../../../core/components/messages/message.component';
+import { CommonEnum } from '../../../../../core/enums/bases/base.enum';
 
 @Component({
   selector: 'app-change-domain-name',
   templateUrl: './change-domain-name.component.html',
   styleUrl: './change-domain-name.component.scss',
   standalone: true,
-  imports: [CommonModule, SharedModule, NameIdComponent],
+  imports: [CommonModule, SharedModule, NameIdComponent, MessageComponent],
 })
 export class ChangeDomainNameComponent extends AccountComponent {
+  public readonly error$ = this.store.select(selMessageNok);
+  public readonly success$ = this.store.select(selMessageOk);
+  public readonly isLoading$ = this.store.select(selIsLoading);
+
   public override ngOnInit(): void {
     this.form = this.formBuilder.group({});
 
@@ -25,8 +33,8 @@ export class ChangeDomainNameComponent extends AccountComponent {
       )
       .subscribe(this.updateNameId.bind(this));
   }
+
   /**
-   * INFO:
    * responsible to listen event to submit
    */
   public override onSubmit(): void {
@@ -34,14 +42,14 @@ export class ChangeDomainNameComponent extends AccountComponent {
   }
 
   /**
-   * INFO:
    * responsible to call service to update nameId
    *
    * @param value string - value to update
    */
-  private updateNameId(value: string): void {
+  private updateNameId(nameId: string): void {
     if (this.isNameIdValid) {
-      console.log(value);
+      this.store.dispatch(acLoading({ isLoading: true }));
+      this.store.dispatch(acNameId({ nameId: nameId + CommonEnum.daily }));
     }
   }
 }

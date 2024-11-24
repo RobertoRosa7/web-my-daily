@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
 import { selectorTheme } from '../../selectors/colors/color.selector';
-import { selectName } from '../../../pages/profile/core/selectors/user.selector';
+import { selGetNickname } from '../../selectors/user/user.selector';
 
 @Component({
   selector: 'app-toolbar',
@@ -25,7 +25,7 @@ export class ToolbarComponent implements OnInit {
   protected readonly dialog?: MatDialog = inject(MatDialog);
 
   public theme$ = this.store.select(selectorTheme);
-  public name$ = this.store.select(selectName);
+  public name$ = this.store.select(selGetNickname);
 
   @Output() send = new EventEmitter();
   @Output() updateRegisters = new EventEmitter();

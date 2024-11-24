@@ -13,7 +13,7 @@ import {
   happenSuccess,
   happenUpdateSuccess,
   happenVoid,
-} from '../../actions/happens/profile.happens.action';
+} from '../../actions/happen/profile.happens.action';
 import { happenTypes } from '../../types/happens/happen.type';
 import { HappenService } from '../../services/happens/happen.service';
 import { commentTypes } from '../../types/happens/comment.type';
@@ -22,7 +22,7 @@ import {
   happenCommentDeleteRemoteSuccess,
   happenCommentLocal,
   happenCommentPutSuccess,
-} from '../../actions/happens/comment.action';
+} from '../../actions/happen/comment.action';
 
 /**
  * @see: https://ngrx.io/guide/effects

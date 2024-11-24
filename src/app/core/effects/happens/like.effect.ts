@@ -5,11 +5,11 @@ import { catchError, exhaustMap, map, mergeMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HappenService } from '../../services/happens/happen.service';
 import { likesTypes } from '../../types/happens/likes.type';
-import { actionLikesError, actionLikeSuccess } from '../../actions/happens/likes.action';
+import { actionLikesError, actionLikeSuccess } from '../../actions/happen/likes.action';
 import { environment } from '../../../../environments/environment';
 import { io } from 'socket.io-client';
 import { LikeHttpResponse, LikeRequest } from '../../interfaces/happens/profile.happen.interface';
-import { selectorId } from '../../../pages/profile/core/selectors/user.selector';
+import { selGetId } from '../../selectors/user/user.selector';
 
 type response = HttpErrorResponse | LikeHttpResponse;
 
@@ -25,7 +25,7 @@ export class LikeEffect {
   private readonly store = inject(Store);
 
   private handlerWithResponse(response: response, request: LikeRequest) {
-    return this.store.select(selectorId).pipe(
+    return this.store.select(selGetId).pipe(
       map((id) => {
         if (response instanceof HttpErrorResponse) {
           return actionLikesError({ failed: response });

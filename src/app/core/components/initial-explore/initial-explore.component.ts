@@ -2,14 +2,14 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { Router, RouterModule } from '@angular/router';
-import { User } from '../../../pages/profile/core/interfaces/profile.interface';
-import { AuthService } from '../../../pages/auth/core/services/auth.services';
+import { User } from '../../interfaces/profile/profile.interface';
+import { AuthService } from '../../services/auth/auth.services';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { FollowRequest } from '../../interfaces/follows/follow.interface';
 import { DialogService } from '../../services/dialogs/dialog.service';
 import { DialogActions, DialogAlert } from '../../interfaces/dialogs/dialogs.interface';
-import { FollowingStatus } from '../../enums/bases/base.enum';
+import { FollowingStatusEnum } from '../../enums/bases/base.enum';
 import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
 
 @Component({
@@ -22,7 +22,7 @@ import { ButtonFollowerComponent } from '../button-follower/button-follower.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InitialExploreComponent {
-  public followingStatus = FollowingStatus;
+  public followingStatus = FollowingStatusEnum;
 
   @Input({ required: true })
   public profile!: User;

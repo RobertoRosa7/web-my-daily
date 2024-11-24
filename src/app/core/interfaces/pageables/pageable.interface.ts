@@ -1,5 +1,5 @@
 import { JsonProperty } from '../../decorators/jsons/json.decorator';
-import { User } from '../../../pages/profile/core/interfaces/profile.interface';
+import { User } from '../profile/profile.interface';
 
 export class Page {
   public pageNumbe!: number;

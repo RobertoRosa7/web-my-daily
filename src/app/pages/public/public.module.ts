@@ -18,9 +18,9 @@ import { ButtonBackComponent } from '../../core/components/button-back/button-ba
 import { DetailsComponentProfilePublic } from './details/details.component';
 import { Page404Component } from './404/page-404.component';
 import { ToolbarComponent } from '../../core/components/toolbar/toolbar.component';
-import { publicProfileReducer } from './core/reducers/public-profile.reducer';
-import { PublicProfileEffect } from './core/effects/public-profile.effect';
-import { PublicProfileService } from './core/services/public-profile.service';
+import { publicProfileReducer } from '../../core/reducers/public/public-profile.reducer';
+import { PublicProfileEffect } from '../../core/effects/public/public-profile.effect';
+import { PublicProfileService } from '../../core/services/public/public-profile.service';
 import { FollowersComponent } from '../../core/components/followers/followers.component';
 import { FooterComponent } from '../../core/components/footer/footer.component';
 

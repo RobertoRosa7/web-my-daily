@@ -3,13 +3,13 @@ import { Store } from '@ngrx/store';
 import { Public } from '../public';
 import { map } from 'rxjs';
 import { pageableProfilePublicMock } from '../../../mock/profile.mock';
-import { User } from '../../profile/core/interfaces/profile.interface';
-import { selectorPageablePub } from '../core/selectors/public-profile.selector';
-import { actionProfilePublic, actionUserFollow } from '../core/actions/public-profile.action';
+import { User } from '../../../core/interfaces/profile/profile.interface';
+import { selectorPageablePub } from '../../../core/selectors/public/public-profile.selector';
+import { actionProfilePublic, actionUserFollow } from '../../../core/actions/public/public-profile.action';
 import { FollowRequest } from '../../../core/interfaces/follows/follow.interface';
 import * as Highcharts from 'highcharts';
 import { backgroundType } from '../../../core/types/colors/color.type';
-import { actionColor } from '../../profile/core/actions/color.action';
+import { actionColor } from '../../../core/actions/color/color.action';
 
 @Component({
   selector: 'app-profile-component',

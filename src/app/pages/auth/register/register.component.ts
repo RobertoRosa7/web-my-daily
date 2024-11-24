@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
 import { FielRegister } from '../auth.field.validators';
-import { IAuthState } from '../core/interfaces/auth.interface';
+import { IAuthState } from '../../../core/interfaces/auth/auth.interface';
 import { Store } from '@ngrx/store';
-import { Common } from '../../../core/enums/bases/base.enum';
+import { CommonEnum } from '../../../core/enums/bases/base.enum';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +44,7 @@ export class RegisterComponent extends AuthComponent implements OnInit {
         email: this.getEmail,
         password: this.getPassword,
         checkTerms: this.getCheckTerms,
-        nameId: this.getNameId + Common.daily,
+        nameId: this.getNameId + CommonEnum.daily,
         nickname: this.getNickName,
       })
     );

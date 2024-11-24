@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SnackBarActions, dialogData } from '../../interfaces/dialogs/dialogs.interface';
 import { HappenVisibility, ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { CommonModule } from '@angular/common';
@@ -13,7 +7,7 @@ import { FollowerPipe } from '../../pipes/followers/follwers.pipe';
 import { Store } from '@ngrx/store';
 import { DialogService } from '../../services/dialogs/dialog.service';
 import { DialogHelperService } from '../../services/dialogs/dialog-helper.service';
-import { actionDislikedLocal, actionLikedLocal } from '../../actions/happens/likes.action';
+import { actionDislikedLocal, actionLikedLocal } from '../../actions/happen/likes.action';
 import { selectHappenActive } from '../../selectors/happens/profile.happens.selector';
 
 @Component({

@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { validateDomainNamePattern, validateEmailPattern } from '../../utils/regex/utils.regex.validators';
 import { Observable, catchError, of, switchMap } from 'rxjs';
-import { UniqueNameService } from './core/services/unique-name.service';
+import { UniqueNameService } from '../../core/services/auth/unique-name.service';
 
 // field e-mail
 export const emailField = new FormControl(null, {

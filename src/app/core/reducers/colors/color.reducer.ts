@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { actionColor } from '../../../pages/profile/core/actions/color.action';
+import { actionColor } from '../../actions/color/color.action';
 import { colors } from '../../interfaces/colors/colors.interface';
 
 const states: colors = {

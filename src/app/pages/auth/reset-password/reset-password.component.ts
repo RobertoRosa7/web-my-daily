@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthComponent } from '../auth.component';
-import { IAuthState } from '../core/interfaces/auth.interface';
+import { IAuthState } from '../../../core/interfaces/auth/auth.interface';
 import { Store } from '@ngrx/store';
 import { FieldEmail } from '../auth.field.validators';
 

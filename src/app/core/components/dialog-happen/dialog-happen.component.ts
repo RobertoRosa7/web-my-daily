@@ -6,9 +6,9 @@ import { HappenVisibility, ProfileHappen } from '../../interfaces/happens/profil
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectorTheme } from '../../selectors/colors/color.selector';
-import { User } from '../../../pages/profile/core/interfaces/profile.interface';
+import { User } from '../../interfaces/profile/profile.interface';
 import { Observable, combineLatest, tap } from 'rxjs';
-import { selectorUser } from '../../../pages/profile/core/selectors/user.selector';
+import { selGetUser } from '../../selectors/user/user.selector';
 import { selectHappenActive } from '../../selectors/happens/profile.happens.selector';
 
 @Component({
@@ -24,7 +24,7 @@ export class DialogHappenComponent implements OnInit {
   private readonly store: Store = inject(Store);
   private readonly dialogRef = inject(MatDialogRef<DialogHappenComponent>);
 
-  public readonly user$: Observable<User | undefined> = this.store.select(selectorUser);
+  public readonly user$: Observable<User | undefined> = this.store.select(selGetUser);
   public readonly happen$ = this.store.select(selectHappenActive);
 
   public comb$ = combineLatest({ user: this.user$, happen: this.happen$ }).pipe(

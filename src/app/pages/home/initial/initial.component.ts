@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from '../home';
 import { Store } from '@ngrx/store';
-import { actionColor } from '../../profile/core/actions/color.action';
+import { actionColor } from '../../../core/actions/color/color.action';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { backgroundType } from '../../../core/types/colors/color.type';
-import { happenTimeline } from '../../../core/actions/happens/profile.happens.action';
-import { actionProfilePublic } from '../../public/core/actions/public-profile.action';
+import { happenTimeline } from '../../../core/actions/happen/profile.happens.action';
+import { actionProfilePublic } from '../../../core/actions/public/public-profile.action';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({

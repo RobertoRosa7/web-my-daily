@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Profile } from '../profile';
-import { actionColor } from '../core/actions/color.action';
+import { actionColor } from '../../../core/actions/color/color.action';
 
 @Component({
   selector: 'app-settings',

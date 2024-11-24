@@ -3,8 +3,8 @@ import { LocalStorageService } from '../../services/localstorages/localstorage.s
 import { ActivatedRouteSnapshot, MaybeAsync, RouterStateSnapshot } from '@angular/router';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { User } from '../../../pages/profile/core/interfaces/profile.interface';
-import { actionUser } from '../../../pages/profile/core/actions/user.action';
+import { User } from '../../interfaces/profile/profile.interface';
+import { acUser } from '../../actions/user/user.action';
 import { isPlatformBrowser } from '@angular/common';
 
 export const resolver = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): MaybeAsync<User | null> => {
@@ -16,7 +16,7 @@ export const resolver = (route: ActivatedRouteSnapshot, state: RouterStateSnapsh
   if (isPlatformBrowser(platform)) {
     const services = inject(LocalStorageService);
     user = services.getKey('user');
-    store.dispatch(actionUser(user || new User()));
+    store.dispatch(acUser(user || new User()));
   }
 
   return of(user);

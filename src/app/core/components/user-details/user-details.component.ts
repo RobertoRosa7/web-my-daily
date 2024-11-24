@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
+import { UserProfile } from '../../interfaces/profile/profile.interface';
 
 /**
  * @see: https://angular.io/api/common/PercentPipe

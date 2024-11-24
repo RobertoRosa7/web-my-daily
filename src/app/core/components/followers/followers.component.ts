@@ -7,10 +7,10 @@ import { SharedModule } from '../../../shared/shared.module';
 import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
 import { DialogService } from '../../services/dialogs/dialog.service';
-import { AuthService } from '../../../pages/auth/core/services/auth.services';
+import { AuthService } from '../../services/auth/auth.services';
 import { FollowRequest } from '../../interfaces/follows/follow.interface';
-import { UserProfile } from '../../../pages/profile/core/interfaces/profile.interface';
-import { FollowingStatus } from '../../enums/bases/base.enum';
+import { UserProfile } from '../../interfaces/profile/profile.interface';
+import { FollowingStatusEnum } from '../../enums/bases/base.enum';
 import { DialogActions, DialogAlert } from '../../interfaces/dialogs/dialogs.interface';
 
 @Component({
@@ -32,7 +32,7 @@ export class FollowersComponent {
   @Input()
   public id!: string | undefined | null;
 
-  public readonly followingStatus = FollowingStatus;
+  public readonly followingStatus = FollowingStatusEnum;
   private readonly dialogService = inject(DialogService);
 
   constructor(private readonly dialog: MatDialog, private readonly router: Router) {}

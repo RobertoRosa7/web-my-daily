@@ -3,11 +3,11 @@ import { FollowRequest } from '../../../core/interfaces/follows/follow.interface
 import { Profile } from '../../profile/profile';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { actionUserFollow } from '../../profile/core/actions/profile.action';
-import { selectorUserPub } from '../core/selectors/public-profile.selector';
+import { actionUserFollow } from '../../../core/actions/profile/profile.action';
+import { selectorUserPub } from '../../../core/selectors/public/public-profile.selector';
 import { backgroundType } from '../../../core/types/colors/color.type';
-import { actionColor } from '../../profile/core/actions/color.action';
-import { actionProfilePublic } from '../core/actions/public-profile.action';
+import { actionColor } from '../../../core/actions/color/color.action';
+import { actionProfilePublic } from '../../../core/actions/public/public-profile.action';
 
 @Component({
   selector: 'app-details-public-profile',

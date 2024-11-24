@@ -7,13 +7,13 @@ import { selectHappenActive, selectorComments } from '../../selectors/happens/pr
 import { CommentComponent } from '../comments/comment.component';
 import { Observable, map } from 'rxjs';
 import { CommentRequest, HappenComment } from '../../interfaces/happens/happen.comment.interface';
-import { selectorId } from '../../../pages/profile/core/selectors/user.selector';
+import { selGetId } from '../../selectors/user/user.selector';
 import { FormControl } from '@angular/forms';
 import {
   happenCommentDeleteRemote,
   happenCommentPutRemote,
   happenCommentRemote,
-} from '../../actions/happens/comment.action';
+} from '../../actions/happen/comment.action';
 
 @Component({
   selector: 'app-dialog-comments',
@@ -31,7 +31,7 @@ export class DialogHappenCommentsComponent {
     .pipe(map(({ happenActive }) => this.profileToComment(happenActive)));
 
   public readonly comments$ = this.store.select(selectorComments);
-  public readonly userId$: Observable<string | undefined> = this.store.select(selectorId);
+  public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
 
   public addComment(comment: HappenComment) {
     const request = new CommentRequest();
@@ -43,7 +43,7 @@ export class DialogHappenCommentsComponent {
     this.store.dispatch(happenCommentRemote(request));
     this.form.reset();
   }
-  
+
   public onDelete(comment: HappenComment) {
     this.store.dispatch(happenCommentDeleteRemote({ commentId: comment.id || '' }));
   }

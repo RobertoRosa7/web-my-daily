@@ -19,7 +19,7 @@ import {
   happenUpdateLocal,
   happenUpdateRollback,
   happenUpdateSuccess,
-} from '../../actions/happens/profile.happens.action';
+} from '../../actions/happen/profile.happens.action';
 
 import { HttpErrorResponse } from '@angular/common/http';
 import {
@@ -27,7 +27,7 @@ import {
   actionLikedLocal,
   actionLikedSocketio,
   actionLikeSuccess,
-} from '../../actions/happens/likes.action';
+} from '../../actions/happen/likes.action';
 import {
   callbackDislikedLocal,
   callbackLikeSuccess,
@@ -45,7 +45,7 @@ import {
   happenCommentDeleteRemoteSuccess,
   happenCommentLocal,
   happenCommentPutSuccess,
-} from '../../actions/happens/comment.action';
+} from '../../actions/happen/comment.action';
 
 type States = Partial<HappenResponsePageable>;
 type ProfileHappenIndex = { index: number; data: ProfileHappen };

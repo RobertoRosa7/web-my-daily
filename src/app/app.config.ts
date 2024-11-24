@@ -12,7 +12,7 @@ import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { authInterceptor } from './core/interceptors/colors/core.interceptor';
 import { colorReducer } from './core/reducers/colors/color.reducer';
-import { userReducer } from './pages/profile/core/reducers/user.reducer';
+import { userReducer } from './core/reducers/user/user.reducer';
 
 registerLocaleData(localePt, 'pt');
 

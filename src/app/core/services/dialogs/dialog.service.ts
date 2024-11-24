@@ -5,7 +5,7 @@ import { ScrollStrategyOptions } from '@angular/cdk/overlay';
 import { ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { concatMap, filter, first } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { happenDeleteLocal, happenPostLocal, happenUpdateLocal } from '../../actions/happens/profile.happens.action';
+import { happenDeleteLocal, happenPostLocal, happenUpdateLocal } from '../../actions/happen/profile.happens.action';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { happenTypes } from '../../types/happens/happen.type';

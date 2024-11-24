@@ -12,7 +12,7 @@ import {
 } from '../../interfaces/happens/profile.happen.interface';
 import { JsonMapProperties } from '../../decorators/jsons/json.decorator';
 import { HttpResponseDefault } from '../../interfaces/https/http-response.interface';
-import { HappenRepository } from '../../repositories/happen.repository';
+import { HappenRepository } from '../../repositories/happen/happen.repository';
 import {
   CommentRequest,
   HappenCommentHttpResponse,

@@ -1,38 +1,38 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../../../shared/shared.module';
 import { FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import {
-  selectName,
-  selectorChangeNicknameNok,
-  selectorIsUpdatingUser,
-  selectorNicknameOk,
-} from '../../../core/selectors/user.selector';
-import { actionColor } from '../../../core/actions/color.action';
-import { actionChangeNickName } from '../../../core/actions/user.action';
-import { MessageComponent } from '../../../../../core/components/messages/message.component';
+  selGetNickname,
+  selMessageOk,
+  selIsLoading,
+  selMessageNok,
+} from '../../../../../core/selectors/user/user.selector';
+import { actionColor } from '../../../../../core/actions/color/color.action';
+import { acNickname } from '../../../../../core/actions/user/user.action';
 import { AccountComponent } from '../account.component';
+import { MessageComponent } from '../../../../../core/components/messages/message.component';
 
 @Component({
   selector: 'app-change-name',
   templateUrl: './change-name.component.html',
   styleUrl: './change-name.component.scss',
   standalone: true,
+
   imports: [CommonModule, SharedModule, MessageComponent],
 })
 export class ChangeNameComponent extends AccountComponent {
   public readonly formControll: FormControl = new FormControl();
 
-  public readonly error$ = this.store.select(selectorChangeNicknameNok);
-  public readonly isLoading$ = this.store.select(selectorIsUpdatingUser);
-  public readonly success$ = this.store.select(selectorNicknameOk);
+  public readonly error$ = this.store.select(selMessageNok);
+  public readonly isLoading$ = this.store.select(selIsLoading);
+  public readonly success$ = this.store.select(selMessageOk);
 
   override ngOnInit(): void {
     this.store.dispatch(actionColor({ theme: '' }));
 
     this.store
-      .select(selectName)
+      .select(selGetNickname)
       .pipe(this.takeUntilDestroy())
       .subscribe({
         next: (nickname) => this.formControll.setValue(nickname),
@@ -40,7 +40,7 @@ export class ChangeNameComponent extends AccountComponent {
   }
 
   public override onSubmit() {
-    this.store.dispatch(actionChangeNickName({ nickname: this.formControll.value.trim() }));
+    this.store.dispatch(acNickname({ nickname: this.formControll.value.trim() }));
   }
 
   public onHide() {}

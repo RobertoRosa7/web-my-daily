@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Profile } from '../profile';
 import { Store } from '@ngrx/store';
-import { selectorProfile } from '../core/selectors/profile.selector';
+import { selectorProfile } from '../../../core/selectors/profile/profile.selector';
 import { ProfileHappenObservable } from '../../../core/interfaces/happens/profile.happen.interface';
 import { selectorHappens } from '../../../core/selectors/happens/profile.happens.selector';
-import { ProfileObservable } from '../core/interfaces/profile.interface';
+import { ProfileObservable } from '../../../core/interfaces/profile/profile.interface';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
 import { ListeningFollowResponse } from '../../../core/interfaces/follows/follow.interface';
-import { actionSocketUserMetrics } from '../core/actions/socketio.action';
-import { actionUserFollowers } from '../core/actions/user.action';
+import { actionSocketUserMetrics } from '../../../core/actions/socket/socketio.action';
+import { acUsFollowers } from '../../../core/actions/user/user.action';
 import { JsonMapProperties } from '../../../core/decorators/jsons/json.decorator';
 import { isPlatformBrowser } from '@angular/common';
 import { io } from 'socket.io-client';
-import { actionProfileRequest } from '../core/actions/profile.action';
-import { happenRequest } from '../../../core/actions/happens/profile.happens.action';
+import { actionProfileRequest } from '../../../core/actions/profile/profile.action';
+import { happenRequest } from '../../../core/actions/happen/profile.happens.action';
 import { environment } from '../../../../environments/environment';
-import { actionColor } from '../core/actions/color.action';
+import { actionColor } from '../../../core/actions/color/color.action';
 import { backgroundType } from '../../../core/types/colors/color.type';
 
 @Component({
@@ -47,7 +47,7 @@ export class UserComponent extends Profile implements OnInit {
           )
         )
         .subscribe({
-          next: (data) => this.store.dispatch(actionUserFollowers(data)),
+          next: (data) => this.store.dispatch(acUsFollowers(data)),
         });
 
       this.socketio.on('listening_profile_metrics', (data) => {

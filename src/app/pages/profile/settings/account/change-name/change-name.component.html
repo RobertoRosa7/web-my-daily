@@ -2,11 +2,7 @@
   <div class="container">
     <app-message *ngIf="success$ | async as ok" [message]="ok" [visible]="true" type="success"></app-message>
     <app-message *ngIf="error$ | async as nok" [message]="nok" [visible]="true" type="error"></app-message>
-    <app-message
-      *ngIf="isLoading$ | async"
-      [message]="'Atualizando nickname...'"
-      [visible]="true"
-      type="info"></app-message>
+    <app-message *ngIf="isLoading$ | async" [message]="'Atualizando...'" [visible]="true" type="info"></app-message>
 
     <div class="field-session">
       <h1>Altera apelido (opcional)</h1>
