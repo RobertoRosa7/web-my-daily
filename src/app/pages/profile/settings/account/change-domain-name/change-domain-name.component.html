@@ -1,14 +1,12 @@
-<form class="change-domain-name" (ngSubmit)="onSubmit()">
+<form [hidden]="!isReady" class="change-domain-name" (ngSubmit)="onSubmit()">
   <div class="container">
-    <app-message *ngIf="success$ | async as ok" [message]="ok" [visible]="true" type="success"></app-message>
-    <app-message *ngIf="error$ | async as nok" [message]="nok" [visible]="true" type="error"></app-message>
-    <app-message *ngIf="isLoading$ | async" [message]="'Atualizando...'" [visible]="true" type="info"></app-message>
     <div class="field-session">
+      <app-message></app-message>
       <h1>Altera nome de domínio</h1>
       <app-input-name-id
-        [isHideSubmit]="false"
         [inputValue]="nameId$ | async"
         (trigger)="onFireEvent(fieldNames.nameId, $event)"></app-input-name-id>
     </div>
+    <app-button-submit [form]="form" [name]="labelButtonSubmit"></app-button-submit>
   </div>
 </form>

@@ -1,8 +1,10 @@
 @import '../../../../../themes/mixins';
 
 .account {
-  margin-top: 10rem;
+  padding-top: 5rem;
+  height: 100%;
   .container {
+    height: inherit;
     @include size-page;
     .mat-mdc-card-header,
     .mat-mdc-card-avatar {
@@ -32,7 +34,6 @@
     }
     .box-card {
       background-color: var(--white);
-      padding: 1rem;
       border: 1px solid var(--border-default);
       border-radius: 0.5rem;
       width: 100%;
@@ -42,6 +43,11 @@
       }
       .card-menu:last-child {
         border: none;
+      }
+      mat-card-title,
+      mat-card-subtitle {
+        font-weight: 300;
+        font-family: inherit;
       }
       mat-card {
         box-shadow: none;

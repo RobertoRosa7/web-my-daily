@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
-import { SharedModule } from '../../../shared/shared.module';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, filter, map } from 'rxjs';
 import { ActionsSubject } from '@ngrx/store';
-import { authType } from '../../types/auth/auth.type';
+import { SharedModule } from '@shared/shared.module';
+import { AuthType } from '@acTypes/auth/auth.type';
 
 /**
  * @see: https://angular.io/guide/form-validation
@@ -15,7 +15,7 @@ import { authType } from '../../types/auth/auth.type';
     <button
       type="submit"
       [disabled]="form.invalid || (isLoading$ | async)"
-      class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-slate-500"
+      class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-blue-300"
       [style.backgroundColor]="color">
       <span *ngIf="!(isLoading$ | async)">{{ name }}</span>
       <mat-spinner
@@ -24,12 +24,11 @@ import { authType } from '../../types/auth/auth.type';
         *ngIf="isLoading$ | async"></mat-spinner>
     </button>
   `,
-  styles: ` `,
   standalone: true,
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class ButtonSubmitComponent {
-  public isLoading$!: Observable<boolean>;
+  public readonly isLoading$!: Observable<boolean>;
   private readonly actionSubject = inject(ActionsSubject);
 
   @Input({ required: true })
@@ -44,7 +43,7 @@ export class ButtonSubmitComponent {
   constructor() {
     this.isLoading$ = this.actionSubject.pipe(
       // layer filer only action loading
-      filter(({ type }) => type === authType.LOGIN_LOADING),
+      filter(({ type }) => type === AuthType.LOGIN_LOADING),
       // layer map catch payload action loading
       map((action) => {
         // abastract loading from action types

@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { actionProfileSuccess, actionUserFollowSuccess } from '../../actions/profile/profile.action';
+import { acSusProfile, acUseFollowSuccess } from '../../actions/profile/profile.action';
 import { actionSocketUserMetrics } from '../../actions/socket/socketio.action';
 import { JsonMapProperties } from '../../decorators/jsons/json.decorator';
 import {
@@ -67,8 +67,8 @@ const callbackOnUserFollowers = (states: States, follwoers: ListeningFollowRespo
 
 export const profileReducer = createReducer(
   states,
-  on(actionProfileSuccess, callbackOnProfileSuccess),
-  on(actionUserFollowSuccess, callbackOnSuccess),
+  on(acSusProfile, callbackOnProfileSuccess),
+  on(acUseFollowSuccess, callbackOnSuccess),
   on(actionSocketUserMetrics, callbackOnProfileMetrics),
   on(acUsFollowers, callbackOnUserFollowers),
   on(actionCoreReset, callbackResetStore)

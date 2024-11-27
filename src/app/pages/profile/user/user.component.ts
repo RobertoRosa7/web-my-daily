@@ -12,7 +12,7 @@ import { acUsFollowers } from '../../../core/actions/user/user.action';
 import { JsonMapProperties } from '../../../core/decorators/jsons/json.decorator';
 import { isPlatformBrowser } from '@angular/common';
 import { io } from 'socket.io-client';
-import { actionProfileRequest } from '../../../core/actions/profile/profile.action';
+import { acReqProfile } from '../../../core/actions/profile/profile.action';
 import { happenRequest } from '../../../core/actions/happen/profile.happens.action';
 import { environment } from '../../../../environments/environment';
 import { actionColor } from '../../../core/actions/color/color.action';
@@ -34,7 +34,7 @@ export class UserComponent extends Profile implements OnInit {
   override ngOnInit(): void {
     if (isPlatformBrowser(this.platform)) {
       this.socketio = io(environment.ws + '/profile');
-      this.store.dispatch(actionProfileRequest());
+      this.store.dispatch(acReqProfile());
       this.store.dispatch(happenRequest());
 
       this.userId$

@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.services';
 import * as authAction from '../../actions/auth/auth.action';
-import { authType } from '../../types/auth/auth.type';
+import { AuthType } from '../../types/auth/auth.type';
 import { LocalStorageService } from '../../services/localstorages/localstorage.service';
 import { Store } from '@ngrx/store';
 import { AuthVars } from '../../interfaces/auth/auth.interface';
@@ -23,7 +23,7 @@ export class AuthEffect {
   public register: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(authType.LOGIN_REGISTER),
+      ofType(AuthType.LOGIN_REGISTER),
       // layer to fetch payload from action
       mergeMap((payload) =>
         // layer to service send payload to backend
@@ -56,7 +56,7 @@ export class AuthEffect {
   public login: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(authType.LOGIN),
+      ofType(AuthType.LOGIN),
       // layer to fetch payload from action
       mergeMap((payload) =>
         // layer to service send payload to backend

@@ -1,23 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { mergeMap, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { InDestroyDirective } from '../../directives/destroy/destroy.directive';
+import { Store } from '@ngrx/store';
+import { selShowMessage } from '@selectors/message/message.selector';
+import { acShowMessage } from '@actions/message/message.action';
+import { ShowMessage } from '@interfaces/message/message.interface';
 
 @Component({
   selector: 'app-message',
   standalone: true,
   imports: [CommonModule, SharedModule],
   template: `
-    <div *ngIf="visible" class="message {{ type }}" [class.fade-out]="hide">
-      <mat-error *ngIf="type === 'error' && message">
-        {{ message }}
-      </mat-error>
-
-      <mat-hint *ngIf="type !== 'error' && message">
-        {{ message }}
-      </mat-hint>
-    </div>
+    <ng-container *ngIf="data$ | async as data">
+      <div class="message {{ data.type }}" [class.fade-out]="!data.show">
+        <button (click)="closeMessage()" type="button" role="button" mat-icon-button aria-describedby="closeable">
+          <mat-icon>close</mat-icon>
+        </button>
+        <span>{{ data.message }}</span>
+      </div>
+    </ng-container>
   `,
   styles: [
     `
@@ -26,14 +29,27 @@ import { InDestroyDirective } from '../../directives/destroy/destroy.directive';
         margin-bottom: 10px;
         border-radius: 5px;
         transition: opacity 0.5s ease-out; /* Adicionando uma transição suave de 0.5 segundos */
+        display: flex;
+        min-height: 64px;
+        position: relative;
       }
-
+      .message button {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .message span {
+        display: flex;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 0.8rem;
+        align-items: center;
+      }
       .success {
         background-color: #d4edda;
         color: #155724;
         border: 1px solid #c3e6cb;
       }
-
       .error {
         background-color: #f8d7da;
         color: #721c24;
@@ -42,48 +58,33 @@ import { InDestroyDirective } from '../../directives/destroy/destroy.directive';
       .info {
         background-color: var(--border-default);
         color: var(--dark);
-        border: 1px solid var(--dark);
       }
       .fade-out {
         opacity: 0; /* Define a opacidade para 0 ao ativar a classe .fade-out */
+        visibility: hidden;
       }
     `,
   ],
 })
-export class MessageComponent extends InDestroyDirective implements OnInit {
-  @Input({ required: true })
-  public message: string | undefined = undefined;
+export class MessageComponent extends InDestroyDirective {
+  public data$: Observable<ShowMessage> = this.store.select(selShowMessage);
 
-  @Input()
-  public type: 'success' | 'error' | 'info' = 'info';
-
-  @Output()
-  public onHide = new EventEmitter<boolean>();
-
-  @Input()
-  public visible: boolean = false;
-  public hide: boolean = false; // Variável para controlar o início da animação de fade-out
-
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private readonly store: Store) {
     super();
   }
 
-  ngOnInit(): void {
-    timer(3000)
-      .pipe(
-        // layer - destroy component
-        this.takeUntilDestroy(),
-        // layer - wait 300
-        mergeMap(() => {
-          this.hide = true; // Ativa a classe .fade-out para iniciar a animação de fade-out
-          this.cdr.detectChanges();
-          this.onHide.emit(true);
-          return timer(500);
-        })
-      )
-      .subscribe(() => {
-        this.visible = false; // Remove o componente após a animação de fade-out
-        this.cdr.detectChanges();
-      });
+  /**
+   * Processes the close message on display
+   */
+  public closeMessage(): void {
+    this.store.dispatch(
+      acShowMessage({
+        body: {
+          type: '',
+          show: false,
+          message: '',
+        },
+      })
+    );
   }
 }

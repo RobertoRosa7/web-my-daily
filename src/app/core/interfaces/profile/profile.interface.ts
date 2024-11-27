@@ -80,7 +80,5 @@ export class ProfileSingleResponse extends HttpResponseDefault<UserProfile> {
 export class HttpUserResponse extends HttpResponseDefault<User> {
   @JsonProperty({ clazz: User })
   public override data: User = new User();
-  public isLoading?: boolean;
-  public messageOk?: string;
-  public messageNok?: string;
+  public typeError!: string;
 }

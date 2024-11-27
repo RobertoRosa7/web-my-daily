@@ -11,15 +11,15 @@ const userProfileError = profileType.userProfileError;
 const userFollow = profileType.userFollow;
 const userFollowSuccess = profileType.userFollowSuccess;
 
-const callbackSuccess = (payload: ProfileResponse) => payload;
-const callbackPublicSucces = (payload: ProfileResponse | HttpResponseDefault<null>) => payload;
-const callbackError = (payload: { error: HttpErrorResponse }) => payload;
-const callbackFollowRequest = (payload: FollowRequest) => payload;
-const callbackFollowSuccess = (payload: FollowRequest) => payload;
+const cbSuccess = (payload: ProfileResponse) => payload;
+const cbPublicSuccess = (payload: ProfileResponse | HttpResponseDefault<null>) => payload;
+const cbError = (payload: { error: HttpErrorResponse }) => payload;
+const cbFollowRequest = (payload: FollowRequest) => payload;
+const cbFollowSuccess = (payload: FollowRequest) => payload;
 
-export const actionProfileRequest = createAction(userProfile);
-export const actionProfileSuccess = createAction(userProfileSuccess, callbackSuccess);
-export const actionProfilePublicSuccess = createAction(userProfileSuccess, callbackPublicSucces);
-export const actionProfileError = createAction(userProfileError, callbackError);
-export const actionUserFollow = createAction(userFollow, callbackFollowRequest);
-export const actionUserFollowSuccess = createAction(userFollowSuccess, callbackFollowSuccess);
+export const acReqProfile = createAction(userProfile);
+export const acSusProfile = createAction(userProfileSuccess, cbSuccess);
+export const acPubSusProfile = createAction(userProfileSuccess, cbPublicSuccess);
+export const acErrProfile = createAction(userProfileError, cbError);
+export const acUseFollow = createAction(userFollow, cbFollowRequest);
+export const acUseFollowSuccess = createAction(userFollowSuccess, cbFollowSuccess);

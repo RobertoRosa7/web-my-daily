@@ -11,4 +11,5 @@ export enum userType {
   chNameIdNok = 'userChangeNameIdNok@types',
 
   chLoading = 'userChangeLoading@types',
+  usReset = 'userResetState@tyeps',
 }

@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { SettingComponent } from '../setting.component';
+import { selMessage } from '@selectors/user/user.selector';
 
 @Component({
   selector: 'app-account',
@@ -8,21 +8,42 @@ import { SettingComponent } from '../setting.component';
   styleUrl: './account.component.scss',
 })
 export class AccountComponent extends SettingComponent {
-  private fb: FormBuilder = inject(FormBuilder);
+  public readonly labelButtonSubmit = 'Salvar Alteração';
+  public readonly msgUpdating = 'Atualizando...';
+  public readonly typeInfo = 'info';
+  public readonly typeSuccess = 'success';
+  public readonly typeError = 'error';
+  public readonly message$ = this.store.select(selMessage);
 
-  public userForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    phone: ['', Validators.required],
-    address: ['', Validators.required],
-    password: ['', Validators.required],
-    profileVisibility: ['', Validators.required],
-    blockedContacts: [''],
-  });
+  public onSubmit() {}
+  public onDeactivateAccount() {}
+  public onDeleteAccount() {}
 
-  onSubmit() {}
+  /**
+   * getNameId = get name field from form
+   */
+  public get getNameId() {
+    return this.form.get(this.fieldNames.nameId)?.value;
+  }
 
-  onDeactivateAccount() {}
+  /**
+   * isNameIdValid = get name field from form is valid to submit
+   */
+  public get isNameIdValid() {
+    return this.form.get(this.fieldNames.nameId)?.valid;
+  }
 
-  onDeleteAccount() {}
+  /**
+   * getNickname = get name field from form is valid to submit
+   */
+  public get getNickname() {
+    return this.form.get(this.fieldNames.nickname)?.value;
+  }
+
+  /**
+   * isNicknameValid = get name field from form is valid to submit
+   */
+  public get isNicknameValid() {
+    return this.form.get(this.fieldNames.nickname)?.valid;
+  }
 }

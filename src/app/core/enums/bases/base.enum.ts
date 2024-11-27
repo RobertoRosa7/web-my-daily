@@ -43,7 +43,7 @@ export enum FollowingStatusEnum {
   public = 'PUBLIC',
 }
 
-export enum FieldNameEnul {
+export enum FieldNameEnum {
   nameId = 'nameId',
   nickname = 'nickname',
   email = 'email',
@@ -63,3 +63,4 @@ export enum TimeAgoMessages {
   MINUTES = 'há {time} minuto(s)',
   NOW = 'agora mesmo',
 }
+

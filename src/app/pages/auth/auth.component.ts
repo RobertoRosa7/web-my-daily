@@ -12,13 +12,13 @@ import {
   actionGoto,
   actionLoading,
 } from '../../core/actions/auth/auth.action';
-import { authType } from '../../core/types/auth/auth.type';
+import { AuthType } from '../../core/types/auth/auth.type';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth/auth.services';
 import { isPlatformBrowser } from '@angular/common';
 import { actionCoreReset } from '../../core/actions/resets/reset.action';
 import { actionColor } from '../../core/actions/color/color.action';
-import { FieldNameEnul } from '../../core/enums/bases/base.enum';
+import { FieldNameEnum } from '../../core/enums/bases/base.enum';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 
 @Component({
@@ -28,7 +28,7 @@ import { InDestroyDirective } from '../../core/directives/destroy/destroy.direct
 export class AuthComponent extends InDestroyDirective {
   public form!: FormGroup;
   public readonly isLoading$!: Observable<boolean>;
-  public readonly fieldNames = FieldNameEnul;
+  public readonly fieldNames = FieldNameEnum;
 
   // responsible to listening actions to login success
   public readonly message$: Observable<HttpResponseDefault<IAuthState>> = this.store
@@ -57,7 +57,7 @@ export class AuthComponent extends InDestroyDirective {
     // listening action loading happens
     this.isLoading$ = this.actionSubject.pipe(
       // layer filer only action loading
-      filter(({ type }) => type === authType.LOGIN_LOADING),
+      filter(({ type }) => type === AuthType.LOGIN_LOADING),
       // layer map catch payload action loading
       map((action) => {
         // abastract loading from action types
@@ -72,7 +72,7 @@ export class AuthComponent extends InDestroyDirective {
     this.actionSubject
       .pipe(
         // layer filer only action login goto
-        filter(({ type }) => type === authType.LOGIN_GOTO),
+        filter(({ type }) => type === AuthType.LOGIN_GOTO),
         // layer map to return message on display
         map((action) => {
           // abstract paths to navigate
@@ -100,7 +100,7 @@ export class AuthComponent extends InDestroyDirective {
    * getEmail = get name field from form
    */
   public get getEmail() {
-    return this.form.get(FieldNameEnul.email)?.value;
+    return this.form.get(FieldNameEnum.email)?.value;
   }
 
   /**
@@ -108,7 +108,7 @@ export class AuthComponent extends InDestroyDirective {
    * getPassword = get name field from form
    */
   public get getPassword() {
-    return this.form.get(FieldNameEnul.password)?.value;
+    return this.form.get(FieldNameEnum.password)?.value;
   }
 
   /**
@@ -116,7 +116,7 @@ export class AuthComponent extends InDestroyDirective {
    * getNickName = get name field from form
    */
   public get getNickName() {
-    return this.form.get(FieldNameEnul.nickname)?.value;
+    return this.form.get(FieldNameEnum.nickname)?.value;
   }
 
   /**
@@ -124,7 +124,7 @@ export class AuthComponent extends InDestroyDirective {
    * getNameId = get name field from form
    */
   public get getNameId() {
-    return this.form.get(FieldNameEnul.nameId)?.value;
+    return this.form.get(FieldNameEnum.nameId)?.value;
   }
 
   /**
@@ -132,7 +132,7 @@ export class AuthComponent extends InDestroyDirective {
    * getCheckTerms = get name field from form
    */
   public get getCheckTerms() {
-    return this.form.get(FieldNameEnul.checkTerms)?.value;
+    return this.form.get(FieldNameEnum.checkTerms)?.value;
   }
 
   /**

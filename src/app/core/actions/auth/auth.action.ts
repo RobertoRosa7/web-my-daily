@@ -1,16 +1,16 @@
 import { createAction } from '@ngrx/store';
-import { authType } from '../../types/auth/auth.type';
+import { AuthType } from '../../types/auth/auth.type';
 import { IAuthState, ILogin, IRegister } from '../../interfaces/auth/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpResponseDefault } from '../../interfaces/https/http-response.interface';
 
-const login = authType.LOGIN;
-const register = authType.LOGIN_REGISTER;
-const error = authType.LOGIN_ERROR;
-const success = authType.LOGIN_SUCCESS;
-const clear = authType.CLEAR;
-const goto = authType.LOGIN_GOTO;
-const loading = authType.LOGIN_LOADING;
+const login = AuthType.LOGIN;
+const register = AuthType.LOGIN_REGISTER;
+const error = AuthType.LOGIN_ERROR;
+const success = AuthType.LOGIN_SUCCESS;
+const clear = AuthType.CLEAR;
+const goto = AuthType.LOGIN_GOTO;
+const loading = AuthType.LOGIN_LOADING;
 
 const callbackLogin = (payload: ILogin) => payload;
 const callbackRegister = (payload: IRegister) => payload;

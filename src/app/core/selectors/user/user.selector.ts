@@ -9,9 +9,7 @@ const cbGetUser = ({ data }: HttpUserResponse) => (data ? data : undefined);
 const cbGetNameId = ({ data }: HttpUserResponse) => (data ? data.nameId?.replace(CommonEnum.daily, '') : undefined);
 const cbGetNickname = ({ data }: HttpUserResponse) => (data ? data.name : undefined);
 
-const cbMessageNok = ({ messageNok }: HttpUserResponse) => messageNok;
-const cbMessageOk = ({ messageOk }: HttpUserResponse) => messageOk;
-const cbIsLoading = ({ isLoading }: HttpUserResponse) => isLoading;
+const cbMessage = ({ message, typeError }: HttpUserResponse) => ({ message, typeError });
 
 export const selGetId = createSelector(user, cbGetId);
 export const selGetUser = createSelector(user, cbGetUser);
@@ -19,6 +17,4 @@ export const selGetUser = createSelector(user, cbGetUser);
 export const selGetNameId = createSelector(user, cbGetNameId);
 export const selGetNickname = createSelector(user, cbGetNickname);
 
-export const selMessageOk = createSelector(user, cbMessageOk);
-export const selMessageNok = createSelector(user, cbMessageNok);
-export const selIsLoading = createSelector(user, cbIsLoading);
+export const selMessage = createSelector(user, cbMessage);

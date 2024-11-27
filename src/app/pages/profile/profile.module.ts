@@ -1,43 +1,55 @@
 import { NgModule } from '@angular/core';
 import { Profile } from './profile';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './profile.route';
-import { ToolbarComponent } from '../../core/components/toolbar/toolbar.component';
 import { UserComponent } from './user/user.component';
 import { SettingComponent } from './settings/setting.component';
 import { provideState } from '@ngrx/store';
-import { CoverComponent } from '../../core/components/cover/cover.component';
-import { FeelingsComponent } from '../../core/components/feelings/feelings.component';
-import { UserDetailsComponent } from '../../core/components/user-details/user-details.component';
-import { ProfileRepository } from '../../core/repositories/profile/profile.repository';
-import { ProfileService } from '../../core/services/profile/profile.service';
-import { LocalStorageService } from '../../core/services/localstorages/localstorage.service';
 import { provideEffects } from '@ngrx/effects';
-import { ProfileEffect } from '../../core/effects/profile/profile.effect';
-import { happenReducer } from '../../core/reducers/happens/profile.happens.reducer';
-import { InputPhotoComponent } from '../../core/components/input-photo/input-photo.component';
-import { profileReducer } from '../../core/reducers/profile/profile.reducer';
-import { userReducer } from '../../core/reducers/user/user.reducer';
-import { FollowersComponent } from '../../core/components/followers/followers.component';
-import { ButtonFabCreateComponent } from '../../core/components/button-fab-create/button-fab-create.component';
-import { HappenService } from '../../core/services/happens/happen.service';
-import { HappenRepository } from '../../core/repositories/happen/happen.repository';
-import { HappensEffect } from '../../core/effects/happens/profile.happens.effect';
-import { LikeEffect } from '../../core/effects/happens/like.effect';
+import { ButtonSubmitComponent } from '@components/button-submit/button-submit.component';
+import { NameIdComponent } from '@components/input-name-id/name-id.component';
+import { NickNameComponent } from '@components/input-nickname/nickname.component';
 import { AccountComponent } from './settings/account/account.component';
 import { MenuSettingsComponent } from './settings/menu-settings/menu-settings.component';
-import { ButtonBackComponent } from '../../core/components/button-back/button-back.component';
 import { SecurityComponent } from './settings/security/security.component';
-import { ChangeNameComponent } from './settings/account/change-name/change-name.component';
 import { ChangeDomainNameComponent } from './settings/account/change-domain-name/change-domain-name.component';
-import { UniqueNameRepository } from '../../core/repositories/auth/unique-name.repository';
-import { UniqueNameService } from '../../core/services/auth/unique-name.service';
-import { MessageComponent } from '../../core/components/messages/message.component';
+import { ChangeNameComponent } from './settings/account/change-name/change-name.component';
+import { FollowersComponent } from '@components/followers/followers.component';
+import { InputPhotoComponent } from '@components/input-photo/input-photo.component';
+import { ButtonFabCreateComponent } from '@components/button-fab-create/button-fab-create.component';
+import { ButtonBackComponent } from '@components/button-back/button-back.component';
+import { MessageComponent } from '@components/messages/message.component';
+import { profileReducer } from '@reducers/profile/profile.reducer';
+import { happenReducer } from '@reducers/happens/profile.happens.reducer';
+import { userReducer } from '@reducers/user/user.reducer';
+import { LikeEffect } from '@effects/happens/like.effect';
+import { HappensEffect } from '@effects/happens/profile.happens.effect';
+import { ProfileEffect } from '@effects/profile/profile.effect';
+import { HappenRepository } from '@repositories/happen/happen.repository';
+import { HappenService } from '@services/happens/happen.service';
+import { UniqueNameRepository } from '@repositories/auth/unique-name.repository';
+import { UniqueNameService } from '@services/auth/unique-name.service';
+import { SharedModule } from '@shared/shared.module';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
+import { CoverComponent } from '@components/cover/cover.component';
+import { FeelingsComponent } from '@components/feelings/feelings.component';
+import { UserDetailsComponent } from '@components/user-details/user-details.component';
+import { ProfileRepository } from '@repositories/profile/profile.repository';
+import { ProfileService } from '@services/profile/profile.service';
+import { LocalStorageService } from '@services/localstorages/localstorage.service';
 
 @NgModule({
-  declarations: [Profile, UserComponent, AccountComponent, MenuSettingsComponent, SettingComponent, SecurityComponent],
+  declarations: [
+    Profile,
+    UserComponent,
+    AccountComponent,
+    MenuSettingsComponent,
+    SettingComponent,
+    SecurityComponent,
+    ChangeDomainNameComponent,
+    ChangeNameComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -51,8 +63,10 @@ import { MessageComponent } from '../../core/components/messages/message.compone
     InputPhotoComponent,
     ButtonFabCreateComponent,
     ButtonBackComponent,
-    ChangeNameComponent,
-    ChangeDomainNameComponent,
+    MessageComponent,
+    ButtonSubmitComponent,
+    NameIdComponent,
+    NickNameComponent,
   ],
   providers: [
     provideState({ name: 'profile', reducer: profileReducer }),

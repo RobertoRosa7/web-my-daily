@@ -13,6 +13,7 @@ import { registerLocaleData } from '@angular/common';
 import { authInterceptor } from './core/interceptors/colors/core.interceptor';
 import { colorReducer } from './core/reducers/colors/color.reducer';
 import { userReducer } from './core/reducers/user/user.reducer';
+import { rdMessages } from '@reducers/message/message.reducer';
 
 registerLocaleData(localePt, 'pt');
 
@@ -23,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideState({ name: 'colors', reducer: colorReducer }),
     provideState({ name: 'user', reducer: userReducer }),
-
+    provideState({ name: 'message', reducer: rdMessages }),
     provideStore(),
     // provideClientHydration(withNoHttpTransferCache()),
     // withHttpTransferCacheOptions({

@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component, OnInit, PLATFORM_ID, inject } from 
 import { Store } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 import { Socket, io } from 'socket.io-client';
-import { actionProfileRequest } from '../../core/actions/profile/profile.action';
+import { acReqProfile } from '../../core/actions/profile/profile.action';
 import { happenRequest } from '../../core/actions/happen/profile.happens.action';
-import { selGetId, selGetNameId } from '../../core/selectors/user/user.selector';
+import { selGetId, selGetNameId, selGetNickname } from '@selectors/user/user.selector';
 import { selectorTheme } from '../../core/selectors/colors/color.selector';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
 import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.interface';
@@ -16,7 +16,7 @@ import { actionColor } from '../../core/actions/color/color.action';
 import { backgroundType } from '../../core/types/colors/color.type';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { FieldNameEnul } from '../../core/enums/bases/base.enum';
+import { FieldNameEnum } from '../../core/enums/bases/base.enum';
 
 @Component({
   selector: 'app-profile',
@@ -32,31 +32,19 @@ export class Profile extends InDestroyDirective implements OnInit {
   protected readonly store: Store = inject(Store);
   protected socketio!: Socket;
 
-  public readonly fieldNames = FieldNameEnul;
   public form!: FormGroup;
+  public isReady!: boolean;
+
+  public readonly fieldNames = FieldNameEnum;
   public readonly theme$ = this.store.select(selectorTheme);
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
   public readonly nameId$: Observable<string | undefined> = this.store.select(selGetNameId);
+  public readonly nickname$: Observable<string | undefined> = this.store.select(selGetNickname);
 
   public ngOnInit(): void {}
 
   public onFireEvent(field: string, form: FormControl) {
     this.form.addControl(field, form);
-  }
-
-  /**
-   * INFO:
-   * getNameId = get name field from form
-   */
-  public get getNameId() {
-    return this.form.get(FieldNameEnul.nameId)?.value;
-  }
-
-  /**
-   * INFO:
-   * isNameIdValid = get name field from form is valid to submit
-   */
-  public get isNameIdValid() {
-    return this.form.get(this.fieldNames.nameId)?.valid;
+    this.isReady = true;
   }
 }

@@ -8,6 +8,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 const user = userType.user;
 const userFollowers = userType.userFollowers;
 
+const usResetState = userType.usReset;
+
 const chNickname = userType.chNickname;
 const chNicknameOk = userType.chNicknameOk;
 const chNicknameNok = userType.chNicknameNok;
@@ -16,27 +18,21 @@ const chNameId = userType.chNameId;
 const chNameOk = userType.chNameIdOk;
 const chNameNok = userType.chNameIdNok;
 
-const chLoading = userType.chLoading;
-
 // callback function
 const cbUser = (payload: User) => payload;
 const cbUsFollwers = (payload: ListeningFollowResponse) => payload;
 
 const cbNickname = (payload: { nickname: string }) => payload;
 const cbNicknameOk = (payload: HttpUserResponse) => payload;
-const cbNicknameNok = (payload: HttpUserResponse) => payload;
+const cbNicknameNok = (payload: { failure: HttpErrorResponse }) => payload;
 
 const cbNameId = (payload: { nameId: string }) => payload;
 const cbNameIdOk = (payload: HttpUserResponse) => payload;
 const cbNameIdNok = (payload: { failure: HttpErrorResponse }) => payload;
 
-const cbLoading = (payload: { isLoading: boolean }) => payload;
-
 // export action create
 export const acUser = createAction(user, cbUser);
 export const acUsFollowers = createAction(userFollowers, cbUsFollwers);
-
-export const acLoading = createAction(user, cbLoading);
 
 export const acNickname = createAction(chNickname, cbNickname);
 export const acNicknameOk = createAction(chNicknameOk, cbNicknameOk);
@@ -45,3 +41,5 @@ export const acNicknameNok = createAction(chNicknameNok, cbNicknameNok);
 export const acNameId = createAction(chNameId, cbNameId);
 export const acNameIdOk = createAction(chNameOk, cbNameIdOk);
 export const acNameIdNok = createAction(chNameNok, cbNameIdNok);
+
+export const acResetState = createAction(usResetState);

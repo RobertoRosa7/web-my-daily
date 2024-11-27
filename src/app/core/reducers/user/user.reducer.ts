@@ -6,67 +6,52 @@ import {
   acNicknameOk,
   acNicknameNok,
   acUser,
-  acLoading,
+  acResetState,
 } from '../../actions/user/user.action';
 import { HttpErrorResponse } from '@angular/common/http';
 
 type States = Partial<HttpUserResponse>;
 type HttpResponseWithError = { failure: HttpErrorResponse };
-type IsLoading = { isLoading: boolean };
 
-const states: States = {};
-
-const callbackSetValues = (_: States, data: User) => ({ ..._, data });
-const callbackChangeNicknameOk = (_: States, { data }: HttpUserResponse) => ({
-  ..._,
-  data,
-  messageOk: 'Alteração feita com sucesso!',
-  messageNok: undefined,
-  error: undefined,
-  isLoading: false,
-});
-const callbackChangeNicknameNok = (_: States) => {
-  return {
-    ..._,
-    messageOk: undefined,
-    messageNok: 'Não foi possível efetuar operação. Por favor, verifique sua conexão com a internet e tente novamente.',
-    isLoading: false,
-  };
+const states: States = {
+  message: 'ajfdlasjflajdsf ljalsfja lj fsd lajfla jsdfl ajfdlasj dfljasld jlasjdflk ajsfdlas jfldajs lfdjalsdjfa',
 };
 
-const cbLoading = (_: States, { isLoading }: IsLoading) => ({
+const cbError = (_: States, { failure }: HttpResponseWithError) => ({
   ..._,
-  message: undefined,
-  messageOk: undefined,
-  messageNok: undefined,
-  error: undefined,
-  isLoading,
+  error: failure.error.error,
+  message: failure.error.message,
+  typeError: 'error',
 });
 
-const cbNameIdNok = (_: States, { failure }: HttpResponseWithError) => ({
-  ..._,
-  data: failure.error.data,
-  error: failure.error.error,
-  messageNok: failure.error.message,
-  messageOk: undefined,
-  isLoading: false,
-});
-const cbNameIdOk = (_: States, resp: HttpUserResponse) => ({
+const cbSuccess = (_: States, resp: HttpUserResponse) => ({
   ..._,
   data: resp.data,
   error: resp.error,
-  messageOk: resp.message,
-  messageNok: undefined,
-  isLoading: false,
+  message: resp.message,
+  typeError: 'success',
 });
+
+const cbResetStates = (_: States) => ({
+  ..._,
+  error: false,
+  message: undefined,
+  typeError: undefined,
+});
+
+const cbSetValues = (_: States, data: User) => ({ ..._, data });
+const cbNicknameOk = (_: States, resp: HttpUserResponse) => cbSuccess(_, resp);
+const cbNicknameNok = (_: States, error: HttpResponseWithError) => cbError(_, error);
+const cbNameIdNok = (_: States, error: HttpResponseWithError) => cbError(_, error);
+const cbNameIdOk = (_: States, resp: HttpUserResponse) => cbSuccess(_, resp);
 
 export const userReducer = createReducer(
   states,
-  on(acUser, callbackSetValues),
-  on(acNicknameOk, callbackChangeNicknameOk),
-  on(acNicknameNok, callbackChangeNicknameNok),
+  on(acUser, cbSetValues),
+  on(acNicknameOk, cbNicknameOk),
+  on(acNicknameNok, cbNicknameNok),
 
   on(acNameIdOk, cbNameIdOk),
   on(acNameIdNok, cbNameIdNok),
-  on(acLoading, cbLoading)
+  on(acResetState, cbResetStates)
 );

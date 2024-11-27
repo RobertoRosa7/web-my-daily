@@ -3,7 +3,7 @@ import { FollowRequest } from '../../../core/interfaces/follows/follow.interface
 import { Profile } from '../../profile/profile';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
-import { actionUserFollow } from '../../../core/actions/profile/profile.action';
+import { acUseFollow } from '../../../core/actions/profile/profile.action';
 import { selectorUserPub } from '../../../core/selectors/public/public-profile.selector';
 import { backgroundType } from '../../../core/types/colors/color.type';
 import { actionColor } from '../../../core/actions/color/color.action';
@@ -34,6 +34,6 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
   }
 
   public onSocketio(event: FollowRequest) {
-    this.store.dispatch(actionUserFollow(event));
+    this.store.dispatch(acUseFollow(event));
   }
 }

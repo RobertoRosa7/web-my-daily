@@ -1,18 +1,12 @@
-<form (ngSubmit)="onSubmit()" class="change-name">
+<form [hidden]="!isReady" (ngSubmit)="onSubmit()" class="change-name">
   <div class="container">
-    <app-message *ngIf="success$ | async as ok" [message]="ok" [visible]="true" type="success"></app-message>
-    <app-message *ngIf="error$ | async as nok" [message]="nok" [visible]="true" type="error"></app-message>
-    <app-message *ngIf="isLoading$ | async" [message]="'Atualizando...'" [visible]="true" type="info"></app-message>
-
     <div class="field-session">
+      <app-message></app-message>
       <h1>Altera apelido (opcional)</h1>
-      <mat-form-field appearance="fill" class="form-group">
-        <mat-label>Apelido</mat-label>
-        <input matInput type="text" [formControl]="formControll" aria-describedby="nameHelp" />
-        <button type="submit" matSuffix mat-icon-button>
-          <span class="material-symbols-outlined"> action_key </span>
-        </button>
-      </mat-form-field>
+      <app-input-nickname
+        [inputValue]="nickname$ | async"
+        (trigger)="onFireEvent(fieldNames.nickname, $event)"></app-input-nickname>
     </div>
+    <app-button-submit [form]="form" [name]="labelButtonSubmit"></app-button-submit>
   </div>
 </form>

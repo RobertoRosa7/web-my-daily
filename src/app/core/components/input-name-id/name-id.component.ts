@@ -24,6 +24,7 @@ import { CommonEnum } from '../../enums/bases/base.enum';
     <mat-hint align="end">{{ controlName.value }}{{ domainSuffix }}</mat-hint>
     <mat-error *ngIf="controlName.getError('pattern')">Somente letras minuscúlas e alpha numérico</mat-error>
     <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 4 letras</mat-error>
+    <mat-error *ngIf="controlName.getError('maxlength')">Maxímo de 6 letras</mat-error>
     <mat-error *ngIf="controlName.getError('required')">Nome é obrigatório</mat-error>
     <mat-error *ngIf="controlName.getError('uniqueDomainName')">{{ controlName.value }} já em uso</mat-error>
     <button role="button" [hidden]="isHideSubmit" type="submit" matSuffix mat-icon-button>

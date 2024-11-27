@@ -1,4 +1,4 @@
-export enum authType {
+export enum AuthType {
   LOGIN = 'login@types',
   LOGIN_REGISTER = 'loginRegister@types',
   LOGIN_ERROR = 'loginError@types',
