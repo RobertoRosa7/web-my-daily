@@ -90,7 +90,7 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content (click)="details(happen)" role="content" aria-describedby="post" aria-details="post content">
-      <div class="word-break" [innerHTML]="happen.whatHappen"></div>
+      <div class="word-break" [innerHTML]="happen.whatHappen | codeText"></div>
     </mat-card-content>
 
     <mat-card-actions>

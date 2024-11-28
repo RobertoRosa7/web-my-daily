@@ -26,10 +26,35 @@ export const validatePasswordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&
  */
 export const validateDomainNamePattern = /^[a-z0-9]+$/;
 
+/**
+ * Pattern Code Text Format
+ */
+export const codeTextPattern = /`([^`]+)`/g;
+
+/**
+ *
+ * @param senha string
+ * @returns
+ */
 export const validatePassword = (senha: string) => {
   return String(senha).toLowerCase().match(validatePasswordPattern);
 };
 
+/**
+ *
+ * @param text string
+ * @returns string clear
+ */
 export const clearText = (text: string) => {
   return text ? text.trim() : '';
+};
+
+export const extractRawText = (html: string): string => {
+  if (!html) return '';
+
+  // Regex para encontrar o conteúdo dentro das tags <code>
+  const regex = /<code>(.*?)<\/code>/g;
+
+  // Substituir <code> pelo conteúdo bruto delimitado por `
+  return html.replace(regex, '`$1`').replace(/<[^>]*>/g, '');
 };

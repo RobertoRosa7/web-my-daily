@@ -1,10 +1,6 @@
 <div class="flex flex-col items-center justify-center h-screen">
   <div class="py-3 px-5 w-full max-w-md">
-    <ng-container *ngIf="message$ | async as resp">
-      <!-- <app-message *ngIf="!resp.error && !!resp.data" [message]="resp.message" type="success"></app-message> -->
-      <!-- <app-message *ngIf="resp.error && !resp.data" [message]="resp.message" type="error"></app-message> -->
-    </ng-container>
-
+    <app-message></app-message>
     <h1 class="text-center mb-5">Cadastre sua conta</h1>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="px-5 flex flex-col gap-y-5">

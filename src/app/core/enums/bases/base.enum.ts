@@ -53,6 +53,7 @@ export enum FieldNameEnum {
 }
 export enum CommonEnum {
   daily = '@daily',
+  codeTag = '<code>$1</code>'
 }
 
 export enum TimeAgoMessages {
