@@ -11,7 +11,7 @@ COPY ./package*.json /app/
 RUN npm install
 
 # Copiar o restante do código após instalar as dependências
-COPY . /app/
+COPY . .
 
 # Executar o build SSR (browser e server)
 RUN npm run build:ssr
