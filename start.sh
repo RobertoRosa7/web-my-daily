@@ -3,7 +3,7 @@
 # Função para iniciar o NGINX
 start_nginx() {
   echo "Iniciando o NGINX..."
-  envsubst < ./nginx.conf.template > /etc/nginx/conf.d/default.conf && nginx -g "daemon off;" &
+  envsubst < nginx.conf.template > /etc/nginx/conf.d/default.conf && nginx -g "daemon off;" &
 }
 
 # Função para iniciar o Angular Server

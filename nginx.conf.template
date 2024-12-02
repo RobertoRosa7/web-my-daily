@@ -79,11 +79,6 @@ http {
         error_log /var/log/nginx/frontend-error.log;
     }
 
-    # Configuração HTTPS (porta 443) para o Frontend SPA
-    server {
-        server_name innovatenet.com.br www.innovatenet.com.br api.innovatenet.com.br api.innovatenet.local innovatenet.local;
-    }
-
     # Configuração HTTPS (porta 443) para o API Gateway
     server {
         listen 80;
