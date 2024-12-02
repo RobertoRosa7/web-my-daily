@@ -43,5 +43,6 @@ RUN chmod +x /app/start.sh
 # Expor portas
 EXPOSE 80 443
 
+
 # Comando de inicialização
 CMD ["/app/start.sh"]
