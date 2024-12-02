@@ -27,7 +27,7 @@ COPY --from=builder /app/dist/browser /usr/share/nginx/html
 COPY --from=builder /app/dist/server /app/server
 
 # Copiar arquivo de configuração do NGINX
-COPY ./nginx.conf.template /app/
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Instalar dependências do Angular Server
 # COPY ./package*.json /app
@@ -39,7 +39,6 @@ RUN chmod +x /app/start.sh
 
 # Expor portas
 EXPOSE 80 443
-
 
 # Comando de inicialização
 CMD ["/app/start.sh"]
