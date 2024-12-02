@@ -1,11 +1,11 @@
 # Etapa 1: Construção do Frontend Angular
-FROM node:20-alpine as build-frontend
+FROM node:20-alpine as builder
 
 # Diretório de trabalho
 WORKDIR /app
 
 # Copiar apenas os arquivos de dependências para cache
-COPY ./frontend/package*.json /app/
+COPY ./package*.json /app/
 
 # Instalar dependências com cache otimizado
 RUN npm install
@@ -26,8 +26,8 @@ RUN apk add --no-cache nodejs npm openssl bash
 WORKDIR /app
 
 # Copiar build do Angular (browser e server)
-COPY --from=build-frontend /app/dist/web-my-daily/browser /usr/share/nginx/html/browser
-COPY --from=build-frontend /app/dist/web-my-daily/server /app/server
+COPY --from=builder /app/dist/web-my-daily/browser /usr/share/nginx/html/browser
+COPY --from=builder /app/dist/web-my-daily/server /app/server
 
 # Copiar arquivo de configuração do NGINX
 COPY ./nginx.conf /etc/nginx/nginx.conf
