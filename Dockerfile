@@ -11,7 +11,7 @@ COPY ./package*.json /app/
 RUN npm install
 
 # Copiar o restante do código após instalar as dependências
-# COPY ./ /app
+#COPY ./ /app
 
 # Executar o build SSR (browser e server)
 RUN npm run build:ssr
@@ -27,15 +27,14 @@ COPY --from=builder /app/dist/browser /usr/share/nginx/html
 COPY --from=builder /app/dist/server /app/server
 
 # Copiar arquivo de configuração do NGINX
-# COPY ./nginx.conf.template /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf.template /app/
 
 # Instalar dependências do Angular Server
 # COPY ./package*.json /app
 # RUN npm install --only=production
 
 # Copiar script de inicialização
-COPY ./* /app
-
+COPY ./start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
 # Expor portas
