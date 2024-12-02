@@ -9,7 +9,7 @@ start_nginx() {
 # Função para iniciar o Angular Server
 start_angular_server() {
   echo "Iniciando o Angular Universal Server..."
-  node /app/server/main.js &
+  node /app/server/server.mjs &
 }
 
 # Função para capturar sinais de interrupção
