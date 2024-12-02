@@ -5,13 +5,13 @@ http {
     keepalive_timeout 65;
 
      # Configuração de SSL com variáveis de ambiente
-    map {{ENVIRONMENT}} $ssl_certificate {
+    map $ENVIRONMENT $ssl_certificate {
         default /etc/ssl/certs/default.crt; # Caso nenhum seja definido
         production /etc/letsencrypt/live/www.innovatenet.com.br/fullchain.pem;
         local /etc/ssl/certs/api.innovatenet.local.crt;
     }
 
-    map {{ENVIRONMENT}} $ssl_certificate_key {
+    map $ENVIRONMENT $ssl_certificate_key {
         default /etc/ssl/private/default.key; # Caso nenhum seja definido
         production /etc/letsencrypt/live/www.innovatenet.com.br/privkey.pem;
         local /etc/ssl/private/api.innovatenet.local.key;
@@ -27,8 +27,9 @@ http {
         # return 301 https://$host$request_uri;
 
         # Certificados SSL para produção/local usar certificados com base no ambiente
-        ssl_certificate $ssl_certificate;
-        ssl_certificate_key $ssl_certificate_key;
+        ssl_certificate $SSL_CERTIFICATE;
+        ssl_certificate_key $SSL_CERTIFICATE_KEY;
+
 
         # Segurança SSL/TLS
         ssl_protocols TLSv1.2 TLSv1.3;

@@ -1,9 +1,30 @@
 #!/bin/bash
 
+# Função para configurar certificados SSL com base no ambiente
+configure_ssl_certificates() {
+  echo "Configurando certificados SSL para o ambiente: $ENVIRONMENT"
+
+  if [[ "$ENVIRONMENT" == "local" ]]; then
+    echo "Usando certificados locais..."
+    export SSL_CERTIFICATE="/etc/ssl/certs/api.innovatenet.local.crt"
+    export SSL_CERTIFICATE_KEY="/etc/ssl/private/api.innovatenet.local.key"
+  elif [[ "$ENVIRONMENT" == "production" ]]; then
+    echo "Usando certificados de produção..."
+    export SSL_CERTIFICATE="/etc/letsencrypt/live/www.innovatenet.com.br/fullchain.pem"
+    export SSL_CERTIFICATE_KEY="/etc/letsencrypt/live/www.innovatenet.com.br/privkey.pem"
+  else
+    echo "Ambiente desconhecido, usando certificados padrão..."
+    export SSL_CERTIFICATE="/etc/ssl/certs/default.crt"
+    export SSL_CERTIFICATE_KEY="/etc/ssl/private/default.key"
+  fi
+}
+
 # Função para iniciar o NGINX
 start_nginx() {
   echo "Iniciando o NGINX..."
-  envsubst < /app/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g "daemon off;" &
+  # Substituir variáveis no template do NGINX
+  envsubst < /app/nginx.conf.template > /etc/nginx/nginx.conf
+  nginx -g "daemon off;" &
 }
 
 # Função para iniciar o Angular Server
@@ -21,6 +42,9 @@ handle_sigterm() {
   wait "$angular_pid"
   exit 0
 }
+
+# Configurar certificados antes de iniciar os serviços
+configure_ssl_certificates
 
 # Iniciar os serviços
 start_nginx
