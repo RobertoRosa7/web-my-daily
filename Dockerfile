@@ -5,7 +5,7 @@ FROM node:20-alpine as build-frontend
 WORKDIR /app
 
 # Copiar apenas os arquivos de dependências para cache
-COPY ./frontend/package*.json /app/
+COPY ./package*.json /app/
 
 # Instalar dependências com cache otimizado
 RUN npm install
