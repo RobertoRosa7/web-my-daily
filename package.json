@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --live-reload false",
-    "build": "ng build",
+    "build:ssr": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:web-my-daily": "node dist/web-my-daily/server/server.mjs"
+    "serve:ssr": "node dist/web-my-daily/server/server.mjs"
   },
   "private": true,
   "dependencies": {
