@@ -23,8 +23,8 @@ FROM nginx:alpine
 RUN apk add --no-cache nodejs npm openssl bash
 
 # Copiar build do Angular (browser e server)
-COPY --from=builder /app/dist/web-my-daily/browser /usr/share/nginx/html/browser
-COPY --from=builder /app/dist/web-my-daily/server /app/server
+COPY --from=builder /app/dist/browser /usr/share/nginx/html/browser
+COPY --from=builder /app/dist/server /app/server
 
 # Copiar arquivo de configuração do NGINX
 # COPY ./nginx.conf.template /etc/nginx/conf.d/default.conf

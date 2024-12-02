@@ -21,7 +21,7 @@
               "reflect-metadata",
               "moment"
             ],
-            "outputPath": "dist/web-my-daily",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
