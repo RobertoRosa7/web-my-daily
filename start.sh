@@ -17,6 +17,11 @@ configure_ssl_certificates() {
     export SSL_CERTIFICATE="/etc/ssl/certs/default.crt"
     export SSL_CERTIFICATE_KEY="/etc/ssl/private/default.key"
   fi
+   # Verifique se os arquivos existem
+  if [[ ! -f "$SSL_CERTIFICATE" || ! -f "$SSL_CERTIFICATE_KEY" ]]; then
+    echo "Erro: Certificados SSL não encontrados! Certificado: $SSL_CERTIFICATE, Chave: $SSL_CERTIFICATE_KEY"
+    exit 1
+  fi
 }
 
 # Função para iniciar o NGINX
