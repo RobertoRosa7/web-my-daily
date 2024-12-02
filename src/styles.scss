@@ -1,1 +1,353 @@
-/* You can add global styles to this file, and also import other style files */
+// Importa mixins para reutilização de estilos.
+@import './themes/mixins';
+// Importa o tema dark para estilos específicos.
+@import './themes/dark/dark';
+// Importa o tema light para estilos específicos.
+@import './themes/light/light';
+
+// Base do Tailwind CSS.
+@tailwind base;
+// Componentes do Tailwind CSS.
+@tailwind components;
+// Utilitários do Tailwind CSS.
+@tailwind utilities;
+
+// Paleta de cores root.
+:root {
+  // Cores para o tema claro.
+  --border-default: #d0d7de; // Cor padrão para bordas.
+  --text-accent: #ff4081; // Cor de destaque para textos.
+  --text-light: #08090c50; // Texto claro com opacidade.
+  --text-white: #333; // Texto branco padrão.
+  --text-middle-orange: #e67e22; // Laranja médio.
+  --text-middle-light: #585858; // Cinza médio.
+  --text-green: #009688; // Verde principal.
+  --text-green-light: #00968850; // Verde claro com opacidade.
+  --color-white: white; // Branco puro.
+  --color-whitesmoke: whitesmoke; // Branco esfumaçado.
+  --color-medium-white: #fafafa; // Branco médio.
+  --color-white-brightness: rgba(224, 224, 224, 0.4); // Branco com brilho reduzido.
+  --color-light-soft: #8b8b8b; // Cinza claro suave.
+
+  // Cores para o tema escuro.
+  --text-dark: #d65a31; // Texto em laranja escuro.
+  --text-dark-green: #0ff5e6; // Verde ciano para texto.
+  --color-dark-default: #202124; // Fundo escuro padrão.
+  --color-dark-primary: #58525200; // Primário com transparência.
+  --color-dark-secondary: #131722; // Fundo secundário escuro.
+  --color-dark: #212121; // Cinza escuro.
+  --bg-dark-color: #505050; // Cor de fundo para tema escuro.
+
+  // Variações de vermelho escuro.
+  --color-dark-red: #400000; // Vermelho escuro.
+  --color-dark-red-intensive: #000000; // Preto intenso.
+  --color-dark-red-medium: #800000; // Vermelho médio.
+  --color-dark-red-soft: #bf0000; // Vermelho suave.
+  --color-dark-red-light: #ff000025; // Vermelho claro translúcido.
+
+  // Variações de azul escuro.
+  --color-dark-blue: #090088; // Azul escuro principal.
+  --color-dark-blue-light: #02006c; // Azul escuro claro.
+  --color-dark-blue-soft: #010057; // Azul escuro suave.
+  --color-dark-blue-medium: #010048; // Azul médio escuro.
+  --color-dark-blue-intensive: #03002e; // Azul intenso.
+  --color-dark-blue-darkness: rgb(2, 0, 36); // Azul extremamente escuro.
+
+  // Cores adicionais para estilos de interface.
+  --color-yellow-light: #fd7d1457; // Amarelo claro com opacidade.
+  --color-green-light: #28a74547; // Verde claro com opacidade.
+  --color-white-light: #f9f9f9; // Branco claro.
+  --blue: #007bff; // Azul padrão.
+  --indigo: #6610f2; // Índigo.
+  --purple: #6f42c1; // Roxo.
+  --pink: #e83e8c; // Rosa.
+  --red: #dc3545; // Vermelho.
+  --orange: #fd7e14; // Laranja.
+  --yellow: #ffc107; // Amarelo.
+  --green: #28a745; // Verde.
+  --teal: #20c997; // Verde-azulado.
+  --cyan: #17a2b8; // Ciano.
+  --white: #fff; // Branco.
+  --gray: #6c757d; // Cinza.
+  --gray-dark: #343a40; // Cinza escuro.
+  --primary: #df3636; // Cor primária.
+  --secondary: #fff3b1; // Cor secundária.
+  --success: #28a745; // Indicador de sucesso.
+  --info: #17a2b8; // Indicador de informação.
+  --warning: #bf870050; // Indicador de alerta.
+  --danger: #dc3545; // Indicador de perigo.
+  --light: #f8f9fa; // Tema claro.
+  --dark: #343a40; // Tema escuro.
+  --gold: gold; // Ouro.
+  --brown: brown; // Marrom.
+  --green-microsoft: #488a84ad; // Verde inspirado na Microsoft.
+  --brown-light: #d8c9c2; // Marrom claro.
+  --brown-dark: #73635b; // Marrom escuro.
+  --brown-darker: #4e433f; // Marrom mais escuro.
+
+  // Cores específicas para interações sociais.
+  --social-hub: #d0d7de50; // Hub social translúcido.
+  --social-muted: #ddf4ff; // Azul claro para estado mudo.
+  --social-blue-accent: #0969da; // Azul acentuado.
+  --social-green-accent: #1f883d; // Verde acentuado.
+  --social-green-muted: #1f883d1a; // Verde translúcido para estado mudo.
+  --social-green-header: #d0dede39; // Verde translúcido para cabeçalhos.
+  --social-warning-muted: #bf87001a; // Amarelo translúcido para alerta.
+  --social-purple: purple; // Roxo.
+
+  // Cores para sentimentos.
+  --feeling-pos: #ef201d; // Sentimento positivo em vermelho.
+  --feeling-neg: #321d66; // Sentimento negativo em roxo.
+
+  // Gradientes para fundos de perfil e home.
+  --profile-cover: linear-gradient(-45deg, #d0d7deb3 20%, var(--white) 80%, #d0d7de00 5%);
+  --home-cover: linear-gradient(-45deg, var(--primary) 20%, var(--dark) 80%, var(--color-dark-blue-darkness) 5%);
+  --public-profile-cover: linear-gradient(
+    -45deg,
+    var(--dark) 10%,
+    var(--color-dark-blue-intensive) 80%,
+    var(--white) 0%
+  );
+}
+
+// Estilização para HTML e corpo.
+html,
+body {
+  height: 100%; // Altura total.
+  overflow-x: hidden; // Esconde rolagem horizontal.
+  scroll-behavior: auto; // Rolagem padrão.
+}
+
+body {
+  margin: 0; // Remove margens padrão.
+  font-family: Roboto, 'Helvetica Neue', sans-serif; // Define fonte padrão.
+}
+
+code {
+  background-color: #eef2f7; // Fundo claro para código.
+  color: #1a1a1a; // Texto em preto.
+  font-family: monospace; // Fonte estilo código.
+  padding: 0.01rem 0.5rem; // Espaçamento interno.
+  border-radius: 0.5rem; // Bordas arredondadas.
+}
+.loading-waves {
+  width: inherit; // Usa a largura herdada do elemento pai.
+  height: inherit; // Usa a altura herdada do elemento pai.
+  min-height: 25px; // Define altura mínima de 25px.
+  overflow: hidden; // Esconde qualquer conteúdo que ultrapasse.
+  position: relative; // Define posição relativa para elementos filhos.
+  opacity: 0.5; // Define opacidade reduzida.
+  * {
+    visibility: hidden; // Oculta os filhos do elemento.
+  }
+}
+
+.word-break {
+  word-break: keep-all; // Mantém palavras inteiras, sem quebras.
+}
+
+.loading-waves::after {
+  content: ''; // Adiciona conteúdo vazio para estilização.
+  position: absolute; // Posiciona em relação ao elemento pai.
+  animation: waves 1.5s linear infinite; // Animação de ondas.
+  height: 100%; // Preenche 100% da altura.
+  width: 100%; // Preenche 100% da largura.
+  background: rgba(0, 0, 0, 2); // Fundo preto com opacidade.
+  filter: blur(5rem); // Aplica efeito de desfoque.
+  z-index: 3; // Eleva a camada do elemento.
+  transform: rotate(45deg); // Gira o elemento em 45 graus.
+}
+
+@keyframes waves {
+  to {
+    transform: translateX(100%); // Move o elemento para a direita.
+  }
+}
+
+// Botão de voltar.
+.btn-back {
+  @include btn-icon-radio; // Usa mixin para estilo de botão.
+}
+
+// Personalização de diálogos.
+.dialog-custom,
+.dialog-custom .profile,
+.dialog-custom .home {
+  .mat-ripple-element {
+    transition-duration: 0ms !important; // Remove a transição.
+    display: none; // Oculta o efeito ripple.
+  }
+  button {
+    border-radius: 0.5rem; // Bordas arredondadas em botões.
+  }
+
+  button.close {
+    color: var(--color-dark) !important; // Cor do botão de fechar.
+    background-color: var(--social-hub); // Fundo do botão de fechar.
+  }
+  button:focus {
+    background-color: transparent; // Remove fundo ao focar.
+  }
+}
+
+.dialog-custom .home,
+.dialog-custom .explore {
+  // Remove fundo preenchido do campo de busca.
+  .mat-focused .mat-mdc-form-field-focus-overlay {
+    background-color: var(--white); // Define fundo branco.
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    border-radius: 1rem; // Bordas arredondadas.
+    border: 1px solid var(--color-dark-red-medium); // Borda vermelha média.
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    padding: 2rem; // Espaçamento interno.
+    color: var(--bg-dark-color); // Cor do texto.
+  }
+  .mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+    background-color: var(--social-muted); // Fundo mutado no estado checado.
+  }
+  .mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled:checked
+    + .mdc-radio__background
+    .mdc-radio__outer-circle {
+    border-color: var(--social-muted); // Cor da borda no estado checado.
+  }
+  .mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled
+    + .mdc-radio__background
+    .mdc-radio__inner-circle {
+    border-color: var(--social-blue-accent); // Cor de acento azul no círculo interno.
+  }
+  button.submit {
+    color: var(--social-blue-accent) !important; // Texto em azul acentuado.
+    background-color: var(--social-muted); // Fundo mutado.
+  }
+}
+
+.dialog-custom .profile {
+  .mat-focused .mat-mdc-form-field-focus-overlay {
+    background-color: var(--white); // Fundo branco no foco.
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    border-radius: 1rem; // Bordas arredondadas.
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    padding: 2rem; // Espaçamento interno.
+    color: var(--bg-dark-color); // Texto com cor de fundo escuro.
+  }
+  .mat-mdc-radio-button.mat-mdc-radio-checked .mdc-radio__background::before {
+    background-color: var(--social-muted); // Fundo mutado no estado checado.
+  }
+  .mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled:checked
+    + .mdc-radio__background
+    .mdc-radio__outer-circle {
+    border-color: var(--social-green-muted) !important; // Verde mutado na borda externa.
+  }
+  .mat-mdc-radio-button
+    .mdc-radio
+    .mdc-radio__native-control:enabled
+    + .mdc-radio__background
+    .mdc-radio__inner-circle {
+    border-color: var(--social-green-accent) !important; // Verde acentuado no círculo interno.
+  }
+  button.submit {
+    color: var(--social-green-accent) !important; // Texto verde acentuado.
+    background-color: var(--social-green-muted); // Fundo verde mutado.
+  }
+}
+
+// Estilo de comentários no diálogo.
+.dialog-comments {
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border: none; // Remove borda de linha ripple.
+  }
+  .mat-form-field.no-underline .mat-form-field-underline {
+    display: none; // Remove sublinhado.
+  }
+  .mat-focused .mat-mdc-form-field-focus-overlay {
+    background-color: var(--white); // Fundo branco no foco.
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: var(--color-dark); // Texto em cor escura.
+    caret-color: var(--color-dark); // Cor do cursor.
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent; // Remove cor da linha inferior.
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background: transparent; // Fundo transparente.
+    border: 1px solid var(--border-default); // Borda padrão.
+  }
+}
+
+.loading {
+  position: relative; // Define posição relativa para elementos internos.
+
+  * {
+    visibility: hidden; // Oculta elementos filhos.
+  }
+}
+
+.loading::after {
+  content: ''; // Adiciona conteúdo vazio para estilização.
+  position: absolute; // Posiciona em relação ao elemento pai.
+  top: 0; // Alinha ao topo.
+  left: 0; // Alinha à esquerda.
+  height: 70%; // Define altura de 70%.
+  width: 100%; // Define largura total.
+  background-color: rgba(0, 0, 0, 0.1); // Fundo semitransparente.
+  border-radius: 1rem; // Bordas arredondadas.
+  animation: lines 2s linear infinite; // Animação contínua de "linhas".
+}
+
+::-webkit-scrollbar {
+  width: 0.6rem; // Define largura do scrollbar.
+  height: 1rem; // Define altura do scrollbar horizontal.
+  background: transparent; // Fundo transparente.
+  z-index: 10; // Prioridade no empilhamento.
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-light); // Cor do "polegar" do scrollbar.
+  border-radius: 2rem; // Bordas arredondadas no "polegar".
+  padding-top: 1rem; // Espaçamento superior.
+  z-index: 10; // Eleva a camada do "polegar".
+}
+
+@keyframes lines {
+  from {
+    width: 50%; // Largura inicial da animação.
+  }
+  to {
+    width: 100%; // Largura final da animação.
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dialog-custom .profile {
+    // Ajusta o padding para telas menores.
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+      padding: 0rem; // Remove espaçamento interno.
+    }
+    // Ajusta a borda do botão de rádio para telas menores.
+    .mat-mdc-radio-button
+      .mdc-radio
+      .mdc-radio__native-control:enabled:checked
+      + .mdc-radio__background
+      .mdc-radio__outer-circle {
+      border-color: var(--color-dark-red-medium); // Cor da borda no estado checado.
+    }
+    .mat-mdc-radio-button
+      .mdc-radio
+      .mdc-radio__native-control:enabled
+      + .mdc-radio__background
+      .mdc-radio__inner-circle {
+      border-color: var(--color-dark-red-medium); // Cor do círculo interno.
+    }
+  }
+}

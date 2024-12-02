@@ -1,0 +1,132 @@
+// card initial explore search and list all profile public
+.card-explore,
+.card-explore .mat-mdc-card-title,
+.card-explore .mat-mdc-card-title div {
+  width: 100%;
+}
+.card-explore {
+  min-width: 300px;
+
+  // container div main all content is here
+  .div-main,
+  .div-main mat-card {
+    justify-content: center;
+  }
+
+  // customize title and subtitle display flex
+  .div-main mat-card .mat-mdc-card-subtitle,
+  .div-main mat-card .mat-mdc-card-title,
+  .div-main mat-card .mat-mdc-card-title p,
+  .div-main mat-card .mat-mdc-card-title p mat-icon,
+  .div-main .container-details {
+    display: flex;
+  }
+  .nickname {
+    padding: 2px 8px;
+    border-radius: 0.5rem;
+    flex: 0.1;
+  }
+  .div-main {
+    width: inherit;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-items: center;
+    // customize card reset values default
+
+    mat-card {
+      width: inherit;
+      margin: 0 0 1rem;
+      border-radius: 1rem;
+      min-height: 5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+
+      // customize card-header
+      .mat-mdc-card-header {
+        align-items: center;
+        flex-direction: row-reverse;
+        gap: 1rem;
+      }
+      // reset custom values default
+      .mat-mdc-card-header,
+      .mat-mdc-card-title,
+      .mdc-card {
+        padding: 0;
+      }
+
+      // image avatar
+      .avatar {
+        margin: 0 !important;
+        max-width: 64px;
+        max-height: 64px;
+        width: 4rem;
+        height: 4rem;
+        // image inside class avatar side left
+        img {
+          cursor: pointer;
+        }
+      }
+      // customize title and subtitle display flex
+      .mat-mdc-card-subtitle {
+        align-items: center;
+      }
+      // force reset values from card
+      ::ng-deep .mat-mdc-card-header-text {
+        width: 100%;
+      }
+      // customize card title
+      .mat-mdc-card-title {
+        justify-content: space-between;
+        text-overflow: ellipsis;
+        // div inside de title content info from users
+        div {
+          max-width: 260px;
+          line-height: 1.5rem;
+        }
+        div:last-child {
+          max-width: 20%;
+          text-align: end;
+        }
+        p {
+          font-size: 0.8rem;
+          justify-content: space-between;
+          text-overflow: ellipsis;
+          word-wrap: nowrap;
+          overflow: hidden;
+          margin: 0;
+          span.divider {
+            flex: 0.1;
+            display: flex;
+            justify-content: center;
+          }
+          // custom specify only public
+          span.public {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex: 1;
+          }
+          // custom icon from card title
+          mat-icon {
+            justify-content: center;
+          }
+        }
+      }
+      .mat-mdc-card-subtitle {
+        justify-content: flex-start;
+        gap: 0.5rem;
+        min-height: 1rem;
+        span {
+          margin-bottom: -3px;
+        }
+        mat-icon {
+          display: flex;
+          align-items: center;
+        }
+        .material-icons {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

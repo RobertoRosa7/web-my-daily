@@ -1,0 +1,64 @@
+<main class="card-explore">
+  <div class="div-main">
+    <mat-card>
+      <mat-card-header>
+        <div
+          class="avatar"
+          *ngIf="profile"
+          matTooltipPosition="left"
+          [matTooltip]="profile.name || ''"
+          [queryParams]="{ name: profile.nameId }"
+          routerLink="/public/details">
+          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
+        </div>
+        <mat-card-title>
+          <div>
+            <p class="container-details">
+              <span
+                class="name"
+                matTooltipPosition="above"
+                [matTooltip]="profile.name || ''"
+                role="span"
+                aria-describedby="name">
+                {{ profile.name }}
+              </span>
+
+              <span class="divider">|</span>
+
+              <span class="public">
+                <span matTooltipPosition="above" [matTooltip]="(profile.createdAt | date) || ''">
+                  {{ profile.createdAt | timeAgo }}
+                </span>
+                <mat-icon
+                  class="text-sm"
+                  matTooltipPosition="right"
+                  [matTooltip]="profile.profilePublic ? 'Público' : 'Privado'"
+                  role="icon"
+                  aria-describedby="icone de visibilidade">
+                  {{ profile.profilePublic ? 'public' : 'lock' }}
+                </mat-icon>
+              </span>
+            </p>
+
+            <p class="container-details">
+              <span
+                matTooltipPosition="below"
+                [matTooltip]="profile.nameId || ''"
+                style="cursor: pointer"
+                [queryParams]="{ name: profile.nameId }"
+                routerLink="/public/details"
+                >{{ profile.nameId?.trim() }}
+              </span>
+            </p>
+          </div>
+          <app-button-follower
+            style="display: flex; justify-content: center; align-items: center"
+            (onLogin)="requestLoginToFollow()"
+            (socketio)="onFollow($event)"
+            [profile]="profile"
+            [id]="id"></app-button-follower>
+        </mat-card-title>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</main>

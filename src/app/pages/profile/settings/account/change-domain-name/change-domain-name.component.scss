@@ -1,0 +1,19 @@
+@import '../../../../../../themes/mixins';
+
+.change-domain-name {
+  padding-top: 5rem;
+  height: 100%;
+  .container {
+    @include size-page;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .form-group {
+      width: 100%;
+    }
+    .field-session {
+      margin-bottom: 2rem;
+    }
+  }
+}

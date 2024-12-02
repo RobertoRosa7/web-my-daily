@@ -1,0 +1,159 @@
+@import '../mixins';
+
+.home {
+  .cover {
+    border-bottom: 1px solid var(--border-default);
+  }
+  mat-toolbar {
+    background-color: var(--white);
+  }
+  .dialog-happen p.title {
+    .name-id {
+      color: var(--color-dark);
+    }
+    .date {
+      background-color: var(--social-muted);
+      color: var(--social-blue-accent);
+    }
+  }
+
+  // tab timeline
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border: none;
+  }
+}
+
+.home.timeline {
+  .mdc-line-ripple::before,
+  .mdc-line-ripple::after {
+    border: none;
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: inherit;
+  }
+  .mat-form-field.no-underline .mat-form-field-underline {
+    display: none;
+  }
+  // input search remove underline coloer
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent;
+  }
+  // remove filled background search input
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background: transparent;
+    border: 1px solid #d0d7deb3;
+    border-radius: 1rem;
+  }
+
+  // card feeling theme profile
+  .card-feeling {
+    border: 1px solid #d0d7deb3;
+
+    mat-card-header {
+      background-color: #d0d7de39;
+    }
+
+    span.name-id {
+      background-color: var(--social-muted);
+      color: var(--social-blue-accent);
+    }
+
+    .mat-mdc-card-content {
+      background-color: var(--color-white);
+    }
+    // button score negative on card feeling
+    .container-scores div button.btn-score-neg {
+      color: var(--feeing-neg);
+    }
+    .container-scores div button.btn-score-pos {
+      color: var(--feeling-pos);
+    }
+  }
+  p.title {
+    .name-id {
+      color: var(--color-dark);
+    }
+    .date {
+      background-color: var(--social-muted);
+      color: var(--social-blue-accent);
+    }
+  }
+  // button menu
+  .container-buttons .btn-menu {
+    @include btn-default;
+    border: none;
+    box-shadow: none;
+    background-color: var(--social-blue-accent);
+    color: var(--white);
+  }
+  // logo nickaneme on toolbar
+  .logo {
+    .nickaname {
+      background-color: var(--social-hub);
+      color: var(--social-blue-accent);
+    }
+  }
+}
+
+.home.explore {
+  .cover {
+    border-bottom: 1px solid var(--social-warning-muted);
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: inherit;
+  }
+  .mat-form-field.no-underline .mat-form-field-underline {
+    display: none;
+  }
+  // customize text inside input field search
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: var(--color-dark);
+    caret-color: var(--color-dark);
+  }
+  // input search remove underline color
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border-bottom-color: transparent;
+  }
+
+  // remove filled background search input
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: 1rem;
+  }
+  // tab timeline
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border: none;
+  }
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border: none;
+  }
+  // button menu
+  .container-buttons .btn-menu {
+    @include btn-default;
+    border: none;
+    box-shadow: none;
+    background-color: var(--warning);
+    color: var(--color-dark);
+  }
+
+  // Title feelingers
+  .feelingers {
+    background-color: var(--social-hub);
+    color: var(--color-dark);
+  }
+
+  // card-explore
+  .card-explore {
+    .nickname {
+      background-color: var(--social-warning-muted);
+      color: var(--color-dark);
+    }
+  }
+  .logo {
+    .nickaname {
+      background-color: var(--social-hub);
+      color: var(--black);
+    }
+  }
+}

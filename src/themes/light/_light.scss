@@ -1,0 +1,12 @@
+@import '../mixins';
+
+// theme light
+.light-mode {
+  background: var(--white);
+
+  // custom theme of eatch page
+  @import './profile';
+  @import './settings';
+  @import './home';
+  @import './public';
+}

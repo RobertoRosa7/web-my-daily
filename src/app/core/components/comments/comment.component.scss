@@ -1,0 +1,210 @@
+.dialog-header {
+  display: flex;
+  .title {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+  }
+  .subtitle {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    background-color: purple;
+    border-radius: 0.5rem;
+    color: var(--white);
+    display: inline-block;
+    padding: 0.2rem 1rem;
+  }
+}
+.container.comments {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+.body {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2.2rem;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  .dialog-content {
+    display: flex;
+    gap: 1rem;
+    position: relative;
+    .timeline {
+      flex: 0.3;
+      display: flex;
+      z-index: 1;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      flex-direction: column;
+      position: relative;
+      .author {
+        line-height: 1rem;
+        color: var(--social-blue-accent);
+        border-radius: 0.5rem;
+        padding: 2px 8px;
+        position: relative;
+        .nickname {
+          font-size: 1rem;
+          display: block;
+        }
+        .domain-name {
+          padding: 2px 8px;
+          border-radius: 0.5rem;
+          background-color: var(--social-purple);
+          font-size: 0.7rem;
+          color: var(--white);
+          display: inline-block;
+          font-style: italic;
+        }
+        .date {
+          font-size: 0.7rem;
+          margin-top: 7px;
+          display: inline-block;
+          color: var(--color-dark);
+        }
+      }
+    }
+    .card-comments {
+      flex: 1;
+      z-index: 1;
+      border: 2px solid var(--social-purple);
+      margin-bottom: 1rem;
+      background-color: var(--white);
+      border-radius: 0.5rem;
+      position: relative;
+      .card-header {
+        display: flex;
+        align-items: center;
+        height: 48px;
+        position: relative;
+        font-size: 0.8rem;
+        color: #433147;
+        font-style: italic;
+        border-collapse: collapse;
+        justify-content: space-between;
+        padding-left: 1rem;
+        border-radius: 0.5rem;
+      }
+      .card-body {
+        padding: 1rem 1rem;
+      }
+      .container-scores {
+        display: flex;
+        border-top: 1px solid var(--social-hub);
+        background-color: var(--social-hub);
+        max-height: 35px;
+        diV {
+          display: flex;
+          align-items: center;
+          button {
+            width: 40px;
+            height: 40px;
+          }
+        }
+        mat-icon {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+.card-insignia {
+  position: absolute;
+  top: 0;
+  left: 15px;
+  height: 16px;
+  width: 16px;
+  z-index: -1;
+  background-color: var(--social-hub);
+}
+.card-insignia.blue {
+  background-color: var(--feeling-neg);
+}
+.card-insignia.red {
+  background-color: var(--feeling-pos);
+}
+.card-insignia::after {
+  content: '';
+  height: 10px;
+  width: 16px;
+  background-color: var(--white);
+  position: absolute;
+  top: 6px;
+  left: 0;
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+.dialog-content .card-comments .card-header::before {
+  content: ' ';
+  right: 100%;
+  width: 8px;
+  height: 16px;
+  top: 11px;
+  left: -8px;
+  position: absolute;
+  background-color: var(--social-purple);
+  pointer-events: none;
+  display: block;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+.dialog-content .card-comments .card-header::after {
+  content: ' ';
+  right: 100%;
+  width: 8px;
+  height: 16px;
+  top: 11px;
+  left: -7px;
+  position: absolute;
+  background-color: var(--white);
+  pointer-events: none;
+  display: block;
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  margin-left: 2px;
+}
+.timeline::before {
+  content: '';
+  height: 100%;
+  width: 1px;
+  position: absolute;
+  top: 0;
+  left: -10px;
+  background-color: var(--social-hub);
+}
+.author::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: -15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--white);
+  border: 2px solid var(--social-purple);
+}
+.author::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 2px;
+  left: -20px;
+  top: 14px;
+  background-color: var(--social-purple);
+  z-index: -1;
+}
+.edit-input {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .container .dialog-content .timeline {
+    .author,
+    .date {
+      line-height: 1rem;
+    }
+  }
+}

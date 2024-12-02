@@ -17,16 +17,83 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
+    "allowJs": true,
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@mocks/*": [
+        "./src/app/mock/*"
+      ],
+      "@actions/*": [
+        "./src/app/core/actions/*"
+      ],
+      "@components/*": [
+        "./src/app/core/components/*"
+      ],
+      "@decorators/*": [
+        "./src/app/core/decorators/*"
+      ],
+      "@derectives/*": [
+        "./src/app/core/derectives/*"
+      ],
+      "@effects/*": [
+        "./src/app/core/effects/*"
+      ],
+      "@enums/*": [
+        "./src/app/core/enums/*"
+      ],
+      "@guards/*": [
+        "./src/app/core/guards/*"
+      ],
+      "@interceptors/*": [
+        "./src/app/core/interceptors/*"
+      ],
+      "@interfaces/*": [
+        "./src/app/core/interfaces/*"
+      ],
+      "@pipes/*": [
+        "./src/app/core/pipes/*"
+      ],
+      "@reducers/*": [
+        "./src/app/core/reducers/*"
+      ],
+      "@repositories/*": [
+        "./src/app/core/repositories/*"
+      ],
+      "@resolvers/*": [
+        "./src/app/core/resolvers/*"
+      ],
+      "@selectors/*": [
+        "./src/app/core/selectors/*"
+      ],
+      "@services/*": [
+        "./src/app/core/services/*"
+      ],
+      "@acTypes/*": [
+        "./src/app/core/types/*"
+      ],
+      "@pages/*": [
+        "./src/app/pages/*"
+      ],
+      "@shared/*": [
+        "./src/app/shared/*"
+      ],
+      "@utils/*": [
+        "./src/app/utils/*"
+      ],
+      "@env/*": [
+        "./src/environments/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
+    "noPropertyAccessFromIndexSignature": false,
     "strictTemplates": true
   }
 }

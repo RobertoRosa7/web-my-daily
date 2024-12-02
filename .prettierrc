@@ -1,0 +1,13 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "printWidth": 120,
+  "max_line_length": 120,
+  "trailingComma": "es5",
+  "arrowParens": "always",
+  "endOfLine": "crlf",
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "bracketSameLine": true
+}

@@ -1,0 +1,37 @@
+.input-photo,
+.input-photo .image,
+.input-photo .img {
+  display: flex;
+  height: inherit;
+  width: inherit;
+
+  min-width: inherit;
+  min-height: inherit;
+
+  align-items: center;
+  justify-content: center;
+}
+.input-photo {
+  .image {
+    border-radius: 1rem;
+    flex: 1;
+  }
+  .img {
+    min-height: 5rem;
+    min-width: 5rem;
+    border-radius: 50%;
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .input-photo .image {
+    background: transparent;
+  }
+
+  .input-photo .img {
+    max-width: 8rem;
+    max-height: 8rem;
+  }
+}

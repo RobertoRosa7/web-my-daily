@@ -1,0 +1,68 @@
+<main class="public-profile" [ngClass]="theme$ | async">
+  <div class="row">
+    <div class="banner">
+      <p class="title">Bem-vindo ao [<span class="daily">Diário</span>]!</p>
+      <p class="subtitle">&quot;Seu <strong>diário</strong>, agora mais inteligente e sensível.&quot;</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="new-feelingers">
+      <div class="container-pup">
+        <div class="box">
+          <div class="search">
+            <p>Novos feelingers</p>
+          </div>
+          <div class="card-explore" *ngIf="userPageble$ | async as pageable; else loading">
+            <app-initial-explore
+              *ngFor="let profile of pageable"
+              (socketio)="onSocketio($event)"
+              [profile]="profile"></app-initial-explore>
+          </div>
+        </div>
+        <ng-template #loading>
+          <div class="card-explore">
+            <app-initial-explore class="loading" *ngFor="let profile of mock" [profile]="profile"></app-initial-explore>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- <div class="section-text">
+      <div class="text">
+        <p>
+          Aqui, você pode se expressar livremente, como se estivesse escrevendo em seu diário pessoal. Nosso objetivo é
+          criar uma comunidade de apoio e compreensão, onde cada história é valorizada e respeitada. Seja você quem for
+          e esteja passando pelo que for, suas experiências importam.
+        </p>
+      </div>
+    </div> -->
+  </div>
+
+  <!-- <div class="row">
+    <div class="section-text">
+      <div class="text">
+        <p>
+          Ao compartilhar, você não só encontra um lugar para desabafar, mas também ajuda outras pessoas que podem estar
+          passando por situações semelhantes. Sinta-se à vontade para explorar, ler as histórias de outros usuários e
+          compartilhar as suas próprias.
+        </p>
+      </div>
+    </div>
+    <figure class="highcharts-figure">
+      <div #charts>chart</div>
+    </figure>
+  </div> -->
+  <!-- 
+  <div class="row">
+    <div class="section-text">
+      <div class="text">
+        <p>
+          Juntos, podemos construir um ambiente de empatia e crescimento pessoal. Se precisar de qualquer ajuda ou tiver
+          alguma dúvida, nossa equipe está sempre aqui para você. Basta entrar em contato. Bem-vindo à nossa comunidade.
+          Sua história começa aqui.
+        </p>
+      </div>
+      <div></div>
+    </div>
+  </div> -->
+</main>

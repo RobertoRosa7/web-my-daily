@@ -1,0 +1,100 @@
+<div class="body">
+  <div class="container">
+    <section class="dialog-content">
+      <div class="timeline">
+        <div class="author">
+          <span matTooltipPosition="left" matTooltip="Apelido" class="nickname">{{ comment.nickname }}</span>
+          <span matTooltipPosition="left" matTooltip="data" class="date">{{
+            comment.updatedAt | date : 'medium'
+          }}</span>
+        </div>
+      </div>
+      <div class="card-comments">
+        <div class="card-insignia" [ngClass]="getInsigniaColor"></div>
+        <div class="card-header">
+          <span matTooltipPosition="above" matTooltip="nome de domínio">{{ comment.nameId }}</span>
+          <button
+            [hidden]="enableMenuButton"
+            matTooltip="Menu"
+            [matMenuTriggerFor]="menus"
+            matTooltipPosition="right"
+            tabindex="-1"
+            mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menus="matMenu" overlapTrigger="true">
+            <button *ngIf="id !== comment.userId" matTooltipPosition="right" mat-menu-item matTooltip="Denúnicar">
+              <span>Denúnciar</span>
+            </button>
+            <button
+              (click)="expanded = true"
+              *ngIf="id === comment.userId"
+              matTooltipPosition="right"
+              mat-menu-item
+              matTooltip="Editar">
+              <span>Editar</span>
+            </button>
+            <button
+              (click)="onRemove(comment)"
+              *ngIf="id === comment.userId"
+              matTooltipPosition="right"
+              mat-menu-item
+              matTooltip="Excluir">
+              <span>exlcuir</span>
+            </button>
+          </mat-menu>
+        </div>
+        <div class="card-body">
+          <div [innerHTML]="comment.text"></div>
+        </div>
+        <div class="container-scores">
+          <div matTooltipPosition="above" matTooltip="Score Positivo">
+            <button disabled class="btn-score-pos" mat-icon-button role="button" aria-describedby="arrow_upward">
+              <mat-icon aria-label="arrow_upward">arrow_upward</mat-icon>
+            </button>
+            <small>{{ comment.scorePositive | percent : '1.2-2' }}</small>
+          </div>
+          <div matTooltipPosition="above" matTooltip="Score Negativo">
+            <button disabled class="btn-score-neg" mat-icon-button role="button" aria-describedby="arrow_downward">
+              <mat-icon aria-label="arrow_downward">arrow_downward</mat-icon>
+            </button>
+            <small>{{ comment.scoreNegative | percent : '1.2-2' }}</small>
+          </div>
+        </div>
+        <form *ngIf="expanded" (ngSubmit)="updateComment(comment)">
+          <mat-form-field class="field edit-input">
+            <textarea
+              (keydown.control.enter)="updateComment(comment)"
+              [formControl]="form"
+              cols="5"
+              rows="5"
+              [tabindex]="0"
+              placeholder="Digite aqui"
+              matInput
+              type="text"></textarea>
+            <button
+              type="submit"
+              role="button"
+              aria-describedby="edit"
+              (click)="updateComment(comment)"
+              *ngIf="form.value !== ''"
+              matSuffix
+              mat-icon-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              type="button"
+              role="button"
+              aria-describedby="close"
+              *ngIf="form.value === ''"
+              (click)="expanded = false"
+              matSuffix
+              mat-icon-button>
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </form>
+      </div>
+    </section>
+  </div>
+</div>

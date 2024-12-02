@@ -1,0 +1,49 @@
+<main class="dialog-happen-detail" *ngIf="happen$ | async as data">
+  <div class="btn-close">
+    <button [tabindex]="-1" matTooltip="fechar" matTooltipPosition="above" [mat-dialog-close]="null" mat-icon-button>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="title">
+      <span>{{ data.happenActive.nickname }}</span>
+      <span>{{ data.happenActive.nameId }}</span>
+    </div>
+  </div>
+  <mat-dialog-content>
+    <span class="inner" [innerHTML]="data.happenActive.whatHappen"></span>
+    <div class="container-likes">
+      <div matTooltipPosition="above" matTooltip="Cutir">
+        <button
+          (click)="liked(data.happenActive.likes.isLiked, data.index, data.happenActive)"
+          mat-icon-button
+          role="button"
+          aria-describedby="favorite">
+          <mat-icon *ngIf="!data.happenActive.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
+          <mat-icon *ngIf="data.happenActive.likes.isLiked" aria-label="favorite">favorite</mat-icon>
+        </button>
+        <small>{{ data.happenActive.likes.likedCount | follows }}</small>
+      </div>
+      <div matTooltipPosition="above" matTooltip="Não curtir">
+        <button
+          (click)="disliked(data.happenActive.likes.isDisliked, data.index, data.happenActive)"
+          mat-icon-button
+          role="button"
+          aria-describedby="not-favorite">
+          <span
+            class="thumb-down"
+            *ngIf="!data.happenActive.likes.isDisliked"
+            aria-label="not-favorite"
+            class="material-symbols-outlined">
+            thumb_down
+          </span>
+          <mat-icon
+            *ngIf="data.happenActive.likes.isDisliked"
+            aria-label="not-favorite"
+            class="material-symbols-outlined">
+            thumb_down
+          </mat-icon>
+        </button>
+        <small>{{ data.happenActive.likes.dislikedCount | follows }}</small>
+      </div>
+    </div>
+  </mat-dialog-content>
+</main>

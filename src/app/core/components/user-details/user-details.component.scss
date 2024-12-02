@@ -1,0 +1,95 @@
+.user-details {
+  font-weight: 100;
+  padding: 1rem;
+
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  .body {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  .infos p:first-child {
+    font-family: 'Open Sans';
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: 'wdth' 100;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+  p {
+    line-height: 1.5rem;
+    margin: 0;
+  }
+  .title {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin: 0;
+    line-height: 2rem;
+  }
+  .title p {
+    font-size: 2rem;
+  }
+  .scores,
+  .scores div,
+  .scores div.right div,
+  .scores div.left div {
+    display: flex;
+    gap: 1rem;
+  }
+  .scores {
+    flex-wrap: wrap;
+    min-height: 5rem;
+    align-items: center;
+    color: var(--color-light-soft);
+    font-family: 'Open Sans';
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: 'wdth' 100;
+    font-weight: 700;
+  }
+  .score-positive {
+    color: var(--feeling-pos);
+  }
+  .score-negative {
+    color: var(--feeling-neg);
+  }
+  .scores div {
+    flex: 1;
+    text-align: center;
+    p:first-child {
+      font-size: 1.5rem;
+    }
+  }
+  .scores div.right div,
+  .scores div.left div {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .user-details {
+    font-weight: 100;
+    margin-top: 3rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    .scores {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 5rem;
+      align-items: center;
+    }
+    .scores div {
+      flex: 1;
+      text-align: center;
+      p {
+        line-height: 1.5rem;
+        margin: 0;
+        min-width: 120px;
+      }
+      p:first-child {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
