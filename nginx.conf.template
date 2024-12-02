@@ -4,19 +4,6 @@ http {
     sendfile      on;
     keepalive_timeout 65;
 
-     # Configuração de SSL com variáveis de ambiente
-    map $ENVIRONMENT $ssl_certificate {
-        default /etc/ssl/certs/default.crt; # Caso nenhum seja definido
-        production /etc/letsencrypt/live/www.innovatenet.com.br/fullchain.pem;
-        local /etc/ssl/certs/api.innovatenet.local.crt;
-    }
-
-    map $ENVIRONMENT $ssl_certificate_key {
-        default /etc/ssl/private/default.key; # Caso nenhum seja definido
-        production /etc/letsencrypt/live/www.innovatenet.com.br/privkey.pem;
-        local /etc/ssl/private/api.innovatenet.local.key;
-    }
-
     # Configuração HTTP (porta 80 3 443)
     server {
         listen 80;
