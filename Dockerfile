@@ -30,7 +30,7 @@ COPY --from=builder /app/dist/web-my-daily/browser /usr/share/nginx/html/browser
 COPY --from=builder /app/dist/web-my-daily/server /app/server
 
 # Copiar arquivo de configuração do NGINX
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf.template /etc/nginx/conf.d/default.conf
 
 # Instalar dependências do Angular Server
 COPY ./package*.json /app
