@@ -5,16 +5,16 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Copiar apenas os arquivos de dependências para cache
-# COPY ./package*.json /app/
+COPY ./package*.json /app/
 
 # Instalar dependências com cache otimizado
-# RUN npm install
+RUN npm install
 
 # Copiar o restante do código após instalar as dependências
 COPY . .
 
 # Executar o build SSR (browser e server)
-# RUN npm run build:ssr
+RUN npm run build:ssr
 
 # Etapa 2: Configuração do contêiner final
 FROM nginx:alpine
@@ -30,8 +30,8 @@ COPY --from=builder /app/dist/web-my-daily/server /app/server
 # COPY ./nginx.conf.template /etc/nginx/conf.d/default.conf
 
 # Instalar dependências do Angular Server
-COPY ./package*.json /app
-RUN npm install --only=production
+# COPY ./package*.json /app
+# RUN npm install --only=production
 
 # Copiar script de inicialização
 COPY ./start.sh /app/start.sh
