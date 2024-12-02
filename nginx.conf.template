@@ -73,8 +73,8 @@ http {
         server_name api.innovatenet.com.br api.innovatenet.local;
 
         # Certificados SSL para produção/local usar certificados com base no ambiente
-        ssl_certificate $ssl_certificate;
-        ssl_certificate_key $ssl_certificate_key;
+        ssl_certificate {{SSL_CERTIFICATE}};
+        ssl_certificate_key {{SSL_CERTIFICATE_KEY}};
 
         # Segurança SSL/TLS
         ssl_protocols TLSv1.2 TLSv1.3;
