@@ -1,5 +1,5 @@
 # Etapa 1: Construção do Frontend Angular
-FROM node:20-alpine AS builder
+FROM node:20.11.1-alpine AS builder
 
 # Diretório de trabalho
 WORKDIR /app
