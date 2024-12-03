@@ -32,10 +32,10 @@ export class LikeEffect {
         }
 
         // verify if card happen is not my own card
-        if (id !== request.ownerId) {
-          const socketio = io(environment.ws + '/likes');
-          socketio.emit('dispatch_likes', request.happenId, request.ownerId);
-        }
+        // if (id !== request.ownerId) {
+        //   const socketio = io(environment.ws + '/likes');
+        //   socketio.emit('dispatch_likes', request.happenId, request.ownerId);
+        // }
 
         return actionLikeSuccess(response.data);
       })

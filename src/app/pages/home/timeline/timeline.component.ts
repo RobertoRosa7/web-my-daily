@@ -27,27 +27,27 @@ export class TimelineComponent extends HomeComponent implements OnInit {
     if (isPlatformBrowser(this.platform)) {
       this.store.dispatch(happenTimeline());
 
-      const socketio = io(environment.ws + '/likes');
+      // const socketio = io(environment.ws + '/likes');
 
-      this.userId$
-        .pipe(
-          mergeMap((id) =>
-            this.listeningLikes$(socketio, 'listening_likes').pipe(
-              map((response) => JsonMapProperties.deserialize(LikeSocketio, response)),
-              filter(({ ownerId }) => ownerId === id)
-            )
-          )
-        )
-        .subscribe({
-          next: (res) => this.store.dispatch(actionLikedSocketio(res)),
-        });
+      // this.userId$
+      //   .pipe(
+      //     mergeMap((id) =>
+      //       this.listeningLikes$(socketio, 'listening_likes').pipe(
+      //         map((response) => JsonMapProperties.deserialize(LikeSocketio, response)),
+      //         filter(({ ownerId }) => ownerId === id)
+      //       )
+      //     )
+      //   )
+      //   .subscribe({
+      //     next: (res) => this.store.dispatch(actionLikedSocketio(res)),
+      //   });
     }
   }
 
-  public listeningLikes$(socketio: Socket, event: string) {
-    return new Observable((observer: Observer<any>) => {
-      socketio.on(event, (data) => (data ? observer.next(data) : observer.error('Unable To Reach Server')));
-      return () => this.socketio.disconnect();
-    });
-  }
+  // public listeningLikes$(socketio: Socket, event: string) {
+  //   return new Observable((observer: Observer<any>) => {
+  //     socketio.on(event, (data) => (data ? observer.next(data) : observer.error('Unable To Reach Server')));
+  //     return () => this.socketio.disconnect();
+  //   });
+  // }
 }

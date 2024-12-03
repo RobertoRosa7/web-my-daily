@@ -23,7 +23,7 @@ export class Public implements OnInit {
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
 
   protected readonly platform = inject(PLATFORM_ID);
-  protected socketio!: Socket;
+  // protected socketio!: Socket;
 
   constructor(protected readonly store: Store) {}
 

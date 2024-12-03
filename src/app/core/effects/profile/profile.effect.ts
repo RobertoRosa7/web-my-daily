@@ -38,8 +38,8 @@ export class ProfileEffect {
         this.profileService.following(payload).pipe(
           // Layer - socketio to update real time
           map(() => {
-            const socketio = io(environment.ws + '/profile');
-            socketio.emit(payload.ev, payload.followingId, payload.userId);
+            // const socketio = io(environment.ws + '/profile');
+            // socketio.emit(payload.ev, payload.followingId, payload.userId);
             return acUseFollowSuccess(payload);
           }),
           // Layer - HttpErrorResponse
