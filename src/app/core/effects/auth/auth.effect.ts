@@ -1,21 +1,22 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth/auth.services';
 import * as authAction from '../../actions/auth/auth.action';
 import { AuthType } from '../../types/auth/auth.type';
-import { LocalStorageService } from '../../services/localstorages/localstorage.service';
-import { Store } from '@ngrx/store';
 import { AuthVars } from '../../interfaces/auth/auth.interface';
-import { HttpErrorResponse } from '@angular/common/http';
 import { RoutePathsEnum } from '../../enums/bases/base.enum';
+import { Effect } from '@effects/effect';
 
 /**
  * @see: https://ngrx.io/guide/effects
  */
 @Injectable()
-export class AuthEffect {
+export class AuthEffect extends Effect {
+  private readonly action: Actions = inject(Actions);
+  private readonly authService: AuthService = inject(AuthService);
+
   /**
    * INFO:
    * register - effect login effect responsible to handler layer between services, store states, reducers and components
@@ -28,18 +29,18 @@ export class AuthEffect {
       mergeMap((payload) =>
         // layer to service send payload to backend
         this.authService.register(payload).pipe(
-          // layer resolve http error to handler
-          catchError((e) => of(e)),
           // layer map when login made success
           map((response) => {
             // check if response if http error and then dispatch action of error
-            if (response instanceof HttpErrorResponse) {
-              return authAction.actionLoginError({ fail: response });
-            }
+            this.showMessage(response.message as string, 'success');
+
             // dispatch action to home after login
             this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.login] }));
+
             return authAction.actionLoginSuccess(response);
           }),
+          // layer resolve http error to handler
+          catchError((e) => this.handlerError(e)),
           // layer finalize stopping loading
           finalize(() => this.store.dispatch(authAction.actionLoading({ isLoading: false })))
         )
@@ -61,25 +62,24 @@ export class AuthEffect {
       mergeMap((payload) =>
         // layer to service send payload to backend
         this.authService.login(payload).pipe(
-          // layer resolve http error to handler
-          catchError((e) => of(e)),
           // layer map when login made success
           map((response) => {
             // check if response if http error and then dispatch action of error
-            if (response instanceof HttpErrorResponse) {
-              return authAction.actionLoginError({ fail: response });
-            }
+            this.showMessage(response.message as string, 'success');
 
             // layer to save on localstorage information from login after validate on backend
-            this.localStorage.setKey(AuthVars.token, { data: response.data?.token });
+            this.authService.setKey(AuthVars.token, { data: response.data?.token });
 
             // layer to save on localstorage information from login after validate on backend
-            this.localStorage.setKey(AuthVars.user, { data: response.data?.user });
+            this.authService.setKey(AuthVars.user, { data: response.data?.user });
 
             // dispatch action to home after register
             this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.home] }));
+
             return authAction.actionLoginSuccess(response);
           }),
+          // layer resolve http error to handler
+          catchError((e) => this.handlerError(e)),
           // layer finalize stopping loading
           finalize(() => this.store.dispatch(authAction.actionLoading({ isLoading: false })))
         )
@@ -88,11 +88,4 @@ export class AuthEffect {
       catchError((e) => of(e))
     )
   );
-
-  constructor(
-    private readonly action: Actions,
-    private readonly authService: AuthService,
-    private readonly localStorage: LocalStorageService,
-    private readonly store: Store
-  ) {}
 }

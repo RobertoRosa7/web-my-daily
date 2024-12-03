@@ -12,7 +12,6 @@ export class PublicProfileService {
   constructor(private readonly profileRespository: ProfileRepository) {}
 
   /**
-   * INFO:
    * getProfilePublic - Public any can access information from users
    * @returns Observable<ProfileHappenResponse>
    */
@@ -21,7 +20,6 @@ export class PublicProfileService {
   }
 
   /**
-   * INFO:
    * singleTonOrPageable - responsible to serialize User or Pageable Use
    *
    * @param name string

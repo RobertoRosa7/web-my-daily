@@ -20,6 +20,7 @@ import { actionCoreReset } from '../../core/actions/resets/reset.action';
 import { actionColor } from '../../core/actions/color/color.action';
 import { FieldNameEnum } from '../../core/enums/bases/base.enum';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
+import { acShowMessage } from '@actions/message/message.action';
 
 @Component({
   selector: 'app-auth',
@@ -96,7 +97,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * getEmail = get name field from form
    */
   public get getEmail() {
@@ -104,7 +104,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * getPassword = get name field from form
    */
   public get getPassword() {
@@ -112,7 +111,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * getNickName = get name field from form
    */
   public get getNickName() {
@@ -120,7 +118,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * getNameId = get name field from form
    */
   public get getNameId() {
@@ -128,7 +125,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * getCheckTerms = get name field from form
    */
   public get getCheckTerms() {
@@ -136,7 +132,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * clearAction = reset message on display
    */
   public get clearAction() {
@@ -144,7 +139,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * loginAction = dispatch action to make login
    */
   public get loginAction() {
@@ -152,7 +146,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * registerActioln = dispath action to make register
    */
   public get registerActioln() {
@@ -160,7 +153,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * registerActioln = dispath action to make register
    */
   public get goToAction() {
@@ -168,7 +160,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * registerActioln = dispath action to make register
    */
   public get loading() {
@@ -176,7 +167,6 @@ export class AuthComponent extends InDestroyDirective {
   }
 
   /**
-   * INFO:
    * navigate - responsible to go to some page
    *
    * @param paths Array<string> paths to navigate
@@ -184,6 +174,17 @@ export class AuthComponent extends InDestroyDirective {
   private navigate(paths: Array<string>): Observable<boolean> {
     // clear fields message on display
     this.store.dispatch(this.clearAction());
+
+    // clear message
+    this.store.dispatch(
+      acShowMessage({
+        body: {
+          type: '',
+          show: false,
+          message: '',
+        },
+      })
+    );
 
     // navigate
     return from(this.router.navigate(paths));

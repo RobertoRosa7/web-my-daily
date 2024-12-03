@@ -4,7 +4,7 @@ import { Profile } from '../../profile/profile';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 import { acUseFollow } from '../../../core/actions/profile/profile.action';
-import { selectorUserPub } from '../../../core/selectors/public/public-profile.selector';
+import { selUserPub } from '../../../core/selectors/public/public-profile.selector';
 import { backgroundType } from '../../../core/types/colors/color.type';
 import { actionColor } from '../../../core/actions/color/color.action';
 import { actionProfilePublic } from '../../../core/actions/public/public-profile.action';
@@ -15,7 +15,7 @@ import { actionProfilePublic } from '../../../core/actions/public/public-profile
   styleUrl: './details.component.scss',
 })
 export class DetailsComponentProfilePublic extends Profile implements OnInit {
-  public readonly userProfile$ = this.store.select(selectorUserPub);
+  public readonly userProfile$ = this.store.select(selUserPub);
 
   constructor(protected override readonly store: Store, private readonly activeRoute: ActivatedRoute) {
     super();

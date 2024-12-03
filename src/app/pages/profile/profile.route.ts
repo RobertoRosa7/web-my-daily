@@ -7,11 +7,13 @@ import { SecurityComponent } from './settings/security/security.component';
 import { ChangeNameComponent } from './settings/account/change-name/change-name.component';
 import { MenuSettingsComponent } from './settings/menu-settings/menu-settings.component';
 import { ChangeDomainNameComponent } from './settings/account/change-domain-name/change-domain-name.component';
+import { authGuard } from '@guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: Profile,
+    canActivate: [authGuard],
     children: [
       { path: 'user', component: UserComponent },
       {

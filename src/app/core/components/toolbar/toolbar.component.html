@@ -15,7 +15,7 @@
       </div>
       <span class="spacer"></span>
       <div class="container-buttons">
-        <app-button-menu *ngIf="id"></app-button-menu>
+        <app-button-menu (onLogout)="onLogout()" *ngIf="id"></app-button-menu>
         <button
           class="btn-menu"
           routerLink="/auth/login"

@@ -287,7 +287,7 @@ code {
 
 .loading {
   position: relative; // Define posição relativa para elementos internos.
-
+  width: inherit;
   * {
     visibility: hidden; // Oculta elementos filhos.
   }
@@ -300,7 +300,9 @@ code {
   left: 0; // Alinha à esquerda.
   height: 70%; // Define altura de 70%.
   width: 100%; // Define largura total.
-  background-color: rgba(0, 0, 0, 0.1); // Fundo semitransparente.
+  // background-color: rgba(0, 0, 0, 0.1); // Fundo semitransparente.
+  background: linear-gradient(90deg, var(--text-light), var(--social-hub)); // Gradiente de exemplo
+  background-size: 200%; // Define um tamanho maior para permitir o deslocamento
   border-radius: 1rem; // Bordas arredondadas.
   animation: lines 2s linear infinite; // Animação contínua de "linhas".
 }
@@ -321,10 +323,12 @@ code {
 
 @keyframes lines {
   from {
-    width: 50%; // Largura inicial da animação.
+    width: 100%; // Largura inicial da animação.
+    background-position: 50% 0; // Inicia no meio (50%)
   }
   to {
     width: 100%; // Largura final da animação.
+    background-position: 100% 0; // Termina no final (100%)
   }
 }
 

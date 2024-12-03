@@ -20,9 +20,13 @@
           </div>
         </div>
         <ng-template #loading>
-          <div class="card-explore">
+          <div class="card-explore" *ngIf="!(error$ | async); else error">
             <app-initial-explore class="loading" *ngFor="let profile of mock" [profile]="profile"></app-initial-explore>
           </div>
+        </ng-template>
+
+        <ng-template #error>
+          <div>Não foi possível recuperar usuários recentes.</div>
         </ng-template>
       </div>
     </div>

@@ -9,6 +9,7 @@ export const authInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
   const services = inject(LocalStorageService);
+
   const platformId = inject(PLATFORM_ID);
 
   if (isPlatformBrowser(platformId)) {
@@ -28,6 +29,7 @@ export const authInterceptor: HttpInterceptorFn = (
     catchError((error: HttpErrorResponse) => {
       switch (error.status) {
         case 401:
+          services.clearAll();
           return throwError(() => error);
         default:
           return throwError(() => error);

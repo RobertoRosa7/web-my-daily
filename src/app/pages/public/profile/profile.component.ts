@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Public } from '../public';
-import { map } from 'rxjs';
+import { catchError, delay, map, of } from 'rxjs';
 import { pageableProfilePublicMock } from '../../../mock/profile.mock';
 import { User } from '../../../core/interfaces/profile/profile.interface';
-import { selectorPageablePub } from '../../../core/selectors/public/public-profile.selector';
+import { selPageableError, selPageablePub } from '../../../core/selectors/public/public-profile.selector';
 import { actionProfilePublic, actionUserFollow } from '../../../core/actions/public/public-profile.action';
 import { FollowRequest } from '../../../core/interfaces/follows/follow.interface';
 import * as Highcharts from 'highcharts';
@@ -21,7 +21,9 @@ export class ProfileComponent extends Public implements OnInit {
   public charts!: ElementRef;
 
   public readonly mock = pageableProfilePublicMock as Array<User>;
-  public readonly userPageble$ = this.store.select(selectorPageablePub).pipe(map((res) => res?.content));
+  public readonly userPageble$ = this.store.select(selPageablePub).pipe(map((res) => res?.content));
+  public readonly error$ = this.store.select(selPageableError);
+
   public highcharts = Highcharts;
   public options = {
     chart: {

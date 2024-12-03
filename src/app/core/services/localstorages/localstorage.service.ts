@@ -1,7 +1,6 @@
 import { Injectable, afterNextRender } from '@angular/core';
 import { IData } from '../../interfaces/localstorages/localstorage.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +8,7 @@ import { Store } from '@ngrx/store';
 export class LocalStorageService {
   public token$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
-  constructor(private readonly store: Store) {
+  constructor() {
     afterNextRender(() => {
       try {
       } catch (err) {}
@@ -22,6 +21,10 @@ export class LocalStorageService {
 
   public getKey(key: string) {
     return this.deserealizeKey(key);
+  }
+
+  public getKeyObservable<T>(key: string): Observable<T> {
+    return of(this.deserealizeKey(key));
   }
 
   public setKey<T>(key: string, data: IData<T>) {

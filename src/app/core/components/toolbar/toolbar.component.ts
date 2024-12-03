@@ -11,6 +11,7 @@ import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
 import { selectorTheme } from '../../selectors/colors/color.selector';
 import { selGetNickname } from '../../selectors/user/user.selector';
+import { AuthService } from '@services/auth/auth.services';
 
 @Component({
   selector: 'app-toolbar',
@@ -22,6 +23,7 @@ import { selGetNickname } from '../../selectors/user/user.selector';
 export class ToolbarComponent implements OnInit {
   private readonly router: Router = inject(Router);
   private readonly store: Store = inject(Store);
+  private readonly AuthService: AuthService = inject(AuthService);
   protected readonly dialog?: MatDialog = inject(MatDialog);
 
   public theme$ = this.store.select(selectorTheme);
@@ -67,6 +69,10 @@ export class ToolbarComponent implements OnInit {
 
   public hideMenu(): void {
     this.send.emit('hide');
+  }
+
+  public onLogout(): void {
+    this.AuthService.logout();
   }
 
   public logout(): void {

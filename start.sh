@@ -1,35 +1,5 @@
 #!/bin/bash
 
-# Função para configurar certificados SSL com base no ambiente
-configure_ssl_certificates() {
-    echo "Configurando certificados SSL para o ambiente: $ENVIRONMENT"
-
-    if [[ "$ENVIRONMENT" == "local" ]]; then
-        echo "Usando certificados locais..."
-        export SSL_CERTIFICATE="/etc/ssl/certs/api.innovatenet.local.crt"
-        export SSL_CERTIFICATE_KEY="/etc/ssl/private/api.innovatenet.local.key"
-    elif [[ "$ENVIRONMENT" == "production" ]]; then
-        echo "Usando certificados de produção..."
-        export SSL_CERTIFICATE="/etc/letsencrypt/live/www.innovatenet.com.br/fullchain.pem"
-        export SSL_CERTIFICATE_KEY="/etc/letsencrypt/live/www.innovatenet.com.br/privkey.pem"
-    else
-        echo "Ambiente desconhecido, usando certificados padrão..."
-        export SSL_CERTIFICATE="/etc/ssl/certs/default.crt"
-        export SSL_CERTIFICATE_KEY="/etc/ssl/private/default.key"
-    fi
-
-    # Verifique se os arquivos existem
-    if [[ ! -f "$SSL_CERTIFICATE" || ! -f "$SSL_CERTIFICATE_KEY" ]]; then
-        echo "Erro: Certificados SSL não encontrados! Certificado: $SSL_CERTIFICATE, Chave: $SSL_CERTIFICATE_KEY"
-        exit 1
-    fi
-
-    if [[ -z "$SSL_CERTIFICATE" || -z "$SSL_CERTIFICATE_KEY" ]]; then
-        echo "Erro: Certificados SSL não configurados!"
-        exit 1
-    fi
-}
-
 # Função para iniciar o NGINX
 start_nginx() {
     echo "Iniciando o NGINX..."

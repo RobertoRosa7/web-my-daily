@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { selectorTheme } from '../../selectors/colors/color.selector';
 import { Store } from '@ngrx/store';
@@ -35,7 +35,7 @@ import { SharedModule } from '../../../shared/shared.module';
         <span>Configurações</span>
       </button>
 
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Sair" routerLink="/public">
+      <button (click)="logout()" matTooltipPosition="left" mat-menu-item matTooltip="Sair" routerLink="/public">
         <mat-icon>logout</mat-icon>
         <span>Sair</span>
       </button>
@@ -43,6 +43,13 @@ import { SharedModule } from '../../../shared/shared.module';
   `,
 })
 export class ButtonMenuComponent {
+  private readonly store: Store = inject(Store);
   public theme$ = this.store.select(selectorTheme);
-  constructor(private readonly store: Store) {}
+
+  @Output()
+  public onLogout = new EventEmitter();
+
+  public logout(): void {
+    this.onLogout.emit();
+  }
 }

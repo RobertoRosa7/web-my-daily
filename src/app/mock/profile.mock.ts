@@ -1,4 +1,4 @@
-export const pageableProfilePublicMock = [...new Array(10)].map(() => ({
+export const pageableProfilePublicMock = [...new Array(3)].map(() => ({
   id: '64f74f6e54d0ba6c4b532786',
   email: 'kakashi.kisura7@gmail.com',
   name: 'kakashi',

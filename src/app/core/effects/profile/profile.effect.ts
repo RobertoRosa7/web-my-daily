@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, finalize, map, mergeMap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../../types/profile/profile.type';
 import { ProfileService } from '../../services/profile/profile.service';
@@ -15,17 +14,16 @@ import { userType } from '../../types/user/user.type';
 import { acNameIdOk, acNicknameOk } from '../../actions/user/user.action';
 import { LocalStorageService } from '../../services/localstorages/localstorage.service';
 import { AuthVars } from '../../interfaces/auth/auth.interface';
-import { acShowMessage } from '@actions/message/message.action';
-import { ShowMessage } from '@interfaces/message/message.interface';
 import { HttpUserResponse } from '@interfaces/profile/profile.interface';
+import { Effect } from '@effects/effect';
 
 /**
  * @see: https://ngrx.io/guide/effects
  */
 @Injectable()
-export class ProfileEffect {
+export class ProfileEffect extends Effect {
   private readonly action: Actions = inject(Actions);
-  private readonly store: Store = inject(Store);
+
   private readonly profileService = inject(ProfileService);
   private readonly localStorage: LocalStorageService = inject(LocalStorageService);
 
@@ -148,47 +146,5 @@ export class ProfileEffect {
       // Layer - finalize loading
       finalize(() => this.store.dispatch(actionLoading({ isLoading: false })))
     );
-  }
-
-  /**
-   * Handles errors by dispatching a show message action.
-   * @param error The HTTP error response.
-   */
-  private handlerError({ error }: HttpErrorResponse) {
-    const message = error?.message || 'Não possível realizar operação';
-
-    return of(
-      acShowMessage({
-        body: this.buildShowMessage(message, 'error'),
-      })
-    );
-  }
-
-  /**
-   * Dispatch action to update display message
-   *
-   * @param message string
-   * @param type string
-   */
-  private showMessage(message: string, type: string): void {
-    this.store.dispatch(
-      acShowMessage({
-        body: this.buildShowMessage(message, type),
-      })
-    );
-  }
-
-  /**
-   * Constructs an error message for display.
-   * @param message The error message.
-   */
-  private buildShowMessage(message: string, type: string): ShowMessage {
-    const body = new ShowMessage();
-
-    body.message = message;
-    body.type = type;
-    body.show = true;
-
-    return body;
   }
 }
