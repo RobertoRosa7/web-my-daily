@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --live-reload false",
-    "build:prod": "--configuration=production",
-    "build:dev": "--configuration=production",
+    "build:prod": "ng build --configuration production",
+    "build:dev": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr": "node dist/web-my-daily/server/server.mjs"
