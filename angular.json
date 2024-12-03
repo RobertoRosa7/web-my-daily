@@ -21,6 +21,8 @@
               "reflect-metadata",
               "moment"
             ],
+            "aot": true,
+            "sourceMap": false,
             "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -118,7 +120,7 @@
   "cli": {
     "analytics": "29a09f41-cf4d-4671-b9e4-58c4026e83cf",
     "cache": {
-      "enabled": false
+      "enabled": true
     }
   }
 }

@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Executar o build SSR (browser e server)
-RUN npm run build:ssr
+RUN npm run build:prod
 
 # Etapa 2: Configuração do contêiner final
 FROM nginx:alpine
