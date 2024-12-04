@@ -4,3 +4,14 @@
 ::ng-deep .mdc-text-field--no-label .mat-mdc-form-field-infix {
   padding: 0 !important;
 }
+
+.login {
+  .container-password,
+  .container-password .links {
+    display: flex;
+    justify-content: space-between;
+  }
+  .container-password {
+    flex-direction: column;
+  }
+}
