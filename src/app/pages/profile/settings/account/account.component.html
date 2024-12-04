@@ -4,6 +4,7 @@
       <h1>Conta</h1>
       <p>Configurações de sua conta</p>
     </div>
+    <app-message></app-message>
     <div class="box-card">
       <div class="card-menu">
         <mat-card routerLink="/profile/change-name">
@@ -29,7 +30,7 @@
 
     <div class="box-card">
       <div class="card-menu">
-        <mat-card>
+        <mat-card (click)="onDelete()">
           <mat-card-header>
             <mat-icon mat-card-avatar>delete</mat-icon>
             <mat-card-title>Excluir sua conta</mat-card-title>

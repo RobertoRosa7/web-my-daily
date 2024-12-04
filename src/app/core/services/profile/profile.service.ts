@@ -65,6 +65,14 @@ export class ProfileService {
   }
 
   /**
+   * deleteProfle - deleteProfle user
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public deleteProfile(id: string): Observable<HttpResponseDefault<string>> {
+    return this.profileRespository.deleteProfle(id);
+  }
+
+  /**
    * singleTonOrPageable - responsible to serialize User or Pageable Use
    *
    * @param name string

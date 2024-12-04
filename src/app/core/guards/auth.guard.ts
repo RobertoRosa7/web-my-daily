@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, map } from 'rxjs/operators';
 import { AuthService } from '@services/auth/auth.services';
 import { isPlatformBrowser } from '@angular/common';
+import { RoutePathsEnum } from '@enums/bases/base.enum';
 
 export const authGuard: CanActivateFn = (route, state) => {
   // Serviços injetados de forma direta usando `inject`
@@ -24,7 +25,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     map((isAuthenticated) => {
       if (!isAuthenticated) {
         // Navega para a página inicial caso não esteja autenticado
-        router.navigateByUrl('/auth/login').then();
+        router.navigateByUrl(RoutePathsEnum.login).then();
 
         // Exibe uma mensagem amigável
         snackbar.open('Sua credencial expirou!', 'ok');

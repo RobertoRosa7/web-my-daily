@@ -37,18 +37,18 @@ export class UserComponent extends Profile implements OnInit {
       this.store.dispatch(acReqProfile());
       this.store.dispatch(happenRequest());
 
-      this.userId$
-        .pipe(
-          mergeMap((id) =>
-            this.listeningFollows$().pipe(
-              map((response) => JsonMapProperties.deserialize(ListeningFollowResponse, response)),
-              filter(({ followId }: ListeningFollowResponse) => followId === id)
-            )
-          )
-        )
-        .subscribe({
-          next: (data) => this.store.dispatch(acUsFollowers(data)),
-        });
+      // this.userId$
+      //   .pipe(
+      //     mergeMap((id) =>
+      //       this.listeningFollows$().pipe(
+      //         map((response) => JsonMapProperties.deserialize(ListeningFollowResponse, response)),
+      //         filter(({ followId }: ListeningFollowResponse) => followId === id)
+      //       )
+      //     )
+      //   )
+      //   .subscribe({
+      //     next: (data) => this.store.dispatch(acUsFollowers(data)),
+      //   });
 
       // this.socketio.on('listening_profile_metrics', (data) => {
       //   if (data) {

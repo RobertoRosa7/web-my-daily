@@ -26,6 +26,9 @@ export class ProfileRepository {
   @Url(PathsEnum.pathPutUserChangeNameId)
   private readonly urlPostUserChangeNameId!: string;
 
+  @Url(PathsEnum.pathProfileDel)
+  private readonly pathProfileDel!: string;
+
   private readonly http: HttpClient = inject(HttpClient);
 
   /**
@@ -70,5 +73,13 @@ export class ProfileRepository {
    */
   public following(follower: FollowRequest): Observable<HttpResponseDefault<string>> {
     return this.http.put<HttpResponseDefault<string>>(`${this.urlUserFollowing}`, follower);
+  }
+
+  /**
+   * deleteProfle - deleteProfle user
+   * @returns Observable<HttpResponseDefault<string>>
+   */
+  public deleteProfle(id: string): Observable<HttpResponseDefault<string>> {
+    return this.http.delete<HttpResponseDefault<string>>(this.pathProfileDel.replace("{id}", id));
   }
 }
