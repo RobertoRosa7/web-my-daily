@@ -25,7 +25,7 @@ RUN apk add --no-cache nodejs npm openssl bash
 # Copiar build do Angular (browser e server)
 COPY --from=builder /app/dist/browser /usr/share/nginx/html
 COPY --from=builder /app/dist/server /app/server
-COPY --from=builder . .
+# COPY --from=builder . .
 
 # Copiar arquivo de configuração do NGINX
 # COPY ./nginx.conf /etc/nginx/nginx.conf
@@ -35,7 +35,9 @@ COPY --from=builder . .
 # RUN npm install --only=production
 
 # Copiar script de inicialização
-COPY ./start.sh /app/start.sh
+#COPY ./start.sh /app/start.sh
+COPY ./ /app/
+
 RUN chmod +x /app/start.sh
 
 # Expor portas
