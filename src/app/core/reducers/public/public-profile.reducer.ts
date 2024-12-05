@@ -1,5 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { actionProfileSuccess, actionUserFollowSuccess } from '../../actions/public/public-profile.action';
+import {
+  actionProfileError,
+  actionProfileSuccess,
+  actionUserFollowSuccess,
+} from '../../actions/public/public-profile.action';
 import { actionSocketUserMetrics } from '../../actions/public/public-socketio.action';
 import { JsonMapProperties } from '../../decorators/jsons/json.decorator';
 import {
@@ -12,21 +16,28 @@ import {
 import { PageableUser } from '../../interfaces/pageables/pageable.interface';
 import { FollowRequest, ListeningFollowResponse } from '../../interfaces/follows/follow.interface';
 import { actionCoreReset } from '../../actions/resets/reset.action';
+import { HttpErrorResponse } from '@angular/common/http';
 
 type States = Partial<ProfileResponse>;
+type ResponseError = { error: HttpErrorResponse };
 const states: States = {};
 
-const callbackResetStore = (_: States) => states;
-const callbackOnProfileSuccess = (_: States, { data, message, error }: ProfileResponse) => {
-  return {
-    ..._,
-    data,
-    message,
-    error,
-  };
-};
+const cbResetStore = (_: States) => states;
+const cbOnProfileSuccess = (_: States, { data, message, error }: ProfileResponse) => ({
+  ..._,
+  data,
+  message,
+  error,
+});
 
-const callbackOnProfileMetrics = (states: States, metrics: MsUserProfileResponse) => {
+const cbOnProfileError = (_: States, { error }: ResponseError) => ({
+  ..._,
+  data: undefined,
+  message: error.error?.message,
+  error,
+});
+
+const cbOnProfileMetrics = (states: States, metrics: MsUserProfileResponse) => {
   if (states.data instanceof UserProfile) {
     const userProfile = Object.assign(new UserProfile(), states.data);
     userProfile.profile = JsonMapProperties.deserialize(MsUserProfileResponse, metrics);
@@ -35,7 +46,7 @@ const callbackOnProfileMetrics = (states: States, metrics: MsUserProfileResponse
   return { ...states };
 };
 
-const callbackOnSuccess = (states: States, { followingId, followingStatus }: FollowRequest) => {
+const cbkOnSuccess = (states: States, { followingId, followingStatus }: FollowRequest) => {
   if (states.data instanceof PageableUser) {
     const index = states.data.content.findIndex(({ id }) => id === followingId);
     const pageable = Object.assign(new PageableUser(), states.data);
@@ -55,7 +66,7 @@ const callbackOnSuccess = (states: States, { followingId, followingStatus }: Fol
   }
 };
 
-const callbackOnUserFollowers = (states: States, follwoers: ListeningFollowResponse) => {
+const cbOnUserFollowers = (states: States, follwoers: ListeningFollowResponse) => {
   if (states.data instanceof UserProfile) {
     const userProfile = Object.assign(new UserProfile(), states.data);
     userProfile.follows = follwoers.data || new TotalFollowsDto();
@@ -66,8 +77,9 @@ const callbackOnUserFollowers = (states: States, follwoers: ListeningFollowRespo
 
 export const publicProfileReducer = createReducer(
   states,
-  on(actionProfileSuccess, callbackOnProfileSuccess),
-  on(actionUserFollowSuccess, callbackOnSuccess),
-  on(actionSocketUserMetrics, callbackOnProfileMetrics),
-  on(actionCoreReset, callbackResetStore)
+  on(actionProfileSuccess, cbOnProfileSuccess),
+  on(actionUserFollowSuccess, cbkOnSuccess),
+  on(actionSocketUserMetrics, cbOnProfileMetrics),
+  on(actionCoreReset, cbResetStore),
+  on(actionProfileError, cbOnProfileError)
 );

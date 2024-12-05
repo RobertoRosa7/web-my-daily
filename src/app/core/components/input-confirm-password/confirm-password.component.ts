@@ -21,6 +21,7 @@ import { Form } from '../../../pages/auth/auth.form';
     <mat-form-field class="flex flex-col w-full" floatLabel="always">
       <label>Confirme sua Senha</label>
       <input
+        name="confirm-password"
         matInput
         required
         [formControl]="controlName"

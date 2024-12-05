@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  host: 'https://api.innovatenet.com.br',
-  ws: 'https://api.innovatenet.com.br',
+  host: 'https://api.innovatenet.local',
+  ws: 'wss://api.innovatenet.local',
 };

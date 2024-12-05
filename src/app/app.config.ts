@@ -1,4 +1,4 @@
-import { ApplicationConfig, LOCALE_ID } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -14,6 +14,7 @@ import { authInterceptor } from './core/interceptors/colors/core.interceptor';
 import { colorReducer } from './core/reducers/colors/color.reducer';
 import { userReducer } from './core/reducers/user/user.reducer';
 import { rdMessages } from '@reducers/message/message.reducer';
+import { provideServiceWorker } from '@angular/service-worker';
 
 registerLocaleData(localePt, 'pt');
 
@@ -31,14 +32,18 @@ export const appConfig: ApplicationConfig = {
     //   includePostRequests: true,
     // })
     provideStoreDevtools({
-      maxAge: 45,
-      logOnly: false, // Restrict extension to log-only mode
+        maxAge: 45,
+        logOnly: false, // Restrict extension to log-only mode
     }),
     {
-      provide: DateAdapter,
-      useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE],
+        provide: DateAdapter,
+        useClass: MomentDateAdapter,
+        deps: [MAT_DATE_LOCALE],
     },
     { provide: LOCALE_ID, useValue: 'pt' },
-  ],
+    provideServiceWorker('ngsw-worker.js', {
+        enabled: !isDevMode(),
+        registrationStrategy: 'registerWhenStable:30000'
+    }), provideAnimationsAsync()
+],
 };

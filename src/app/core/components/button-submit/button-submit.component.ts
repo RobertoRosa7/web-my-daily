@@ -15,7 +15,7 @@ import { AuthType } from '@acTypes/auth/auth.type';
     <button
       type="submit"
       [disabled]="form.invalid || (isLoading$ | async)"
-      class="w-full bg-blue-500 text-white py-3 rounded-full cursor-pointer disabled:bg-blue-300"
+      class="w-full bg-blue-500 text-white py-3 cursor-pointer disabled:bg-blue-300"
       [style.backgroundColor]="color">
       <span *ngIf="!(isLoading$ | async)">{{ name }}</span>
       <mat-spinner

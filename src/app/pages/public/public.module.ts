@@ -7,7 +7,7 @@ import { routes } from './public.route';
 import { Public } from './public';
 import { UserDetailsComponent } from '../../core/components/user-details/user-details.component';
 import { ProfileComponent } from './profile/profile.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { InitialExploreComponent } from '../../core/components/initial-explore/initial-explore.component';
@@ -24,30 +24,23 @@ import { PublicProfileService } from '../../core/services/public/public-profile.
 import { FollowersComponent } from '../../core/components/followers/followers.component';
 import { FooterComponent } from '../../core/components/footer/footer.component';
 
-@NgModule({
-  declarations: [Public, ProfileComponent, DetailsComponentProfilePublic],
-  imports: [
-    CommonModule,
-    SharedModule,
-    HttpClientModule,
-    RouterModule.forChild(routes),
-    CoverComponent,
-    FollowersComponent,
-    UserDetailsComponent,
-    InitialExploreComponent,
-    DialogAlertComponent,
-    InputSearchComponent,
-    InputPhotoComponent,
-    ButtonBackComponent,
-    Page404Component,
-    ToolbarComponent,
-    FooterComponent,
-  ],
-
-  providers: [
-    provideState({ name: 'public', reducer: publicProfileReducer }),
-    provideEffects([PublicProfileEffect]),
-    PublicProfileService,
-  ],
-})
+@NgModule({ declarations: [Public, ProfileComponent, DetailsComponentProfilePublic], imports: [CommonModule,
+        SharedModule,
+        RouterModule.forChild(routes),
+        CoverComponent,
+        FollowersComponent,
+        UserDetailsComponent,
+        InitialExploreComponent,
+        DialogAlertComponent,
+        InputSearchComponent,
+        InputPhotoComponent,
+        ButtonBackComponent,
+        Page404Component,
+        ToolbarComponent,
+        FooterComponent], providers: [
+        provideState({ name: 'public', reducer: publicProfileReducer }),
+        provideEffects([PublicProfileEffect]),
+        PublicProfileService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class PublicModule {}

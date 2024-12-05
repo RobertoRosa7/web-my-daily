@@ -9,6 +9,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { JsonMapProperties } from '../../core/decorators/jsons/json.decorator';
 import { acUsFollowers } from '../../core/actions/user/user.action';
+import { acShowMessage } from '@actions/message/message.action';
+import { ShowMessage } from '@interfaces/message/message.interface';
 
 @Component({
   selector: 'app-public',
@@ -23,7 +25,7 @@ export class Public implements OnInit {
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
 
   protected readonly platform = inject(PLATFORM_ID);
-  protected socketio!: Socket;
+  // protected socketio!: Socket;
 
   constructor(protected readonly store: Store) {}
 
@@ -58,4 +60,32 @@ export class Public implements OnInit {
   //     return () => this.socketio.disconnect();
   //   });
   // }
+
+  /**
+   * Dispatch action to update display message
+   *
+   * @param message string
+   * @param type string
+   */
+  protected showMessage(message: string, type: string): void {
+    this.store.dispatch(
+      acShowMessage({
+        body: this.buildShowMessage(message, type),
+      })
+    );
+  }
+
+  /**
+   * Constructs an error message for display.
+   * @param message The error message.
+   */
+  protected buildShowMessage(message: string, type: string): ShowMessage {
+    const body = new ShowMessage();
+
+    body.message = message;
+    body.type = type;
+    body.show = true;
+
+    return body;
+  }
 }

@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth/auth.services';
 import { AuthComponent } from './auth.component';
 import { AuthRepository } from '../../core/repositories/auth/auth.repository';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { EmailComponent } from '../../core/components/input-email/email.component';
 import { PasswordComponent } from '../../core/components/input-password/password.component';
 import { NameIdComponent } from '../../core/components/input-name-id/name-id.component';
@@ -20,7 +20,6 @@ import { provideState } from '@ngrx/store';
 import { authReducer } from '../../core/reducers/auth/auth.reducer';
 import { AuthEffect } from '../../core/effects/auth/auth.effect';
 import { provideEffects } from '@ngrx/effects';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UniqueNameService } from '../../core/services/auth/unique-name.service';
 import { UniqueNameRepository } from '../../core/repositories/auth/unique-name.repository';
 import { MessageComponent } from '../../core/components/messages/message.component';
@@ -28,30 +27,24 @@ import { MessageComponent } from '../../core/components/messages/message.compone
 /**
  * @see: https://ngrx.io/guide/store
  */
-@NgModule({
-  declarations: [RegisterComponent, LoginComponent, AuthComponent, ResetPasswordComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forChild(routes),
-    EmailComponent,
-    PasswordComponent,
-    NameIdComponent,
-    NickNameComponent,
-    ConfirmPasswordComponent,
-    ButtonSubmitComponent,
-    MessageComponent,
-  ],
-  providers: [
-    AuthService,
-    AuthRepository,
-    UniqueNameRepository,
-    UniqueNameService,
-    provideState({ name: 'auth', reducer: authReducer }),
-    provideEffects(AuthEffect),
-  ],
-})
+@NgModule({ declarations: [RegisterComponent, LoginComponent, AuthComponent], imports: [CommonModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(routes),
+        EmailComponent,
+        PasswordComponent,
+        NameIdComponent,
+        NickNameComponent,
+        ConfirmPasswordComponent,
+        ButtonSubmitComponent,
+        MessageComponent], providers: [
+        AuthService,
+        AuthRepository,
+        UniqueNameRepository,
+        UniqueNameService,
+        provideState({ name: 'auth', reducer: authReducer }),
+        provideEffects(AuthEffect),
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AuthModule {}

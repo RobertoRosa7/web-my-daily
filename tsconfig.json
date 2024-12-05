@@ -94,6 +94,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "noPropertyAccessFromIndexSignature": false,
-    "strictTemplates": true
+    "strictTemplates": true,
   }
 }

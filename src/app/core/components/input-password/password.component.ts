@@ -14,6 +14,7 @@ import { Form } from '../../../pages/auth/auth.form';
     <mat-form-field class="flex flex-col w-full" floatLabel="always">
       <label>Senha</label>
       <input
+        name="password"
         matInput
         [formControl]="controlName"
         [type]="changeTexts ? 'password' : 'text'"

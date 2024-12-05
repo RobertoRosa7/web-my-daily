@@ -17,6 +17,8 @@ import { backgroundType } from '../../core/types/colors/color.type';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FieldNameEnum } from '../../core/enums/bases/base.enum';
+import { ShowMessage } from '@interfaces/message/message.interface';
+import { acShowMessage } from '@actions/message/message.action';
 
 @Component({
   selector: 'app-profile',
@@ -46,5 +48,46 @@ export class Profile extends InDestroyDirective implements OnInit {
   public onFireEvent(field: string, form: FormControl) {
     this.form.addControl(field, form);
     this.isReady = true;
+  }
+
+  protected clearMessage() {
+    // clear message
+    this.store.dispatch(
+      acShowMessage({
+        body: {
+          type: '',
+          show: false,
+          message: '',
+        },
+      })
+    );
+  }
+
+  /**
+   * Dispatch action to update display message
+   *
+   * @param message string
+   * @param type string
+   */
+  protected showMessage(message: string, type: string): void {
+    this.store.dispatch(
+      acShowMessage({
+        body: this.buildShowMessage(message, type),
+      })
+    );
+  }
+
+  /**
+   * Constructs an error message for display.
+   * @param message The error message.
+   */
+  protected buildShowMessage(message: string, type: string): ShowMessage {
+    const body = new ShowMessage();
+
+    body.message = message;
+    body.type = type;
+    body.show = true;
+
+    return body;
   }
 }

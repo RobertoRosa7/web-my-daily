@@ -3,6 +3,7 @@ export enum RoutePathsEnum {
   register = '/auth/register',
   login = '/auth/login',
   home = '/home',
+  publicArea = '/public'
 }
 
 //paths do backend
@@ -17,6 +18,7 @@ export enum PathsEnum {
   pathPostUserFollow = '/ms-users/follows',
   pathPostLiked = '/ms-users/user/likes/like',
   pathPostDisliked = '/ms-users/user/likes/dislike',
+  pathProfileDel = '/ms-users/user/profile?id={id}',
 
   pathPostStoppingViewing = '/ms-daily/happen/user/stop-viewing',
   pathGetTimeline = '/ms-daily/happen/user/timelines',
@@ -53,7 +55,7 @@ export enum FieldNameEnum {
 }
 export enum CommonEnum {
   daily = '@daily',
-  codeTag = '<code>$1</code>'
+  codeTag = '<code>$1</code>',
 }
 
 export enum TimeAgoMessages {
@@ -64,4 +66,3 @@ export enum TimeAgoMessages {
   MINUTES = 'há {time} minuto(s)',
   NOW = 'agora mesmo',
 }
-

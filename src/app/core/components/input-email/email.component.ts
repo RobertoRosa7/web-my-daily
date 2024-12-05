@@ -13,9 +13,10 @@ import { Form } from '../../../pages/auth/auth.form';
   template: `<mat-form-field class="flex flex-col w-full" floatLabel="always">
     <label>Email</label>
     <input
+      name="email"
       matInput
       [formControl]="controlName"
-      type="text"
+      type="email"
       placeholder="Insira seu email"
       class="border-b outline-none pt-2" />
     <mat-error *ngIf="controlName.getError('required')">Email é obrigatório</mat-error>

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ILogin, IRegister, loginResponse, registerResponse } from '../../interfaces/auth/auth.interface';
+import { AuthVars, ILogin, IRegister, loginResponse, registerResponse } from '../../interfaces/auth/auth.interface';
 import { clearText } from '../../../utils/regex/utils.regex.validators';
 import { Observable, map } from 'rxjs';
 import { AuthRepository } from '../../repositories/auth/auth.repository';
 import { LocalStorageService } from '../localstorages/localstorage.service';
 import { JsonMapProperties } from '../../decorators/jsons/json.decorator';
 import { User } from '../../interfaces/profile/profile.interface';
+import { IData } from '@interfaces/localstorages/localstorage.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,6 @@ export class AuthService {
   ) {}
 
   /**
-   * INFO:
    * login - responsible to call repository to make login
    *
    * @param param ILogin
@@ -39,7 +39,6 @@ export class AuthService {
   }
 
   /**
-   * INFO:
    * register - responsible to create new user
    *
    * @param payload IRegister
@@ -53,7 +52,6 @@ export class AuthService {
   }
 
   /**
-   * INFO:
    * isSessionUser - check if user have session active
    * @returns boolean
    */
@@ -62,10 +60,26 @@ export class AuthService {
   }
 
   /**
-   * INFO:
+   * isSessionUser - check if user have session active
+   * @returns boolean
+   */
+  public isSessionUserObservable(): Observable<boolean> {
+    return this.localStorageService.getKeyObservable<boolean>(AuthVars.token).pipe(map((token) => !!token));
+  }
+
+  /**
    * clearSession - clear session from user
    */
   public clearSession(): void {
+    this.localStorageService.clearAll();
+  }
+
+  public setKey<T>(key: string, data: IData<T>) {
+    this.localStorageService.setKey(key, data);
+  }
+
+
+  public logout() {
     this.localStorageService.clearAll();
   }
 }

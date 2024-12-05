@@ -1,5 +1,5 @@
 # Etapa 1: Construção do Frontend Angular
-FROM node:20-alpine as build-frontend
+FROM node:20.11.1-alpine AS builder
 
 # Diretório de trabalho
 WORKDIR /app
@@ -11,10 +11,10 @@ COPY ./package*.json /app/
 RUN npm install
 
 # Copiar o restante do código após instalar as dependências
-COPY . /app/
+COPY . .
 
 # Executar o build SSR (browser e server)
-RUN npm run build:ssr
+RUN npm run build:prod
 
 # Etapa 2: Configuração do contêiner final
 FROM nginx:alpine
@@ -22,19 +22,16 @@ FROM nginx:alpine
 # Instalação de Node.js e utilitários
 RUN apk add --no-cache nodejs npm openssl bash
 
-# Diretório de trabalho
-WORKDIR /app
-
 # Copiar build do Angular (browser e server)
-COPY --from=build-frontend /app/dist/web-my-daily/browser /usr/share/nginx/html/browser
-COPY --from=build-frontend /app/dist/web-my-daily/server /app/server
+COPY --from=builder /app/dist/browser /usr/share/nginx/html
+COPY --from=builder /app/dist/server /app/server
 
 # Copiar arquivo de configuração do NGINX
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Instalar dependências do Angular Server
-COPY ./package*.json /app
-RUN npm install --only=production
+# COPY ./package*.json /app
+# RUN npm install --only=production
 
 # Copiar script de inicialização
 COPY ./start.sh /app/start.sh

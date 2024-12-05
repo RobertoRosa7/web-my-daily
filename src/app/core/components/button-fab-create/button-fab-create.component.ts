@@ -13,7 +13,7 @@ import { happenFindOneLocal, happenPostRollback } from '../../actions/happen/pro
   templateUrl: './button-fab-create.component.html',
   styleUrl: './button-fab-create.component.scss',
   standalone: true,
-  imports: [SharedModule, DialogHappenComponent],
+  imports: [SharedModule],
   providers: [DialogService],
 })
 export class ButtonFabCreateComponent {

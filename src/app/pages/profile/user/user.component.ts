@@ -33,28 +33,28 @@ export class UserComponent extends Profile implements OnInit {
 
   override ngOnInit(): void {
     if (isPlatformBrowser(this.platform)) {
-      this.socketio = io(environment.ws + '/profile');
+      // this.socketio = io(environment.ws + '/profile');
       this.store.dispatch(acReqProfile());
       this.store.dispatch(happenRequest());
 
-      this.userId$
-        .pipe(
-          mergeMap((id) =>
-            this.listeningFollows$().pipe(
-              map((response) => JsonMapProperties.deserialize(ListeningFollowResponse, response)),
-              filter(({ followId }: ListeningFollowResponse) => followId === id)
-            )
-          )
-        )
-        .subscribe({
-          next: (data) => this.store.dispatch(acUsFollowers(data)),
-        });
+      // this.userId$
+      //   .pipe(
+      //     mergeMap((id) =>
+      //       this.listeningFollows$().pipe(
+      //         map((response) => JsonMapProperties.deserialize(ListeningFollowResponse, response)),
+      //         filter(({ followId }: ListeningFollowResponse) => followId === id)
+      //       )
+      //     )
+      //   )
+      //   .subscribe({
+      //     next: (data) => this.store.dispatch(acUsFollowers(data)),
+      //   });
 
-      this.socketio.on('listening_profile_metrics', (data) => {
-        if (data) {
-          this.store.dispatch(actionSocketUserMetrics(data));
-        }
-      });
+      // this.socketio.on('listening_profile_metrics', (data) => {
+      //   if (data) {
+      //     this.store.dispatch(actionSocketUserMetrics(data));
+      //   }
+      // });
     }
     this.store.dispatch(
       actionColor({

@@ -2,19 +2,18 @@ import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../../types/public/public-profile.type';
 import { PublicProfileService } from '../../services/public/public-profile.service';
 import { actionProfileError, actionProfileSuccess } from '../../actions/public/public-profile.action';
+import { Effect } from '@effects/effect';
 
 /**
  * @see: https://ngrx.io/guide/effects
  */
 @Injectable()
-export class PublicProfileEffect {
+export class PublicProfileEffect extends Effect {
   private readonly action: Actions = inject(Actions);
-  private readonly store: Store = inject(Store);
   private readonly profileService = inject(PublicProfileService);
 
   /**
