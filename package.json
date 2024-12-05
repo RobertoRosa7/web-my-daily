@@ -3,11 +3,11 @@
   "version": "0.0.4",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --live-reload false",
-    "build:prod": "ng build --configuration production",
-    "build:dev": "ng build --configuration production",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "start": "node logo.js && ng serve --live-reload false",
+    "build:prod": "node logo.js && ng build --configuration production",
+    "build:dev": "node logo.js && ng build --configuration production",
+    "watch": "node logo.js && ng build --watch --configuration development",
+    "test": "node logo.js && ng test",
     "serve:ssr": "node dist/server/server.mjs"
   },
   "private": true,
@@ -25,7 +25,7 @@
     "@angular/platform-server": "^18.2.13",
     "@angular/router": "^18.2.13",
     "@angular/service-worker": "^18.2.13",
-    "@angular/ssr": "^17.3.3",
+    "@angular/ssr": "^18.2.12",
     "@ngrx/effects": "^17.2.0",
     "@ngrx/store": "^17.2.0",
     "@ngrx/store-devtools": "^17.2.0",
@@ -42,8 +42,8 @@
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.3",
-    "@angular/cli": "^17.3.3",
+    "@angular-devkit/build-angular": "^18.2.12",
+    "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.13",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
