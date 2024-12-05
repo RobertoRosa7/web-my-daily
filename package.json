@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "node logo.js && ng serve --live-reload false",
     "build:prod": "node logo.js && ng build --configuration production",
-    "build:dev": "node logo.js && ng build --configuration production",
+    "build:dev": "node logo.js && ng build --configuration development",
     "watch": "node logo.js && ng build --watch --configuration development",
     "test": "node logo.js && ng test",
     "serve:ssr": "node dist/server/server.mjs"
