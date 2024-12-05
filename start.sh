@@ -2,10 +2,30 @@
 
 # Função para iniciar o NGINX
 start_nginx() {
+    echo "Carregando variáveis do arquivo .env..."
+
+    # Verifica se o arquivo .env existe
+    if [ -f /app/.env ]; then
+        export $(grep -v '^#' /app/.env | xargs)
+        echo "Variáveis carregadas com sucesso."
+    else
+        echo "Arquivo /app/.env não encontrado! Certifique-se de que ele exista em /app/.env."
+        exit 1
+    fi
+
+    echo "Substituindo variáveis no template do NGINX..."
+    if [ -f /app/nginx.conf ]; then
+        # Substitui as variáveis no template e gera o arquivo de configuração final
+        envsubst '${WEB_SERVER_NAME} ${GATEWAY_SERVER_NAME} ${SOCKET_HOST} ${SOCKET_PORT} ${GATEWAY_HOST} ${GATEWAY_PORT} ${SSR_SERVER_NAME} ${SSR_HOST} ${SSR_PORT}' </app/nginx.conf >/etc/nginx/nginx.conf
+        echo "Arquivo de configuração do NGINX gerado com sucesso."
+    else
+        echo "Arquivo nginx.conf não encontrado! Certifique-se de que ele exista em /app."
+        exit 1
+    fi
+
     echo "Iniciando o NGINX..."
-    # Substituir variáveis no template do NGINX
-    # envsubst </app/nginx.conf.template >/etc/nginx/nginx.conf
-    nginx -g "daemon off;" &
+    # Inicia o NGINX em modo foreground
+    nginx -g "daemon off;"
 }
 
 # Função para iniciar o Angular Server
@@ -23,9 +43,6 @@ handle_sigterm() {
     wait "$angular_pid"
     exit 0
 }
-
-# Configurar certificados antes de iniciar os serviços
-# configure_ssl_certificates
 
 # Iniciar os serviços
 start_nginx
