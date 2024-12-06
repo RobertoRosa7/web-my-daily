@@ -1,9 +1,10 @@
-<div class="flex flex-col items-center justify-center h-screen">
+<div class="register flex flex-col items-center justify-center">
   <div class="py-3 px-5 w-full max-w-md">
+    <app-button-back class="btn-float right"></app-button-back>
+    <h1 class="title">Cadastre sua conta</h1>
     <app-message></app-message>
-    <h1 class="text-center mb-5">Cadastre sua conta</h1>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="px-5 flex flex-col gap-y-5">
+      <div class="flex flex-col gap-y-5">
         <app-input-name-id (trigger)="onFireEvent(fieldNames.nameId, $event)"></app-input-name-id>
         <app-input-nickname (trigger)="onFireEvent(fieldNames.nickname, $event)"></app-input-nickname>
         <app-input-email (trigger)="onFireEvent(fieldNames.email, $event)"></app-input-email>
@@ -18,10 +19,7 @@
           <a routerLink="/auth/terms-conditions" class="underline text-primary">Termos e Condições</a> do aplicativo
           <a routerLink="/auth/privacy-policy" class="underline text-primary">Politica de Privacidade</a>.
         </mat-checkbox>
-
-        <div>
-          <app-button-submit [form]="form" [name]="'Registrar-se'"></app-button-submit>
-        </div>
+        <app-button-submit [form]="form" [name]="'Registrar-se'"></app-button-submit>
         <div class="flex gap-2">
           Já tem uma conta?<a routerLink="/auth/login" class="underline text-blue-500">Realizar login</a>
         </div>

@@ -23,28 +23,36 @@ import { provideEffects } from '@ngrx/effects';
 import { UniqueNameService } from '../../core/services/auth/unique-name.service';
 import { UniqueNameRepository } from '../../core/repositories/auth/unique-name.repository';
 import { MessageComponent } from '../../core/components/messages/message.component';
+import { ButtonBackComponent } from '@components/button-back/button-back.component';
 
 /**
  * @see: https://ngrx.io/guide/store
  */
-@NgModule({ declarations: [RegisterComponent, LoginComponent, AuthComponent], imports: [CommonModule,
-        SharedModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-        EmailComponent,
-        PasswordComponent,
-        NameIdComponent,
-        NickNameComponent,
-        ConfirmPasswordComponent,
-        ButtonSubmitComponent,
-        MessageComponent], providers: [
-        AuthService,
-        AuthRepository,
-        UniqueNameRepository,
-        UniqueNameService,
-        provideState({ name: 'auth', reducer: authReducer }),
-        provideEffects(AuthEffect),
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [RegisterComponent, LoginComponent, AuthComponent],
+  imports: [
+    CommonModule,
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    EmailComponent,
+    PasswordComponent,
+    NameIdComponent,
+    NickNameComponent,
+    ConfirmPasswordComponent,
+    ButtonSubmitComponent,
+    MessageComponent,
+    ButtonBackComponent,
+  ],
+  providers: [
+    AuthService,
+    AuthRepository,
+    UniqueNameRepository,
+    UniqueNameService,
+    provideState({ name: 'auth', reducer: authReducer }),
+    provideEffects(AuthEffect),
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class AuthModule {}

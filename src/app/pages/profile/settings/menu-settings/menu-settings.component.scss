@@ -18,5 +18,11 @@
         background: var(--color-white-brightness);
       }
     }
+    mat-icon.floating {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+    }
   }
 }

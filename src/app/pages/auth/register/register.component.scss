@@ -1,6 +1,34 @@
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: transparent !important;
-}
-::ng-deep .mdc-text-field--no-label .mat-mdc-form-field-infix {
-  padding: 0 !important;
+@import '../../../../themes/mixins';
+
+.register {
+  ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: transparent !important;
+  }
+  ::ng-deep .mdc-text-field--no-label .mat-mdc-form-field-infix {
+    padding: 0 !important;
+  }
+  ::ng-deep .mdc-text-field {
+    padding: 0;
+  }
+  ::ng-deep .mat-mdc-form-field-error-wrapper {
+    padding: 0;
+  }
+  > div {
+    position: relative;
+  }
+  h1.title {
+    @include title;
+    margin-top: 3rem;
+    margin-bottom: 0 !important;
+  }
+  .btn-float {
+    position: absolute;
+    top: 0;
+  }
+  .right {
+    left: 0;
+  }
+  .left {
+    right: 0;
+  }
 }

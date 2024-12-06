@@ -1,7 +1,5 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { selectorTheme } from '../../selectors/colors/color.selector';
-import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
 
@@ -11,6 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
   imports: [SharedModule, RouterModule, CommonModule],
   template: `
     <button
+      class="btn-menu"
       role="button"
       disableRipple="true"
       matTooltip="Menu"
@@ -43,9 +42,6 @@ import { SharedModule } from '../../../shared/shared.module';
   `,
 })
 export class ButtonMenuComponent {
-  private readonly store: Store = inject(Store);
-  public theme$ = this.store.select(selectorTheme);
-
   @Output()
   public onLogout = new EventEmitter();
 
