@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Public } from '../public';
-import { catchError, delay, map, of } from 'rxjs';
+import { catchError, delay, map, Observable, of } from 'rxjs';
 import { pageableProfilePublicMock } from '../../../mock/profile.mock';
 import { User } from '../../../core/interfaces/profile/profile.interface';
 import { selPageableError, selPageablePub } from '../../../core/selectors/public/public-profile.selector';
@@ -10,6 +10,7 @@ import { FollowRequest } from '../../../core/interfaces/follows/follow.interface
 import * as Highcharts from 'highcharts';
 import { backgroundType } from '../../../core/types/colors/color.type';
 import { actionColor } from '../../../core/actions/color/color.action';
+import { PageableUser } from '@interfaces/pageables/pageable.interface';
 
 @Component({
   selector: 'app-profile-component',
@@ -21,7 +22,7 @@ export class ProfileComponent extends Public implements OnInit {
   public charts!: ElementRef;
 
   public readonly mock = pageableProfilePublicMock as Array<User>;
-  public readonly userPageble$ = this.store.select(selPageablePub).pipe(map((res) => res?.content));
+  public readonly userPageble$ = this.store.select(selPageablePub).pipe(map((res) => []));
   public readonly error$ = this.store.select(selPageableError);
 
   public highcharts = Highcharts;
@@ -106,9 +107,9 @@ export class ProfileComponent extends Public implements OnInit {
   public onSocketio(event: FollowRequest) {
     this.store.dispatch(actionUserFollow(event));
   }
+
   /**
-    // Data retrieved from https://worldpopulationreview.com/country-rankings/countries-by-density
- * 
- */
+   * Data retrieved from https://worldpopulationreview.com/country-rankings/countries-by-density
+   */
   public initializeChart() {}
 }

@@ -1,36 +1,41 @@
 @import '../../../../themes/mixins';
+
 .main-toolbar {
+  @include size-container;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 3;
-}
-.toolbar-row {
-  min-height: 80px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  padding: 0 10rem;
-  .logo {
-    margin-right: 1rem;
-    .nickaname {
-      cursor: pointer;
-      text-decoration: underline;
-      padding: 2px 8px;
-      border-radius: 0.5rem;
-      font-style: italic;
+  .toolbar-row {
+    min-height: 80px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    display: flex;
+    .logo {
+      margin-right: 1rem;
+      .nickaname {
+        cursor: pointer;
+        text-decoration: underline;
+        padding: 2px 8px;
+        border-radius: 0.5rem;
+        font-style: italic;
+      }
     }
   }
-}
-.spacer {
-  flex: 1 1 auto;
-}
-@media screen and (max-width: 768px) {
-  app-input-search {
-    display: none;
+  .spacer {
+    flex: 1 1 auto;
   }
+  // change color icon from button
+  .container-buttons .btn-menu {
+    @include btn-default;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .toolbar-row {
-    padding: 0 1rem;
     .logo {
       margin-right: 1rem;
     }

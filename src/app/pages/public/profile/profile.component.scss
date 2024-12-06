@@ -2,9 +2,8 @@
 
 // user page
 .public-profile {
-  padding-left: 5rem;
-  padding-right: 5rem;
-  margin-top: 5rem;
+  @include size-container;
+  @include size-toolbar;
   .button-back {
     display: flex;
     justify-content: flex-start;
@@ -14,7 +13,6 @@
   }
   .info,
   .follow,
-  .section-text,
   .banner,
   .outros {
     padding: 0 2rem;
@@ -24,7 +22,8 @@
   .container-followers,
   .img,
   .row,
-  .banner {
+  .banner,
+  .container-image {
     display: flex;
   }
   .new-feelingers,
@@ -32,8 +31,12 @@
   .banner,
   .svg,
   .section-text,
-  .highcharts-figure {
+  .highcharts-figure,
+  .container-image {
     flex: 1;
+  }
+  .row {
+    gap: 2rem;
   }
   p {
     margin: 0;
@@ -58,110 +61,120 @@
       text-align: center;
     }
   }
-  .section-text {
-    min-height: inherit;
-    border-radius: 2rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-bottom: 10rem;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-  }
-  .section-text p {
-    font-size: 1.5rem;
-    text-indent: 3rem;
-    text-align: justify;
-    font-weight: 300;
-  }
-  .section-text .text {
-    background-color: white;
-    border-radius: 1rem;
-    padding: 2rem;
-  }
-  .container-photo {
-    min-height: 15rem;
-    gap: 1rem;
-    position: relative;
-    .photo {
-      width: inherit;
-      height: inherit;
-      min-width: inherit;
+  .section {
+    margin-bottom: 5rem;
+    .section-text {
       min-height: inherit;
-      flex: 0.3;
-    }
-    .image,
-    .container-followers {
-      align-items: center;
-    }
-    .image {
-      flex: 0.5;
-    }
-    .container-followers {
       flex: 1;
-      flex-direction: column;
-    }
-    app-follwers {
-      width: 100%;
-    }
-    .image {
-      align-items: flex-start;
-    }
-    .container-followers p {
-      font-size: 1.5rem;
-      font-weight: normal;
-    }
-    .container-followers button {
-      width: 100%;
-    }
-    .img {
-      height: 14rem;
-      width: 14rem;
-      border-radius: 50%;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      display: flex;
     }
-    .border-top-radious {
-      display: none;
+    .section-text p {
+      font-size: 1.5rem;
+      text-indent: 3rem;
+      text-align: left;
+      font-weight: 300;
     }
-  }
-  .follow {
-    min-height: 8rem;
-  }
-  .body {
-    border-top-left-radius: 4rem;
-  }
-  .container-pup {
-    position: relative;
-    border-radius: 2rem 2rem 0 0;
-    padding-top: 1.6rem;
-    .search {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: inherit;
-      width: 100%;
-      z-index: 3;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      padding-top: 1rem;
-      border-radius: 2rem 2rem 0 0;
+    .section-text .text {
+      background-color: white;
+      border-radius: 1rem;
     }
-    .box {
-      p {
-        font-size: 1.7rem;
-        color: var(--white);
-        font-weight: 100;
+    .container-photo {
+      min-height: 15rem;
+      gap: 1rem;
+      position: relative;
+      .photo {
+        width: inherit;
+        height: inherit;
+        min-width: inherit;
+        min-height: inherit;
+        flex: 0.3;
       }
-      .card-explore {
-        margin-top: 1rem;
+      .image,
+      .container-followers {
+        align-items: center;
       }
-      padding-top: 2rem;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      overflow-y: auto;
+      .image {
+        flex: 0.5;
+      }
+      .container-followers {
+        flex: 1;
+        flex-direction: column;
+      }
+      app-follwers {
+        width: 100%;
+      }
+      .image {
+        align-items: flex-start;
+      }
+      .container-followers p {
+        font-size: 1.5rem;
+        font-weight: normal;
+      }
+      .container-followers button {
+        width: 100%;
+      }
+      .img {
+        height: 14rem;
+        width: 14rem;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+      }
+      .border-top-radious {
+        display: none;
+      }
+    }
+    .follow {
+      min-height: 8rem;
+    }
+    .body {
+      border-top-left-radius: 4rem;
+    }
+    .container-pup {
+      position: relative;
       border-radius: 2rem 2rem 0 0;
+      padding-top: 1.6rem;
+      .msg {
+        padding: 1rem;
+      }
+      .search {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: inherit;
+        width: 100%;
+        z-index: 3;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: 1rem;
+        border-radius: 2rem 2rem 0 0;
+      }
+      .box {
+        border-width: 1px;
+        border-style: solid;
+        overflow-y: auto;
+        border-radius: 2rem 2rem 0 0;
+        min-height: 15rem;
+        p {
+          font-size: 1.7rem;
+          color: var(--white);
+          font-weight: 100;
+        }
+        .card-explore {
+          margin-top: 1rem;
+        }
+        .title {
+          @include title;
+          padding: 1rem;
+        }
+      }
+    }
+    .container-image {
+      border-radius: 2rem 2rem 0 0;
+      justify-content: center;
+      padding: 5rem 0;
     }
   }
 }
@@ -170,7 +183,7 @@
 @media screen and (max-width: 768px) {
   // user page
   .public-profile {
-    padding: 0;
+    @include size-toolbar;
     // page
     .container-feelings {
       max-height: 30rem;
@@ -178,6 +191,7 @@
     }
     .row {
       flex-direction: column;
+      gap: 1rem;
     }
     .container-photo,
     .container-followers,

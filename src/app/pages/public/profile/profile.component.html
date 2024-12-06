@@ -1,46 +1,72 @@
 <main class="public-profile" [ngClass]="theme$ | async">
-  <div class="row">
+  <div class="section row welcome">
     <div class="banner">
       <p class="title">Bem-vindo ao [<span class="daily">Diário</span>]!</p>
       <p class="subtitle">&quot;Seu <strong>diário</strong>, agora mais inteligente e sensível.&quot;</p>
     </div>
   </div>
-  <div class="row">
+  <section class="section row">
+    <article class="section-text">
+      <div class="text">
+        <p>Aqui, você pode se expressar livremente, como se estivesse escrevendo em seu diário pessoal.</p>
+      </div>
+    </article>
     <div class="new-feelingers">
       <div class="container-pup">
         <div class="box">
-          <div class="search">
-            <p>Novos feelingers</p>
+          <div class="title">
+            <h2>Novos feelingers</h2>
           </div>
           <div class="card-explore" *ngIf="userPageble$ | async as pageable; else loading">
-            <app-initial-explore
-              *ngFor="let profile of pageable"
-              (socketio)="onSocketio($event)"
-              [profile]="profile"></app-initial-explore>
+            <ng-container *ngIf="pageable.length > 0; else isEmpty">
+              <app-initial-explore *ngFor="let profile of pageable" (socketio)="onSocketio($event)" [profile]="profile">
+              </app-initial-explore>
+            </ng-container>
+            <ng-template #isEmpty>
+              <span class="msg empty">Ops! Nenhum usuário recém cadastrado - em breve teremos!</span>
+            </ng-template>
           </div>
         </div>
         <ng-template #loading>
           <div class="card-explore" *ngIf="!(error$ | async); else error">
-            <app-initial-explore class="loading" *ngFor="let profile of mock" [profile]="profile"></app-initial-explore>
+            <app-initial-explore class="loading" *ngFor="let profile of mock" [profile]="profile">
+            </app-initial-explore>
           </div>
         </ng-template>
-
         <ng-template #error>
-          <div>Não foi possível recuperar usuários recentes.</div>
+          <span class="msg error">Não foi possível recuperar usuários recentes.</span>
         </ng-template>
       </div>
     </div>
+  </section>
 
-    <!-- <div class="section-text">
+  <section class="section row">
+    <div class="container-image home-logged">
+      <div class="image">
+        <img src="assets/img/home-logged.png" alt="Home" />
+      </div>
+    </div>
+    <article class="section-text">
       <div class="text">
         <p>
-          Aqui, você pode se expressar livremente, como se estivesse escrevendo em seu diário pessoal. Nosso objetivo é
-          criar uma comunidade de apoio e compreensão, onde cada história é valorizada e respeitada. Seja você quem for
-          e esteja passando pelo que for, suas experiências importam.
+          Nosso objetivo é criar uma comunidade de apoio e compreensão, onde cada história é valorizada e respeitada.
         </p>
       </div>
-    </div> -->
-  </div>
+    </article>
+  </section>
+
+  <section class="section row">
+    <article class="section-text">
+      <div class="text">
+        <p>Seja você quem for e esteja passando pelo que for, suas experiências importam.</p>
+      </div>
+    </article>
+    <div class="container-image user-profile">
+      <div class="image">
+        <img src="assets/img/user-profile.png" alt="Profile" />
+      </div>
+    </div>
+  </section>
 
   <!-- <div class="row">
     <div class="section-text">

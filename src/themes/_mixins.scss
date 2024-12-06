@@ -7,18 +7,28 @@
   justify-content: center;
   align-items: center;
 }
-
+// set style button default
 @mixin btn-default {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
   width: inherit;
-
   :focus {
     background: var(--color-dark-red-light);
   }
   min-width: 90px;
+}
+
+@mixin size-toolbar {
+  padding-top: 5rem;
+}
+
+@mixin size-container {
+  width: inherit;
+  max-width: inherit;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 // set size page default

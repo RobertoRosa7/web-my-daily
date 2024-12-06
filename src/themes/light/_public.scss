@@ -5,7 +5,6 @@
   width: 100%;
   position: relative;
   color: var(--color-dark-default);
-
   // customize show profile public in details card profile user
   .user-details {
     background: var(--white);
@@ -22,8 +21,21 @@
   .banner p.title {
     color: var(--gray);
   }
+  // title page welcome
   .daily {
-    color: var(--success);
+    color: var(--green-microsoft);
+  }
+  // section page welcome
+  .section .container-image.home-logged {
+    background-color: var(--green-microsoft);
+  }
+  // section page welcome
+  .section .container-image.user-profile {
+    background-color: var(--green);
+  }
+  // section page welcome
+  .section .container-pup .box {
+    border-color: var(--warning);
   }
   // card feeling theme profile
   .card-feeling {
@@ -75,7 +87,6 @@
   mat-toolbar {
     background-color: var(--white);
   }
-
   // customize mat card
   .mdc-card {
     background-color: var(--white);
@@ -112,15 +123,11 @@
       color: var(--white);
     }
   }
-  // customize button menu toolbar
+  // customize button menu toolbar page welcome
   .container-buttons .btn-menu {
-    @include btn-default;
-    // change color icon from button
-    border: none;
-    box-shadow: none;
     background-color: var(--warning);
+    color: var(--color-dark);
   }
-
   // customize mat card theme profile
   .mat-mdc-card-title {
     p {

@@ -86,9 +86,15 @@
       ],
       "@env/*": [
         "./src/environments/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
       ]
-    }
+    },
   },
+  "include": [
+    "src/**/*"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
