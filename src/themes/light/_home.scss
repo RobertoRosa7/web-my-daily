@@ -16,13 +16,11 @@
       color: var(--social-blue-accent);
     }
   }
-
-  // tab timeline
   .mat-mdc-tab .mdc-tab-indicator__content--underline {
     border: none;
   }
 }
-
+// customize page home tab main
 .home.timeline {
   .mdc-line-ripple::before,
   .mdc-line-ripple::after {
@@ -44,20 +42,17 @@
     border: 1px solid #d0d7deb3;
     border-radius: 1rem;
   }
-
   // card feeling theme profile
   .card-feeling {
     border: 1px solid #d0d7deb3;
-
     mat-card-header {
       background-color: #d0d7de39;
     }
-
+    // change color name id page home main
     span.name-id {
       background-color: var(--social-muted);
       color: var(--social-blue-accent);
     }
-
     .mat-mdc-card-content {
       background-color: var(--color-white);
     }
@@ -78,9 +73,8 @@
       color: var(--social-blue-accent);
     }
   }
-  // button menu
+  // button menu toolbar tab main
   .container-buttons .btn-menu {
-    @include btn-default;
     border: none;
     box-shadow: none;
     background-color: var(--social-blue-accent);
@@ -94,7 +88,7 @@
     }
   }
 }
-
+// customize tab explore home
 .home.explore {
   .cover {
     border-bottom: 1px solid var(--social-warning-muted);
@@ -114,7 +108,6 @@
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
     border-bottom-color: transparent;
   }
-
   // remove filled background search input
   .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background: transparent;
@@ -128,21 +121,18 @@
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
     border: none;
   }
-  // button menu
+  // button menu toolbar tab explore
   .container-buttons .btn-menu {
-    @include btn-default;
     border: none;
     box-shadow: none;
     background-color: var(--warning);
     color: var(--color-dark);
   }
-
   // Title feelingers
   .feelingers {
     background-color: var(--social-hub);
     color: var(--color-dark);
   }
-
   // card-explore
   .card-explore {
     .nickname {
@@ -150,10 +140,11 @@
       color: var(--color-dark);
     }
   }
+  // logo page home explore
   .logo {
     .nickaname {
-      background-color: var(--social-hub);
-      color: var(--black);
+      background-color: var(--warning);
+      color: var(--color-dark);
     }
   }
 }

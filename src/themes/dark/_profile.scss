@@ -5,61 +5,50 @@
   width: 100%;
   position: relative;
   color: var(--white);
-
   // mat toolbar
   mat-toolbar {
     background-color: transparent;
   }
-
   // mat card
   .mdc-card {
     background-color: var(--color-dark-default);
     border-left: 1px solid var(--teal);
   }
-
   .mat-mdc-card-subtitle {
     color: var(--color-light-soft);
   }
-
   // followers
   .container-followers p {
     color: var(--color-medium-white);
   }
-
   .container-followers button {
     background-color: var(--primary);
     color: var(--white) !important;
   }
-
   // phto profile image
   .page .container-photo .img {
     background-color: var(--color-dark-blue-darkness);
   }
-
   // button back
-  .btn-back {
-    // change color icon from btn back
-    mat-icon {
-      color: var(--white);
-    }
-  }
-
+  // .btn-back {
+  //   // change color icon from btn back
+  //   mat-icon {
+  //     color: var(--white);
+  //   }
+  // }
   // button menu
-  .btn-menu {
-    // change color icon from button
-    mat-icon {
-      color: var(--primary);
-    }
-  }
-
+  // .btn-menu {
+  //   // change color icon from button
+  //   mat-icon {
+  //     color: var(--primary);
+  //   }
+  // }
   .infos p:first-child {
     color: var(--color-medium-white);
   }
-
   .score-positive {
     color: var(--teal) !important;
   }
-
   .score-negative {
     color: var(--primary) !important;
   }

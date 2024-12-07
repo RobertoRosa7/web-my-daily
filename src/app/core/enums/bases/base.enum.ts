@@ -4,10 +4,15 @@ export enum RoutePathsEnum {
   login = '/auth/login',
   terms = '/auth/terms-conditions',
   policy = '/auth/privacy-policy',
+  
   home = '/home',
+  homeInit = '/home/initial',
+  
   publicArea = '/public',
   profileDetail = '/public/details',
+  
   profileUser = '/profile/user',
+  profileSettinsg = '/profile/settings'
 }
 
 export enum PathResources {

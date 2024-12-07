@@ -19,6 +19,7 @@ export const routes: Routes = [
   {
     path: 'public',
     loadChildren: () => import('./pages/public/public.module').then((m) => m.PublicModule),
+    resolve: { user: resolver },
   },
   { path: '**', redirectTo: 'public', pathMatch: 'prefix' },
 ];

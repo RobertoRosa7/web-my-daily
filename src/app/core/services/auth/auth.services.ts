@@ -77,9 +77,4 @@ export class AuthService {
   public setKey<T>(key: string, data: IData<T>) {
     this.localStorageService.setKey(key, data);
   }
-
-
-  public logout() {
-    this.localStorageService.clearAll();
-  }
 }

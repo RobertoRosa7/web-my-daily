@@ -4,7 +4,7 @@
   mat-toolbar {
     background-color: var(--dark);
   }
-  // button back
+  // button back page settins
   .btn-back {
     // change color icon from btn back
     mat-icon {
@@ -19,9 +19,8 @@
     background-color: var(--social-muted);
     color: var(--color-dark);
   }
-  // button menu
+  // button menu toolbar page settings
   .container-buttons .btn-menu {
-    @include btn-default;
     border: none;
     box-shadow: none;
     background-color: var(--social-muted);

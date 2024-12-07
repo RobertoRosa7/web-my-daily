@@ -4,26 +4,22 @@
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: 'Orbitron';
   src: url('./assets/fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
 }
-
 // Importa mixins para reutilização de estilos.
 @import './themes/mixins';
 // Importa o tema dark para estilos específicos.
 @import './themes/dark/dark';
 // Importa o tema light para estilos específicos.
 @import './themes/light/light';
-
 // Base do Tailwind CSS.
 @tailwind base;
 // Componentes do Tailwind CSS.
 @tailwind components;
 // Utilitários do Tailwind CSS.
 @tailwind utilities;
-
 // Paleta de cores root.
 :root {
   // Cores para o tema claro.
@@ -121,7 +117,6 @@
     var(--white) 0%
   );
 }
-
 // Estilização para HTML e corpo.
 html,
 body {
@@ -129,12 +124,10 @@ body {
   overflow-x: hidden; // Esconde rolagem horizontal.
   scroll-behavior: auto; // Rolagem padrão.
 }
-
 body {
   margin: 0; // Remove margens padrão.
   font-family: Roboto, 'Helvetica Neue', sans-serif; // Define fonte padrão.
 }
-
 code {
   background-color: #eef2f7; // Fundo claro para código.
   color: #1a1a1a; // Texto em preto.
@@ -153,11 +146,23 @@ code {
     visibility: hidden; // Oculta os filhos do elemento.
   }
 }
-
 .word-break {
   word-break: keep-all; // Mantém palavras inteiras, sem quebras.
 }
-
+// button menu session
+.btn-finish-session {
+  .mat-mdc-menu-item-text {
+    color: var(--color-dark-red);
+  }
+}
+// button back toolbar global settings
+.btn-back {
+  // change color icon from btn back
+  mat-icon {
+    margin-right: 1rem;
+    min-width: 1rem;
+  }
+}
 .loading-waves::after {
   content: ''; // Adiciona conteúdo vazio para estilização.
   position: absolute; // Posiciona em relação ao elemento pai.
@@ -169,18 +174,15 @@ code {
   z-index: 3; // Eleva a camada do elemento.
   transform: rotate(45deg); // Gira o elemento em 45 graus.
 }
-
 @keyframes waves {
   to {
     transform: translateX(100%); // Move o elemento para a direita.
   }
 }
-
 // Botão de voltar.
 .btn-back {
   @include btn-icon-radio; // Usa mixin para estilo de botão.
 }
-
 // Personalização de diálogos.
 .dialog-custom,
 .dialog-custom .profile,
@@ -201,7 +203,6 @@ code {
     background-color: transparent; // Remove fundo ao focar.
   }
 }
-
 .dialog-custom .home,
 .dialog-custom .explore {
   // Remove fundo preenchido do campo de busca.
@@ -238,7 +239,6 @@ code {
     background-color: var(--social-muted); // Fundo mutado.
   }
 }
-
 .dialog-custom .profile {
   .mat-focused .mat-mdc-form-field-focus-overlay {
     background-color: var(--white); // Fundo branco no foco.
@@ -272,7 +272,6 @@ code {
     background-color: var(--social-green-muted); // Fundo verde mutado.
   }
 }
-
 // Estilo de comentários no diálogo.
 .dialog-comments {
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
@@ -296,7 +295,6 @@ code {
     border: 1px solid var(--border-default); // Borda padrão.
   }
 }
-
 .loading {
   position: relative; // Define posição relativa para elementos internos.
   width: inherit;
@@ -304,7 +302,6 @@ code {
     visibility: hidden; // Oculta elementos filhos.
   }
 }
-
 .loading::after {
   content: ''; // Adiciona conteúdo vazio para estilização.
   position: absolute; // Posiciona em relação ao elemento pai.
@@ -318,21 +315,18 @@ code {
   border-radius: 1rem; // Bordas arredondadas.
   animation: lines 2s linear infinite; // Animação contínua de "linhas".
 }
-
 ::-webkit-scrollbar {
   width: 0.6rem; // Define largura do scrollbar.
   height: 1rem; // Define altura do scrollbar horizontal.
   background: transparent; // Fundo transparente.
   z-index: 10; // Prioridade no empilhamento.
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--text-light); // Cor do "polegar" do scrollbar.
   border-radius: 2rem; // Bordas arredondadas no "polegar".
   padding-top: 1rem; // Espaçamento superior.
   z-index: 10; // Eleva a camada do "polegar".
 }
-
 @keyframes lines {
   from {
     width: 100%; // Largura inicial da animação.
@@ -343,7 +337,6 @@ code {
     background-position: 100% 0; // Termina no final (100%)
   }
 }
-
 @media screen and (max-width: 768px) {
   .dialog-custom .profile {
     // Ajusta o padding para telas menores.
@@ -366,13 +359,4 @@ code {
       border-color: var(--color-dark-red-medium); // Cor do círculo interno.
     }
   }
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }

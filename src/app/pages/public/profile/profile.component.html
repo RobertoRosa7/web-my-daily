@@ -19,7 +19,11 @@
           </div>
           <div class="card-explore" *ngIf="userPageble$ | async as pageable; else loading">
             <ng-container *ngIf="pageable.length > 0; else isEmpty">
-              <app-initial-explore *ngFor="let profile of pageable" (socketio)="onSocketio($event)" [profile]="profile">
+              <app-initial-explore
+                [id]="userId$ | async"
+                *ngFor="let profile of pageable"
+                (socketio)="onSocketio($event)"
+                [profile]="profile">
               </app-initial-explore>
             </ng-container>
             <ng-template #isEmpty>

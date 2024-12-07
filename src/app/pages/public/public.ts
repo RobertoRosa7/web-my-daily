@@ -16,7 +16,7 @@ import { PathResources } from '@enums/bases/base.enum';
 @Component({
   selector: 'app-public',
   template: `
-    <app-toolbar></app-toolbar>
+    <app-toolbar [id]="userId$ | async"></app-toolbar>
     <router-outlet></router-outlet>
     <app-footer></app-footer>
   `,

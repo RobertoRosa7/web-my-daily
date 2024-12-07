@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
+import { RoutePathsEnum } from '@enums/bases/base.enum';
 
 @Component({
   selector: 'app-button-menu',
@@ -19,31 +20,48 @@ import { SharedModule } from '../../../shared/shared.module';
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Inicial" routerLink="/home/initial">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Inicial" [routerLink]="routePaths.homeInit">
         <mat-icon>home</mat-icon>
         <span>Inicial</span>
       </button>
 
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Perfil" routerLink="/profile/user">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Perfil" [routerLink]="routePaths.profileUser">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>
 
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Configurações" routerLink="/profile/settings">
+      <button
+        matTooltipPosition="left"
+        mat-menu-item
+        matTooltip="Configurações"
+        [routerLink]="routePaths.profileSettinsg">
         <mat-icon>settings</mat-icon>
         <span>Configurações</span>
       </button>
 
-      <button (click)="logout()" matTooltipPosition="left" mat-menu-item matTooltip="Sair" routerLink="/public">
+      <mat-divider></mat-divider>
+
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Área Pública" [routerLink]="routePaths.publicArea">
+        <mat-icon>open_in_new</mat-icon>
+        <span>Área Pública</span>
+      </button>
+      <button
+        class="btn-finish-session"
+        (click)="logout()"
+        matTooltipPosition="left"
+        mat-menu-item
+        matTooltip="Encerrar Sessão"
+        [routerLink]="routePaths.publicArea">
         <mat-icon>logout</mat-icon>
-        <span>Sair</span>
+        <span>Encerrar Sessão</span>
       </button>
     </mat-menu>
   `,
 })
 export class ButtonMenuComponent {
   @Output()
-  public onLogout = new EventEmitter();
+  public readonly onLogout = new EventEmitter();
+  public readonly routePaths = RoutePathsEnum;
 
   public logout(): void {
     this.onLogout.emit();

@@ -11,13 +11,14 @@ import { Store } from '@ngrx/store';
   template: `
     <main class="explore">
       <div class="page">
-        <app-input-search></app-input-search>
+        <!-- <app-input-search></app-input-search> -->
         <p class="feelingers">Novos feelingers</p>
         <app-initial-explore
           [id]="userId$ | async"
           *ngFor="let profile of userPageble$ | async"
           (socketio)="onSocketio($event)"
-          [profile]="profile"></app-initial-explore>
+          [profile]="profile">
+        </app-initial-explore>
       </div>
     </main>
   `,

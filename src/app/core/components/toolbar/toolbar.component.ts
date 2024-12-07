@@ -74,11 +74,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   public onLogout(): void {
-    this.AuthService.logout();
-  }
-
-  public logout(): void {
-    this.router.navigateByUrl('/');
+    this.AuthService.clearSession();
   }
 
   public add(type: string): void {
