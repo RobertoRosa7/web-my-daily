@@ -1,6 +1,6 @@
 {
   "name": "web-my-daily",
-  "version": "0.0.4",
+  "version": "0.0.15",
   "scripts": {
     "ng": "ng",
     "start": "node logo.js && ng serve",
