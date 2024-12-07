@@ -16,15 +16,14 @@ import { actionProfilePublic } from '../../../core/actions/public/public-profile
 })
 export class DetailsComponentProfilePublic extends Profile implements OnInit {
   public readonly userProfile$ = this.store.select(selUserPub);
+  public searchBy!: string | null;
 
   constructor(protected override readonly store: Store, private readonly activeRoute: ActivatedRoute) {
     super();
   }
 
   override ngOnInit(): void {
-    this.activeRoute.queryParamMap.subscribe((params) =>
-      this.store.dispatch(actionProfilePublic({ name: params.get('name') }))
-    );
+    this.activeRoute.queryParamMap.subscribe((params) => this.searchProfile(params.get('name')));
     this.store.dispatch(
       actionColor({
         theme: 'public',
@@ -35,5 +34,10 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
 
   public onSocketio(event: FollowRequest) {
     this.store.dispatch(acUseFollow(event));
+  }
+
+  private searchProfile(name: string | null) {
+    this.searchBy = name;
+    this.store.dispatch(actionProfilePublic({ name }));
   }
 }

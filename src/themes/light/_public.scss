@@ -25,6 +25,9 @@
   .daily {
     color: var(--green-microsoft);
   }
+  .section .section-text p {
+    color: var(--gray);
+  }
   // section page welcome
   .section .container-image.home-logged {
     background-color: var(--green-microsoft);
@@ -204,6 +207,10 @@
   // customize dialog happen create
   .dialog-happen .btn-save {
     color: red;
+  }
+  // page 404
+  .footer .text {
+    background-color: var(--green);
   }
 }
 // customize media queries max width 768px - mobile first

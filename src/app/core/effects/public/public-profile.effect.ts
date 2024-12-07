@@ -17,7 +17,6 @@ export class PublicProfileEffect extends Effect {
   private readonly profileService = inject(PublicProfileService);
 
   /**
-   * INFO:
    * profilePublic - responsilbe to fetch Pageable or Single public profile of user
    */
   public profilePublic$: Observable<Actions> = createEffect(() =>
@@ -25,13 +24,10 @@ export class PublicProfileEffect extends Effect {
       ofType(profileType.USER_PROFILE_PUBLIC),
       mergeMap(({ name }) =>
         this.profileService.getProfilePublic(name).pipe(
-          catchError((e) => of(e)),
-          map((response) => {
-            if (response instanceof HttpErrorResponse) {
-              return actionProfileError({ error: response });
-            }
-            return actionProfileSuccess(response);
-          })
+          // Layer - sucess profile public suer
+          map((response) => actionProfileSuccess(response)),
+          // Layer - Error show message
+          catchError((e) => this.handlerError(e)),
         )
       ),
       // layer to catch error from effect

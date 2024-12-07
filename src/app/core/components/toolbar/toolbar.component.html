@@ -5,11 +5,11 @@
       <app-button-back></app-button-back>
       }
       <div class="logo">
-        <span>Diário</span>
+        <span role="link" [routerLink]="routePathEnum.publicArea">Diário</span>
         <ng-container>
           @if (id) {
           <span>/</span>
-          <small routerLink="/profile/user" class="nickaname">{{ name$ | async }}</small>
+          <small role="link" [routerLink]="routePathEnum.profileUser" class="nickaname">{{ name$ | async }}</small>
           }
         </ng-container>
       </div>
@@ -18,7 +18,7 @@
         <app-button-menu (onLogout)="onLogout()" *ngIf="id"></app-button-menu>
         <button
           class="btn-menu"
-          routerLink="/auth/login"
+          [routerLink]="routePathEnum.login"
           role="button"
           aria-describedby="signin"
           mat-raised-button

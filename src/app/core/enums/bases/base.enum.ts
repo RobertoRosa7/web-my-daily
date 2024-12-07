@@ -2,8 +2,18 @@
 export enum RoutePathsEnum {
   register = '/auth/register',
   login = '/auth/login',
+  terms = '/auth/terms-conditions',
+  policy = '/auth/privacy-policy',
   home = '/home',
-  publicArea = '/public'
+  publicArea = '/public',
+  profileDetail = '/public/details',
+  profileUser = '/profile/user',
+}
+
+export enum PathResources {
+  imgSourceHome = 'assets/img/user-profile.png',
+  imgSourceLoged = 'assets/img/home-logged.png',
+  imgSourceAvatar = 'assets/img/avatar.png',
 }
 
 //paths do backend

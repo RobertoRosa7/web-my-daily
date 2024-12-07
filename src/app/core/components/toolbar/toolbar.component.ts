@@ -12,6 +12,7 @@ import { ButtonBackComponent } from '../button-back/button-back.component';
 import { selectorTheme } from '../../selectors/colors/color.selector';
 import { selGetNickname } from '../../selectors/user/user.selector';
 import { AuthService } from '@services/auth/auth.services';
+import { RoutePathsEnum } from '@enums/bases/base.enum';
 
 @Component({
   selector: 'app-toolbar',
@@ -26,8 +27,9 @@ export class ToolbarComponent implements OnInit {
   private readonly AuthService: AuthService = inject(AuthService);
   protected readonly dialog?: MatDialog = inject(MatDialog);
 
-  public theme$ = this.store.select(selectorTheme);
-  public name$ = this.store.select(selGetNickname);
+  public readonly routePathEnum = RoutePathsEnum;
+  public readonly theme$ = this.store.select(selectorTheme);
+  public readonly name$ = this.store.select(selGetNickname);
 
   @Output() send = new EventEmitter();
   @Output() updateRegisters = new EventEmitter();

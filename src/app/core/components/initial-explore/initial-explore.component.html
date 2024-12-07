@@ -9,7 +9,7 @@
           [matTooltip]="profile.name || ''"
           [queryParams]="{ name: profile.nameId }"
           routerLink="/public/details">
-          <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" />
+          <img [src]="pathResources.imgSourceAvatar" alt="avatar" role="img" />
         </div>
         <mat-card-title>
           <div>
@@ -46,7 +46,7 @@
                 [matTooltip]="profile.nameId || ''"
                 style="cursor: pointer"
                 [queryParams]="{ name: profile.nameId }"
-                routerLink="/public/details"
+                [routerLink]="routePathsEnum.profileDetail"
                 >{{ profile.nameId?.trim() }}
               </span>
             </p>

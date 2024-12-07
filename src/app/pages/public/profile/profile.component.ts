@@ -11,6 +11,7 @@ import * as Highcharts from 'highcharts';
 import { backgroundType } from '../../../core/types/colors/color.type';
 import { actionColor } from '../../../core/actions/color/color.action';
 import { PageableUser } from '@interfaces/pageables/pageable.interface';
+import { PathResources } from '@enums/bases/base.enum';
 
 @Component({
   selector: 'app-profile-component',
@@ -22,7 +23,7 @@ export class ProfileComponent extends Public implements OnInit {
   public charts!: ElementRef;
 
   public readonly mock = pageableProfilePublicMock as Array<User>;
-  public readonly userPageble$ = this.store.select(selPageablePub).pipe(map((res) => []));
+  public readonly userPageble$ = this.store.select(selPageablePub).pipe(map((res) => res.content));
   public readonly error$ = this.store.select(selPageableError);
 
   public highcharts = Highcharts;

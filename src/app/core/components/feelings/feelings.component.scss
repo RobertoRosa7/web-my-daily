@@ -11,6 +11,10 @@
   span.nickname {
     font-weight: 100;
     font-size: 1.1rem;
+    max-width: calc(14 * 1ch);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   max-width: 920px;
   margin-left: auto;
@@ -86,10 +90,6 @@
   // customize subtitle span inside subtitle
   .mat-mdc-card-subtitle span {
     margin-bottom: -3px;
-  }
-  // customize content
-  .mat-mdc-card-content {
-    margin-top: 1rem;
   }
   // customize subtitle
   .mat-mdc-card-subtitle {

@@ -1,4 +1,48 @@
+@import '../../../../themes/mixins';
+
 footer {
-  min-height: 30rem;
-  background-color: var(--color-dark);
+  height: 20rem;
+  background-color: var(--gray-dark);
+  color: var(--white);
+
+  font-weight: 100;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.75rem;
+
+  .container-footer {
+    @include size-container;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: inherit;
+    .row,
+    .row .col-1 .text,
+    .row .info {
+      display: flex;
+    }
+    .col-1 {
+      flex: 1;
+    }
+    .text {
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 2rem;
+      visibility: hidden; // change to visibility to show info on footer
+    }
+    .info {
+      gap: 2rem;
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    .container-footer .info {
+      gap: 0.5rem;
+      flex-direction: column;
+    }
+  }
 }

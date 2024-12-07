@@ -14,10 +14,11 @@
           (trigger)="onFireEvent(fieldNames.confirmPassword, $event)">
         </app-input-confirm-password>
 
-        <mat-checkbox color="primary" [formControlName]="fieldNames.checkTerms">
+        <mat-checkbox role="checkbox" color="primary" [formControlName]="fieldNames.checkTerms">
           Ao registrar se está aceitando os nosso
-          <a routerLink="/auth/terms-conditions" class="underline text-primary">Termos e Condições</a> do aplicativo
-          <a routerLink="/auth/privacy-policy" class="underline text-primary">Politica de Privacidade</a>.
+          <a role="link" routerLink="/auth/terms-conditions" class="underline text-primary">Termos e Condições</a> do
+          aplicativo
+          <a role="link" routerLink="/auth/privacy-policy" class="underline text-primary">Politica de Privacidade</a>.
         </mat-checkbox>
         <app-button-submit [form]="form" [name]="'Registrar-se'"></app-button-submit>
         <div class="flex gap-2">

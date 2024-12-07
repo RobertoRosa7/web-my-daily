@@ -15,6 +15,8 @@ import { CommonEnum } from '../../enums/bases/base.enum';
   template: ` <mat-form-field class="flex flex-col w-full" floatLabel="always">
     <label>Nome de Domínio</label>
     <input
+      maxlength="6"
+      minlength="4"
       matInput
       required
       [formControl]="controlName"

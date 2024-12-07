@@ -6,11 +6,17 @@
         <app-follwers [profile]="userProfile$ | async" (socketio)="onSocketio($event)"></app-follwers>
       </div>
     </div>
+    <br />
+    <br />
     <app-user-details [profile]="userProfile$ | async"></app-user-details>
   </div>
 </main>
 <ng-template #notFound>
-  <div [ngClass]="theme$ | async" style="height: 100%">
-    <app-cover></app-cover>
+  <div class="public-details" [ngClass]="theme$ | async">
+    <app-message></app-message>
+    <app-404
+      [theme]="theme$ | async"
+      messageTitle="Erro interno - estamos trabalhando nisso..."
+      [message]="'Não foi possível encontrar: ' + searchBy"></app-404>
   </div>
 </ng-template>

@@ -5,6 +5,10 @@ import { Component } from '@angular/core';
   standalone: true,
   templateUrl: './terms-conditions.component.html',
   styles: `
+  a {
+    text-decoration: underline;
+    color: blue;
+  }
     main {
       padding: 1rem;
       text-align: justify;

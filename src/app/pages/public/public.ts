@@ -11,16 +11,19 @@ import { JsonMapProperties } from '../../core/decorators/jsons/json.decorator';
 import { acUsFollowers } from '../../core/actions/user/user.action';
 import { acShowMessage } from '@actions/message/message.action';
 import { ShowMessage } from '@interfaces/message/message.interface';
+import { PathResources } from '@enums/bases/base.enum';
 
 @Component({
   selector: 'app-public',
   template: `
     <app-toolbar></app-toolbar>
     <router-outlet></router-outlet>
+    <app-footer></app-footer>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Public implements OnInit {
+  public readonly pathResources = PathResources;
   public readonly theme$ = this.store.select(selectorTheme);
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
 

@@ -9,7 +9,7 @@ import { DialogAlertComponent } from '../dialog-alert/dialog-alert.component';
 import { FollowRequest } from '../../interfaces/follows/follow.interface';
 import { DialogService } from '../../services/dialogs/dialog.service';
 import { DialogActions, DialogAlert } from '../../interfaces/dialogs/dialogs.interface';
-import { FollowingStatusEnum } from '../../enums/bases/base.enum';
+import { FollowingStatusEnum, PathResources, RoutePathsEnum } from '../../enums/bases/base.enum';
 import { ButtonFollowerComponent } from '../button-follower/button-follower.component';
 
 @Component({
@@ -22,7 +22,9 @@ import { ButtonFollowerComponent } from '../button-follower/button-follower.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InitialExploreComponent {
-  public followingStatus = FollowingStatusEnum;
+  public readonly followingStatus = FollowingStatusEnum;
+  public readonly routePathsEnum = RoutePathsEnum;
+  public readonly pathResources = PathResources;
 
   @Input({ required: true })
   public profile!: User;

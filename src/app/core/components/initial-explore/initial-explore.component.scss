@@ -2,16 +2,14 @@
 .card-explore,
 .card-explore .mat-mdc-card-title,
 .card-explore .mat-mdc-card-title div {
-  width: 100%;
+  width: -webkit-fill-available;
 }
 .card-explore {
-  min-width: 300px;
   // container div main all content is here
   .div-main,
   .div-main mat-card {
     justify-content: center;
   }
-
   // customize title and subtitle display flex
   .div-main mat-card .mat-mdc-card-subtitle,
   .div-main mat-card .mat-mdc-card-title,
@@ -31,7 +29,6 @@
     flex-direction: column;
     justify-items: center;
     // customize card reset values default
-
     mat-card {
       width: inherit;
       margin: 0 0 1rem;
@@ -39,7 +36,6 @@
       min-height: 5rem;
       padding-left: 1rem;
       padding-right: 1rem;
-
       // customize card-header
       .mat-mdc-card-header {
         align-items: center;
@@ -52,7 +48,6 @@
       .mdc-card {
         padding: 0;
       }
-
       // image avatar
       .avatar {
         margin: 0 !important;
@@ -79,8 +74,8 @@
         text-overflow: ellipsis;
         // div inside de title content info from users
         div {
-          max-width: 260px;
-          line-height: 1.5rem;
+          max-width: 13rem;
+          line-height: 1rem;
         }
         div:last-child {
           max-width: 20%;
@@ -88,11 +83,17 @@
         }
         p {
           font-size: 0.8rem;
-          justify-content: space-between;
+          align-items: center;
           text-overflow: ellipsis;
           word-wrap: nowrap;
           overflow: hidden;
           margin: 0;
+          span {
+            max-width: calc(14 * 1ch);
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
           span.divider {
             flex: 0.1;
             display: flex;
@@ -127,5 +128,15 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  mat-card-title .container-details .divider {
+    display: none !important;
+  }
+  mat-card-title .container-details {
+    flex-direction: column-reverse;
+    align-items: flex-start !important;
   }
 }

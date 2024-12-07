@@ -23,24 +23,32 @@ import { PublicProfileEffect } from '../../core/effects/public/public-profile.ef
 import { PublicProfileService } from '../../core/services/public/public-profile.service';
 import { FollowersComponent } from '../../core/components/followers/followers.component';
 import { FooterComponent } from '../../core/components/footer/footer.component';
+import { MessageComponent } from '@components/messages/message.component';
 
-@NgModule({ declarations: [Public, ProfileComponent, DetailsComponentProfilePublic], imports: [CommonModule,
-        SharedModule,
-        RouterModule.forChild(routes),
-        CoverComponent,
-        FollowersComponent,
-        UserDetailsComponent,
-        InitialExploreComponent,
-        DialogAlertComponent,
-        InputSearchComponent,
-        InputPhotoComponent,
-        ButtonBackComponent,
-        Page404Component,
-        ToolbarComponent,
-        FooterComponent], providers: [
-        provideState({ name: 'public', reducer: publicProfileReducer }),
-        provideEffects([PublicProfileEffect]),
-        PublicProfileService,
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [Public, ProfileComponent, DetailsComponentProfilePublic],
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    CoverComponent,
+    FollowersComponent,
+    UserDetailsComponent,
+    InitialExploreComponent,
+    DialogAlertComponent,
+    InputSearchComponent,
+    InputPhotoComponent,
+    ButtonBackComponent,
+    Page404Component,
+    ToolbarComponent,
+    FooterComponent,
+    MessageComponent,
+  ],
+  providers: [
+    provideState({ name: 'public', reducer: publicProfileReducer }),
+    provideEffects([PublicProfileEffect]),
+    PublicProfileService,
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+})
 export class PublicModule {}

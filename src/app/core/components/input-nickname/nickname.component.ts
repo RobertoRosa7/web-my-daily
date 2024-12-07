@@ -14,13 +14,16 @@ import { Form } from '../../../pages/auth/auth.form';
     <mat-form-field class="flex flex-col w-full" floatLabel="always">
       <label>Apelido</label>
       <input
+        minlength="4"
+        maxlength="24"
         matInput
         [formControl]="controlName"
         type="text"
         placeholder="Como gostaria de ser chamado(a)"
         class="border-b outline-none pt-2" />
       <mat-error *ngIf="controlName.getError('required')">Apelido é obrigatório</mat-error>
-      <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 4 digitos</mat-error>
+      <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 4 caracteres</mat-error>
+      <mat-error *ngIf="controlName.getError('maxlength')">Máximo de 24 caracteres</mat-error>
       <button role="button" [hidden]="isHideSubmit" type="submit" matSuffix mat-icon-button>
         <span class="material-symbols-outlined"> action_key </span>
       </button>

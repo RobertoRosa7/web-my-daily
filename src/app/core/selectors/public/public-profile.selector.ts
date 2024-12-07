@@ -7,8 +7,8 @@ type SelProfile = MemoizedSelector<object, UserProfile | null>;
 type SelMessage = MemoizedSelector<object, Pick<ProfileResponse, 'error' | 'message'>>;
 type SelIsPublicProfile = MemoizedSelector<object, boolean>;
 type SelProfileName = MemoizedSelector<object, Pick<UserProfile, 'name' | 'id'>>;
-type SelPageablePublicProfile = MemoizedSelector<object, PageableUser | never[]>;
-type SelUserPublicProfile = MemoizedSelector<object, UserProfile | null>;
+type SelPageablePublicProfile = MemoizedSelector<object, PageableUser>;
+type SelUserPubProfile = MemoizedSelector<object, UserProfile | null>;
 
 // recovery state from store
 const profile: Profile = createFeatureSelector<ProfileResponse>('public');
@@ -21,7 +21,7 @@ const cbProfileName = ({ data }: ProfileResponse) => ({
   id: data instanceof UserProfile ? data?.id : '',
 });
 
-const cbPageablePuProbile = ({ data }: ProfileResponse) => (data instanceof PageableUser ? data : []);
+const cbPageablePuProbile = ({ data }: ProfileResponse) => (data instanceof PageableUser ? data : new PageableUser());
 const cbPageableError = ({ error }: ProfileResponse) => error;
 const cbUserPuProbile = ({ data }: ProfileResponse) => (data instanceof UserProfile ? data : null);
 
@@ -32,4 +32,4 @@ export const selProfileName: SelProfileName = createSelector(profile, cbProfileN
 export const selPageablePub: SelPageablePublicProfile = createSelector(profile, cbPageablePuProbile);
 export const selPageableError = createSelector(profile, cbPageableError);
 
-export const selUserPub: SelUserPublicProfile = createSelector(profile, cbUserPuProbile);
+export const selUserPub: SelUserPubProfile = createSelector(profile, cbUserPuProbile);

@@ -1,68 +1,62 @@
 @import '../../../../themes/mixins';
 
-.page {
-  @include size-page;
-  height: 100%;
-  display: flex;
-
-  flex-direction: column;
-  .search {
-    flex: 0.7;
+.page-404 {
+  height: calc(100vh - 544px);
+  .wrapper {
+    height: 100%;
     display: flex;
-    justify-content: flex-end;
     flex-direction: column;
-  }
-  .container-404,
-  .container-404 .text {
-    display: flex;
-  }
-  .container-404 {
-    justify-content: space-between;
-    gap: 1rem;
-    flex: 1 1 auto;
-    .text {
-      flex: 1;
-      justify-content: center;
-      flex-direction: column;
-      h1 {
-        font-weight: 900;
+
+    .container-404,
+    .container-404 .text {
+      display: flex;
+    }
+    .container-404 {
+      gap: 1rem;
+      flex: 1 1 auto;
+      overflow: hidden;
+      .text {
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        height: 30rem;
+        h1 {
+          color: var(--color-dark-blue-darkness);
+          font-size: 10rem;
+          font-weight: 600;
+          font-family: AntonSC;
+          text-align: center;
+        }
+      }
+      .text:nth-child(2) h1 {
+        font-size: 2rem;
+        font-weight: 400;
+        line-height: 2rem;
+        text-align: center;
       }
     }
-    .text:nth-child(2) {
-      line-height: 2rem;
+    // only div with support info
+    .container-404.support .text {
       justify-content: flex-start;
-      h1 {
-        font-size: 3rem;
-      }
-    }
-    .text:first-child {
-      h1 {
-        font-size: 15rem;
-        color: var(--color-dark-blue-darkness);
-      }
     }
   }
 }
 @media screen and (max-width: 768px) {
-  .page {
-    .container-404 {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      .text {
-        h1 {
-          font-weight: 900;
+  .page-404 {
+    .wrapper {
+      .container-404 {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .text h1 {
+          font-size: 4rem;
         }
-      }
-      .text:nth-child(2) {
-        line-height: 1rem;
-        h1 {
-          font-size: 1rem;
-        }
-      }
-      .text:first-child {
-        h1 {
-          font-size: 8rem;
+        .text:nth-child(2) {
+          h1 {
+            line-height: 1.5rem;
+            font-size: 1.5rem;
+          }
         }
       }
     }

@@ -1,11 +1,13 @@
 @import '../../../../themes/mixins';
 
 .main-toolbar {
-  @include size-container;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 3;
+  mat-toolbar {
+    @include size-container;
+  }
   .toolbar-row {
     min-height: 80px;
     align-items: center;

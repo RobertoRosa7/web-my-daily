@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'AntonSC';
+  src: url('./assets/fonts/AntonSC-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('./assets/fonts/Orbitron-VariableFont_wght.ttf') format('truetype');
+}
+
 // Importa mixins para reutilização de estilos.
 @import './themes/mixins';
 // Importa o tema dark para estilos específicos.
@@ -356,5 +368,11 @@ code {
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

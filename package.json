@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "scripts": {
     "ng": "ng",
-    "start": "node logo.js && ng serve --live-reload false",
+    "start": "node logo.js && ng serve",
     "build:prod": "node logo.js && ng build --configuration production",
     "build:dev": "node logo.js && ng build --configuration development",
     "watch": "node logo.js && ng build --watch --configuration development",
