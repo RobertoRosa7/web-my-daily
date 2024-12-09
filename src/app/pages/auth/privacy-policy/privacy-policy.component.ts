@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { FooterComponent } from '@components/footer/footer.component';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-privacy-policy',
-  standalone: true,
   templateUrl: './privacy-policy.component.html',
-  styles: `
-    main {
-      padding: 1rem;
-      text-align: justify;
-    }
-    strong {
-      font-weight: 500;
-    }
-  `,
+  styleUrl: './privacy-policy.component.scss',
+  standalone: true,
+  imports: [FooterComponent, ToolbarComponent, MatButtonModule],
 })
-export class PrivacyPolicyComponent {}
+export class PrivacyPolicyComponent {
+  public printPdf(): void {
+    window.print();
+  }
+}

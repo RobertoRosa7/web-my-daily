@@ -8,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 const user = userType.user;
 const userFollowers = userType.userFollowers;
 
-const usResetState = userType.usReset;
+const usReset = userType.usReset;
 
 const chNickname = userType.chNickname;
 const chNicknameOk = userType.chNicknameOk;
@@ -42,4 +42,4 @@ export const acNameId = createAction(chNameId, cbNameId);
 export const acNameIdOk = createAction(chNameOk, cbNameIdOk);
 export const acNameIdNok = createAction(chNameNok, cbNameIdNok);
 
-export const acResetState = createAction(usResetState);
+export const acUsReset = createAction(usReset);

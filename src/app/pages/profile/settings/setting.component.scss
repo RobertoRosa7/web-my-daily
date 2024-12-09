@@ -5,7 +5,6 @@
   .container {
     @include size-page;
   }
-
   .row {
     display: flex;
     gap: 1rem;

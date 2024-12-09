@@ -31,5 +31,4 @@ export const selIsProfilePublic: SelIsPublicProfile = createSelector(profile, cb
 export const selProfileName: SelProfileName = createSelector(profile, cbProfileName);
 export const selPageablePub: SelPageablePublicProfile = createSelector(profile, cbPageablePuProbile);
 export const selPageableError = createSelector(profile, cbPageableError);
-
 export const selUserPub: SelUserPubProfile = createSelector(profile, cbUserPuProbile);

@@ -33,8 +33,7 @@
       font-weight: 700;
     }
     .box-card {
-      background-color: var(--white);
-      border: 1px solid var(--border-default);
+      border: 1px solid var(--dark);
       border-radius: 0.5rem;
       width: 100%;
       margin-bottom: 2rem;
@@ -54,6 +53,7 @@
         border: none;
         width: 100%;
         position: relative;
+        background: none;
         mat-icon.floating {
           position: absolute;
           top: 50%;

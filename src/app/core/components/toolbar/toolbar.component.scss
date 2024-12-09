@@ -16,6 +16,9 @@
     display: flex;
     .logo {
       margin-right: 1rem;
+      span {
+        cursor: pointer;
+      }
       .nickaname {
         cursor: pointer;
         text-decoration: underline;

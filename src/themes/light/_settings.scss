@@ -26,4 +26,12 @@
     background-color: var(--social-muted);
     color: var(--color-dark);
   }
+
+  // container page profile user private menu-settings
+  .container {
+    mat-card {
+      background: none;
+      border: 1px solid var(--dark);
+    }
+  }
 }

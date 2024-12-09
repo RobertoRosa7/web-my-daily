@@ -6,22 +6,33 @@
     </div>
     <app-message></app-message>
     <div class="box-card">
-      <div class="card-menu">
-        <mat-card routerLink="/profile/change-name">
+      <!-- <div class="card-menu">
+        <mat-card routerLink="/profile/change-domain-name">
           <mat-card-header>
-            <mat-icon mat-card-avatar>account_box</mat-icon>
-            <mat-card-title>Alterar apelido</mat-card-title>
-            <mat-card-subtitle>seu nome amigável por onde será chamada</mat-card-subtitle>
+            <mat-icon mat-card-avatar>person</mat-icon>
+            <mat-card-title>Suas informações</mat-card-title>
+            <mat-card-subtitle>Resumo - dados cadastrados</mat-card-subtitle>
           </mat-card-header>
           <mat-icon class="floating">chevron_right</mat-icon>
         </mat-card>
-      </div>
+      </div> -->
+
       <div class="card-menu">
         <mat-card routerLink="/profile/change-domain-name">
           <mat-card-header>
             <mat-icon mat-card-avatar>badge</mat-icon>
             <mat-card-title>Alterar nome de domínio</mat-card-title>
-            <mat-card-subtitle>seu nome para ser encontrador pelo sistema</mat-card-subtitle>
+            <mat-card-subtitle>Seu nome para ser encontrador pelo sistema</mat-card-subtitle>
+          </mat-card-header>
+          <mat-icon class="floating">chevron_right</mat-icon>
+        </mat-card>
+      </div>
+      <div class="card-menu">
+        <mat-card routerLink="/profile/change-name">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>account_box</mat-icon>
+            <mat-card-title>Alterar apelido</mat-card-title>
+            <mat-card-subtitle>Seu nome amigável por onde será chamada</mat-card-subtitle>
           </mat-card-header>
           <mat-icon class="floating">chevron_right</mat-icon>
         </mat-card>
@@ -39,78 +50,5 @@
         </mat-card>
       </div>
     </div>
-    <!-- <mat-card class="user-settings">
-      <mat-card-title>Configurações do Usuário</mat-card-title>
-      <mat-card-content>
-        <form (ngSubmit)="onSubmit()" [formGroup]="userForm" class="settings-form" novalidate>
-          <div class="field-session">
-            <p>Informações essenciais</p>
-            <mat-form-field appearance="fill" class="form-group">
-              <mat-label>Nome</mat-label>
-              <input matInput type="text" formControlName="name" aria-describedby="nameHelp" />
-              <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
-                Nome é obrigatório.
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" class="form-group">
-              <mat-label>E-mail</mat-label>
-              <input matInput type="email" formControlName="email" aria-describedby="emailHelp" />
-              <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
-                Email inválido.
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" class="form-group">
-              <mat-label>Telefone</mat-label>
-              <input matInput type="text" formControlName="phone" aria-describedby="phoneHelp" />
-              <mat-error *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
-                Telefone é obrigatório.
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div class="field-sessiong">
-            <p>Informações opicionais</p>
-            <mat-form-field appearance="fill" class="form-group">
-              <mat-label>Endereço</mat-label>
-              <input matInput type="text" formControlName="address" aria-describedby="addressHelp" />
-              <mat-error *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched">
-                Endereço é obrigatório.
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="field-session">
-            <p>Atualização de credenciais</p>
-            <mat-form-field appearance="fill" class="form-group">
-              <mat-label>Senha</mat-label>
-              <input matInput type="password" formControlName="password" aria-describedby="passwordHelp" />
-              <mat-error *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
-                Senha é obrigatória.
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <mat-form-field appearance="fill" class="form-group">
-            <mat-label>Perfil</mat-label>
-            <mat-select formControlName="profileVisibility">
-              <mat-option value="public">Público</mat-option>
-              <mat-option value="private">Privado</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill" class="form-group">
-            <mat-label>Bloquear Contato</mat-label>
-            <input matInput type="text" placeholder="Digite o nome do contato" formControlName="blockedContacts" />
-          </mat-form-field>
-          
-          <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Salvar</button>
-        </form>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="warn" (click)="onDeactivateAccount()">Desativar Conta</button>
-        <button mat-raised-button color="warn" (click)="onDeleteAccount()">Excluir Conta</button>
-      </mat-card-actions>
-    </mat-card> -->
   </div>
 </main>

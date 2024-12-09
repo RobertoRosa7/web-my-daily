@@ -1,23 +1,23 @@
 @import '../../../../../themes/mixins';
 
-.settings {
+.menu-settings {
   margin-top: 10rem;
   .container {
     @include size-page;
     ::ng-deep .mat-card-header {
       flex-direction: row-reverse !important;
     }
-
     mat-card {
       cursor: pointer;
       position: relative;
-      background-color: transparent;
       box-shadow: none;
-      border: none;
-      &:hover {
-        background: var(--color-white-brightness);
-      }
     }
+    mat-card-title,
+    mat-card-subtitle {
+      font-weight: 300;
+      font-family: inherit;
+    }
+
     mat-icon.floating {
       position: absolute;
       top: 50%;

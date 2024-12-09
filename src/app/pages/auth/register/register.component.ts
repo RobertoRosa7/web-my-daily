@@ -5,6 +5,7 @@ import { FielRegister } from '../auth.field.validators';
 import { IAuthState } from '../../../core/interfaces/auth/auth.interface';
 import { Store } from '@ngrx/store';
 import { CommonEnum } from '../../../core/enums/bases/base.enum';
+import { toLowerCase } from '@utils/strings/string.util';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +45,7 @@ export class RegisterComponent extends AuthComponent implements OnInit {
         email: this.getEmail,
         password: this.getPassword,
         checkTerms: this.getCheckTerms,
-        nameId: this.getNameId + CommonEnum.daily,
+        nameId: toLowerCase(this.getNameId + CommonEnum.daily),
         nickname: this.getNickName,
       })
     );

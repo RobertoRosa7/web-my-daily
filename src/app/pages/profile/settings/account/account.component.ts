@@ -10,6 +10,7 @@ import { ProfileService } from '@services/profile/profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { RoutePathsEnum } from '@enums/bases/base.enum';
+import { AuthService } from '@services/auth/auth.services';
 
 @Component({
   selector: 'app-account',
@@ -20,6 +21,7 @@ export class AccountComponent extends SettingComponent {
   private readonly dialog: MatDialog = inject(MatDialog);
   private readonly dialogService = inject(DialogService);
   private readonly profileService = inject(ProfileService);
+  private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
   public readonly labelButtonSubmit = 'Salvar Alteração';
@@ -66,7 +68,7 @@ export class AccountComponent extends SettingComponent {
     const dialogAction = new DialogActions();
 
     dialogData.title = 'Vai excluir sua conta?';
-    dialogData.message = 'Todos os seus dados serão apadados.actions';
+    dialogData.message = 'Todos os seus dados serão apadados.';
     dialogAction.messageAction = 'Excluir';
     dialogAction.messageClose = 'Cancelar';
     dialogData.actions = dialogAction;
@@ -103,7 +105,10 @@ export class AccountComponent extends SettingComponent {
       delay(1000), // Simula tempo de espera
       tap(() => this.showMessage('Sua conta foi excluída com sucesso.', 'success')),
       delay(3000), // Atraso para refletir a exclusão
-      tap(() => this.showMessage('Encerrando sua sessão, aguarde...', 'info')),
+      tap(() => {
+        this.authService.clearSession();
+        this.showMessage('Encerrando sua sessão, aguarde...', 'info');
+      }),
       delay(3000), // Atraso para finalizar sessão
       tap(() => this.finalizeProcess())
     );

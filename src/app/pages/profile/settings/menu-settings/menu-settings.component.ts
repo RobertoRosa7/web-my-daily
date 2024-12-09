@@ -1,10 +1,9 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { Component } from '@angular/core';
+import { SettingComponent } from '../setting.component';
 
 @Component({
   selector: 'app-menu-settings',
   templateUrl: './menu-settings.component.html',
   styleUrl: './menu-settings.component.scss',
 })
-export class MenuSettingsComponent {
-}
+export class MenuSettingsComponent extends SettingComponent {}

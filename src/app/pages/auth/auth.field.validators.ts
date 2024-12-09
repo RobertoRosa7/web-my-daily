@@ -51,12 +51,7 @@ export class FielRegister extends FieldsValidators {
  */
 export function nameIdField(service: UniqueNameService) {
   return new FormControl(null, {
-    validators: [
-      Validators.required,
-      Validators.minLength(4),
-      Validators.pattern(validateDomainNamePattern),
-      Validators.maxLength(6),
-    ],
+    validators: [Validators.required, Validators.minLength(4), Validators.maxLength(6)],
     asyncValidators: [uniqueDomainNameValidator(service)],
     updateOn: 'blur',
   });

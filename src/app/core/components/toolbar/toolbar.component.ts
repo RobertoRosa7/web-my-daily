@@ -13,6 +13,8 @@ import { selectorTheme } from '../../selectors/colors/color.selector';
 import { selGetNickname } from '../../selectors/user/user.selector';
 import { AuthService } from '@services/auth/auth.services';
 import { RoutePathsEnum } from '@enums/bases/base.enum';
+import { acReset } from '@actions/profile/profile.action';
+import { acUsReset } from '@actions/user/user.action';
 
 @Component({
   selector: 'app-toolbar',
@@ -24,7 +26,7 @@ import { RoutePathsEnum } from '@enums/bases/base.enum';
 export class ToolbarComponent implements OnInit {
   private readonly router: Router = inject(Router);
   private readonly store: Store = inject(Store);
-  private readonly AuthService: AuthService = inject(AuthService);
+  private readonly authService: AuthService = inject(AuthService);
   protected readonly dialog?: MatDialog = inject(MatDialog);
 
   public readonly routePathEnum = RoutePathsEnum;
@@ -36,10 +38,8 @@ export class ToolbarComponent implements OnInit {
 
   @Input()
   public id!: string | null | undefined;
-
   public autocomplete$!: Observable<string[]>;
   public notifications$!: Observable<any[]>;
-
   public searchTerms: FormControl = new FormControl();
   public user: any;
   public isDark!: boolean;
@@ -74,7 +74,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   public onLogout(): void {
-    this.AuthService.clearSession();
+    // clean localstorage
+    this.authService.clearSession();
+    // clean redux store
+    this.store.dispatch(acReset());
+    this.store.dispatch(acUsReset());
   }
 
   public add(type: string): void {

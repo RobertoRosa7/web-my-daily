@@ -147,4 +147,12 @@
       color: var(--color-dark);
     }
   }
+  // card explore page home
+  .div-main {
+    mat-card {
+      background: none;
+      box-shadow: none;
+      border: 1px solid var(--warning);
+    }
+  }
 }

@@ -360,3 +360,19 @@ code {
     }
   }
 }
+@media print {
+  body {
+    height: auto !important;
+  }
+  .main {
+    .container {
+      overflow: visible !important;
+      break-inside: avoid;
+    }
+    app-toolbar,
+    app-footer,
+    button {
+      display: none;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import { CommonEnum } from '@enums/bases/base.enum';
 import { acNameId } from '@actions/user/user.action';
 import { AccountComponent } from '../account.component';
 import { actionColor } from '@actions/color/color.action';
+import { toLowerCase } from '@utils/strings/string.util';
 
 @Component({
   selector: 'app-change-domain-name',
@@ -29,7 +30,7 @@ export class ChangeDomainNameComponent extends AccountComponent {
    */
   private updateNameId(nameId: string): void {
     if (this.isNameIdValid) {
-      this.store.dispatch(acNameId({ nameId: nameId + CommonEnum.daily }));
+      this.store.dispatch(acNameId({ nameId: toLowerCase(nameId + CommonEnum.daily) }));
     }
   }
 }

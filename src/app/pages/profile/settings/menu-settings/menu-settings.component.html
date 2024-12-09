@@ -1,4 +1,4 @@
-<main class="settings">
+<main class="menu-settings" [ngClass]="theme$ | async">
   <div class="container">
     <mat-card routerLink="/profile/settings/account">
       <mat-card-header>

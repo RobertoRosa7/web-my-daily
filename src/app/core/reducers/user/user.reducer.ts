@@ -6,7 +6,7 @@ import {
   acNicknameOk,
   acNicknameNok,
   acUser,
-  acResetState,
+  acUsReset,
 } from '../../actions/user/user.action';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -14,7 +14,7 @@ type States = Partial<HttpUserResponse>;
 type HttpResponseWithError = { failure: HttpErrorResponse };
 
 const states: States = {
-  message: 'ajfdlasjflajdsf ljalsfja lj fsd lajfla jsdfl ajfdlasj dfljasld jlasjdflk ajsfdlas jfldajs lfdjalsdjfa',
+  message: '',
 };
 
 const cbError = (_: States, { failure }: HttpResponseWithError) => ({
@@ -37,6 +37,7 @@ const cbResetStates = (_: States) => ({
   error: false,
   message: undefined,
   typeError: undefined,
+  data: undefined,
 });
 
 const cbSetValues = (_: States, data: User) => ({ ..._, data });
@@ -50,8 +51,7 @@ export const userReducer = createReducer(
   on(acUser, cbSetValues),
   on(acNicknameOk, cbNicknameOk),
   on(acNicknameNok, cbNicknameNok),
-
   on(acNameIdOk, cbNameIdOk),
   on(acNameIdNok, cbNameIdNok),
-  on(acResetState, cbResetStates)
+  on(acUsReset, cbResetStates)
 );

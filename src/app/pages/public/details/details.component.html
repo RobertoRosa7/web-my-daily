@@ -1,21 +1,26 @@
-<main class="public-details" *ngIf="userProfile$ | async; else notFound" [ngClass]="theme$ | async">
-  <div class="page">
+<main class="public-details">
+  <div class="page" *ngIf="userProfile$ | async as profile; else load" [ngClass]="theme$ | async">
     <div class="box">
       <app-input-photo></app-input-photo>
       <div class="container-followers">
-        <app-follwers [id]="userId$ | async" [profile]="userProfile$ | async" (socketio)="onSocketio($event)">
-        </app-follwers>
+        <app-follwers [id]="userId$ | async" [profile]="profile" (socketio)="onSocketio($event)"></app-follwers>
       </div>
     </div>
-    <app-user-details [profile]="userProfile$ | async"></app-user-details>
+    <app-user-details [profile]="profile"></app-user-details>
   </div>
 </main>
-<ng-template #notFound>
-  <div class="public-details" [ngClass]="theme$ | async">
+
+<ng-template #load>
+  <p *ngIf="!(isLoading$ | async); else erroLoading">Carregando...</p>
+</ng-template>
+
+<ng-template #erroLoading>
+  <div class="public-details" *ngIf="!isLoadingHelper">
     <app-message></app-message>
     <app-404
       [theme]="theme$ | async"
       messageTitle="Erro interno - estamos trabalhando nisso..."
-      [message]="'Não foi possível encontrar: ' + searchBy"></app-404>
+      [message]="'Não foi possível encontrar: ' + searchBy">
+    </app-404>
   </div>
 </ng-template>

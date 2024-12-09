@@ -1,12 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import { ProfileHappen, ProfileHappenResponse } from '../../interfaces/public/public-profile.happen.interface';
-import {
-  actionProfileHappensDelete,
-  actionProfileHappensError,
-  actionProfileHappensPost,
-  actionProfileHappensSuccess,
-} from '../../actions/public/public-profile.happens.action';
-
 import { actionCoreReset } from '../../actions/resets/reset.action';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -38,11 +31,4 @@ const callbackError = (_: States, { failed }: { failed: HttpErrorResponse }) => 
   error: failed,
 });
 
-export const publicProfileHappenReducer = createReducer(
-  states,
-  on(actionProfileHappensPost, callbackPost),
-  on(actionProfileHappensSuccess, callbackSuccess),
-  on(actionProfileHappensDelete, callbackDelete),
-  on(actionCoreReset, callbackResetStore),
-  on(actionProfileHappensError, callbackError)
-);
+export const publicProfileHappenReducer = createReducer(states, on(actionCoreReset, callbackResetStore));

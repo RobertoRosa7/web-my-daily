@@ -4,6 +4,7 @@
 .public-profile {
   @include size-container;
   @include size-toolbar;
+  @include size-medium;
   .button-back {
     display: flex;
     justify-content: flex-start;

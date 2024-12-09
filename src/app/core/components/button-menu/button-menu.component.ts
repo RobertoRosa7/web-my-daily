@@ -20,9 +20,9 @@ import { RoutePathsEnum } from '@enums/bases/base.enum';
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Inicial" [routerLink]="routePaths.homeInit">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Linha do tempo" [routerLink]="routePaths.homeInit">
         <mat-icon>home</mat-icon>
-        <span>Inicial</span>
+        <span>Linha do tempo</span>
       </button>
 
       <button matTooltipPosition="left" mat-menu-item matTooltip="Perfil" [routerLink]="routePaths.profileUser">

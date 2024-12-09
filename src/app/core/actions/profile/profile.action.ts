@@ -5,11 +5,12 @@ import { ProfileResponse } from '../../interfaces/profile/profile.interface';
 import { HttpResponseDefault } from '../../interfaces/https/http-response.interface';
 import { FollowRequest } from '../../interfaces/follows/follow.interface';
 
-const userProfile = profileType.userProfile;
-const userProfileSuccess = profileType.userProfileSuccess;
-const userProfileError = profileType.userProfileError;
-const userFollow = profileType.userFollow;
-const userFollowSuccess = profileType.userFollowSuccess;
+const usProType = profileType.userProfile;
+const usProSuccessType = profileType.userProfileSuccess;
+const usProErrorType = profileType.userProfileError;
+const useFollowType = profileType.userFollow;
+const usFollowSucessType = profileType.userFollowSuccess;
+const usResetType = profileType.userReset;
 
 const cbSuccess = (payload: ProfileResponse) => payload;
 const cbPublicSuccess = (payload: ProfileResponse | HttpResponseDefault<null>) => payload;
@@ -17,9 +18,10 @@ const cbError = (payload: { error: HttpErrorResponse }) => payload;
 const cbFollowRequest = (payload: FollowRequest) => payload;
 const cbFollowSuccess = (payload: FollowRequest) => payload;
 
-export const acReqProfile = createAction(userProfile);
-export const acSusProfile = createAction(userProfileSuccess, cbSuccess);
-export const acPubSusProfile = createAction(userProfileSuccess, cbPublicSuccess);
-export const acErrProfile = createAction(userProfileError, cbError);
-export const acUseFollow = createAction(userFollow, cbFollowRequest);
-export const acUseFollowSuccess = createAction(userFollowSuccess, cbFollowSuccess);
+export const acReqProfile = createAction(usProType);
+export const acReset = createAction(usResetType);
+export const acSusProfile = createAction(usProSuccessType, cbSuccess);
+export const acPubSusProfile = createAction(usProSuccessType, cbPublicSuccess);
+export const acErrProfile = createAction(usProErrorType, cbError);
+export const acUseFollow = createAction(useFollowType, cbFollowRequest);
+export const acUseFollowSuccess = createAction(usFollowSucessType, cbFollowSuccess);

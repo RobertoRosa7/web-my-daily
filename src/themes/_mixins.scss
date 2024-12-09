@@ -35,6 +35,11 @@
   }
 }
 
+@mixin size-medium {
+  max-width: 1280px;
+  margin: auto;
+}
+
 // set size page default
 @mixin size-page {
   width: inherit;

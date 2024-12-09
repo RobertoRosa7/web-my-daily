@@ -1,21 +1,17 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { FooterComponent } from '@components/footer/footer.component';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-terms-conditions',
-  standalone: true,
   templateUrl: './terms-conditions.component.html',
-  styles: `
-  a {
-    text-decoration: underline;
-    color: blue;
-  }
-    main {
-      padding: 1rem;
-      text-align: justify;
-    }
-    strong {
-      font-weight: 500;
-    }
-  `,
+  styleUrl: './terms-conditions.component.scss',
+  standalone: true,
+  imports: [FooterComponent, ToolbarComponent, MatButtonModule],
 })
-export class TermsConditionComponent {}
+export class TermsConditionComponent {
+  public printPdf(): void {
+    window.print();
+  }
+}
