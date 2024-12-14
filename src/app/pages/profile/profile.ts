@@ -12,14 +12,14 @@ import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.in
 import { actionSocketUserMetrics } from '../../core/actions/socket/socketio.action';
 import { acUsFollowers } from '../../core/actions/user/user.action';
 import { JsonMapProperties } from '../../core/decorators/jsons/json.decorator';
-import { actionColor } from '../../core/actions/color/color.action';
+import { acColor } from '../../core/actions/color/color.action';
 import { backgroundType } from '../../core/types/colors/color.type';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FieldNameEnum } from '../../core/enums/bases/base.enum';
 import { ShowMessage } from '@interfaces/message/message.interface';
 import { acShowMessage } from '@actions/message/message.action';
-
+import { RoutePathsEnum } from '@enums/bases/base.enum';
 @Component({
   selector: 'app-profile',
   template: `
@@ -38,6 +38,7 @@ export class Profile extends InDestroyDirective implements OnInit {
   public isReady!: boolean;
 
   public readonly fieldNames = FieldNameEnum;
+  public readonly routePaths = RoutePathsEnum;
   public readonly theme$ = this.store.select(selectorTheme);
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
   public readonly nameId$: Observable<string | undefined> = this.store.select(selGetNameId);

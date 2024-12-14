@@ -9,7 +9,7 @@ import { actionProfilePublic, actionUserFollow } from '../../../core/actions/pub
 import { FollowRequest } from '../../../core/interfaces/follows/follow.interface';
 import * as Highcharts from 'highcharts';
 import { backgroundType } from '../../../core/types/colors/color.type';
-import { actionColor } from '../../../core/actions/color/color.action';
+import { acColor } from '../../../core/actions/color/color.action';
 import { PageableUser } from '@interfaces/pageables/pageable.interface';
 import { PathResources } from '@enums/bases/base.enum';
 
@@ -99,7 +99,7 @@ export class ProfileComponent extends Public implements OnInit {
   override ngOnInit(): void {
     this.store.dispatch(actionProfilePublic({ name: null }));
     this.store.dispatch(
-      actionColor({
+      acColor({
         theme: 'public',
       })
     );

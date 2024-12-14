@@ -20,12 +20,16 @@ import { RoutePathsEnum } from '@enums/bases/base.enum';
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menus="matMenu" overlapTrigger="true">
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Linha do tempo" [routerLink]="routePaths.homeInit">
+      <button
+        matTooltipPosition="left"
+        mat-menu-item
+        matTooltip="Linha do tempo"
+        [routerLink]="routePaths.routeHomeInit">
         <mat-icon>home</mat-icon>
         <span>Linha do tempo</span>
       </button>
 
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Perfil" [routerLink]="routePaths.profileUser">
+      <button matTooltipPosition="left" mat-menu-item matTooltip="Perfil" [routerLink]="routePaths.routeProUser">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>
@@ -34,14 +38,18 @@ import { RoutePathsEnum } from '@enums/bases/base.enum';
         matTooltipPosition="left"
         mat-menu-item
         matTooltip="Configurações"
-        [routerLink]="routePaths.profileSettinsg">
+        [routerLink]="routePaths.routeProSettings">
         <mat-icon>settings</mat-icon>
         <span>Configurações</span>
       </button>
 
       <mat-divider></mat-divider>
 
-      <button matTooltipPosition="left" mat-menu-item matTooltip="Área Pública" [routerLink]="routePaths.publicArea">
+      <button
+        matTooltipPosition="left"
+        mat-menu-item
+        matTooltip="Área Pública"
+        [routerLink]="routePaths.routePublicArea">
         <mat-icon>open_in_new</mat-icon>
         <span>Área Pública</span>
       </button>
@@ -51,7 +59,7 @@ import { RoutePathsEnum } from '@enums/bases/base.enum';
         matTooltipPosition="left"
         mat-menu-item
         matTooltip="Encerrar Sessão"
-        [routerLink]="routePaths.publicArea">
+        [routerLink]="routePaths.routePublicArea">
         <mat-icon>logout</mat-icon>
         <span>Encerrar Sessão</span>
       </button>

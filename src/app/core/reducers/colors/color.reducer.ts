@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { actionColor } from '../../actions/color/color.action';
+import { acColor } from '../../actions/color/color.action';
 import { colors } from '../../interfaces/colors/colors.interface';
 
 const states: colors = {
@@ -9,5 +9,5 @@ const states: colors = {
 
 export const colorReducer = createReducer(
   states,
-  on(actionColor, (state, { theme, background }) => ({ ...state, theme, background }))
+  on(acColor, (state, { theme, background }) => ({ ...state, theme, background }))
 );

@@ -15,7 +15,7 @@ import { io } from 'socket.io-client';
 import { acReqProfile } from '../../../core/actions/profile/profile.action';
 import { happenRequest } from '../../../core/actions/happen/profile.happens.action';
 import { environment } from '../../../../environments/environment';
-import { actionColor } from '../../../core/actions/color/color.action';
+import { acColor } from '../../../core/actions/color/color.action';
 import { backgroundType } from '../../../core/types/colors/color.type';
 
 @Component({
@@ -57,7 +57,7 @@ export class UserComponent extends Profile implements OnInit {
       // });
     }
     this.store.dispatch(
-      actionColor({
+      acColor({
         theme: 'profile',
         background: backgroundType.profileCover,
       })

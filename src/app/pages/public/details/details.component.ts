@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { acUseFollow } from '../../../core/actions/profile/profile.action';
 import { selUserPub } from '../../../core/selectors/public/public-profile.selector';
 import { backgroundType } from '../../../core/types/colors/color.type';
-import { actionColor } from '../../../core/actions/color/color.action';
+import { acColor } from '../../../core/actions/color/color.action';
 import { actionProfilePublic } from '../../../core/actions/public/public-profile.action';
 import { filter, map, Observable } from 'rxjs';
 import { AuthType } from '@acTypes/auth/auth.type';
@@ -47,7 +47,7 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
     this.activeRoute.queryParamMap.subscribe((params) => this.searchProfile(params.get('name')));
 
     this.store.dispatch(
-      actionColor({
+      acColor({
         theme: 'public',
         background: backgroundType.profileCover,
       })

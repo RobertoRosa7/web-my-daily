@@ -35,7 +35,7 @@ export class AuthEffect extends Effect {
             this.showMessage(response.message as string, 'success');
 
             // dispatch action to home after login
-            this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.login] }));
+            this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.routeLogin] }));
 
             return authAction.actionLoginSuccess(response);
           }),
@@ -74,7 +74,7 @@ export class AuthEffect extends Effect {
             this.authService.setKey(AuthVars.user, { data: response.data?.user });
 
             // dispatch action to home after register
-            this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.home] }));
+            this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.routeHome] }));
 
             return authAction.actionLoginSuccess(response);
           }),

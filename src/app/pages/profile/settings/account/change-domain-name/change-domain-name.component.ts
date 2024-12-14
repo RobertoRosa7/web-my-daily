@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonEnum } from '@enums/bases/base.enum';
 import { acNameId } from '@actions/user/user.action';
 import { AccountComponent } from '../account.component';
-import { actionColor } from '@actions/color/color.action';
+import { acColor } from '@actions/color/color.action';
 import { toLowerCase } from '@utils/strings/string.util';
 
 @Component({
@@ -12,7 +12,7 @@ import { toLowerCase } from '@utils/strings/string.util';
 })
 export class ChangeDomainNameComponent extends AccountComponent {
   public override ngOnInit(): void {
-    this.store.dispatch(actionColor({ theme: 'settings' }));
+    this.store.dispatch(acColor({ theme: 'settings' }));
     this.form = this.formBuilder.group({});
   }
 

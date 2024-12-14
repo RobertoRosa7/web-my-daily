@@ -1,7 +1,7 @@
 import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectorTheme } from '../../core/selectors/colors/color.selector';
-import { actionColor } from '../../core/actions/color/color.action';
+import { acColor } from '../../core/actions/color/color.action';
 import { selGetId } from '../../core/selectors/user/user.selector';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(
-      actionColor({
+      acColor({
         theme: 'home timeline',
         background: backgroundType.socialHub,
       })

@@ -38,17 +38,21 @@ import { UserDetailsComponent } from '@components/user-details/user-details.comp
 import { ProfileRepository } from '@repositories/profile/profile.repository';
 import { ProfileService } from '@services/profile/profile.service';
 import { LocalStorageService } from '@services/localstorages/localstorage.service';
+import { ResumeUserInfoComponent } from './settings/account/resume-user-info/resume-user-info.component';
+import { MenuAccountComponent } from './settings/account/menu-account/menu-account.component';
 
 @NgModule({
   declarations: [
     Profile,
     UserComponent,
-    AccountComponent,
+    MenuAccountComponent,
     MenuSettingsComponent,
+    AccountComponent,
     SettingComponent,
     SecurityComponent,
     ChangeDomainNameComponent,
     ChangeNameComponent,
+    ResumeUserInfoComponent,
   ],
   imports: [
     CommonModule,

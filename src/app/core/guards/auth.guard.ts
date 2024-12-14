@@ -25,7 +25,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     map((isAuthenticated) => {
       if (!isAuthenticated) {
         // Navega para a página inicial caso não esteja autenticado
-        router.navigateByUrl(RoutePathsEnum.login).then();
+        router.navigateByUrl(RoutePathsEnum.routeLogin).then();
 
         // Exibe uma mensagem amigável
         snackbar.open('Sua credencial expirou!', 'ok');

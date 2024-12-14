@@ -34,7 +34,7 @@ export const authInterceptor: HttpInterceptorFn = (
       switch (error.status) {
         case 401:
           services.clearAll();
-          router.navigateByUrl(RoutePathsEnum.login).then();
+          router.navigateByUrl(RoutePathsEnum.routeLogin).then();
           return throwError(() => error);
         default:
           return throwError(() => error);

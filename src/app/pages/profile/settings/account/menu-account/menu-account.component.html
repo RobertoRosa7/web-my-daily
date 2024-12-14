@@ -6,8 +6,8 @@
     </div>
     <app-message></app-message>
     <div class="box-card">
-      <!-- <div class="card-menu">
-        <mat-card routerLink="/profile/change-domain-name">
+      <div class="card-menu">
+        <mat-card [routerLink]="routePaths.routeUserInfo">
           <mat-card-header>
             <mat-icon mat-card-avatar>person</mat-icon>
             <mat-card-title>Suas informações</mat-card-title>
@@ -15,10 +15,10 @@
           </mat-card-header>
           <mat-icon class="floating">chevron_right</mat-icon>
         </mat-card>
-      </div> -->
+      </div>
 
       <div class="card-menu">
-        <mat-card routerLink="/profile/change-domain-name">
+        <mat-card [routerLink]="routePaths.routeChangeDomain">
           <mat-card-header>
             <mat-icon mat-card-avatar>badge</mat-icon>
             <mat-card-title>Alterar nome de domínio</mat-card-title>
@@ -27,8 +27,9 @@
           <mat-icon class="floating">chevron_right</mat-icon>
         </mat-card>
       </div>
+
       <div class="card-menu">
-        <mat-card routerLink="/profile/change-name">
+        <mat-card [routerLink]="routePaths.routeChangeName">
           <mat-card-header>
             <mat-icon mat-card-avatar>account_box</mat-icon>
             <mat-card-title>Alterar apelido</mat-card-title>

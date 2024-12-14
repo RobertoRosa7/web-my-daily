@@ -8,6 +8,8 @@ import { ChangeNameComponent } from './settings/account/change-name/change-name.
 import { MenuSettingsComponent } from './settings/menu-settings/menu-settings.component';
 import { ChangeDomainNameComponent } from './settings/account/change-domain-name/change-domain-name.component';
 import { authGuard } from '@guards/auth.guard';
+import { ResumeUserInfoComponent } from './settings/account/resume-user-info/resume-user-info.component';
+import { MenuAccountComponent } from './settings/account/menu-account/menu-account.component';
 
 export const routes: Routes = [
   {
@@ -20,14 +22,28 @@ export const routes: Routes = [
         path: 'settings',
         component: SettingComponent,
         children: [
-          { path: 'menu', component: MenuSettingsComponent },
-          { path: 'account', component: AccountComponent },
+          { path: 'menu-settings', component: MenuSettingsComponent },
+          {
+            path: 'account',
+            component: AccountComponent,
+            children: [
+              {
+                path: 'menu-account',
+                component: MenuAccountComponent,
+              },
+              {
+                path: 'resume-user-info',
+                component: ResumeUserInfoComponent,
+              },
+              { path: 'change-name', component: ChangeNameComponent },
+              { path: 'change-domain-name', component: ChangeDomainNameComponent },
+              { path: '**', redirectTo: 'menu-account', pathMatch: 'prefix' },
+            ],
+          },
           { path: 'security', component: SecurityComponent },
-          { path: '**', redirectTo: 'menu', pathMatch: 'prefix' },
+          { path: '**', redirectTo: 'menu-settings', pathMatch: 'prefix' },
         ],
       },
-      { path: 'change-name', component: ChangeNameComponent },
-      { path: 'change-domain-name', component: ChangeDomainNameComponent },
       { path: '**', redirectTo: 'user', pathMatch: 'prefix' },
     ],
   },

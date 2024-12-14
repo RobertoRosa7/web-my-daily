@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Profile } from '../profile';
-import { actionColor } from '@actions/color/color.action';
+import { acColor } from '@actions/color/color.action';
 
 @Component({
   selector: 'app-settings',
@@ -8,8 +8,7 @@ import { actionColor } from '@actions/color/color.action';
   styleUrl: './setting.component.scss',
 })
 export class SettingComponent extends Profile {
-
   public override ngOnInit(): void {
-    this.store.dispatch(actionColor({ theme: 'settings' }));
+    this.store.dispatch(acColor({ theme: 'settings' }));
   }
 }

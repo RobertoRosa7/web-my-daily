@@ -1,18 +1,21 @@
 //paths do frotend
 export enum RoutePathsEnum {
-  register = '/auth/register',
-  login = '/auth/login',
-  terms = '/auth/terms-conditions',
-  policy = '/auth/privacy-policy',
-  
-  home = '/home',
-  homeInit = '/home/initial',
-  
-  publicArea = '/public',
-  profileDetail = '/public/details',
-  
-  profileUser = '/profile/user',
-  profileSettinsg = '/profile/settings'
+  routeRegister = '/auth/register',
+  routeLogin = '/auth/login',
+  routeTerms = '/auth/terms-conditions',
+  routePolicy = '/auth/privacy-policy',
+
+  routeHome = '/home',
+  routeHomeInit = '/home/initial',
+
+  routePublicArea = '/public',
+  routeProDetail = '/public/details',
+
+  routeProUser = '/profile/user',
+  routeProSettings = '/profile/settings',
+  routeUserInfo = '/profile/settings/account/resume-user-info',
+  routeChangeDomain = '/profile/settings/account/change-domain-name',
+  routeChangeName = '/profile/settings/account/change-name',
 }
 
 export enum PathResources {

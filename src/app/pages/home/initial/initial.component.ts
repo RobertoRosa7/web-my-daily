@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from '../home';
 import { Store } from '@ngrx/store';
-import { actionColor } from '../../../core/actions/color/color.action';
+import { acColor } from '../../../core/actions/color/color.action';
 import { MatTabChangeEvent } from '@angular/material/tabs';
 import { backgroundType } from '../../../core/types/colors/color.type';
 import { happenTimeline } from '../../../core/actions/happen/profile.happens.action';
@@ -26,14 +26,14 @@ export class InitialComponent extends HomeComponent implements OnInit {
   public onTabChange({ index }: MatTabChangeEvent): void {
     const tabIndex: any = {
       0: () => {
-        this.store.dispatch(actionColor({ theme: 'home explore', background: backgroundType.profileCover }));
+        this.store.dispatch(acColor({ theme: 'home explore', background: backgroundType.profileCover }));
         this.store.dispatch(actionProfilePublic({ name: null }));
       },
       1: () => {
-        this.store.dispatch(actionColor({ theme: 'home timeline' }));
+        this.store.dispatch(acColor({ theme: 'home timeline' }));
         this.store.dispatch(happenTimeline());
       },
-      2: () => this.store.dispatch(actionColor({ theme: 'home sentiment' })),
+      2: () => this.store.dispatch(acColor({ theme: 'home sentiment' })),
     };
     tabIndex[index]();
   }

@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth/auth.services';
 import { isPlatformBrowser } from '@angular/common';
 import { actionCoreReset } from '../../core/actions/resets/reset.action';
-import { actionColor } from '../../core/actions/color/color.action';
+import { acColor } from '../../core/actions/color/color.action';
 import { FieldNameEnum } from '../../core/enums/bases/base.enum';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 import { acShowMessage } from '@actions/message/message.action';
@@ -48,7 +48,7 @@ export class AuthComponent extends InDestroyDirective {
   constructor(protected readonly store: Store<IAuthState>) {
     super();
     // set theme login
-    this.store.dispatch(actionColor({ theme: 'login' }));
+    this.store.dispatch(acColor({ theme: 'login' }));
 
     // clear previous session
     if (isPlatformBrowser(this.platform)) {
