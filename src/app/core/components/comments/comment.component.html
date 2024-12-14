@@ -45,7 +45,7 @@
           </mat-menu>
         </div>
         <div class="card-body">
-          <div [innerHTML]="comment.text"></div>
+          <div [innerHTML]="comment.text | codeText"></div>
         </div>
         <div class="container-scores">
           <div matTooltipPosition="above" matTooltip="Score Positivo">

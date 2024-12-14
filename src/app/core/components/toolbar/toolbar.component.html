@@ -8,14 +8,15 @@
         <span role="link" [routerLink]="routePathEnum.publicArea">Diário</span>
         <ng-container>
           @if (id) {
-          <span>/</span>
           <small role="link" [routerLink]="routePathEnum.profileUser" class="nickaname">{{ name$ | async }}</small>
           }
         </ng-container>
       </div>
       <span class="spacer"></span>
       <div class="container-buttons">
-        <app-button-menu (onLogout)="onLogout()" *ngIf="id"></app-button-menu>
+        @if (id) {
+        <app-button-menu (onLogout)="onLogout()"></app-button-menu>
+        }
         <button
           class="btn-menu"
           [routerLink]="routePathEnum.login"

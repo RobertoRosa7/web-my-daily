@@ -1,15 +1,20 @@
 <div class="login flex flex-col items-center justify-center">
-  <div class="py-3 px-5 w-full max-w-md">
-    <app-button-back class="btn-float right"></app-button-back>
-    <h1 class="title">Entre na sua conta</h1>
+  <div class="w-full max-w-md container-login">
     <app-message></app-message>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <header class="header">
+      <app-button-back></app-button-back>
+      <div class="container-title">
+        <p class="title">Entre na sua conta</p>
+      </div>
+    </header>
+    <form class="form-login" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-col gap-y-5">
         <app-input-email (trigger)="onFireEvent(fieldNames.email, $event)"></app-input-email>
         <app-input-password (trigger)="onFireEvent(fieldNames.password, $event)"></app-input-password>
 
         <div>
-          <app-button-submit [form]="form" [name]="'Realizar login'"></app-button-submit>
+          <app-button-submit [form]="form" [name]="'Entrar'"></app-button-submit>
         </div>
 
         <div class="container-password">

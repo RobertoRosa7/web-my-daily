@@ -9,7 +9,7 @@
     </div>
   </div>
   <mat-dialog-content>
-    <span class="inner" [innerHTML]="data.happenActive.whatHappen"></span>
+    <span class="inner" [innerHTML]="data.happenActive.whatHappen | codeText"></span>
     <div class="container-likes">
       <div matTooltipPosition="above" matTooltip="Cutir">
         <button
@@ -17,8 +17,10 @@
           mat-icon-button
           role="button"
           aria-describedby="favorite">
-          <mat-icon *ngIf="!data.happenActive.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
-          <mat-icon *ngIf="data.happenActive.likes.isLiked" aria-label="favorite">favorite</mat-icon>
+          <mat-icon role="img" *ngIf="!data.happenActive.likes.isLiked" aria-label="favorite">
+            favorite_outline
+          </mat-icon>
+          <mat-icon role="img" *ngIf="data.happenActive.likes.isLiked" aria-label="favorite"> favorite </mat-icon>
         </button>
         <small>{{ data.happenActive.likes.likedCount | follows }}</small>
       </div>
@@ -29,6 +31,7 @@
           role="button"
           aria-describedby="not-favorite">
           <span
+            role="img"
             class="thumb-down"
             *ngIf="!data.happenActive.likes.isDisliked"
             aria-label="not-favorite"
@@ -36,6 +39,7 @@
             thumb_down
           </span>
           <mat-icon
+            role="img"
             *ngIf="data.happenActive.likes.isDisliked"
             aria-label="not-favorite"
             class="material-symbols-outlined">

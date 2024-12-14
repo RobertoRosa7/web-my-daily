@@ -11,7 +11,7 @@
       </div>
       <div matTooltip="Score de sentimentos" matTooltipPosition="left" class="title">
         <p>Score</p>
-        <span>score de sentimentos</span>
+        <span>Pontuação de Sentimentos</span>
       </div>
       <div class="scores">
         <div class="right">
@@ -25,7 +25,7 @@
             <p aria-label="score-positive">
               {{ profile.profile.totalScorePositive | number : '1.2-2' }}
             </p>
-            <p>score pos.</p>
+            <p>Positivo</p>
           </div>
           <div
             matTooltip="Score Negativo"
@@ -34,18 +34,18 @@
             aria-describedby="score-negative"
             class="score-negative">
             <p aria-label="score-negative">{{ profile.profile.totalScoreNegative | number : '1.2-2' }}</p>
-            <p>socre neg.</p>
+            <p>Negativo</p>
           </div>
         </div>
 
         <div class="left">
           <div matTooltip="Média" matTooltipPosition="above" role="div" aria-describedby="mean" class="mean">
             <p aria-label="mean">{{ profile.profile.meanFeeling | number : '1.2-2' }}</p>
-            <p>média</p>
+            <p>Média</p>
           </div>
           <div matTooltip="Desvio Padrão" matTooltipPosition="above" role="div" aria-describedby="std" class="std">
             <p aria-label="std">{{ profile.profile.stdFeeling | number : '1.2-2' }}</p>
-            <p>des. padrão</p>
+            <p>Desvio padrão</p>
           </div>
         </div>
       </div>

@@ -1,14 +1,6 @@
 .btn-fab-create {
   position: fixed;
-  bottom: 4rem;
-  right: 12rem;
+  bottom: 5rem;
+  right: 1rem;
   z-index: 1;
-}
-
-@media screen and (max-width: 768px) {
-  .btn-fab-create {
-    bottom: 5rem;
-    right: 2rem;
-    z-index: 1;
-  }
 }

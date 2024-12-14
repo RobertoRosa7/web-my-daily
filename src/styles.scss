@@ -135,6 +135,13 @@ code {
   padding: 0.01rem 0.5rem; // Espaçamento interno.
   border-radius: 0.5rem; // Bordas arredondadas.
 }
+
+.mat-mdc-menu-content {
+  background: var(--white); // background menu mat-menu
+}
+.mat-mdc-dialog-surface {
+  border-radius: 0 !important; // dialog
+}
 .loading-waves {
   width: inherit; // Usa a largura herdada do elemento pai.
   height: inherit; // Usa a altura herdada do elemento pai.

@@ -24,7 +24,10 @@ import { acShowMessage } from '@actions/message/message.action';
 
 @Component({
   selector: 'app-auth',
-  template: `<router-outlet></router-outlet>`,
+  template: `
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  `,
 })
 export class AuthComponent extends InDestroyDirective {
   public form!: FormGroup;

@@ -24,6 +24,8 @@ import { UniqueNameService } from '../../core/services/auth/unique-name.service'
 import { UniqueNameRepository } from '../../core/repositories/auth/unique-name.repository';
 import { MessageComponent } from '../../core/components/messages/message.component';
 import { ButtonBackComponent } from '@components/button-back/button-back.component';
+import { FooterComponent } from '@components/footer/footer.component';
+import { ToolbarComponent } from '@components/toolbar/toolbar.component';
 
 /**
  * @see: https://ngrx.io/guide/store
@@ -44,6 +46,8 @@ import { ButtonBackComponent } from '@components/button-back/button-back.compone
     ButtonSubmitComponent,
     MessageComponent,
     ButtonBackComponent,
+    FooterComponent,
+    ToolbarComponent
   ],
   providers: [
     AuthService,

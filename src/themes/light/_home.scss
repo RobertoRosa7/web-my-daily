@@ -48,6 +48,9 @@
     mat-card-header {
       background-color: #d0d7de39;
     }
+    mat-card-actions {
+      background: var(--white);
+    }
     // change color name id page home main
     span.name-id {
       background-color: var(--social-muted);
