@@ -1,9 +1,13 @@
 <div class="register flex flex-col items-center justify-center">
-  <div class="py-3 px-5 w-full max-w-md">
-    <app-button-back class="btn-float right"></app-button-back>
-    <h1 class="title">Cadastre sua conta</h1>
+  <div class="w-full max-w-md container">
     <app-message></app-message>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <header class="header">
+      <app-button-back></app-button-back>
+      <div class="container-title">
+        <p class="title">Cadastre sua conta</p>
+      </div>
+    </header>
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-col gap-y-5">
         <app-input-name-id (trigger)="onFireEvent(fieldNames.nameId, $event)"></app-input-name-id>
         <app-input-nickname (trigger)="onFireEvent(fieldNames.nickname, $event)"></app-input-nickname>
@@ -13,10 +17,9 @@
           [password]="form.get(fieldNames.password)"
           (trigger)="onFireEvent(fieldNames.confirmPassword, $event)">
         </app-input-confirm-password>
-
         <mat-checkbox role="checkbox" color="primary" [formControlName]="fieldNames.checkTerms">
           Ao registrar se está aceitando os nosso
-          <a role="link" routerLink="/auth/terms-conditions" class="underline text-primary">Termos e Condições</a> do
+          <a role="link" routerLink="/auth/terms-conditions" class="underline text-primary"> Termos e Condições </a> do
           aplicativo
           <a role="link" routerLink="/auth/privacy-policy" class="underline text-primary">Politica de Privacidade</a>.
         </mat-checkbox>
