@@ -12,6 +12,7 @@ import { CommonModule, Location } from '@angular/common';
   imports: [MatIconModule, MatDividerModule, RouterModule, CommonModule],
   template: `
     <button
+      title="Voltar"
       (click)="location.back()"
       aria-details="go back"
       aria-describedby="button"
@@ -19,7 +20,6 @@ import { CommonModule, Location } from '@angular/common';
       type="button"
       class="btn-back"
       [ngClass]="theme$ | async"
-      disableRipple="true"
       matTooltip="voltar"
       mat-icon-button
       aria-label="volar">

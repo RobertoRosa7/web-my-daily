@@ -2,7 +2,7 @@
   <div class="container">
     <div class="field-session">
       <app-message></app-message>
-      <h4>Altera apelido (opcional)</h4>
+      <h4>Altera apelido</h4>
       <app-input-nickname
         [inputValue]="nickname$ | async"
         (trigger)="onFireEvent(fieldNames.nickname, $event)"></app-input-nickname>

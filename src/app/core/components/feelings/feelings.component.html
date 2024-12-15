@@ -16,33 +16,20 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menus="matMenu" overlapTrigger="true">
-          <button
-            (click)="stoppingViewing(happen)"
-            *ngIf="id !== happen.userId"
-            matTooltipPosition="right"
-            mat-menu-item
-            matTooltip="Editar">
-            <mat-icon iconPositionEnd>remove</mat-icon>
-            <span>Deixar de Visualizar</span>
-          </button>
-          <button
-            *ngIf="id === happen.userId"
-            (click)="edit(happen)"
-            matTooltipPosition="right"
-            mat-menu-item
-            matTooltip="Editar">
+          @if(id === happen.userId) {
+          <button (click)="edit(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
             <mat-icon>edit</mat-icon>
             <span>Editar</span>
           </button>
-          <button
-            *ngIf="id === happen.userId"
-            (click)="remove(happen)"
-            matTooltipPosition="right"
-            mat-menu-item
-            matTooltip="Remover">
+          <button (click)="remove(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Remover">
             <mat-icon>remove</mat-icon>
             <span>Excluir</span>
           </button>
+          } @else {
+          <button (click)="stoppingViewing(happen)" matTooltipPosition="right" mat-menu-item matTooltip="Editar">
+            <span>Deixar de Visualizar</span>
+          </button>
+          }
         </mat-menu>
       </mat-card-title>
       <mat-card-subtitle>
@@ -54,38 +41,38 @@
           routerLink="/public/details"
           matTooltip="Nome de domínio"
           role="link"
-          aria-describedby="nameId"
-          >{{ happen.nameId }}</span
-        >
+          aria-describedby="nameId">
+          {{ happen.nameId }}
+        </span>
         <span>|</span>
-        <span matTooltipPosition="above" matTooltip="Data" role="timer" aria-describedby="date">{{
-          happen.updatedAt | date
-        }}</span>
+        <span matTooltipPosition="above" matTooltip="Data" role="timer" aria-describedby="date">
+          {{ happen.updatedAt | date }}
+        </span>
         <ng-container [ngSwitch]="happen.visibility">
           <mat-icon
             *ngSwitchCase="status.private"
             matTooltipPosition="right"
             matTooltip="Somente você pode visualizar"
             role="icon"
-            aria-describedby="post-private"
-            >lock</mat-icon
-          >
+            aria-describedby="post-private">
+            lock
+          </mat-icon>
           <mat-icon
             *ngSwitchCase="status.followers"
             matTooltipPosition="right"
             matTooltip="Seguidores podem visualizar"
             role="icon"
-            aria-describedby="post-followers"
-            >person</mat-icon
-          >
+            aria-describedby="post-followers">
+            person
+          </mat-icon>
           <mat-icon
             *ngSwitchDefault
             matTooltipPosition="right"
             matTooltip="Público"
             role="icon"
-            aria-describedby="post-public"
-            >public</mat-icon
-          >
+            aria-describedby="post-public">
+            public
+          </mat-icon>
         </ng-container>
       </mat-card-subtitle>
     </mat-card-header>
@@ -95,13 +82,13 @@
 
     <mat-card-actions>
       <div class="container-scores">
-        <div matTooltipPosition="above" matTooltip="Score Positivo">
+        <div matTooltipPosition="above" matTooltip="Pontuação Positiva">
           <button disabled class="btn-score-pos" mat-icon-button role="button" aria-describedby="arrow_upward">
             <mat-icon aria-label="arrow_upward">arrow_upward</mat-icon>
           </button>
           <small>{{ happen.feelings.scorePositive | percent : '1.2-2' }}</small>
         </div>
-        <div matTooltipPosition="above" matTooltip="Score Negativo">
+        <div matTooltipPosition="above" matTooltip="Pontuação Negativa">
           <button disabled class="btn-score-neg" mat-icon-button role="button" aria-describedby="arrow_downward">
             <mat-icon aria-label="arrow_downward">arrow_downward</mat-icon>
           </button>
@@ -127,8 +114,11 @@
             mat-icon-button
             role="button"
             aria-describedby="favorite">
-            <mat-icon *ngIf="!happen.likes.isLiked" aria-label="favorite">favorite_outline</mat-icon>
-            <mat-icon *ngIf="happen.likes.isLiked" aria-label="favorite">favorite</mat-icon>
+            @if(!happen.likes.isLiked) {
+            <mat-icon aria-label="favorite">favorite_outline</mat-icon>
+            } @else {
+            <mat-icon aria-label="favorite">favorite</mat-icon>
+            }
           </button>
           <small>{{ happen.likes.likedCount | follows }}</small>
         </div>
@@ -139,16 +129,11 @@
             mat-icon-button
             role="button"
             aria-describedby="not-favorite">
-            <span
-              class="thumb-down"
-              *ngIf="!happen.likes.isDisliked"
-              aria-label="not-favorite"
-              class="material-symbols-outlined">
-              thumb_down
-            </span>
-            <mat-icon *ngIf="happen.likes.isDisliked" aria-label="not-favorite" class="material-symbols-outlined">
-              thumb_down
-            </mat-icon>
+            @if(!happen.likes.isDisliked) {
+            <span class="thumb-down" aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </span>
+            } @else {
+            <mat-icon aria-label="not-favorite" class="material-symbols-outlined"> thumb_down </mat-icon>
+            }
           </button>
           <small>{{ happen.likes.dislikedCount | follows }}</small>
         </div>

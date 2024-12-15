@@ -1,13 +1,21 @@
 <main class="menu-settings" [ngClass]="theme$ | async">
   <div class="container">
-    <mat-card routerLink="/profile/settings/account">
-      <mat-card-header>
-        <mat-icon mat-card-avatar>home</mat-icon>
-        <mat-card-title>Geral</mat-card-title>
-        <mat-card-subtitle>Gerais sobre sua conta</mat-card-subtitle>
-      </mat-card-header>
-      <mat-icon class="floating">chevron_right</mat-icon>
-    </mat-card>
+    <div class="title">
+      <h1>Ajustes</h1>
+      <p>Faça suas configurações em sua conta</p>
+    </div>
+    <div class="box-card">
+      <div class="card-menu">
+        <mat-card routerLink="/profile/settings/account">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>settings</mat-icon>
+            <mat-card-title>Geral</mat-card-title>
+            <mat-card-subtitle>Gerais sobre sua conta</mat-card-subtitle>
+          </mat-card-header>
+          <mat-icon class="floating">chevron_right</mat-icon>
+        </mat-card>
+      </div>
+    </div>
     <!-- <mat-card routerLink="/profile/settings/security">
       <mat-card-header>
         <mat-icon mat-card-avatar>security</mat-icon>

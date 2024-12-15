@@ -4,7 +4,6 @@ import { SettingComponent } from '../setting.component';
 @Component({
   selector: 'app-account',
   template: '<router-outlet></router-outlet>',
-  styleUrl: './account.component.scss',
 })
 export class AccountComponent extends SettingComponent {
   public readonly labelButtonSubmit = 'Salvar Alteração';

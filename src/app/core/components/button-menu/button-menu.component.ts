@@ -25,26 +25,22 @@ import { RoutePathsEnum } from '@enums/bases/base.enum';
         mat-menu-item
         matTooltip="Linha do tempo"
         [routerLink]="routePaths.routeHomeInit">
-        <mat-icon>home</mat-icon>
+        <mat-icon>scheduler</mat-icon>
         <span>Linha do tempo</span>
       </button>
-
       <button matTooltipPosition="left" mat-menu-item matTooltip="Perfil" [routerLink]="routePaths.routeProUser">
         <mat-icon>person</mat-icon>
         <span>Perfil</span>
       </button>
-
       <button
         matTooltipPosition="left"
         mat-menu-item
         matTooltip="Configurações"
         [routerLink]="routePaths.routeProSettings">
-        <mat-icon>settings</mat-icon>
+        <mat-icon>manage_accounts</mat-icon>
         <span>Configurações</span>
       </button>
-
       <mat-divider></mat-divider>
-
       <button
         matTooltipPosition="left"
         mat-menu-item

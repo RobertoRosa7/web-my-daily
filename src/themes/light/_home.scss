@@ -124,6 +124,20 @@
   .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
     border: none;
   }
+  // customize card profil public app-initial
+  .card-explore .div-main button {
+    background: none;
+    color: var(--black);
+  }
+  // disable hover of the button card explore user on public profile
+  .mat-mdc-button-persistent-ripple::before {
+    background-color: transparent;
+  }
+  .card-explore .div-main .container-buttons button:hover,
+  .card-explore .div-main .container-buttons button:active,
+  .card-explore .div-main .container-buttons button::backdrop {
+    color: var(--social-warning-stronger);
+  }
   // button menu toolbar tab explore
   .container-buttons .btn-menu {
     border: none;

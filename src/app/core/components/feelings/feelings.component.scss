@@ -11,7 +11,7 @@
   span.nickname {
     font-weight: 100;
     font-size: 1.1rem;
-    max-width: calc(14 * 1ch);
+    max-width: calc(17 * 1ch);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -51,6 +51,7 @@
   }
   .container-likes {
     justify-content: flex-end;
+    padding-right: 0.7rem;
   }
   // subtitle
   .mat-mdc-card-subtitle {
@@ -86,6 +87,7 @@
   .mat-mdc-card-title {
     display: flex;
     justify-content: space-between;
+    line-height: 1rem;
   }
   // customize subtitle span inside subtitle
   .mat-mdc-card-subtitle span {
@@ -103,6 +105,9 @@
   // customize material icon
   .mat-mdc-card-subtitle .material-icons {
     font-size: 1rem;
+  }
+  .mat-mdc-card-actions {
+    padding: 0;
   }
   // customize material outline icon empty
   .material-symbols-outlined {

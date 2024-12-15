@@ -8,11 +8,11 @@ import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-explore',
+  styleUrl: './explore.component.scss',
   template: `
     <main class="explore">
       <div class="page">
         <!-- <app-input-search></app-input-search> -->
-        <p class="feelingers">Novos feelingers</p>
         <app-initial-explore
           [id]="userId$ | async"
           *ngFor="let profile of userPageble$ | async"
@@ -22,7 +22,6 @@ import { Store } from '@ngrx/store';
       </div>
     </main>
   `,
-  styleUrl: './explore.component.scss',
 })
 export class ExploreComponent extends HomeComponent {
   public readonly userPageble$ = this.store.select(selectorPageablePub).pipe(map((res) => res?.content));
@@ -31,8 +30,10 @@ export class ExploreComponent extends HomeComponent {
     super(store);
   }
 
-  override ngOnInit(): void {}
-
+  /**
+   *
+   * @param event FollowRequest
+   */
   public onSocketio(event: FollowRequest) {
     this.store.dispatch(actionUserFollow(event));
   }

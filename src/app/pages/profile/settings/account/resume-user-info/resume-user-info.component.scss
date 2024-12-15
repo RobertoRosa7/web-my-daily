@@ -1,0 +1,15 @@
+@import '../../../../../../themes/mixins';
+
+.resume-user-info {
+  @include size-toolbar;
+  height: 100%;
+  .container {
+    @include size-page;
+    .title h1 {
+      @include title-settings;
+    }
+    .box-card {
+      @include box-card;
+    }
+  }
+}

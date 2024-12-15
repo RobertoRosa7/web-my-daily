@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 import { Socket, io } from 'socket.io-client';
 import { acReqProfile } from '../../core/actions/profile/profile.action';
 import { happenRequest } from '../../core/actions/happen/profile.happens.action';
-import { selGetId, selGetNameId, selGetNickname } from '@selectors/user/user.selector';
+import { selGetId, selGetNameId, selGetNickname, selGetUser } from '@selectors/user/user.selector';
 import { selectorTheme } from '../../core/selectors/colors/color.selector';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
 import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.interface';
@@ -40,6 +40,7 @@ export class Profile extends InDestroyDirective implements OnInit {
   public readonly fieldNames = FieldNameEnum;
   public readonly routePaths = RoutePathsEnum;
   public readonly theme$ = this.store.select(selectorTheme);
+  public readonly user$ = this.store.select(selGetUser);
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
   public readonly nameId$: Observable<string | undefined> = this.store.select(selGetNameId);
   public readonly nickname$: Observable<string | undefined> = this.store.select(selGetNickname);
@@ -51,6 +52,9 @@ export class Profile extends InDestroyDirective implements OnInit {
     this.isReady = true;
   }
 
+  /**
+   * Responsible to clear message when is displayed
+   */
   protected clearMessage() {
     // clear message
     this.store.dispatch(

@@ -4,6 +4,7 @@
       <ng-container *ngIf="profile.id !== id">
         <ng-container *ngIf="!profile.profilePublic">
           <button
+            [disableRipple]="true"
             *ngSwitchCase="followingStatus.following"
             matTooltipPosition="above"
             matTooltip="deixar de seguir"
@@ -12,10 +13,10 @@
             aria-describedby="deixar de seguir"
             (click)="follow(profile, id, followingStatus.private)"
             mat-button>
-            <span class="btn-follow">Deixar</span>
-            <mat-icon iconPositionEnd>remove</mat-icon>
+            <span class="btn-follow">Seguindo</span>
           </button>
           <button
+            [disableRipple]="true"
             *ngSwitchCase="followingStatus.private"
             matTooltip="privado"
             matTooltipPosition="above"
@@ -25,9 +26,9 @@
             (click)="follow(profile, id, followingStatus.requested)"
             mat-button>
             <span class="btn-follow">Privado</span>
-            <mat-icon iconPositionEnd style="font-size: 1.1rem">lock</mat-icon>
           </button>
           <button
+            [disableRipple]="true"
             *ngSwitchCase="followingStatus.requested"
             matTooltip="Aguardando confirmação"
             matTooltipPosition="above"
@@ -37,11 +38,11 @@
             (click)="follow(profile, id, followingStatus.private)"
             mat-button>
             <span class="btn-follow">Solicitado</span>
-            <mat-icon iconPositionEnd style="font-size: 1.1rem">check</mat-icon>
           </button>
         </ng-container>
         <ng-container *ngIf="profile.profilePublic">
           <button
+            [disableRipple]="true"
             *ngSwitchCase="followingStatus.following"
             matTooltipPosition="above"
             matTooltip="deixar de seguir"
@@ -50,10 +51,10 @@
             class="btn-following"
             (click)="follow(profile, id, followingStatus.public)"
             mat-button>
-            <span class="btn-follow">Deixar</span>
-            <mat-icon iconPositionEnd>remove</mat-icon>
+            <span class="btn-follow">Seguindo</span>
           </button>
           <button
+            [disableRipple]="true"
             *ngSwitchCase="followingStatus.public"
             matTooltip="seguir"
             matTooltipPosition="above"
@@ -63,13 +64,13 @@
             (click)="follow(profile, id, followingStatus.following)"
             mat-button>
             <span class="btn-follow">Seguir</span>
-            <mat-icon iconPositionEnd>add</mat-icon>
           </button>
         </ng-container>
       </ng-container>
     </ng-container>
     <ng-template #showButonPublic>
       <button
+        [disableRipple]="true"
         *ngIf="profile.profilePublic"
         matTooltip="seguir"
         matTooltipPosition="above"
@@ -82,6 +83,7 @@
         <span class="btn-follow">Seguir</span>
       </button>
       <button
+        [disableRipple]="true"
         *ngIf="!profile.profilePublic"
         matTooltip="seguir"
         matTooltipPosition="above"
@@ -90,7 +92,6 @@
         class="btn-private"
         (click)="requestLoginToFollow()"
         mat-button>
-        <mat-icon iconPositionEnd style="font-size: 1.1rem">lock</mat-icon>
         <span class="btn-follow">Privado</span>
       </button>
     </ng-template>

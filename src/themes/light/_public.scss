@@ -56,9 +56,17 @@
   }
   // customize card profil public app-initial
   .card-explore .div-main button {
-    background-color: rgba(0, 0, 0, 0.03);
-    border-radius: 1rem;
-    color: var(--color-dark-red-medium);
+    background: none;
+    color: var(--black);
+  }
+  .card-explore .div-main .container-buttons button:hover,
+  .card-explore .div-main .container-buttons button:active,
+  .card-explore .div-main .container-buttons button::backdrop {
+    color: var(--green);
+  }
+  // disable hover of the button card explore user on public profile
+  .card-explore .div-main .container-buttons .mat-mdc-button-persistent-ripple::before {
+    background-color: transparent;
   }
   // customize card profil public app-initial change color button private
   .card-explore .div-main .container-buttons button.btn-private {
@@ -69,10 +77,6 @@
   .card-explore .div-main .container-buttons button.btn-request {
     color: var(--black);
     background-color: var(--color-green-light);
-  }
-  // customize buttom color default theme profile
-  .container-buttons button {
-    background-color: var(--white);
   }
   // customize button private public profile
   .container-buttons button.btn-private {
@@ -99,17 +103,6 @@
   .mat-mdc-card-subtitle {
     color: var(--gray);
   }
-  // customize profile private and public container fo followers
-  .container-followers p {
-    // border-left: 1px solid var(--border-default);
-    // border-right: 1px solid var(--border-default);
-  }
-  .container-followers p:first-child {
-    // border-top: 1px solid var(--border-default);
-  }
-  .container-followers p:last-child {
-    // border-bottom: 1px solid var(--border-default);
-  }
   // customize profile private and public container fo followers button
   .container-followers button {
     background-color: var(--white);
@@ -119,13 +112,6 @@
   .page .container-photo .img {
     background-color: var(--white);
   }
-  // // customize button back
-  // .btn-back {
-  //   // change color icon from btn back
-  //   mat-icon {
-  //     color: var(--white);
-  //   }
-  // }
   // customize button menu toolbar page welcome
   .container-buttons .btn-menu {
     background-color: var(--warning);

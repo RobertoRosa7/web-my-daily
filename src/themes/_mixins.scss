@@ -60,3 +60,43 @@
   font-family: Arial, Helvetica, sans-serif;
   color: var(--gray);
 }
+
+@mixin title-settings {
+  font-size: 2rem;
+  font-family: 'Open Sans';
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: 'wdth' 100;
+  font-weight: 700;
+}
+
+@mixin box-card {
+  border: 1px solid var(--dark);
+  border-radius: 0.5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  .card-menu {
+    border-bottom: 1px solid var(--border-default);
+  }
+  .card-menu:last-child {
+    border: none;
+  }
+  mat-card-title,
+  mat-card-subtitle {
+    font-weight: 300;
+    font-family: inherit;
+  }
+  mat-card {
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    position: relative;
+    background: none;
+    mat-icon.floating {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+    }
+  }
+}

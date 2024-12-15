@@ -1,0 +1,64 @@
+<div class="resume-user-info" *ngIf="user$ | async as user">
+  <div class="container">
+    <div class="title">
+      <h1>Suas Informações</h1>
+    </div>
+
+    <div class="section">
+      <div class="title">
+        <p>Dados pessoais</p>
+      </div>
+      <div class="box-card">
+        <div class="card-menu">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Nome</mat-card-title>
+              <mat-card-subtitle>{{ user.name }}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+
+        <div class="card-menu">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>E-mail</mat-card-title>
+              <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+
+        <div class="card-menu">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Nome de domínio</mat-card-title>
+              <mat-card-subtitle>{{ user.nameId }}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+
+        <div class="card-menu">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Gênero</mat-card-title>
+              <mat-card-subtitle>{{ user.genre ? user.genre : 'Não informado' }}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <p>Contato</p>
+      <div class="box-card">
+        <div class="card-menu">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>Telefone</mat-card-title>
+              <mat-card-subtitle>{{ user.phone ? user.phone : 'Não informado' }}</mat-card-subtitle>
+            </mat-card-header>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

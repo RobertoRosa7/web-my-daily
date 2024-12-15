@@ -1,28 +1,33 @@
 @import '../../../../../themes/mixins';
 
 .menu-settings {
-  margin-top: 10rem;
+  @include size-toolbar;
+  height: 100%;
   .container {
     @include size-page;
-    ::ng-deep .mat-card-header {
-      flex-direction: row-reverse !important;
+    .mat-mdc-card-header,
+    .mat-mdc-card-avatar {
+      padding: 0;
+      margin: 0;
     }
-    mat-card {
+    .mat-mdc-card-avatar {
+      height: inherit;
+    }
+    .mat-mdc-card-header {
+      &:hover {
+        background-color: var(--color-white-brightness);
+      }
+      display: flex;
+      align-items: center;
       cursor: pointer;
-      position: relative;
-      box-shadow: none;
+      min-height: 48px;
+      padding: 1rem;
     }
-    mat-card-title,
-    mat-card-subtitle {
-      font-weight: 300;
-      font-family: inherit;
+    .title h1 {
+      @include title-settings;
     }
-
-    mat-icon.floating {
-      position: absolute;
-      top: 50%;
-      right: 1rem;
-      transform: translateY(-50%);
+    .box-card {
+      @include box-card;
     }
   }
 }

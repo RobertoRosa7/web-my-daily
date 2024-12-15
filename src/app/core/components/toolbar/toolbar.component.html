@@ -5,10 +5,12 @@
       <app-button-back></app-button-back>
       }
       <div class="logo">
-        <span role="link" [routerLink]="routePathEnum.routePublicArea">Diário</span>
+        <span role="link" matTooltip="Diário" [routerLink]="routePathEnum.routePublicArea">Diário</span>
         <ng-container>
           @if (id) {
-          <small role="link" [routerLink]="routePathEnum.routeProUser" class="nickaname">{{ name$ | async }}</small>
+          <small role="link" [matTooltip]="name$ | async" [routerLink]="routePathEnum.routeProUser" class="nickaname">
+            {{ name$ | async }}
+          </small>
           }
         </ng-container>
       </div>
@@ -16,16 +18,16 @@
       <div class="container-buttons">
         @if (id) {
         <app-button-menu (onLogout)="onLogout()"></app-button-menu>
-        }
+        } @else {
         <button
           class="btn-menu"
           [routerLink]="routePathEnum.routeLogin"
           role="button"
           aria-describedby="signin"
-          mat-raised-button
-          *ngIf="!id">
+          mat-raised-button>
           Entrar
         </button>
+        }
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

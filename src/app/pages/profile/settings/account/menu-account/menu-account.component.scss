@@ -1,10 +1,9 @@
 @import '../../../../../../themes/mixins';
 
-.account {
-  padding-top: 5rem;
+.menu-account {
+  @include size-toolbar;
   height: 100%;
   .container {
-    height: inherit;
     @include size-page;
     .mat-mdc-card-header,
     .mat-mdc-card-avatar {
@@ -25,42 +24,10 @@
       padding: 1rem;
     }
     .title h1 {
-      font-size: 2rem;
-      font-family: 'Open Sans';
-      font-optical-sizing: auto;
-      font-style: normal;
-      font-variation-settings: 'wdth' 100;
-      font-weight: 700;
+      @include title-settings;
     }
     .box-card {
-      border: 1px solid var(--dark);
-      border-radius: 0.5rem;
-      width: 100%;
-      margin-bottom: 2rem;
-      .card-menu {
-        border-bottom: 1px solid var(--border-default);
-      }
-      .card-menu:last-child {
-        border: none;
-      }
-      mat-card-title,
-      mat-card-subtitle {
-        font-weight: 300;
-        font-family: inherit;
-      }
-      mat-card {
-        box-shadow: none;
-        border: none;
-        width: 100%;
-        position: relative;
-        background: none;
-        mat-icon.floating {
-          position: absolute;
-          top: 50%;
-          right: 1rem;
-          transform: translateY(-50%);
-        }
-      }
+      @include box-card;
     }
   }
 }

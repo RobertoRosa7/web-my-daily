@@ -1,11 +1,11 @@
 .container-buttons button {
   width: 100%;
 }
+.container-buttons .mat-mdc-button {
+  padding: 0;
+}
 .mobile.container-buttons {
   padding-right: 0;
-}
-.mobile.container-buttons button .btn-follow {
-  display: none;
 }
 .mobile.container-buttons button {
   background-color: transparent;
@@ -14,9 +14,6 @@
 @media screen and (max-width: 768px) {
   .container-buttons {
     padding-right: 0;
-  }
-  .container-buttons button .btn-follow {
-    display: none;
   }
   .container-buttons button {
     background-color: transparent;
