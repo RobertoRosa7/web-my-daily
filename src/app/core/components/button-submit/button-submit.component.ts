@@ -43,7 +43,7 @@ export class ButtonSubmitComponent {
   constructor() {
     this.isLoading$ = this.actionSubject.pipe(
       // layer filer only action loading
-      filter(({ type }) => type === AuthType.LOGIN_LOADING),
+      filter(({ type }) => type === AuthType.authLoadingType),
       // layer map catch payload action loading
       map((action) => {
         // abastract loading from action types

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import {
   AbstractControl,
@@ -7,7 +7,6 @@ import {
   FormsModule,
   ReactiveFormsModule,
   ValidationErrors,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { Form } from '../../../pages/auth/auth.form';
@@ -28,9 +27,9 @@ import { Form } from '../../../pages/auth/auth.form';
         [type]="changeTexts ? 'password' : 'text'"
         placeholder="Confirme a senha"
         class="border-b outline-none pt-2" />
-      <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>{{
-        changeTexts ? 'visibility_off' : 'visibility'
-      }}</mat-icon>
+      <mat-icon style="cursor: pointer" (click)="changeTexts = !changeTexts" matSuffix>
+        {{ changeTexts ? 'visibility_off' : 'visibility' }}
+      </mat-icon>
       <mat-error *ngIf="controlName.getError('mustMatch')" class="text-error"> Senhas não são iguais </mat-error>
     </mat-form-field>
   `,
@@ -44,21 +43,34 @@ import { Form } from '../../../pages/auth/auth.form';
   standalone: true,
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
-export class ConfirmPasswordComponent extends Form {
-  public changeTexts = true;
+export class ConfirmPasswordComponent extends Form implements OnInit {
+  public changeTexts = true; // change text or password
 
-  public confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  /**
+   * Responsible to match password
+   *
+   * @param control AbstractControl
+   * @returns ValidationErrors | null
+   */
+  public confirmPasswordValidator = (control: AbstractControl): ValidationErrors | null => {
     return this.password && this.password.value === control.value ? null : { mustMatch: true };
   };
 
-  public controlName: FormControl = new FormControl(null, {
+  /**
+   * FormControl - input password validator
+   */
+  public controlName = new FormControl(null, {
     validators: [this.confirmPasswordValidator.bind(this), Validators.required, Validators.minLength(6)],
     updateOn: 'change',
   });
 
   @Input()
-  public password!: AbstractControl | null;
+  public password!: AbstractControl | null; // input password formControl
 
   @Output()
-  public trigger = this.onChange(this.controlName);
+  public trigger = this.onChange(this.controlName); // dispatch event on form change
+
+  ngOnInit(): void {
+    this.initForm.emit(this.controlName); // start event and add new form controll on form group
+  }
 }

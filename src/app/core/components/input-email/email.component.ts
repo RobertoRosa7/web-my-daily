@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { emailField } from '../../../pages/auth/auth.field.validators';
 import { Form } from '../../../pages/auth/auth.form';
 
@@ -36,9 +36,13 @@ import { Form } from '../../../pages/auth/auth.form';
   standalone: true,
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
-export class EmailComponent extends Form {
-  public controlName: FormControl = emailField;
+export class EmailComponent extends Form implements OnInit {
+  public controlName = emailField; // field email with validator
 
   @Output()
-  public trigger = this.onChange(this.controlName);
+  public trigger = this.onChange(this.controlName); // dispatch event on form change
+
+  ngOnInit(): void {
+    this.initForm.emit(this.controlName); // start event and add new form controll on form group
+  }
 }

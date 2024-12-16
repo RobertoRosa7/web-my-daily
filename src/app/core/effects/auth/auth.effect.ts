@@ -2,11 +2,11 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, finalize, map, mergeMap } from 'rxjs/operators';
-import { AuthService } from '../../services/auth/auth.services';
-import * as authAction from '../../actions/auth/auth.action';
+import { AuthService } from '@services/auth/auth.services';
+import * as authAction from '@actions/auth/auth.action';
 import { AuthType } from '../../types/auth/auth.type';
-import { AuthVars } from '../../interfaces/auth/auth.interface';
-import { RoutePathsEnum } from '../../enums/bases/base.enum';
+import { AuthVars } from '@interfaces/auth/auth.interface';
+import { RoutePathsEnum } from '@enums/bases/base.enum';
 import { Effect } from '@effects/effect';
 
 /**
@@ -18,13 +18,12 @@ export class AuthEffect extends Effect {
   private readonly authService: AuthService = inject(AuthService);
 
   /**
-   * INFO:
    * register - effect login effect responsible to handler layer between services, store states, reducers and components
    */
-  public register: Observable<Actions> = createEffect(() =>
+  public register$: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(AuthType.LOGIN_REGISTER),
+      ofType(AuthType.authRegiterType),
       // layer to fetch payload from action
       mergeMap((payload) =>
         // layer to service send payload to backend
@@ -35,14 +34,14 @@ export class AuthEffect extends Effect {
             this.showMessage(response.message as string, 'success');
 
             // dispatch action to home after login
-            this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.routeLogin] }));
+            this.store.dispatch(authAction.acGoto({ paths: [RoutePathsEnum.routeLogin] }));
 
-            return authAction.actionLoginSuccess(response);
+            return authAction.acLoginSuccess(response);
           }),
           // layer resolve http error to handler
           catchError((e) => this.handlerError(e)),
           // layer finalize stopping loading
-          finalize(() => this.store.dispatch(authAction.actionLoading({ isLoading: false })))
+          finalize(() => this.store.dispatch(authAction.acLoading({ isLoading: false })))
         )
       ),
       // layer to catch error from effect
@@ -51,13 +50,12 @@ export class AuthEffect extends Effect {
   );
 
   /**
-   * INFO:
    * login - effect login effect responsible to handler layer between services, store states, reducers and components
    */
-  public login: Observable<Actions> = createEffect(() =>
+  public login$: Observable<Actions> = createEffect(() =>
     this.action.pipe(
       // layer types to dispatch action
-      ofType(AuthType.LOGIN),
+      ofType(AuthType.authLoginType),
       // layer to fetch payload from action
       mergeMap((payload) =>
         // layer to service send payload to backend
@@ -74,14 +72,41 @@ export class AuthEffect extends Effect {
             this.authService.setKey(AuthVars.user, { data: response.data?.user });
 
             // dispatch action to home after register
-            this.store.dispatch(authAction.actionGoto({ paths: [RoutePathsEnum.routeHome] }));
+            this.store.dispatch(authAction.acGoto({ paths: [RoutePathsEnum.routeHome] }));
 
-            return authAction.actionLoginSuccess(response);
+            return authAction.acLoginSuccess(response);
           }),
           // layer resolve http error to handler
           catchError((e) => this.handlerError(e)),
           // layer finalize stopping loading
-          finalize(() => this.store.dispatch(authAction.actionLoading({ isLoading: false })))
+          finalize(() => this.store.dispatch(authAction.acLoading({ isLoading: false })))
+        )
+      ),
+      // layer to catch error from effect
+      catchError((e) => of(e))
+    )
+  );
+
+  /**
+   *
+   */
+  public resetPassword$: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      // layer types to dispatch action
+      ofType(AuthType.authSendEmailType),
+      // layer to fetch payload from action
+      mergeMap((request) =>
+        this.authService.resetPassword(request).pipe(
+          map((response) => {
+            // check if response if http error and then dispatch action of error
+            this.showMessage(response.message as string, 'success');
+
+            return authAction.acSendEmailOk(response);
+          }),
+          // Layer - error
+          catchError((e) => this.handlerError(e)),
+          // layer finalize stopping loading
+          finalize(() => this.store.dispatch(authAction.acLoading({ isLoading: false })))
         )
       ),
       // layer to catch error from effect

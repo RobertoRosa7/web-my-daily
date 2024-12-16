@@ -17,29 +17,25 @@
           <div class="title">
             <h2>Chegaram agora!</h2>
           </div>
-          <div class="card-explore" *ngIf="userPageble$ | async as pageable; else loading">
-            <ng-container *ngIf="pageable.length > 0; else isEmpty">
-              <app-initial-explore
-                [id]="userId$ | async"
-                *ngFor="let profile of pageable"
-                (socketio)="onSocketio($event)"
-                [profile]="profile">
-              </app-initial-explore>
-            </ng-container>
-            <ng-template #isEmpty>
-              <span class="msg empty">Ops! Nenhum usuário recém cadastrado - em breve teremos!</span>
-            </ng-template>
-          </div>
-        </div>
-        <ng-template #loading>
-          <div class="card-explore" *ngIf="!(error$ | async); else error">
-            <app-initial-explore class="loading" *ngFor="let profile of mock" [profile]="profile">
+          @if(userPageble$ | async; as pageable) {
+          <div class="card-explore">
+            @if(pageable.length > 0) { @for(p of pageable; track $index) {
+            <app-initial-explore [id]="userId$ | async" (socketio)="onSocketio($event)" [profile]="p">
             </app-initial-explore>
+            } }@else {
+            <span class="msg empty">Ops! Nenhum usuário recém cadastrado - em breve teremos!</span>
+            }
           </div>
-        </ng-template>
-        <ng-template #error>
+          }@else if(!(error$ | async)) {
+          <div class="card-explore">
+            @for(p of mock; track $index) {
+            <app-initial-explore class="loading" [profile]="p"></app-initial-explore>
+            }
+          </div>
+          }@else {
           <span class="msg error">Não foi possível recuperar usuários recentes.</span>
-        </ng-template>
+          }
+        </div>
       </div>
     </div>
   </section>

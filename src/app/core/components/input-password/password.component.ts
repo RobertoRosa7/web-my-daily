@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Output } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { passwordField } from '../../../pages/auth/auth.field.validators';
@@ -25,6 +25,9 @@ import { Form } from '../../../pages/auth/auth.form';
       </mat-icon>
       <mat-error *ngIf="controlName.getError('required')">Senha é obrigatório</mat-error>
       <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 6 digitos</mat-error>
+      <mat-error *ngIf="controlName.getError('pattern')">
+        A senha deve conter letras, números e caracteres especiais
+      </mat-error>
     </mat-form-field>
   `,
   styles: `::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) {
@@ -37,10 +40,14 @@ import { Form } from '../../../pages/auth/auth.form';
   standalone: true,
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
-export class PasswordComponent extends Form {
-  public changeTexts = true;
-  public controlName: FormControl = passwordField;
+export class PasswordComponent extends Form implements OnInit {
+  public changeTexts = true; // change text or password
+  public controlName: FormControl = passwordField; // form controll password
 
   @Output()
-  public trigger = this.onChange(this.controlName);
+  public trigger = this.onChange(this.controlName); // dispatch event on form change
+
+  public ngOnInit(): void {
+    this.initForm.emit(this.controlName); // start event and add new form controll on form group
+  }
 }

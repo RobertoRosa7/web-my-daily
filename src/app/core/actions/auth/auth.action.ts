@@ -1,29 +1,35 @@
 import { createAction } from '@ngrx/store';
 import { AuthType } from '../../types/auth/auth.type';
-import { IAuthState, ILogin, IRegister } from '../../interfaces/auth/auth.interface';
+import { IAuthState, ILogin, IRegister, ResetPassResponse } from '../../interfaces/auth/auth.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpResponseDefault } from '../../interfaces/https/http-response.interface';
 
-const login = AuthType.LOGIN;
-const register = AuthType.LOGIN_REGISTER;
-const error = AuthType.LOGIN_ERROR;
-const success = AuthType.LOGIN_SUCCESS;
-const clear = AuthType.CLEAR;
-const goto = AuthType.LOGIN_GOTO;
-const loading = AuthType.LOGIN_LOADING;
+const auLogin = AuthType.authLoginType;
+const auRegister = AuthType.authRegiterType;
+const auError = AuthType.authErrorType;
+const auSuccess = AuthType.authSuccessType;
+const auClear = AuthType.authClearType;
+const autGoto = AuthType.authGotoType;
+const auLoading = AuthType.authLoadingType;
+const auSendEmail = AuthType.authSendEmailType;
+const authSendEmailOk = AuthType.authSendEmailOkType;
 
-const callbackLogin = (payload: ILogin) => payload;
-const callbackRegister = (payload: IRegister) => payload;
-const callbackError = (payload: { fail: HttpErrorResponse }) => payload;
-const callbackSuccess = (payload: HttpResponseDefault<IAuthState>) => payload;
-const callbackGoto = (payload: { paths: Array<string> }) => payload;
-const callbackLoading = (payload: { isLoading: boolean }) => payload;
+const cbLogin = (payload: ILogin) => payload;
+const cbRegister = (payload: IRegister) => payload;
+const cbError = (payload: { fail: HttpErrorResponse }) => payload;
+const cbSuccess = (payload: HttpResponseDefault<IAuthState>) => payload;
+const cbGoto = (payload: { paths: Array<string> }) => payload;
+const cbLoading = (payload: { isLoading: boolean }) => payload;
+const cbSendEmail = (payload: { email: string }) => payload;
+const cbSendEmailOk = (payload: ResetPassResponse) => payload;
 
-export const actionClear = createAction(clear);
+export const acClear = createAction(auClear);
 
-export const actionLogin = createAction(login, callbackLogin);
-export const actionRegiser = createAction(register, callbackRegister);
-export const actionLoginError = createAction(error, callbackError);
-export const actionLoginSuccess = createAction(success, callbackSuccess);
-export const actionGoto = createAction(goto, callbackGoto);
-export const actionLoading = createAction(loading, callbackLoading);
+export const acLogin = createAction(auLogin, cbLogin);
+export const acRegister = createAction(auRegister, cbRegister);
+export const acLoginError = createAction(auError, cbError);
+export const acLoginSuccess = createAction(auSuccess, cbSuccess);
+export const acGoto = createAction(autGoto, cbGoto);
+export const acLoading = createAction(auLoading, cbLoading);
+export const acSendEmail = createAction(auSendEmail, cbSendEmail);
+export const acSendEmailOk = createAction(authSendEmailOk, cbSendEmailOk);

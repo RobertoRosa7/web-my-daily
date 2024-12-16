@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AccountComponent } from '../account.component';
 import { acNickname } from '@actions/user/user.action';
-import { actionLoading } from '@actions/auth/auth.action';
+import { acLoading } from '@actions/auth/auth.action';
 import { acColor } from '@actions/color/color.action';
 import { ShowMessage } from '@interfaces/message/message.interface';
 import { acShowMessage } from '@actions/message/message.action';

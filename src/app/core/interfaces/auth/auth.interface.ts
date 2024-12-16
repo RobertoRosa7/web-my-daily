@@ -1,8 +1,15 @@
 import { HttpResponseDefault } from '../https/http-response.interface';
+export type LoginResponse = HttpResponseDefault<IAuthState>;
+export type LegisterResponse = HttpResponseDefault<IAuthState>;
+export type ResetPassResponse = HttpResponseDefault<string>;
 
 export interface ILogin {
   email: string;
   password: string;
+}
+
+export interface IResetPassRequest {
+  email: string;
 }
 
 export interface IRegister extends ILogin {
@@ -30,9 +37,6 @@ export interface IAuthState {
   token: string | null;
   user: User | null;
 }
-
-export type loginResponse = HttpResponseDefault<IAuthState>;
-export type registerResponse = HttpResponseDefault<IAuthState>;
 
 export enum AuthVars {
   token = 'token',

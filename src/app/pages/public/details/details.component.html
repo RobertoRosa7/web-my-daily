@@ -1,5 +1,6 @@
 <main class="public-details">
-  <div class="page" *ngIf="userProfile$ | async as profile; else load" [ngClass]="theme$ | async">
+  @if(userProfile$ | async; as profile) {
+  <div class="page" [ngClass]="theme$ | async">
     <div class="box">
       <app-input-photo></app-input-photo>
       <div class="container-followers">
@@ -8,14 +9,10 @@
     </div>
     <app-user-details [profile]="profile"></app-user-details>
   </div>
-</main>
-
-<ng-template #load>
-  <p *ngIf="!(isLoading$ | async); else erroLoading">Carregando...</p>
-</ng-template>
-
-<ng-template #erroLoading>
-  <div class="public-details" *ngIf="!isLoadingHelper">
+  } @else if (!(isLoading$ | async)) {
+  <p>Carregando...</p>
+  } @else if (!isLoadingHelper){
+  <div class="public-details">
     <app-message></app-message>
     <app-404
       [theme]="theme$ | async"
@@ -23,4 +20,5 @@
       [message]="'Não foi possível encontrar: ' + searchBy">
     </app-404>
   </div>
-</ng-template>
+  }
+</main>

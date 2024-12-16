@@ -1,99 +1,92 @@
-<div class="container-buttons">
-  <ng-container [ngSwitch]="profile.followingStatus">
-    <ng-container *ngIf="id; else showButonPublic">
-      <ng-container *ngIf="profile.id !== id">
-        <ng-container *ngIf="!profile.profilePublic">
-          <button
-            [disableRipple]="true"
-            *ngSwitchCase="followingStatus.following"
-            matTooltipPosition="above"
-            matTooltip="deixar de seguir"
-            role="button"
-            class="btn-following"
-            aria-describedby="deixar de seguir"
-            (click)="follow(profile, id, followingStatus.private)"
-            mat-button>
-            <span class="btn-follow">Seguindo</span>
-          </button>
-          <button
-            [disableRipple]="true"
-            *ngSwitchCase="followingStatus.private"
-            matTooltip="privado"
-            matTooltipPosition="above"
-            aria-describedby="privado"
-            role="button"
-            class="btn-private"
-            (click)="follow(profile, id, followingStatus.requested)"
-            mat-button>
-            <span class="btn-follow">Privado</span>
-          </button>
-          <button
-            [disableRipple]="true"
-            *ngSwitchCase="followingStatus.requested"
-            matTooltip="Aguardando confirmação"
-            matTooltipPosition="above"
-            aria-describedby="solicitado"
-            role="button"
-            class="btn-request"
-            (click)="follow(profile, id, followingStatus.private)"
-            mat-button>
-            <span class="btn-follow">Solicitado</span>
-          </button>
-        </ng-container>
-        <ng-container *ngIf="profile.profilePublic">
-          <button
-            [disableRipple]="true"
-            *ngSwitchCase="followingStatus.following"
-            matTooltipPosition="above"
-            matTooltip="deixar de seguir"
-            role="button"
-            aria-describedby="deixar de seguir"
-            class="btn-following"
-            (click)="follow(profile, id, followingStatus.public)"
-            mat-button>
-            <span class="btn-follow">Seguindo</span>
-          </button>
-          <button
-            [disableRipple]="true"
-            *ngSwitchCase="followingStatus.public"
-            matTooltip="seguir"
-            matTooltipPosition="above"
-            aria-describedby="seguir"
-            role="button"
-            class="btn-public"
-            (click)="follow(profile, id, followingStatus.following)"
-            mat-button>
-            <span class="btn-follow">Seguir</span>
-          </button>
-        </ng-container>
-      </ng-container>
-    </ng-container>
-    <ng-template #showButonPublic>
-      <button
-        [disableRipple]="true"
-        *ngIf="profile.profilePublic"
-        matTooltip="seguir"
-        matTooltipPosition="above"
-        aria-describedby="seguir"
-        role="button"
-        class="btn-add"
-        (click)="requestLoginToFollow()"
-        mat-button>
-        <mat-icon iconPositionEnd>add</mat-icon>
-        <span class="btn-follow">Seguir</span>
-      </button>
-      <button
-        [disableRipple]="true"
-        *ngIf="!profile.profilePublic"
-        matTooltip="seguir"
-        matTooltipPosition="above"
-        aria-describedby="seguir"
-        role="button"
-        class="btn-private"
-        (click)="requestLoginToFollow()"
-        mat-button>
-        <span class="btn-follow">Privado</span>
-      </button>
-    </ng-template>
-  </ng-container>
+<div [ngSwitch]="profile.followingStatus" class="container-buttons">
+  @if(id) { @if(profile.id !== id) { @if(!profile.profilePublic) {
+  <button
+    [disableRipple]="true"
+    *ngSwitchCase="followingStatus.following"
+    matTooltipPosition="above"
+    matTooltip="deixar de seguir"
+    role="button"
+    class="btn-following"
+    aria-describedby="deixar de seguir"
+    (click)="follow(profile, id, followingStatus.private)"
+    mat-button>
+    <span class="btn-follow">Seguindo</span>
+  </button>
+  <button
+    [disableRipple]="true"
+    *ngSwitchCase="followingStatus.private"
+    matTooltip="privado"
+    matTooltipPosition="above"
+    aria-describedby="privado"
+    role="button"
+    class="btn-private"
+    (click)="follow(profile, id, followingStatus.requested)"
+    mat-button>
+    <span class="btn-follow">Privado</span>
+  </button>
+  <button
+    [disableRipple]="true"
+    *ngSwitchCase="followingStatus.requested"
+    matTooltip="Aguardando confirmação"
+    matTooltipPosition="above"
+    aria-describedby="solicitado"
+    role="button"
+    class="btn-request"
+    (click)="follow(profile, id, followingStatus.private)"
+    mat-button>
+    <span class="btn-follow">Solicitado</span>
+  </button>
+  } @else {
+  <button
+    [disableRipple]="true"
+    *ngSwitchCase="followingStatus.following"
+    matTooltipPosition="above"
+    matTooltip="deixar de seguir"
+    role="button"
+    aria-describedby="deixar de seguir"
+    class="btn-following"
+    (click)="follow(profile, id, followingStatus.public)"
+    mat-button>
+    <span class="btn-follow">Seguindo</span>
+  </button>
+  <button
+    [disableRipple]="true"
+    *ngSwitchCase="followingStatus.public"
+    matTooltip="seguir"
+    matTooltipPosition="above"
+    aria-describedby="seguir"
+    role="button"
+    class="btn-public"
+    (click)="follow(profile, id, followingStatus.following)"
+    mat-button>
+    <span class="btn-follow">Seguir</span>
+  </button>
+  } } }@else { @if(profile.profilePublic) {
+
+  <button
+    [disableRipple]="true"
+    *ngIf=""
+    matTooltip="seguir"
+    matTooltipPosition="above"
+    aria-describedby="seguir"
+    role="button"
+    class="btn-add"
+    (click)="requestLoginToFollow()"
+    mat-button>
+    <mat-icon iconPositionEnd>add</mat-icon>
+    <span class="btn-follow">Seguir</span>
+  </button>
+  } @else {
+  <button
+    [disableRipple]="true"
+    matTooltip="seguir"
+    matTooltipPosition="above"
+    aria-describedby="seguir"
+    role="button"
+    class="btn-private"
+    (click)="requestLoginToFollow()"
+    mat-button>
+    <span class="btn-follow">Privado</span>
+  </button>
+  } }
 </div>

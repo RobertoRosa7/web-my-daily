@@ -21,7 +21,6 @@ export class LoginComponent extends AuthComponent implements OnInit {
   }
 
   /**
-   * INFO:
    * ngOnInit - start life cycle hooks
    */
   public ngOnInit(): void {
@@ -33,7 +32,6 @@ export class LoginComponent extends AuthComponent implements OnInit {
   }
 
   /**
-   * INFO:
    * onSubmit - make login listening event on submit from form
    * Aqui você pode acessar os valores do formulário
    */

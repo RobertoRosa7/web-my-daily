@@ -6,6 +6,8 @@ import { nameIdField } from '../../../pages/auth/auth.field.validators';
 import { Form } from '../../../pages/auth/auth.form';
 import { UniqueNameService } from '../../services/auth/unique-name.service';
 import { CommonEnum } from '../../enums/bases/base.enum';
+import { map, startWith } from 'rxjs';
+import { toLowerCase } from '@utils/strings/string.util';
 
 /**
  * @see: https://angular.io/guide/form-validation
@@ -23,7 +25,7 @@ import { CommonEnum } from '../../enums/bases/base.enum';
       type="text"
       placeholder="ex: fulando@daily"
       class="border-b outline-none pt-2" />
-    <mat-hint align="end">{{ controlName.value }}{{ domainSuffix }}</mat-hint>
+    <mat-hint align="end">{{ controlName.value | lowercase }}{{ domainSuffix }}</mat-hint>
     <!-- <mat-error *ngIf="controlName.getError('pattern')">Somente letras minuscúlas e alpha numérico</mat-error> -->
     <mat-error *ngIf="controlName.getError('minlength')">Mínimo de 4 letras</mat-error>
     <mat-error *ngIf="controlName.getError('maxlength')">Maxímo de 6 letras</mat-error>
@@ -47,13 +49,14 @@ import { CommonEnum } from '../../enums/bases/base.enum';
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class NameIdComponent extends Form implements OnInit {
-  public domainSuffix = CommonEnum.daily;
-  public controlName: FormControl = nameIdField(inject(UniqueNameService));
+  public domainSuffix = CommonEnum.daily; // sufix @daily required to register
+  public controlName: FormControl = nameIdField(inject(UniqueNameService)); // unique name id async
 
   @Output()
-  public trigger = this.onChange(this.controlName);
+  public trigger = this.onChange(this.controlName); // dispatch event on form change
 
   public ngOnInit(): void {
     this.controlName.setValue(this.inputValue);
+    this.initForm.emit(this.controlName); // start event and add new form controll on form group
   }
 }

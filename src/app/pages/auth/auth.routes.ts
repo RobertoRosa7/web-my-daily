@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsConditionComponent } from './terms-conditions/terms-conditions.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { CreatePasswordComponent } from './create-password/create-password.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'terms-conditions', component: TermsConditionComponent },
       { path: 'reset-password', component: ResetPasswordComponent },
+      { path: 'create-new-password', component: CreatePasswordComponent },
       { path: '**', redirectTo: 'login', pathMatch: 'prefix' },
     ],
   },

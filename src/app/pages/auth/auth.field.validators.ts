@@ -6,9 +6,9 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { validateDomainNamePattern, validateEmailPattern } from '../../utils/regex/utils.regex.validators';
 import { Observable, catchError, of, switchMap } from 'rxjs';
-import { UniqueNameService } from '../../core/services/auth/unique-name.service';
+import { UniqueNameService } from '@services/auth/unique-name.service';
+import { validateEmailPattern, validatePasswordPattern } from '@utils/regex/utils.regex.validators';
 
 // field e-mail
 export const emailField = new FormControl(null, {
@@ -17,31 +17,13 @@ export const emailField = new FormControl(null, {
 
 // field password
 export const passwordField = new FormControl(null, {
-  validators: [Validators.required, Validators.minLength(6)],
+  validators: [Validators.required, Validators.minLength(6), Validators.pattern(validatePasswordPattern)],
 });
 
 // field nickname
 export const nickNameField = new FormControl(null, {
   validators: [Validators.required, Validators.minLength(4)],
 });
-
-// FieldsValidators - class field validators base
-export class FieldsValidators {
-  public email = emailField;
-  public password = passwordField;
-}
-
-// FieldLogin - class field validator login
-export class FieldLogin extends FieldsValidators {}
-
-export class FieldEmail {
-  public email = emailField;
-}
-
-// FielRegister - class field validator register
-export class FielRegister extends FieldsValidators {
-  public checkTerms = [false, [Validators.requiredTrue]];
-}
 
 /**
  * field name id
@@ -53,7 +35,7 @@ export function nameIdField(service: UniqueNameService) {
   return new FormControl(null, {
     validators: [Validators.required, Validators.minLength(4), Validators.maxLength(6)],
     asyncValidators: [uniqueDomainNameValidator(service)],
-    updateOn: 'blur',
+    updateOn: 'change',
   });
 }
 
@@ -82,7 +64,6 @@ export function confirmPassword(password: AbstractControl | null) {
 }
 
 /**
- * INFO:
  * checkPassword - responsible to match password
  *
  * @param controlName string field password (required)
@@ -119,6 +100,7 @@ export function uniqueDomainNameValidator(service: UniqueNameService): AsyncVali
 
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     const domainName = control.value;
+
     if (!domainName) {
       return response;
     }
@@ -131,4 +113,27 @@ export function uniqueDomainNameValidator(service: UniqueNameService): AsyncVali
       catchError(() => response)
     );
   };
+}
+
+// field e-mail
+export class FieldEmail {
+  public email = emailField;
+}
+
+// field password
+export class FieldPassword {
+  public password = passwordField;
+}
+
+// FieldsValidators - class field validators base
+export class FieldsValidators extends FieldPassword {
+  public email = emailField;
+}
+
+// FieldLogin - class field validator login
+export class FieldLogin extends FieldsValidators {}
+
+// FielRegister - class field validator register
+export class FielRegister extends FieldsValidators {
+  public checkTerms = [false, [Validators.requiredTrue]];
 }

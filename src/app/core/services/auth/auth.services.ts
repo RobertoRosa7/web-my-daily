@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
-import { AuthVars, ILogin, IRegister, loginResponse, registerResponse } from '../../interfaces/auth/auth.interface';
-import { clearText } from '../../../utils/regex/utils.regex.validators';
 import { Observable, map } from 'rxjs';
-import { AuthRepository } from '../../repositories/auth/auth.repository';
+import {
+  AuthVars,
+  ILogin,
+  IRegister,
+  LoginResponse,
+  LegisterResponse,
+  IResetPassRequest,
+  ResetPassResponse,
+} from '@interfaces/auth/auth.interface';
+import { clearText } from '@utils/regex/utils.regex.validators';
+import { AuthRepository } from '@repositories/auth/auth.repository';
 import { LocalStorageService } from '../localstorages/localstorage.service';
-import { JsonMapProperties } from '../../decorators/jsons/json.decorator';
-import { User } from '../../interfaces/profile/profile.interface';
+import { JsonMapProperties } from '@decorators/jsons/json.decorator';
+import { User } from '@interfaces/profile/profile.interface';
 import { IData } from '@interfaces/localstorages/localstorage.interface';
 
 @Injectable({
@@ -23,7 +31,7 @@ export class AuthService {
    * @param param ILogin
    * @returns Observable<loginResponse>
    */
-  public login({ password, email }: ILogin): Observable<loginResponse> {
+  public login({ password, email }: ILogin): Observable<LoginResponse> {
     email = clearText(email);
     password = clearText(password);
 
@@ -44,11 +52,20 @@ export class AuthService {
    * @param payload IRegister
    * @returns Observable<registerResponse>
    */
-  public register(payload: IRegister): Observable<registerResponse> {
+  public register(payload: IRegister): Observable<LegisterResponse> {
     clearText(payload.nameId);
     clearText(payload.email);
 
     return this.authRepository.register(payload);
+  }
+
+  /**
+   *
+   * @param request IResetPassRequest
+   * @returns Observable<ResetPassResponse>
+   */
+  public resetPassword(request: IResetPassRequest): Observable<ResetPassResponse> {
+    return this.authRepository.resetPassword(request);
   }
 
   /**
@@ -74,6 +91,11 @@ export class AuthService {
     this.localStorageService.clearAll();
   }
 
+  /**
+   *
+   * @param key string
+   * @param data T
+   */
   public setKey<T>(key: string, data: IData<T>) {
     this.localStorageService.setKey(key, data);
   }

@@ -9,23 +9,32 @@
     </header>
     <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-col gap-y-5">
-        <app-input-name-id (trigger)="onFireEvent(fieldNames.nameId, $event)"></app-input-name-id>
-        <app-input-nickname (trigger)="onFireEvent(fieldNames.nickname, $event)"></app-input-nickname>
+        <app-input-name-id
+          (initForm)="onFireEvent(fieldNames.nameId, $event)"
+          (trigger)="onFireEvent(fieldNames.nameId, $event)"></app-input-name-id>
+        <app-input-nickname
+          (initForm)="onFireEvent(fieldNames.nickname, $event)"
+          (trigger)="onFireEvent(fieldNames.nickname, $event)"></app-input-nickname>
         <app-input-email (trigger)="onFireEvent(fieldNames.email, $event)"></app-input-email>
         <app-input-password (trigger)="onFireEvent(fieldNames.password, $event)"></app-input-password>
         <app-input-confirm-password
           [password]="form.get(fieldNames.password)"
+          (initForm)="onFireEvent(fieldNames.confirmPassword, $event)"
           (trigger)="onFireEvent(fieldNames.confirmPassword, $event)">
         </app-input-confirm-password>
         <mat-checkbox role="checkbox" color="primary" [formControlName]="fieldNames.checkTerms">
-          Ao registrar se está aceitando os nosso
-          <a role="link" routerLink="/auth/terms-conditions" class="underline text-primary"> Termos e Condições </a> do
-          aplicativo
-          <a role="link" routerLink="/auth/privacy-policy" class="underline text-primary">Politica de Privacidade</a>.
+          Ao registrar você está aceitando os nosso
+          <a role="link" [routerLink]="routePaths.routeTerms" class="underline text-primary"> Termos e Condições </a> do
+          aplicativo e
+          <a role="link" [routerLink]="routePaths.routePolicy" class="underline text-primary">
+            Politica de Privacidade.
+          </a>
         </mat-checkbox>
         <app-button-submit [form]="form" [name]="'Registrar-se'"></app-button-submit>
         <div class="flex gap-2">
-          Já tem uma conta?<a routerLink="/auth/login" class="underline text-blue-500">Realizar login</a>
+          Já tem uma conta?<a role="link" [routerLink]="routePaths.routeLogin" class="underline text-blue-500">
+            Realizar login
+          </a>
         </div>
       </div>
     </form>

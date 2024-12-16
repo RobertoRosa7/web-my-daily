@@ -20,14 +20,14 @@
             <a
               role="link"
               aria-describedby="register new user"
-              routerLink="/auth/register"
+              [routerLink]="routePaths.routeRegister"
               class="underline text-blue-500">
               Cadastrar-se
             </a>
             <a
               role="link"
               aria-describedby="register new user"
-              routerLink="/auth/reset-password"
+              [routerLink]="routePaths.routeResetPass"
               class="underline text-blue-500">
               Esqueceu a senha?
             </a>

@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { profileType } from '../../types/profile/profile.type';
 import { ProfileService } from '../../services/profile/profile.service';
 import { acErrProfile, acSusProfile, acUseFollowSuccess } from '../../actions/profile/profile.action';
-import { actionLoading } from '../../actions/auth/auth.action';
+import { acLoading } from '../../actions/auth/auth.action';
 import { io } from 'socket.io-client';
 import { environment } from '../../../../environments/environment';
 import { FollowRequest } from '../../interfaces/follows/follow.interface';
@@ -63,7 +63,7 @@ export class ProfileEffect extends Effect {
           // Layer - HttpErrorResponse
           catchError((error: HttpErrorResponse) => of(acErrProfile({ error }))),
           // Layer - finalize loading
-          finalize(() => this.store.dispatch(actionLoading({ isLoading: false })))
+          finalize(() => this.store.dispatch(acLoading({ isLoading: false })))
         )
       )
     )
@@ -108,7 +108,7 @@ export class ProfileEffect extends Effect {
       // Layer - HttpErrorResponse
       catchError((failure: HttpErrorResponse) => this.handlerError(failure)),
       // Layer - finalize loading
-      finalize(() => this.store.dispatch(actionLoading({ isLoading: false })))
+      finalize(() => this.store.dispatch(acLoading({ isLoading: false })))
     );
   }
 
@@ -131,7 +131,7 @@ export class ProfileEffect extends Effect {
    * @param nameId The new nameId to be updated.
    */
   private handlerChangeNameId(nameId: string) {
-    this.store.dispatch(actionLoading({ isLoading: true })); // Dispatch loading action
+    this.store.dispatch(acLoading({ isLoading: true })); // Dispatch loading action
 
     return this.profileService.changeNameId(nameId).pipe(
       // Layer - success to change
@@ -144,7 +144,7 @@ export class ProfileEffect extends Effect {
       // Layer - HttpErrorResponse
       catchError((error: HttpErrorResponse) => this.handlerError(error)),
       // Layer - finalize loading
-      finalize(() => this.store.dispatch(actionLoading({ isLoading: false })))
+      finalize(() => this.store.dispatch(acLoading({ isLoading: false })))
     );
   }
 }

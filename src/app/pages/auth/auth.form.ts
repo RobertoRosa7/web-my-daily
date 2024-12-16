@@ -1,6 +1,6 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { BehaviorSubject, Observable, debounceTime, distinctUntilChanged, map } from 'rxjs';
 
 @Directive()
 export abstract class Form {
@@ -8,8 +8,16 @@ export abstract class Form {
   public inputValue: string | undefined | null;
 
   @Input()
-  public isHideSubmit: boolean = true;
+  public isHideSubmit = true;
 
+  @Output()
+  public readonly initForm = new EventEmitter<FormControl>();
+
+  /**
+   *
+   * @param form FormControl
+   * @returns Observable<FormControl>
+   */
   public onChange(form: FormControl): Observable<FormControl> {
     return form.valueChanges.pipe(
       // layer - esperar por 100 milisegundos
@@ -21,6 +29,11 @@ export abstract class Form {
     );
   }
 
+  /**
+   *
+   * @param form FormControl
+   * @returns Observable<string>
+   */
   public onValueChanges(form: FormControl): Observable<string> {
     return form.valueChanges.pipe(
       // layer - esperar por 100 milisegundos

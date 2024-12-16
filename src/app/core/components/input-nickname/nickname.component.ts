@@ -40,12 +40,13 @@ import { Form } from '../../../pages/auth/auth.form';
   imports: [CommonModule, SharedModule, FormsModule, ReactiveFormsModule],
 })
 export class NickNameComponent extends Form implements OnInit {
-  public controlName: FormControl = nickNameField;
+  public controlName: FormControl = nickNameField; // field nickname
 
   @Output()
-  public trigger = this.onChange(this.controlName);
+  public trigger = this.onChange(this.controlName); // dispatch event on form change
 
   public ngOnInit(): void {
     this.controlName.setValue(this.inputValue);
+    this.initForm.emit(this.controlName); // start event and add new form controll on form group
   }
 }

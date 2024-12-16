@@ -6,7 +6,7 @@ import { profileType } from '../../types/public/public-profile.type';
 import { PublicProfileService } from '../../services/public/public-profile.service';
 import { actionProfileSuccess } from '../../actions/public/public-profile.action';
 import { Effect } from '@effects/effect';
-import { actionLoading } from '@actions/auth/auth.action';
+import { acLoading } from '@actions/auth/auth.action';
 
 /**
  * @see: https://ngrx.io/guide/effects
@@ -42,7 +42,7 @@ export class PublicProfileEffect extends Effect {
       // Layer - Error show message
       catchError((e) => this.handlerError(e)),
       // layer finalize stopping loading
-      finalize(() => this.store.dispatch(actionLoading({ isLoading: true })))
+      finalize(() => this.store.dispatch(acLoading({ isLoading: true })))
     );
   }
 }

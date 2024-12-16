@@ -1,26 +1,22 @@
 import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import * as selectAuth from '../../core/selectors/auth/auth.selector';
 import { Observable, delay, filter, from, map, mergeMap } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { IAuthState } from '../../core/interfaces/auth/auth.interface';
-import { HttpResponseDefault } from '../../core/interfaces/https/http-response.interface';
-import {
-  actionClear,
-  actionRegiser,
-  actionLogin,
-  actionGoto,
-  actionLoading,
-} from '../../core/actions/auth/auth.action';
-import { AuthType } from '../../core/types/auth/auth.type';
+import { IAuthState } from '@interfaces/auth/auth.interface';
+import { HttpResponseDefault } from '@interfaces/https/http-response.interface';
+import { acClear, acRegister, acLogin, acGoto, acLoading } from '@actions/auth/auth.action';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth/auth.services';
 import { isPlatformBrowser } from '@angular/common';
-import { actionCoreReset } from '../../core/actions/resets/reset.action';
-import { acColor } from '../../core/actions/color/color.action';
-import { FieldNameEnum } from '../../core/enums/bases/base.enum';
-import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 import { acShowMessage } from '@actions/message/message.action';
+import { AuthType } from '@acTypes/auth/auth.type';
+import { AuthService } from '@services/auth/auth.services';
+import { actionCoreReset } from '@actions/resets/reset.action';
+import { FieldNameEnum, RoutePathsEnum } from '@enums/bases/base.enum';
+import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
+import { acColor } from '@actions/color/color.action';
+import * as selectAuth from '@selectors/auth/auth.selector';
+
+type Message = Observable<HttpResponseDefault<IAuthState>>;
 
 @Component({
   selector: 'app-auth',
@@ -33,18 +29,23 @@ export class AuthComponent extends InDestroyDirective {
   public form!: FormGroup;
   public readonly isLoading$!: Observable<boolean>;
   public readonly fieldNames = FieldNameEnum;
+  public readonly routePaths = RoutePathsEnum;
 
   // responsible to listening actions to login success
-  public readonly message$: Observable<HttpResponseDefault<IAuthState>> = this.store
+  public readonly message$: Message = this.store
     // layer selector to filter
     .select(selectAuth.selectorMessage);
 
   // inject action subject dependency only super class?
-  private readonly actionSubject = inject(ActionsSubject);
-  private readonly router = inject(Router);
-  private readonly authService = inject(AuthService);
+  protected readonly acSubject = inject(ActionsSubject);
+  protected readonly router = inject(Router);
+  protected readonly authService = inject(AuthService);
   private readonly platform = inject(PLATFORM_ID);
 
+  /**
+   *
+   * @param store Store<IAuthState>
+   */
   constructor(protected readonly store: Store<IAuthState>) {
     super();
     // set theme login
@@ -59,9 +60,9 @@ export class AuthComponent extends InDestroyDirective {
     }
 
     // listening action loading happens
-    this.isLoading$ = this.actionSubject.pipe(
+    this.isLoading$ = this.acSubject.pipe(
       // layer filer only action loading
-      filter(({ type }) => type === AuthType.LOGIN_LOADING),
+      filter(({ type }) => type === AuthType.authLoadingType),
       // layer map catch payload action loading
       map((action) => {
         // abastract loading from action types
@@ -73,10 +74,10 @@ export class AuthComponent extends InDestroyDirective {
     );
 
     // after login send to home
-    this.actionSubject
+    this.acSubject
       .pipe(
         // layer filer only action login goto
-        filter(({ type }) => type === AuthType.LOGIN_GOTO),
+        filter(({ type }) => type === AuthType.authGotoType),
         // layer map to return message on display
         map((action) => {
           // abstract paths to navigate
@@ -138,35 +139,35 @@ export class AuthComponent extends InDestroyDirective {
    * clearAction = reset message on display
    */
   public get clearAction() {
-    return actionClear;
+    return acClear;
   }
 
   /**
    * loginAction = dispatch action to make login
    */
   public get loginAction() {
-    return actionLogin;
+    return acLogin;
   }
 
   /**
    * registerActioln = dispath action to make register
    */
   public get registerActioln() {
-    return actionRegiser;
+    return acRegister;
   }
 
   /**
    * registerActioln = dispath action to make register
    */
   public get goToAction() {
-    return actionGoto;
+    return acGoto;
   }
 
   /**
    * registerActioln = dispath action to make register
    */
   public get loading() {
-    return actionLoading;
+    return acLoading;
   }
 
   /**

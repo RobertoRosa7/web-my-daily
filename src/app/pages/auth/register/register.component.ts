@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { IAuthState } from '@interfaces/auth/auth.interface';
+import { Store } from '@ngrx/store';
+import { CommonEnum } from '@enums/bases/base.enum';
+import { toLowerCase } from '@utils/strings/string.util';
 import { AuthComponent } from '../auth.component';
 import { FielRegister } from '../auth.field.validators';
-import { IAuthState } from '../../../core/interfaces/auth/auth.interface';
-import { Store } from '@ngrx/store';
-import { CommonEnum } from '../../../core/enums/bases/base.enum';
-import { toLowerCase } from '@utils/strings/string.util';
 
 @Component({
   selector: 'app-register',
@@ -13,14 +13,11 @@ import { toLowerCase } from '@utils/strings/string.util';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent extends AuthComponent implements OnInit {
-  public isPasswordSame = true;
-
   constructor(private readonly formBuilder: FormBuilder, protected override readonly store: Store<IAuthState>) {
     super(store);
   }
 
   /**
-   * INFO:
    * ngOnInit - start life cycle hooks
    */
   public ngOnInit(): void {
@@ -32,7 +29,6 @@ export class RegisterComponent extends AuthComponent implements OnInit {
   }
 
   /**
-   * INFO:
    * onSubmit - make regiter listening event on submit from form
    */
   public onSubmit(): void {

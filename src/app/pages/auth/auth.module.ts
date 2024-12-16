@@ -1,43 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../core/services/auth/auth.services';
-import { AuthComponent } from './auth.component';
-import { AuthRepository } from '../../core/repositories/auth/auth.repository';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { EmailComponent } from '../../core/components/input-email/email.component';
-import { PasswordComponent } from '../../core/components/input-password/password.component';
-import { NameIdComponent } from '../../core/components/input-name-id/name-id.component';
-import { NickNameComponent } from '../../core/components/input-nickname/nickname.component';
-import { ConfirmPasswordComponent } from '../../core/components/input-confirm-password/confirm-password.component';
-import { routes } from './auth.routes';
-import { ButtonSubmitComponent } from '../../core/components/button-submit/button-submit.component';
 import { provideState } from '@ngrx/store';
-import { authReducer } from '../../core/reducers/auth/auth.reducer';
-import { AuthEffect } from '../../core/effects/auth/auth.effect';
 import { provideEffects } from '@ngrx/effects';
-import { UniqueNameService } from '../../core/services/auth/unique-name.service';
-import { UniqueNameRepository } from '../../core/repositories/auth/unique-name.repository';
-import { MessageComponent } from '../../core/components/messages/message.component';
 import { ButtonBackComponent } from '@components/button-back/button-back.component';
 import { FooterComponent } from '@components/footer/footer.component';
 import { ToolbarComponent } from '@components/toolbar/toolbar.component';
+import { MessageComponent } from '@components/messages/message.component';
+import { UniqueNameService } from '@services/auth/unique-name.service';
+import { authReducer } from '@reducers/auth/auth.reducer';
+import { UniqueNameRepository } from '@repositories/auth/unique-name.repository';
+import { AuthEffect } from '@effects/auth/auth.effect';
+import { ButtonSubmitComponent } from '@components/button-submit/button-submit.component';
+import { ConfirmPasswordComponent } from '@components/input-confirm-password/confirm-password.component';
+import { EmailComponent } from '@components/input-email/email.component';
+import { PasswordComponent } from '@components/input-password/password.component';
+import { NameIdComponent } from '@components/input-name-id/name-id.component';
+import { NickNameComponent } from '@components/input-nickname/nickname.component';
+import { AuthService } from '@services/auth/auth.services';
+import { SharedModule } from '@shared/shared.module';
+import { AuthRepository } from '@repositories/auth/auth.repository';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AuthComponent } from './auth.component';
+import { routes } from './auth.routes';
+import { CreatePasswordComponent } from './create-password/create-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 /**
  * @see: https://ngrx.io/guide/store
  */
 @NgModule({
-  declarations: [RegisterComponent, LoginComponent, AuthComponent],
+  declarations: [RegisterComponent, LoginComponent, AuthComponent, CreatePasswordComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild(routes),
     EmailComponent,
     PasswordComponent,
     NameIdComponent,
@@ -47,7 +48,9 @@ import { ToolbarComponent } from '@components/toolbar/toolbar.component';
     MessageComponent,
     ButtonBackComponent,
     FooterComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    MessageComponent,
+    RouterModule.forChild(routes),
   ],
   providers: [
     AuthService,

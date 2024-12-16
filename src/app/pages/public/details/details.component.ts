@@ -10,7 +10,7 @@ import { acColor } from '../../../core/actions/color/color.action';
 import { actionProfilePublic } from '../../../core/actions/public/public-profile.action';
 import { filter, map, Observable } from 'rxjs';
 import { AuthType } from '@acTypes/auth/auth.type';
-import { actionLoading } from '@actions/auth/auth.action';
+import { acLoading } from '@actions/auth/auth.action';
 
 @Component({
   selector: 'app-details-public-profile',
@@ -24,7 +24,7 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
 
   public isLoading$: Observable<boolean> = this.actionSubject.pipe(
     // layer filer only action loading
-    filter(({ type }) => type === AuthType.LOGIN_LOADING),
+    filter(({ type }) => type === AuthType.authLoadingType),
     // layer map catch payload action loading
     map((action) => {
       // abastract loading from action types
@@ -68,7 +68,7 @@ export class DetailsComponentProfilePublic extends Profile implements OnInit {
    */
   private searchProfile(name: string | null) {
     this.searchBy = name;
-    this.store.dispatch(actionLoading({ isLoading: false }));
+    this.store.dispatch(acLoading({ isLoading: false }));
     this.store.dispatch(actionProfilePublic({ name }));
   }
 }
