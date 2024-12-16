@@ -79,6 +79,10 @@ A aplicação é uma plataforma web inovadora que utiliza análise de sentimento
 
 ---
 
+# Ver mais tarde!
+
+https://www-angulararchitects-io.translate.goog/blog/complete-guide-for-server-side-rendering-ssr-in-angular/?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc
+
 Essas estratégias podem ser combinadas para maximizar o alcance e a receita, adaptando-se ao perfil do público-alvo e à missão da aplicação. Qual dessas ideias parece mais viável ou interessante para você?
 
 [Generate Images](https://www.asciiart.eu/text-to-ascii-art#google_vignette)
