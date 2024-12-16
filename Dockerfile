@@ -13,6 +13,8 @@ RUN npm install
 # Copiar o restante do código após instalar as dependências
 COPY . .
 
+ARG DEPLOY_IN
+
 # Definir a variável de ambiente no contêiner após o build
 ENV DEPLOY_ENVIRONMENT=${DEPLOY_ENVIRONMENT}
 
