@@ -19,7 +19,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "reflect-metadata",
-              "moment"
+              "moment",
+              "highcharts"
             ],
             "aot": true,
             "sourceMap": false,
@@ -42,7 +43,9 @@
             ],
             "scripts": [],
             "server": "src/main.server.ts",
-            "prerender": true,
+            "prerender": {
+              "discoverRoutes": false
+            },
             "ssr": {
               "entry": "server.ts"
             }
