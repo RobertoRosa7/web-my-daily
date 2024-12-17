@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectorTheme } from '../../selectors/colors/color.selector';
+import { selectorTheme } from '@selectors/colors/color.selector';
 import { CommonModule, Location } from '@angular/common';
+import { RoutePathsEnum } from '@enums/bases/base.enum';
 
 @Component({
   selector: 'app-button-back',
@@ -13,7 +14,7 @@ import { CommonModule, Location } from '@angular/common';
   template: `
     <button
       title="Voltar"
-      (click)="location.back()"
+      (click)="navigateBackOrToHome()"
       aria-details="go back"
       aria-describedby="button"
       role="button"
@@ -28,6 +29,20 @@ import { CommonModule, Location } from '@angular/common';
   `,
 })
 export class ButtonBackComponent {
-  public theme$ = this.store.select(selectorTheme);
-  constructor(public readonly location: Location, private readonly store: Store) {}
+  public readonly theme$ = this.store.select(selectorTheme);
+
+  /**
+   *
+   * @param location Location
+   * @param store Store
+   * @param router Router
+   */
+  constructor(public readonly location: Location, private readonly store: Store, private readonly router: Router) {}
+
+  /**
+   * Navega para trás ou redireciona para a home se o histórico estiver vazio
+   */
+  public navigateBackOrToHome(): void {
+    window.history.length > 1 ? this.location.back() : this.router.navigate([RoutePathsEnum.routePublicArea]);
+  }
 }
