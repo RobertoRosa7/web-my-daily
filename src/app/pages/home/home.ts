@@ -1,6 +1,6 @@
 import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectorTheme } from '../../core/selectors/colors/color.selector';
+import { selTheme } from '../../core/selectors/colors/color.selector';
 import { acColor } from '../../core/actions/color/color.action';
 import { selGetId } from '../../core/selectors/user/user.selector';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
@@ -18,7 +18,7 @@ import { Socket } from 'socket.io-client';
   `,
 })
 export class HomeComponent implements OnInit {
-  public readonly theme$ = this.store.select(selectorTheme);
+  public readonly theme$ = this.store.select(selTheme);
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
 
   protected socketio!: Socket;

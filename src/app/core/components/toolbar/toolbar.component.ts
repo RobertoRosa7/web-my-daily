@@ -9,7 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { ButtonMenuComponent } from '../button-menu/button-menu.component';
 import { ButtonBackComponent } from '../button-back/button-back.component';
-import { selectorTheme } from '../../selectors/colors/color.selector';
+import { selTheme } from '../../selectors/colors/color.selector';
 import { selGetNickname } from '../../selectors/user/user.selector';
 import { AuthService } from '@services/auth/auth.services';
 import { RoutePathsEnum } from '@enums/bases/base.enum';
@@ -30,7 +30,7 @@ export class ToolbarComponent implements OnInit {
   protected readonly dialog?: MatDialog = inject(MatDialog);
 
   public readonly routePathEnum = RoutePathsEnum;
-  public readonly theme$ = this.store.select(selectorTheme);
+  public readonly theme$ = this.store.select(selTheme);
   public readonly name$ = this.store.select(selGetNickname);
 
   @Output() send = new EventEmitter();

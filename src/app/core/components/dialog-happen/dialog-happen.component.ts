@@ -5,7 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { HappenVisibility, ProfileHappen } from '../../interfaces/happens/profile.happen.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { selectorTheme } from '../../selectors/colors/color.selector';
+import { selTheme } from '../../selectors/colors/color.selector';
 import { User } from '../../interfaces/profile/profile.interface';
 import { Observable, combineLatest, tap } from 'rxjs';
 import { selGetUser } from '../../selectors/user/user.selector';
@@ -34,7 +34,7 @@ export class DialogHappenComponent implements OnInit {
     })
   );
 
-  public readonly theme$ = this.store.select(selectorTheme);
+  public readonly theme$ = this.store.select(selTheme);
   public readonly form: FormControl = new FormControl('');
   public readonly visibility: FormControl = new FormControl(HappenVisibility.PRIVATE);
 

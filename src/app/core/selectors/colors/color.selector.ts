@@ -5,11 +5,8 @@ import { colors } from '../../interfaces/colors/colors.interface';
 const state: MemoizedSelector<object, colors> = createFeatureSelector<colors>('colors');
 
 // create selector
-export const selectorBg: MemoizedSelector<object, string> = createSelector(
+export const selBackground: MemoizedSelector<object, string> = createSelector(
   state,
   ({ background }: colors) => background || ''
 );
-export const selectorTheme: MemoizedSelector<object, string> = createSelector(
-  state,
-  ({ theme }: colors) => theme || ''
-);
+export const selTheme: MemoizedSelector<object, string> = createSelector(state, ({ theme }: colors) => theme || '');

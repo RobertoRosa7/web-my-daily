@@ -6,7 +6,7 @@ import { Socket, io } from 'socket.io-client';
 import { acReqProfile } from '../../core/actions/profile/profile.action';
 import { happenRequest } from '../../core/actions/happen/profile.happens.action';
 import { selGetId, selGetNameId, selGetNickname, selGetUser } from '@selectors/user/user.selector';
-import { selectorTheme } from '../../core/selectors/colors/color.selector';
+import { selTheme } from '../../core/selectors/colors/color.selector';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
 import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.interface';
 import { actionSocketUserMetrics } from '../../core/actions/socket/socketio.action';
@@ -39,7 +39,7 @@ export class Profile extends InDestroyDirective implements OnInit {
 
   public readonly fieldNames = FieldNameEnum;
   public readonly routePaths = RoutePathsEnum;
-  public readonly theme$ = this.store.select(selectorTheme);
+  public readonly theme$ = this.store.select(selTheme);
   public readonly user$ = this.store.select(selGetUser);
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
   public readonly nameId$: Observable<string | undefined> = this.store.select(selGetNameId);

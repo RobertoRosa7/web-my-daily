@@ -15,6 +15,7 @@ import { FieldNameEnum, RoutePathsEnum } from '@enums/bases/base.enum';
 import { InDestroyDirective } from '../../core/directives/destroy/destroy.directive';
 import { acColor } from '@actions/color/color.action';
 import * as selectAuth from '@selectors/auth/auth.selector';
+import { selTheme } from '@selectors/colors/color.selector';
 
 type Message = Observable<HttpResponseDefault<IAuthState>>;
 
@@ -35,6 +36,8 @@ export class AuthComponent extends InDestroyDirective {
   public readonly message$: Message = this.store
     // layer selector to filter
     .select(selectAuth.selectorMessage);
+
+  public readonly theme$ = this.store.select(selTheme);
 
   // inject action subject dependency only super class?
   protected readonly acSubject = inject(ActionsSubject);

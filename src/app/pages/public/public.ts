@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Observer, filter, map, mergeMap, tap } from 'rxjs';
 import { Socket, io } from 'socket.io-client';
 import { ListeningFollowResponse } from '../../core/interfaces/follows/follow.interface';
-import { selectorTheme } from '../../core/selectors/colors/color.selector';
+import { selTheme } from '../../core/selectors/colors/color.selector';
 import { selGetId } from '../../core/selectors/user/user.selector';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
@@ -24,7 +24,7 @@ import { PathResources } from '@enums/bases/base.enum';
 })
 export class Public implements OnInit {
   public readonly pathResources = PathResources;
-  public readonly theme$ = this.store.select(selectorTheme);
+  public readonly theme$ = this.store.select(selTheme);
   public readonly userId$: Observable<string | undefined> = this.store.select(selGetId);
 
   protected readonly platform = inject(PLATFORM_ID);

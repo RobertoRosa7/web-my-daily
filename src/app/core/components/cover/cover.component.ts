@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectorBg } from '../../selectors/colors/color.selector';
+import { selBackground } from '../../selectors/colors/color.selector';
 
 @Component({
   selector: 'app-cover',
@@ -15,6 +15,6 @@ import { selectorBg } from '../../selectors/colors/color.selector';
   imports: [CommonModule],
 })
 export class CoverComponent {
-  public bgColor$ = this.store.select(selectorBg);
+  public bgColor$ = this.store.select(selBackground);
   constructor(private readonly store: Store) {}
 }
