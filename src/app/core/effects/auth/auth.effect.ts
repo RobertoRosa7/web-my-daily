@@ -113,4 +113,50 @@ export class AuthEffect extends Effect {
       catchError((e) => of(e))
     )
   );
+
+  /**
+   *
+   */
+  public createPassword$: Observable<Actions> = createEffect(() =>
+    this.action.pipe(
+      // layer types to dispatch action
+      ofType(AuthType.authCreatePassType),
+      // layer to fetch payload from action
+      mergeMap((request) =>
+        // layer to fetch payload from action
+        this.authService.createPassword(request).pipe(
+          map((response) => {
+            // check if response if http error and then dispatch action of error
+            this.showMessage(response.message as string, 'success');
+
+            return authAction.acCreatePassOk(response);
+          }),
+          // Layer - error
+          catchError((e) => this.handlerError(e)),
+          // layer finalize stopping loading
+          finalize(() => this.store.dispatch(authAction.acLoading({ isLoading: false })))
+        )
+      ),
+      // layer to catch error from effect
+      catchError((e) => of(e))
+    )
+  );
+
+  // /**
+  //  * Create an RxJS UnaryFunction pipeline with typed response.
+  //  * This ensures generic support for mapping and error handling.
+  //  */
+  // private createEffectPipeline<T>(acSuccess: (response: T) => Actions): UnaryFunction<Observable<T>, Observable<T>> {
+  //   return pipe(
+  //     // layer to fetch payload from action
+  //     map((response: T) => {
+  //       this.showMessage((response as HttpResponseDefault<T>).message as string, 'success'); // Adjust if message exists in a specific format
+  //       return acSuccess(response);
+  //     }),
+  //     // Layer - error
+  //     catchError((error) => this.handlerError(error)),
+  //     // layer finalize stopping loading
+  //     finalize(() => this.store.dispatch(authAction.acLoading({ isLoading: false })))
+  //   );
+  // }
 }

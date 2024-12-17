@@ -2,10 +2,16 @@ import { HttpResponseDefault } from '../https/http-response.interface';
 export type LoginResponse = HttpResponseDefault<IAuthState>;
 export type LegisterResponse = HttpResponseDefault<IAuthState>;
 export type ResetPassResponse = HttpResponseDefault<string>;
+export type CreatePassResponse = HttpResponseDefault<string>;
 
 export interface ILogin {
   email: string;
   password: string;
+}
+
+export interface ICreatePassRequest {
+  password: string;
+  token: string;
 }
 
 export interface IResetPassRequest {

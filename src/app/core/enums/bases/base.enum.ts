@@ -46,6 +46,7 @@ export enum PathsEnum {
   pathPostDisliked = '/ms-users/user/likes/dislike',
   pathProfileDel = '/ms-users/user/profile?id={id}',
   pathResePassword = '/ms-users/auth/password/reset',
+  pathCreatePassword = '/ms-users/auth/password/new?auth={token}',
 
   // ms-daily - management service of daily - Intelligence Artificial (IA)
   pathPostStoppingViewing = '/ms-daily/happen/user/stop-viewing',

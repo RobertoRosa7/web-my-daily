@@ -8,4 +8,6 @@ export enum AuthType {
   authLoadingType = 'loginLoading@types',
   authSendEmailType = 'loginSendEmail@types',
   authSendEmailOkType = 'loginSendEmailOk@types',
+  authCreatePassType = 'loginCreatePassword@types',
+  authCreatePassOkType = 'loginCreatePasssword@types',
 }

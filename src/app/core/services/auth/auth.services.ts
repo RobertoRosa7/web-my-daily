@@ -8,6 +8,8 @@ import {
   LegisterResponse,
   IResetPassRequest,
   ResetPassResponse,
+  ICreatePassRequest,
+  CreatePassResponse,
 } from '@interfaces/auth/auth.interface';
 import { clearText } from '@utils/regex/utils.regex.validators';
 import { AuthRepository } from '@repositories/auth/auth.repository';
@@ -66,6 +68,16 @@ export class AuthService {
    */
   public resetPassword(request: IResetPassRequest): Observable<ResetPassResponse> {
     return this.authRepository.resetPassword(request);
+  }
+
+  /**
+   *
+   * @param request ICreatePassRequest
+   * @param token string
+   * @returns Observable<ICreatePassResponse>
+   */
+  public createPassword(request: ICreatePassRequest): Observable<CreatePassResponse> {
+    return this.authRepository.createPassword(request);
   }
 
   /**

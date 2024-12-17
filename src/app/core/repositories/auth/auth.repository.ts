@@ -6,6 +6,8 @@ import {
   LoginResponse,
   LegisterResponse,
   ResetPassResponse,
+  ICreatePassRequest,
+  CreatePassResponse,
 } from '@interfaces/auth/auth.interface';
 import { Observable } from 'rxjs';
 import { PathsEnum } from '@enums/bases/base.enum';
@@ -24,6 +26,9 @@ export class AuthRepository extends BaseRepository {
 
   @Url(PathsEnum.pathResePassword)
   private pathResetPass!: string;
+
+  @Url(PathsEnum.pathCreatePassword)
+  private pathCreatePass!: string;
 
   /**
    * login - this is responsible to make call http and make login
@@ -52,5 +57,17 @@ export class AuthRepository extends BaseRepository {
    */
   public resetPassword(request: IResetPassRequest): Observable<ResetPassResponse> {
     return this.http.post<ResetPassResponse>(this.pathResetPass, request);
+  }
+
+  /**
+   *
+   * @param token string
+   * @param request ICreatePassRequest
+   * @returns Observable<ResetPassResponse>
+   */
+  public createPassword(request: ICreatePassRequest): Observable<CreatePassResponse> {
+    return this.http.post<ResetPassResponse>(this.pathCreatePass.replace('{token}', request.token), {
+      password: request.password,
+    });
   }
 }
